@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <public publicId="-//LOG4J//DTD LOG4J//EN" uri="jar:file:/C:/Program Files/eclipse/plugins/org.springsource.ide.eclipse.commons.ui_3.5.1.201404040642-CI-B491.jar!/dtd/log4j-1.2.dtd" webURL="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd"/>
+  <public publicId="-//APACHE//DTD LOG4J 1.2//EN" uri="jar:file:/C:/Program Files/eclipse/plugins/org.springsource.ide.eclipse.commons.ui_3.5.1.201404040642-CI-B491.jar!/dtd/log4j-1.2.dtd" webURL="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd"/>
+</catalog>

@@ -24,5 +24,11 @@ public class Tile
 	{
 		this.colour = colour;
 	}
+	
+	public void setAttributes( int type, int colour )
+	{
+		this.type = type;
+		this.colour = colour;
+	}
 
 }

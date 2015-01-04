@@ -115,7 +115,7 @@ public class Main implements ApplicationListener, InputProcessor
 		//of the color to be used to clear the screen.
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		Gdx.gl.glViewport( 0, 0, 800, 480);
+		Gdx.gl.glViewport( 0, 0, 1280, 720);
 		
 		//tell the camera to update its matrices.
 		camera.update();

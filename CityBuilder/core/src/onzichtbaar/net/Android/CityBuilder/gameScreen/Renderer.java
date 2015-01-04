@@ -2,8 +2,10 @@ package onzichtbaar.net.Android.CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
+import onzichtbaar.net.Android.CityBuilder.load.Data;
 import onzichtbaar.net.Android.CityBuilder.load.Skin_Setup;
 import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
+import sun.rmi.runtime.Log;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,18 +13,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class Renderer
+public class Renderer extends Data
 {
 	private int grass = 1;
 	private int wood = 2;
@@ -34,13 +30,12 @@ public class Renderer
 	
 	private int grey = 10;
 	private int green = 11;
-	private int blue = 12;
 	
 	public static final String LOG = Renderer.class.getSimpleName();
 
 	private boolean touchedDown = false;
-	private float touchX = 1200;
-	private float touchY = 1200;
+	private float touchX = 1700;
+	private float touchY = 1700;
 	
 	private float distance = 0;
 	
@@ -62,7 +57,6 @@ public class Renderer
 	private Texture SquareTileSheep;
 	private Texture SquareTileSelected;
 	private Texture InfoBox;
-	private Texture PopupBox;
 	
 	private TextureRegion SquareTileRegion;
 	
@@ -75,12 +69,12 @@ public class Renderer
 	private float firstX = 0;
 	private float firstY = 0;
 	
-	private float offsetX = 0;
+	private float offsetX = 60;
 	private float offsetY = 0;
 	
 	private float zoomSpeed = 0;
 	
-	private float currentZoom = 10;
+	private float currentZoom = 0.5f;
 	
 	private float currentX = 0;
 	private float currentY = 0;
@@ -112,13 +106,13 @@ public class Renderer
 	{
 		this.citizens = citizens;
 		this.game = game;
-		SquareTile = new Texture( Gdx.files.internal( "SquareGreen.png" ));
-		SquareTileTown = new Texture( Gdx.files.internal( "SquareTown.png" ));
+		SquareTile = new Texture( Gdx.files.internal( "SquareGreenSmall.png" ));
+		SquareTileTown = new Texture( Gdx.files.internal( "SquareTownSmall.png" ));
 		SquareTileSheep = new Texture( Gdx.files.internal( "SquareSheep.png" ));
 		SquareTileDesert = new Texture( Gdx.files.internal( "SquareDesert.png" ));
 		SquareTileGrass = new Texture( Gdx.files.internal( "SquareGrass.png" ));
-		SquareTileForest = new Texture( Gdx.files.internal( "SquareForest.png" ));
-		SquareTileSelected = new Texture( Gdx.files.internal( "SquareSelected.png" ));
+		SquareTileForest = new Texture( Gdx.files.internal( "Boom-top-down.png" ));
+		SquareTileSelected = new Texture( Gdx.files.internal( "SquareSelectedSmall.png" ));
 		InfoBox = new Texture( Gdx.files.internal( "UITest.png" ));
 		
 		region = new TextureRegion(InfoBox, 0, 0, InfoBox.getWidth(), InfoBox.getHeight());
@@ -134,9 +128,8 @@ public class Renderer
 		this.batch = batch;
 		
 		UserInterface = new Image(region);
-		UserInterface.setPosition(530, 80);
-		UserInterface.setScale(1f, 0.7f);
-		UserInterface.setVisible( false );
+		UserInterface.setBounds(880, 80, 400, 600);
+		UserInterface.setVisible( true );
 		
 		skin_setup = new Skin_Setup();
 		skin = new Skin();
@@ -144,7 +137,7 @@ public class Renderer
 		
 		tileInfo = new TextField( "", skin );
 		tileInfo.setDisabled(true);
-		tileInfo.setPosition( 600, 340 );
+		tileInfo.setPosition( 1030, 530 );
 		tileInfo.setVisible( false );
 		
 		stage.addActor( UserInterface);
@@ -155,8 +148,8 @@ public class Renderer
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
-		scaling_x = width/480;
-		scaling_y = height/800;
+		scaling_x = width/ScreenHeight;
+		scaling_y = height/ScreenWidth;
 		
 	}
 	
@@ -218,12 +211,10 @@ public class Renderer
 		
 		if( info )
 		{
-			UserInterface.setVisible( true );
 			tileInfo.setVisible( true );
 		}
 		else
 		{
-			UserInterface.setVisible( false );
 			tileInfo.setVisible( false );
 		}
 		
@@ -273,8 +264,8 @@ public class Renderer
 		}
 		else if( touchedDown && !firstPress )
 		{
-			offsetX = (firstX - touchX)*currentZoom;
-			offsetY = (firstY - touchY)*currentZoom;
+			offsetX = ((firstX - touchX)*currentZoom);
+			offsetY = ((firstY - touchY)*currentZoom);
 		}
 		
 		if( !touchedDown )
@@ -307,25 +298,57 @@ public class Renderer
 		
 		if( touchedDown && !firstPinch )
 		{
+
+			//Gdx.app.log( "Zoomtest", "zoomSpeed: " + zoomSpeed );
+
 			zoomSpeed = firstDistance - distance;
 			
-			camera.zoom = (currentZoom + (zoomSpeed/100));
+			if( camera.zoom <= 0.2 && zoomSpeed <= 0 )
+			{
+				currentZoom = 0.2f;
+				zoomSpeed = 0;
+			}
+			else if( camera.zoom >= 0.5 && zoomSpeed > 0)
+			{
+				currentZoom = 0.5f;
+				zoomSpeed = 0;
+			}
+			else
+			{
+				camera.zoom = (currentZoom + (zoomSpeed/1000));
+			}
 		}
 		
 		if( !touchedDown )
 		{
-			currentZoom = (currentZoom + (zoomSpeed/100));
+			currentZoom = (currentZoom + (zoomSpeed/1000));
 			zoomSpeed = 0;
 			firstPinch = true;
 		}
 		
 		if( down_pressed )
 		{
-			camera.zoom += 1;
+			if(camera.zoom >= 0.5f )
+			{
+				
+			}
+			else
+			{
+				camera.zoom += 0.1;
+				currentZoom += 0.1;
+			}
 		}
 		else if( up_pressed )
 		{
-			camera.zoom -= 1;
+			if(camera.zoom <= 0.2 )
+			{
+				
+			}
+			else
+			{
+				camera.zoom -= 0.1;
+				currentZoom -= 0.1;
+			}
 		}
 	}
 	

@@ -1,0 +1,5 @@
+package onzichtbaar.net.Android.CityBuilder.load;
+
+abstract class Data {
+
+}

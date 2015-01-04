@@ -15,7 +15,9 @@ public class TilesLoad
 	
 	private int grey = 10;
 	private int green = 11;
-	private int blue = 12;
+	
+	private int tileWidth = 64;
+	private int tileHeight = 64;
 	
 	private Tile[] tile = new Tile[105];
 	public ArrayList<Tile> tiles = new ArrayList<Tile>();
@@ -28,7 +30,7 @@ public class TilesLoad
 		for( int i = 1; i < 10; i++ )
 		{
 			
-			tile[i] = new Tile( new Vector((-512 + (512 * x)), (512 - (512 * y))), wood, green );
+			tile[i] = new Tile( new Vector((-tileWidth + (tileWidth * x)), (tileHeight - (tileHeight * y))), wood, green );
 			
 			if( (i % 3) == 0 )
 			{
@@ -39,24 +41,15 @@ public class TilesLoad
 			x++;
 		}
 		
-		tile[1].setColour(grey);
-		tile[1].setType(grass);
-		tile[2].setColour(grey);
-		tile[2].setType(grass);
-		tile[3].setColour(grey);
-		tile[3].setType(grass);
-		tile[4].setColour(grey);
-		tile[4].setType(grass);
-		tile[5].setColour(green);
-		tile[5].setType(town);
-		tile[6].setColour(grey);
-		tile[6].setType(grass);
-		tile[7].setColour(grey);
-		tile[7].setType(grass);
-		tile[8].setColour(grey);
-		tile[8].setType(grass);
-		tile[9].setColour(grey);
-		tile[9].setType(grass);
+		tile[1].setAttributes( wood, grey );
+		tile[2].setAttributes( wood, grey );
+		tile[3].setAttributes( wood, grey );
+		tile[4].setAttributes( wood, grey );
+		tile[5].setAttributes( town, grey );
+		tile[6].setAttributes( wood, grey );
+		tile[7].setAttributes( wood, grey );
+		tile[8].setAttributes( wood, grey );
+		tile[9].setAttributes( wood, grey );
 		
 		for( int i = 0; i < 10; i++ )
 		{

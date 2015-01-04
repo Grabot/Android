@@ -1,0 +1,8 @@
+package onzichtbaar.net.Android.CityBuilder.load;
+
+abstract class Data 
+{
+	
+	int ScreenWidth = 1360;
+
+}

@@ -2,6 +2,7 @@ package onzichtbaar.net.Android.CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
+import onzichtbaar.net.Android.CityBuilder.load.Data;
 import onzichtbaar.net.Android.CityBuilder.load.TilesLoad;
 import onzichtbaar.net.Android.CityBuilder.load.Vector;
 import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
@@ -9,7 +10,7 @@ import onzichtbaar.net.Android.CityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Gdx;
 
-public class Simulation 
+public class Simulation extends Data
 {   
 		private int grass = 1;
 		private int wood = 2;
@@ -137,9 +138,10 @@ public class Simulation
         
         private void checkTouch()
         {
-        	touch_distance_x = ((touchX-400)*cameraZ + cameraX);
-        	touch_distance_y = (((touchY-240)*cameraZ - cameraY)*-1);
-        }
+        	touch_distance_x = ((touchX-(ScreenWidth/2))*cameraZ + cameraX);
+        	touch_distance_y = (((touchY-(ScreenHeight/2))*cameraZ - cameraY)*-1);
+        	
+          }
         
         private void TileTouch()
         {
@@ -150,6 +152,7 @@ public class Simulation
         			for( int i = 1; i < tiles.size(); i++ )
                 	{
         				tileSelected[i] = false;
+        			      
                 	}
         			tileTouched = false;
         			info = false;
@@ -160,7 +163,7 @@ public class Simulation
         	{
         		for( int k = 1; k < tiles.size(); k++ )
             	{
-            		if(( tiles.get(k).position.distance( new Vector( touch_distance_x, touch_distance_y )) < 260 ) && !tileTouched )
+            		if(( tiles.get(k).position.distance( new Vector( touch_distance_x, touch_distance_y )) < ((tileWidth/2)+1) ) && !tileTouched )
             		{
         				tileSelected[k] = true;
         				info = true;
