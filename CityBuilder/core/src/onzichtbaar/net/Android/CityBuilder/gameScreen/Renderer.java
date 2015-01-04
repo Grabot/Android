@@ -54,17 +54,17 @@ public class Renderer
 	private float scaling_x = 0;
 	private float scaling_y = 0;
 	
-	private Texture HexTile;
-	private Texture HexTileGrass;
-	private Texture HexTileForest;
-	private Texture HexTileTown;
-	private Texture HexTileDesert;
-	private Texture HexTileSheep;
-	private Texture HexTileSelected;
+	private Texture SquareTile;
+	private Texture SquareTileGrass;
+	private Texture SquareTileForest;
+	private Texture SquareTileTown;
+	private Texture SquareTileDesert;
+	private Texture SquareTileSheep;
+	private Texture SquareTileSelected;
 	private Texture InfoBox;
 	private Texture PopupBox;
 	
-	private TextureRegion HexTileRegion;
+	private TextureRegion SquareTileRegion;
 	
 	private boolean firstPress = true;
 	private boolean firstPinch = true;
@@ -100,34 +100,34 @@ public class Renderer
 	
 	private Image UserInterface;
 	
-	private TextureRegion HexTileRegionSelected;
-	private TextureRegion HexTileRegionTown;
-	private TextureRegion HexTileRegionGrass;
-	private TextureRegion HexTileRegionWood;
-	private TextureRegion HexTileRegionSheep;
-	private TextureRegion HexTileRegionDesert;
+	private TextureRegion SquareTileRegionSelected;
+	private TextureRegion SquareTileRegionTown;
+	private TextureRegion SquareTileRegionGrass;
+	private TextureRegion SquareTileRegionWood;
+	private TextureRegion SquareTileRegionSheep;
+	private TextureRegion SquareTileRegionDesert;
 	private TextureRegion region;
 	
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		this.game = game;
-		HexTile = new Texture( Gdx.files.internal( "hexagon_green.png" ));
-		HexTileTown = new Texture( Gdx.files.internal( "hexagon_town.png" ));
-		HexTileSheep = new Texture( Gdx.files.internal( "hexagon_sheep.png" ));
-		HexTileDesert = new Texture( Gdx.files.internal( "hexagon_desert.png" ));
-		HexTileGrass = new Texture( Gdx.files.internal( "hexagon_grass.png" ));
-		HexTileForest = new Texture( Gdx.files.internal( "hexagon_forest.png" ));
-		HexTileSelected = new Texture( Gdx.files.internal( "hexagon_paint_selected.png" ));
+		SquareTile = new Texture( Gdx.files.internal( "SquareGreen.png" ));
+		SquareTileTown = new Texture( Gdx.files.internal( "SquareTown.png" ));
+		SquareTileSheep = new Texture( Gdx.files.internal( "SquareSheep.png" ));
+		SquareTileDesert = new Texture( Gdx.files.internal( "SquareDesert.png" ));
+		SquareTileGrass = new Texture( Gdx.files.internal( "SquareGrass.png" ));
+		SquareTileForest = new Texture( Gdx.files.internal( "SquareForest.png" ));
+		SquareTileSelected = new Texture( Gdx.files.internal( "SquareSelected.png" ));
 		InfoBox = new Texture( Gdx.files.internal( "UITest.png" ));
 		
 		region = new TextureRegion(InfoBox, 0, 0, InfoBox.getWidth(), InfoBox.getHeight());
-		HexTileRegionSelected = new TextureRegion( HexTileSelected, 0, 0, HexTileSelected.getWidth(), HexTileSelected.getHeight() );
-		HexTileRegionTown = new TextureRegion( HexTileTown, 0, 0, HexTile.getWidth(), HexTile.getHeight() );
-		HexTileRegionGrass = new TextureRegion( HexTileGrass, 0, 0, HexTile.getWidth(), HexTile.getHeight() );
-		HexTileRegionDesert = new TextureRegion( HexTileDesert, 0, 0, HexTile.getWidth(), HexTile.getHeight() );
-		HexTileRegionWood = new TextureRegion( HexTileForest, 0, 0, HexTile.getWidth(), HexTile.getHeight() );
-		HexTileRegionSheep = new TextureRegion( HexTileSheep, 0, 0, HexTile.getWidth(), HexTile.getHeight() );
+		SquareTileRegionSelected = new TextureRegion( SquareTileSelected, 0, 0, SquareTileSelected.getWidth(), SquareTileSelected.getHeight() );
+		SquareTileRegionTown = new TextureRegion( SquareTileTown, 0, 0, SquareTile.getWidth(), SquareTile.getHeight() );
+		SquareTileRegionGrass = new TextureRegion( SquareTileGrass, 0, 0, SquareTile.getWidth(), SquareTile.getHeight() );
+		SquareTileRegionDesert = new TextureRegion( SquareTileDesert, 0, 0, SquareTile.getWidth(), SquareTile.getHeight() );
+		SquareTileRegionWood = new TextureRegion( SquareTileForest, 0, 0, SquareTile.getWidth(), SquareTile.getHeight() );
+		SquareTileRegionSheep = new TextureRegion( SquareTileSheep, 0, 0, SquareTile.getWidth(), SquareTile.getHeight() );
 		
 		this.stage = stage;
 		this.camera = camera;
@@ -181,27 +181,27 @@ public class Renderer
 		
 		simulation.updateScroll( camera.position.x, camera.position.y, camera.zoom );
 		
-		for( int i = 1; i < 104; i++ )
+		for( int i = 1; i < 10; i++ )
 		{
 			if( simulation.tiles.get(i).type == town )
 			{
-				batch.draw( HexTileRegionTown, -HexTile.getWidth()/2 + simulation.tiles.get(i).position.x, -HexTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, HexTile.getWidth(), HexTile.getHeight(), 1, 1, 0, false);
+				batch.draw( SquareTileRegionTown, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
 			}
 			else if( simulation.tiles.get(i).type == grass )
 			{
-				batch.draw( HexTileRegionGrass, -HexTile.getWidth()/2 + simulation.tiles.get(i).position.x, -HexTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, HexTile.getWidth(), HexTile.getHeight(), 1, 1, 0, false);
+				batch.draw( SquareTileRegionGrass, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
 			}
 			else if( simulation.tiles.get(i).type == desert )
 			{
-				batch.draw( HexTileRegionDesert, -HexTile.getWidth()/2 + simulation.tiles.get(i).position.x, -HexTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, HexTile.getWidth(), HexTile.getHeight(), 1, 1, 0, false);
+				batch.draw( SquareTileRegionDesert, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
 			}
 			else if( simulation.tiles.get(i).type == wood )
 			{
-				batch.draw( HexTileRegionWood, -HexTile.getWidth()/2 + simulation.tiles.get(i).position.x, -HexTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, HexTile.getWidth(), HexTile.getHeight(), 1, 1, 0, false);
+				batch.draw( SquareTileRegionWood, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
 			}
 			else if( simulation.tiles.get(i).type == sheep )
 			{
-				batch.draw( HexTileRegionSheep, -HexTile.getWidth()/2 + simulation.tiles.get(i).position.x, -HexTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, HexTile.getWidth(), HexTile.getHeight(), 1, 1, 0, false);
+				batch.draw( SquareTileRegionSheep, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
 			}
 			
 			if( simulation.tiles.get(i).colour == grey )
@@ -209,8 +209,8 @@ public class Renderer
 			}
 			else if( simulation.tiles.get(i).colour == green )
 			{
-				HexTileRegion = new TextureRegion( HexTile, 0, 0, HexTile.getWidth(), HexTile.getHeight() );
-				batch.draw( HexTileRegion, -HexTile.getWidth()/2 + simulation.tiles.get(i).position.x, -HexTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, HexTile.getWidth(), HexTile.getHeight(), 1, 1, 0, false);
+				SquareTileRegion = new TextureRegion( SquareTile, 0, 0, SquareTile.getWidth(), SquareTile.getHeight() );
+				batch.draw( SquareTileRegion, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
 			}
 			
 			
@@ -232,7 +232,7 @@ public class Renderer
 			if( tileTouch[i] )
 			{
 				displayInfoBox( simulation, i );
-				batch.draw( HexTileRegionSelected, (-HexTileSelected.getWidth()/2 + simulation.tiles.get(i).position.x), (-HexTileSelected.getHeight()/2 + simulation.tiles.get(i).position.y), 0, 0, HexTileSelected.getWidth(), HexTileSelected.getHeight(), 1, 1, 0, false);
+				batch.draw( SquareTileRegionSelected, (-SquareTileSelected.getWidth()/2 + simulation.tiles.get(i).position.x), (-SquareTileSelected.getHeight()/2 + simulation.tiles.get(i).position.y), 0, 0, SquareTileSelected.getWidth(), SquareTileSelected.getHeight(), 1, 1, 0, false);
 			}
 		}
 		

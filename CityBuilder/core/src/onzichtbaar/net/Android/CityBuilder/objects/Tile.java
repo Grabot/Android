@@ -14,5 +14,15 @@ public class Tile
             this.type = type;
             this.colour = colour;
     }
+	
+	public void setType( int type )
+	{
+		this.type = type;
+	}
+	
+	public void setColour( int colour )
+	{
+		this.colour = colour;
+	}
 
 }

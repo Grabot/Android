@@ -1,0 +1,48 @@
+package onzichtbaar.net.Android.CityBuilder.load;
+
+import java.util.ArrayList;
+
+import onzichtbaar.net.Android.CityBuilder.objects.Tile;
+
+public class TilesLoad 
+{
+
+	private int grass = 1;
+	private int wood = 2;
+	private int town = 3;
+	private int sheep = 4;
+	private int desert = 5;
+	
+	private int grey = 10;
+	private int green = 11;
+	private int blue = 12;
+	
+	private Tile[] tile = new Tile[105];
+	public ArrayList<Tile> tiles = new ArrayList<Tile>();
+	
+	public TilesLoad()
+	{
+		tile[0] = null;
+		
+		for( int i = 0;)
+		tile[1] = new Tile( new Vector( -512, 512 ), wood ,  green );
+		tile[2] = new Tile( new Vector( 0, 512 ), wood ,  green );
+		tile[3] = new Tile( new Vector( 512, 512 ), wood ,  green );
+		tile[4] = new Tile( new Vector( -512, 0 ), wood ,  green );
+		tile[5] = new Tile( new Vector( 0, 0 ), town ,  green );
+		tile[6] = new Tile( new Vector( 512, 0 ), sheep ,  green );
+		tile[7] = new Tile( new Vector( -512, -512 ), desert ,  green );
+		tile[8] = new Tile( new Vector( 0, -512 ), desert ,  green );
+		tile[9] = new Tile( new Vector( 512, -512 ), desert ,  green );
+		
+		for( int i = 0; i < 10; i++ )
+		{
+			tiles.add(tile[i] );
+		}
+	}
+
+	public ArrayList<Tile> getTiles()
+	{
+		return tiles;
+	}
+}
