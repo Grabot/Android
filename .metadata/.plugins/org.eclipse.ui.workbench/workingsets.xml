@@ -1,20 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workingSetManager>
-<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1417782434730_1" label="greaterThanFive6" name="greaterThanFive6">
-<item elementID="=greaterThanFive6-core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=greaterThanFive6" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=greaterThanFive6-ios" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=greaterThanFive6-html" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=greaterThanFive6-desktop" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=greaterThanFive6-android" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-</workingSet>
-<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1420379132910_2" label="CityBuilder" name="CityBuilder">
-<item elementID="=CityBuilder" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=CityBuilder-core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=CityBuilder-android" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=CityBuilder-desktop" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=CityBuilder-html" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=CityBuilder-ios" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-</workingSet>
-<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1417778096237_0" label="Window Working Set" name="Aggregate for window 1417778096236"/>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1417782434730_1" label="greaterThanFive6" name="greaterThanFive6"/>
 </workingSetManager>
