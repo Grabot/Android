@@ -4,21 +4,8 @@ import java.util.ArrayList;
 
 import onzichtbaar.net.Android.CityBuilder.objects.Tile;
 
-public class TilesLoad 
+public class TilesLoad extends Data
 {
-
-	private int grass = 1;
-	private int wood = 2;
-	private int town = 3;
-	private int sheep = 4;
-	private int desert = 5;
-	
-	private int grey = 10;
-	private int green = 11;
-	
-	private int tileWidth = 64;
-	private int tileHeight = 64;
-	
 	private Tile[] tile = new Tile[105];
 	public ArrayList<Tile> tiles = new ArrayList<Tile>();
 	
@@ -27,31 +14,31 @@ public class TilesLoad
 		tile[0] = null;
 		int x = 0;
 		int y = 0;
-		for( int i = 1; i < 10; i++ )
+		for( int i = 1; i < (numberOfTiles + 1); i++ )
 		{
 			
-			tile[i] = new Tile( new Vector((-tileWidth + (tileWidth * x)), (tileHeight - (tileHeight * y))), wood, green );
+			tile[i] = new Tile( new Vector((-tileStartWidth + (tileWidth * x)), (tileStartHeight - (tileHeight * y))), wood, unavailable );
 			
-			if( (i % 3) == 0 )
+			if( (i % gridSize) == 0 )
 			{
-				x = x - 3;
+				x = x - gridSize;
 				y++;
 			}
 			
 			x++;
 		}
 		
-		tile[1].setAttributes( wood, grey );
-		tile[2].setAttributes( wood, grey );
-		tile[3].setAttributes( wood, grey );
-		tile[4].setAttributes( wood, grey );
-		tile[5].setAttributes( town, grey );
-		tile[6].setAttributes( wood, grey );
-		tile[7].setAttributes( wood, grey );
-		tile[8].setAttributes( wood, grey );
-		tile[9].setAttributes( wood, grey );
+		tile[7].setAttributes( wood, available );
+		tile[8].setAttributes( wood, available );
+		tile[9].setAttributes( wood, available );
+		tile[12].setAttributes( wood, available );
+		tile[13].setAttributes( town, available );
+		tile[14].setAttributes( wood, available );
+		tile[17].setAttributes( wood, available );
+		tile[18].setAttributes( wood, available );
+		tile[19].setAttributes( wood, available );
 		
-		for( int i = 0; i < 10; i++ )
+		for( int i = 0; i < (numberOfTiles + 1); i++ )
 		{
 			tiles.add(tile[i] );
 		}

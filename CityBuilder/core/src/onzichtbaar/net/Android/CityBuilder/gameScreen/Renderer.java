@@ -20,16 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class Renderer extends Data
 {
-	private int grass = 1;
-	private int wood = 2;
-	private int town = 3;
-	private int sheep = 4;
-	private int desert = 5;
-	
 	private  ArrayList<Citizen> citizens = new ArrayList<Citizen>();
-	
-	private int grey = 10;
-	private int green = 11;
 	
 	public static final String LOG = Renderer.class.getSimpleName();
 
@@ -56,6 +47,7 @@ public class Renderer extends Data
 	private Texture SquareTileDesert;
 	private Texture SquareTileSheep;
 	private Texture SquareTileSelected;
+	private Texture SquareUnavailable;
 	private Texture InfoBox;
 	
 	private TextureRegion SquareTileRegion;
@@ -79,12 +71,18 @@ public class Renderer extends Data
 	private float currentX = 0;
 	private float currentY = 0;
 	
+	private boolean touchSideRight = false;
+	private boolean touchSideLeft = false;
+	private boolean touchUp = false;
+	private boolean touchBottom = false;
+	
 	private boolean down_pressed = false;
 	private boolean up_pressed = false;
 	private boolean info = false;
 	private boolean drawCitizen = false;
 	
 	private TextField tileInfo;
+	private TextField levelText;
 	
 	private Skin_Setup skin_setup;
 	
@@ -95,6 +93,7 @@ public class Renderer extends Data
 	private Image UserInterface;
 	
 	private TextureRegion SquareTileRegionSelected;
+	private TextureRegion SquareTileRegionUnavailable;
 	private TextureRegion SquareTileRegionTown;
 	private TextureRegion SquareTileRegionGrass;
 	private TextureRegion SquareTileRegionWood;
@@ -107,6 +106,7 @@ public class Renderer extends Data
 		this.citizens = citizens;
 		this.game = game;
 		SquareTile = new Texture( Gdx.files.internal( "SquareGreenSmall.png" ));
+		SquareUnavailable = new Texture( Gdx.files.internal( "SquareGreySmall.png" ));
 		SquareTileTown = new Texture( Gdx.files.internal( "SquareTownSmall.png" ));
 		SquareTileSheep = new Texture( Gdx.files.internal( "SquareSheep.png" ));
 		SquareTileDesert = new Texture( Gdx.files.internal( "SquareDesert.png" ));
@@ -140,8 +140,14 @@ public class Renderer extends Data
 		tileInfo.setPosition( 1030, 530 );
 		tileInfo.setVisible( false );
 		
+		levelText = new TextField( "Level 1", skin );
+		levelText.setDisabled(true);
+		levelText.setBounds(30, 680, 300, 20 );
+		levelText.setVisible( true );
+		
 		stage.addActor( UserInterface);
 		stage.addActor( tileInfo );
+		stage.addActor( levelText );
 		
 		camera.zoom = currentZoom;
 
@@ -150,7 +156,6 @@ public class Renderer extends Data
 
 		scaling_x = width/ScreenHeight;
 		scaling_y = height/ScreenWidth;
-		
 	}
 	
 	 
@@ -174,7 +179,7 @@ public class Renderer extends Data
 		
 		simulation.updateScroll( camera.position.x, camera.position.y, camera.zoom );
 		
-		for( int i = 1; i < 10; i++ )
+		for( int i = 1; i < (numberOfTiles + 1); i++ )
 		{
 			if( simulation.tiles.get(i).type == town )
 			{
@@ -197,13 +202,13 @@ public class Renderer extends Data
 				batch.draw( SquareTileRegionSheep, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
 			}
 			
-			if( simulation.tiles.get(i).colour == grey )
+			if( simulation.tiles.get(i).colour == available )
 			{
 			}
-			else if( simulation.tiles.get(i).colour == green )
+			else if( simulation.tiles.get(i).colour == unavailable )
 			{
-				SquareTileRegion = new TextureRegion( SquareTile, 0, 0, SquareTile.getWidth(), SquareTile.getHeight() );
-				batch.draw( SquareTileRegion, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
+				SquareTileRegionUnavailable = new TextureRegion( SquareUnavailable, 0, 0, SquareTile.getWidth(), SquareTile.getHeight() );
+				batch.draw( SquareTileRegionUnavailable, -SquareTile.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTile.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTile.getWidth(), SquareTile.getHeight(), 1, 1, 0, false);
 			}
 			
 			
@@ -256,6 +261,7 @@ public class Renderer extends Data
 	
 	private void MapScroll()
 	{
+		
 		if( touchedDown && firstPress )
 		{
 			firstPress = false;
@@ -264,8 +270,34 @@ public class Renderer extends Data
 		}
 		else if( touchedDown && !firstPress )
 		{
-			offsetX = ((firstX - touchX)*currentZoom);
-			offsetY = ((firstY - touchY)*currentZoom);
+			if( ((currentX + offsetX) <= -280) && offsetX < 0 )
+			{
+				touchSideRight = true;
+			}
+			else if( ((currentX + offsetX) >= 280) && offsetX > 0 )
+			{
+				touchSideLeft = true;
+			}
+			else
+			{
+				if(!touchSideRight || !touchSideLeft )
+				{
+					offsetX = ((firstX - touchX)*currentZoom);
+				}
+			}
+			
+			if( ((currentY - offsetY) <= -150) && offsetY > 0 )
+			{
+				touchUp = true;
+			}
+			else if( ((currentY - offsetY) >= 150) && offsetY < 0 )
+			{
+				touchBottom = true;
+			}
+			else
+			{
+				offsetY = ((firstY - touchY)*currentZoom);
+			}
 		}
 		
 		if( !touchedDown )
@@ -275,8 +307,29 @@ public class Renderer extends Data
 			currentY = (currentY - offsetY);
 			offsetX = 0;
 			offsetY = 0;
+			
+			if( touchSideRight )
+			{
+				currentX = -280;
+				touchSideRight = false;
+			}
+			else if( touchSideLeft )
+			{
+				currentX = 280;
+				touchSideLeft = false;
+			}
+			
+			if( touchUp )
+			{
+				currentY = -150;
+				touchUp = false;
+			}
+			else if( touchBottom )
+			{
+				currentY = 150;
+				touchBottom = false;
+			}
 		}
-		
 	}
 	
 	private void MapZoom()

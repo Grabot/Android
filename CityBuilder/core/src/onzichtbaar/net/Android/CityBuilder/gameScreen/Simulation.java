@@ -11,13 +11,7 @@ import onzichtbaar.net.Android.CityBuilder.objects.Tile;
 import com.badlogic.gdx.Gdx;
 
 public class Simulation extends Data
-{   
-		private int grass = 1;
-		private int wood = 2;
-		private int town = 3;
-		private int sheep = 4;
-		private int desert = 5;
-		
+{
 		private Citizen[] citizen = new Citizen[100];
 		
 		public ArrayList<Tile> tiles = new ArrayList<Tile>( );
