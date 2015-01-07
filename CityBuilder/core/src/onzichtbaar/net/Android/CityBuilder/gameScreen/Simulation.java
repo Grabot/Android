@@ -40,7 +40,6 @@ public class Simulation extends Data
         private boolean fast_press = false;
         private boolean down_pressed = false;
         private boolean up_pressed = false;
-        private boolean info = false;
         
         private boolean[] tileSelected = new boolean[105];
         private boolean[] firstTouchTile = new boolean[105];
@@ -149,7 +148,6 @@ public class Simulation extends Data
         			      
                 	}
         			tileTouched = false;
-        			info = false;
         		}
         	}
         	
@@ -160,7 +158,6 @@ public class Simulation extends Data
             		if(( tiles.get(k).position.distance( new Vector( touch_distance_x, touch_distance_y )) < ((tileWidth/2)+1) ) && !tileTouched )
             		{
         				tileSelected[k] = true;
-        				info = true;
             			tileTouched = true;
             		}
             	}
@@ -203,11 +200,5 @@ public class Simulation extends Data
         {
         	return tileSelected;
         }
-        
-        public boolean getInfo()
-        {
-        	return info;
-        }
-        
-        
+     
 }

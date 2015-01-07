@@ -1,0 +1,11 @@
+package onzichtbaar.net.Android.CityBuilder.load;
+
+public class DisplayInfoBox 
+{
+	
+	public DisplayInfoBox()
+	{
+		
+	}
+
+}
