@@ -5,7 +5,77 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2014-12-30T21:26:00Z</updated>
+  <updated>2015-01-08T18:46:00Z</updated>
+  <entry>
+    <title>Spring Session 1.0.0.RELEASE</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/08/spring-session-1-0-0-release" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Rob Winch</name>
+    </author>
+    <id>tag:spring.io,2015-01-08:1910</id>
+    <updated>2015-01-08T18:46:00Z</updated>
+    <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of &lt;a href="http://projects.spring.io/spring-session/"&gt;Spring Session&lt;/a&gt; 1.0.0.RELEASE. You can find the release in &lt;a href="http://repo1.maven.org/maven2/org/springframework/session/"&gt;Maven Central&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#features" class="anchor" name="features"&gt;&lt;/a&gt;Features&lt;/h2&gt;&lt;p&gt;Spring Session provides the following features:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;API and implementations (i.e. Redis) for managing a user&amp;rsquo;s session&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://docs.spring.io/spring-session/docs/current/reference/html5/#httpsession"&gt;HttpSession&lt;/a&gt; - allows replacing the HttpSession in an application container (i.e. Tomcat) neutral way. Additional features include:&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Clustered Sessions&lt;/strong&gt; - Spring Session makes it trivial to support &lt;a href="http://docs.spring.io/spring-session/docs/current/reference/html5/#httpsession-redis"&gt;clustered sessions&lt;/a&gt; without being tied to an application container specific solution.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Multiple Browser Sessions&lt;/strong&gt; - Spring Session supports &lt;a href="http://docs.spring.io/spring-session/docs/current/reference/html5/#httpsession-multi"&gt;managing multiple users&amp;rsquo; sessions&lt;/a&gt; in a single browser instance (i.e. multiple authenticated accounts similar to Google).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;RESTful APIs&lt;/strong&gt; - Spring Session allows providing session ids in headers to work with &lt;a href="http://docs.spring.io/spring-session/docs/current/reference/html5/#httpsession-rest"&gt;RESTful APIs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://docs.spring.io/spring-session/docs/current/reference/html5/#websocket"&gt;WebSocket&lt;/a&gt; - provides the ability to keep the HttpSession alive when receiving WebSocket messages&lt;/li&gt;
+  &lt;li&gt;Lot&amp;rsquo;s of &lt;a href="http://docs.spring.io/spring-session/docs/current/reference/html5/#samples"&gt;sample applications&lt;/a&gt; with Guides to get you started fast!&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;A special thanks to all the community feedback and support. I&amp;rsquo;d like to especially thank &lt;a href="https://github.com/chrylis"&gt;Christopher Smith&lt;/a&gt; for all of his great feedback. If you find an issue or what a new feature, please &lt;a href="https://github.com/spring-projects/spring-session/issues"&gt;report it&lt;/a&gt; or better yet create a &lt;a href="https://github.com/spring-projects/spring-session/pulls"&gt;pull request&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spreading-the-word" class="anchor" name="spreading-the-word"&gt;&lt;/a&gt;Spreading the Word&lt;/h2&gt;&lt;p&gt;If you are excited about Spring Session, help show the love!&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/rob_winch/status/553262382714454017"&gt;Tweet&lt;/a&gt; about it&lt;/li&gt;
+  &lt;li&gt;Star us on &lt;a href="https://github.com/spring-projects/spring-session"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Vote us up on &lt;a href="http://www.dzone.com/links/another_nail_in_the_app_server_coffin_spring_sess.html"&gt;DZone&lt;/a&gt; &amp;amp; &lt;a href="http://www.reddit.com/r/java/comments/2rrwm8/another_nail_in_the_app_server_coffin_spring/"&gt;Reddit&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-session/"&gt;Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-session/docs/current/reference/html5/"&gt;Documentation&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-session/docs/current/api/"&gt;Javadoc&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-session/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-session"&gt;Help&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-session"&gt;Source&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-session/issues?q=milestone%3A%221.0.0+GA%22"&gt;Changelog&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Painless Build and Deploy for YARN Applications with Spring</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-painless-build-and-deploy-for-yarn-applications-with-spring" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2014-12-17:1896</id>
+    <updated>2015-01-08T14:31:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;br/&gt;Speaker: Janne Valkealahti&lt;br/&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014springyarn"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014springyarn&lt;/a&gt;&lt;br/&gt;Big Data Track&lt;br/&gt;Spring&amp;rsquo;s goal, like any good framework, has always been to handle the infrastructure so you can focus on your application code. Join this session to see how Spring provides a simple programming model to develop applications than can easily be tested and deployed as either a YARN application or a traditional application. No longer will you need to struggle with 3rd party library build and packaging issues, XML, and how the YARN Appmasters, Clients and Resource Managers all work together. The magic of Spring Boot, Spring XD, and Spring for Apache Hadoop just make it all work so you can get coding!&lt;br/&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/qlvX7_r9aUA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Boot 1.2.1 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/08/spring-boot-1-2-1-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Phil Webb</name>
+    </author>
+    <id>tag:spring.io,2015-01-08:1909</id>
+    <updated>2015-01-08T08:31:37Z</updated>
+    <content type="html">&lt;p&gt;Spring Boot 1.2.1 has been released and is available now from &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.springframework.boot%22"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;This maintenance release includes over &lt;a href="https://github.com/spring-projects/spring-boot/issues?q=milestone%3A1.2.1"&gt;70 fixes&lt;/a&gt; and enhancements from 1.2.0 and fixes a number of bugs and regressions. If you are still using Spring Boot 1.1, now would be an excellent time to upgrade!&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/1.2.1.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>This Week in Spring - January 6th, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/07/this-week-in-spring-january-6th-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-01-07:1908</id>
+    <updated>2015-01-07T02:20:00Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! I hope your holiday and new year was awesome! It&amp;rsquo;s the beginning of a new year (I almost typed &amp;ldquo;2014&amp;rdquo;!), and we&amp;rsquo;ve got a lot of great stuff coming this year! Let&amp;rsquo;s see what the internet has been doing this last week in the Spring community.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Our friend Petri Kainulainen is back, and he&amp;rsquo;s &lt;a href="http://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-two-crud/"&gt;completely revamped his Spring Data JPA CRUD tutorial&lt;/a&gt;! Check it out! We&amp;rsquo;ve linked to it before in this roundup, but it&amp;rsquo;s always worth re-reading!&lt;/li&gt;
+  &lt;li&gt;I really like this post that looks &lt;a href="http://www.ekito.fr/people/inject-multitenancy-in-your-spring-web-application/"&gt;at introducing multitenancy into an application in terms of a JHipster-based sample&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Inforworld has an interesting post, &lt;a href="http://www.infoworld.com/article/2864453/application-development/why-2015-will-be-the-year-of-microservices.html"&gt;Why 2015 will be the year of the micro service&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Our pals in Spain are putting on their &lt;a href="http://springio.net"&gt;Spring IO (the conference)&lt;/a&gt; conference again this year! It&amp;rsquo;s shaping up to be a really great show, and I can tell you nobody works harder for the community than these guys. If you&amp;rsquo;re in the region, I hope you&amp;rsquo;ll consider it!&lt;/li&gt;
+  &lt;li&gt;Meanwhile, over on the Codeleak.pl blog, there is a great introduction &lt;a href="http://blog.codeleak.pl/2015/01/getting-started-with-jersey-and-spring.html"&gt;to using Jersey and Spring Boot 1.2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&amp;hellip;and a followup post on &lt;a href="http://blog.codeleak.pl/2015/01/building-hateoas-api-with-jax-rs-and.html"&gt;on how to build a HATEOAS API with Spring Boot 1.2 and Jersey&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Marcin Grzejszczak has put together a nice introduction to some of his company&amp;rsquo;s open-source tools for supporting microservices using Spring (and Spring Boot). &lt;a href="https://www.voxxed.com/blog/2014/12/microservices-micro-infra-spring/"&gt;Here&amp;rsquo;s his first post&lt;/a&gt;. I haven&amp;rsquo;t explored everything, but it looks like an interesting read!&lt;/li&gt;
+  &lt;li&gt;This is a new video that shows how to use &lt;a href="https://www.youtube.com/watch?v=K3ZSsF_eXO4"&gt;the Spring Security XML namespace to secure a (in this case JAX-RS-based) REST service&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;I &lt;em&gt;think&lt;/em&gt; this is a &lt;a href="https://www.youtube.com/watch?v=MS7GCW5lKkw"&gt;Korean-language video on writing a unit-test for MyBatis&lt;/a&gt;. I don&amp;rsquo;t know why, yet, but I enjoy watching people iterate. Sometimes a (moving picture) is worth a thousand words.&lt;/li&gt;
+  &lt;li&gt;I &lt;em&gt;think&lt;/em&gt; this is a Bengali-language video on &lt;a href="https://www.youtube.com/watch?v=oXbo3k3uhHw"&gt;how to get started with Spring Boot&lt;/a&gt;. Either way, the video speaks for itself!&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Also, this post marks 4 years of writing &amp;ldquo;This Week in Spring&amp;rdquo;! Thanks everybody for the years of great content for me to read and thanks to all those who have sent in suggestions &lt;a href="http://twitter.com/starbuxman"&gt;on Twitter&lt;/a&gt; or &lt;a href="mailto:jlong@pivotal.io?Subject=TWiS"&gt;by email&lt;/a&gt;. Thanks, and keep it up, Spring community, you&amp;rsquo;re amazing! &lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>This Year in Spring - December 30, 2014</title>
     <link rel="alternate" href="https://spring.io/blog/2014/12/30/this-year-in-spring-december-30-2014" />
@@ -435,92 +505,6 @@
 &lt;p&gt;What is the role of asynchronous, non-blocking style-communication in microservices? Join Stephane Maldini for a revealing look at why reactive components are so important in an eventually-consistent approach like microservice architecture. When services own their data and are completely independent, having a (reactive) abstraction layer can perform a variety of roles. Being able to parallelize resources a microservice owns is an important technique. Another might be as an event bus, pulling state data from various micro services dynamically, checking against the cached, fairly up-to-date local copy. While a microservice has “all” the data it needs from other services to respond to a request, this data is not necessarily up-to-date—an important constraint to be prepared to accept. Stephane will also discuss other async use cases outside of microservices and how &lt;a href="http://www.reactive-streams.org"&gt;www.reactive-streams.org&lt;/a&gt; protocol support allows levels of portability across vendor implementations.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/bn1zZDMyFpI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - December 9th, 2014</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/10/this-week-in-spring-december-9th-2014" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2014-12-10:1884</id>
-    <updated>2014-12-10T00:49:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! In a few short weeks we&amp;rsquo;ll be in 2015! Will that be exciting? Of course. But this week&amp;rsquo;s pretty exciting as well! So much good stuff this week.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2014/12/11/spring-boot-1-2-0-released"&gt;Spring Boot 1.2.0 is here&lt;/a&gt;! So many new features for Java EE (Servlet 3.1-baseline, JTA, JMS and JNDI support) and improved Jackson output, Actuator endpoints, CLI updates and performance. Spring Cloud is already tracking 1.2 and will be based on this soon, as well. &lt;a href="http://start.spring.io"&gt;Get the bits&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2014/12/11/spring-boot-1-1-10-released"&gt;Spring Boot 1.1.10 is now available with numerous fixes&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Resident mad-scientist Andy Wilkinson just announced &lt;a href="https://spring.io/blog/2014/12/12/spring-io-platform-1-1-0-rc1-released"&gt;the latest cut of the Spring IO platform library&lt;/a&gt;. There are lots of things of note, but in particular it&amp;rsquo;s added support for Spring Integration Flow 1.0, Spring Integration Java DSL 1.0, and Spring Integration Splunk 1.1 and updated revisions for several projects besides.&lt;/li&gt;
-  &lt;li&gt;Spring Security lead &lt;a href="https://spring.io/blog/2014/12/11/spring-security-4-0-0-rc1-released"&gt;Rob Winch has announced Spring Security 4.0.0.RC1&lt;/a&gt;. Read his release-notes and try out the bits soon!&lt;/li&gt;
-  &lt;li&gt;Spring Data ninja Thomas Risbery has just &lt;a href="https://spring.io/blog/2014/12/16/spring-for-apache-hadoop-2-0-4-released"&gt;announced Spring for Apache Hadoop 2.0.4&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Spring Integration lead Gary Russell just &lt;a href="https://spring.io/blog/2014/12/15/spring-integration-spring-amqp-maintenance-releases-available"&gt;announced Spring Integration and Spring AMQP maintenance releases&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Join Gary Russell on Jan 27th as he shows new reasons why Spring Integration leads the ESB/Integration Framework market (2014 DZone research): &lt;a href="http://spring.io/blog/2014/12/02/webinar-introducing-the-java-dsl-for-spring-integration"&gt;Introducing the Java DSL for Spring Integration&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Is in-memory your thing? Join Luke Shannon Jan 13th and learn about how Spring MVC/Spring Boot applications can leverage GemFire for persistence in his talk &lt;a href="http://spring.io/blog/2014/12/02/webinar-building-scalable-data-applications-with-spring-and-gemfire"&gt;Building Scalable Data Applications with Spring and GemFire&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Check out the replay of Stepane Maldini&amp;rsquo;s webinar introducing &lt;a href="https://spring.io/blog/2014/12/11/webinar-replay-using-reactor-for-asynch-non-blocking-microservices"&gt;Reactor for asynchronous, non-blocking microservices&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://twitter.com/mraible"&gt;Matt Raible&lt;/a&gt; announced an update to his popular AppFuse starter project. One of the major changes: &lt;a href="http://raibledesigns.com/rd/entry/appfuse_reduced"&gt;it now uses the Spring IO platform dependency for ease-of-version and dependency management&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Hat Tip to Spring Data lead Oliver Gierke who sent me this useful post, &lt;a href="http://www.insaneprogramming.be/blog/2014/12/01/mongodb-java-comparison/"&gt;&lt;em&gt;A Simple Use-case Comparison of JVM Libraries for MongoDB&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Dennis wrote about &lt;a href="https://blog.codecentric.de/en/2014/10/log-management-spring-boot-applications-logstash-elastichsearch-kibana/"&gt;Spring Boot and Logstash, Kibana and ElasticSearch&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;CodeCentric &lt;a href="https://blog.codecentric.de/en/2014/11/spring-boot-starter-batch-web-1-3-0-released/"&gt;have released version 1.3.0 of their Spring Batch and Spring Boot-based starter&lt;/a&gt;. It now includes transaction-safe metrics.&lt;/li&gt;
-  &lt;li&gt;Speaking of Spring Boot starters, specifically, did you see &lt;a href="https://blog.codecentric.de/en/2014/11/extending-spring-boot-five-steps-writing-spring-boot-starter/"&gt;Tobias&amp;rsquo; post from last month on writing your own Spring Boot starter&lt;/a&gt;?&lt;/li&gt;
-&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Framework 4.1.3 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/09/spring-framework-4-1-3-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Stéphane Nicoll</name>
-    </author>
-    <id>tag:spring.io,2014-12-09:1877</id>
-    <updated>2014-12-09T13:14:00Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team I am pleased to announce the immediate availability of Spring Framework 4.1.3.&lt;/p&gt;
-
-&lt;p&gt;Spring Framework 4.1.3 is our third maintenance release in the 4.1.x line and comes with &lt;a href="https://jira.spring.io/issues/?jql=fixVersion%3D4.1.3%20AND%20project%3DSPR"&gt;over 50 fixes and improvements&lt;/a&gt;. It was initially scheduled for late December but we decided to release it early to incorporate user-suggested and user-contributed improvements right in time for the scheduled Spring Boot 1.2 release this week.&lt;/p&gt;
-
-&lt;p&gt;We are still planning on another release later this month (4.1.4) at which point 4.1.x will turn into a maintenance branch, with active development on 4.2 happening on master.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Spring XD - A Guided Tour</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/09/springone2gx-2014-replay-spring-xd-a-guided-tour" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2014-12-09:1881</id>
-    <updated>2014-12-09T13:09:00Z</updated>
-    <content type="html">&lt;p&gt;Spring XD - A Guided Tour&lt;/p&gt;
-
-&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-
-&lt;p&gt;Speakers: Patrick Peralta, David Turanski &lt;/p&gt;
-
-&lt;p&gt;Big Data Track &lt;/p&gt;
-
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-xd-guided-tour"&gt;http://www.slideshare.net/SpringCentral/spring-xd-guided-tour&lt;/a&gt; &lt;/p&gt;
-
-&lt;p&gt;What happens when a Stream is deployed to a Spring XD cluster? How does Stream processing and data partitioning work? How does the cluster recover when a Spring XD container goes down? How does Spring XD create and manage application contexts? What is a Plugin? How does Spring XD support extensibility? Our experienced guides will take you on a tour of the Spring XD runtime environment, navigating Streams and observing how Modules thrive in their natural habitat. We will explore the role of ZooKeeper, Spring Integration, and Spring Boot through beautiful panoramas, code samples, and daring demonstrations.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/lteee9N816k" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Implementing the Lambda Architecture with Spring XD</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/09/springone2gx-2014-replay-implementing-the-lambda-architecture-with-spring-xd" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2014-12-09:1880</id>
-    <updated>2014-12-09T13:01:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-
-&lt;p&gt;Speaker: Carlos Queiroz &lt;/p&gt;
-
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014carlosqueiroz"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014carlosqueiroz&lt;/a&gt; &lt;/p&gt;
-
-&lt;p&gt;Big Data Track&lt;/p&gt;
-
-&lt;p&gt;The lambda architecture has been proposed as a general purpose data system that aims to solve the problem of computing arbitrary functions on an arbitrary dataset in (near) real-time. In this talk we introduce the lambda architecture and show how it can be implemented with SpringXD, GemFireXD and Hadoop (HDFS and MapReduce) as the foundation of the architecture implementation. To validate the architecture we introduce a CDR (Call Detail Record) mining application as use case of the lambda architecture. We finalise by showing a demo of the CDR (Call Detail Record) mining application.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/tjwW9oWkH0Q" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</content>
   </entry>
 </feed>
 

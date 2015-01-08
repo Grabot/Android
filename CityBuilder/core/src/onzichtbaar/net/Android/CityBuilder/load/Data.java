@@ -12,7 +12,8 @@ public abstract class Data
 	protected int tileStartWidth = 126;
 	protected int tileStartHeight = 126;
 	
-	protected int gridSize = 5;
+	protected int gridSizeWidth = 5;
+	protected int gridSizeHeight = 5;
 	protected int numberOfTiles = 25;
 
 	protected int unavailable = 10;

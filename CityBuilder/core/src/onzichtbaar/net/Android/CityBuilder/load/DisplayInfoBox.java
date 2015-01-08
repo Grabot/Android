@@ -16,27 +16,27 @@ public class DisplayInfoBox extends Data
 	{
 		if( simulation.tiles.get(type).type == grass )
 		{
-			tileInfo.setText( "grass" );
+			tileInfo.setText( type + " grass" );
 		}
 		else if( simulation.tiles.get(type).type == wood )
 		{
-			tileInfo.setText( "wood" );
+			tileInfo.setText( type + " wood" );
 		}
 		else if( simulation.tiles.get(type).type == town )
 		{
-			tileInfo.setText( "town" );
+			tileInfo.setText( type + " town" );
 		}
 		else if( simulation.tiles.get(type).type == sheep )
 		{
-			tileInfo.setText( "sheep" );
+			tileInfo.setText( type + " sheep" );
 		}
 		else if( simulation.tiles.get(type).type == desert )
 		{
-			tileInfo.setText( "desert" );
+			tileInfo.setText( type + " desert" );
 		}
 		else if( simulation.tiles.get(type).type == dwayne )
 		{
-			tileInfo.setText( "dwayne" );
+			tileInfo.setText( type + " dwayne" );
 		}
 		tileInfo.setVisible( true );
 	}

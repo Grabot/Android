@@ -19,9 +19,9 @@ public class TilesLoad extends Data
 			
 			tile[i] = new Tile( new Vector((-tileStartWidth + (tileWidth * x)), (tileStartHeight - (tileHeight * y))), wood, unavailable, false );
 			
-			if( (i % gridSize) == 0 )
+			if( (i % gridSizeWidth) == 0 )
 			{
-				x = x - gridSize;
+				x = x - gridSizeWidth;
 				y++;
 			}
 			
@@ -34,10 +34,12 @@ public class TilesLoad extends Data
 		tile[9].setAttributes( dwayne, available, false );
 		tile[12].setAttributes( wood, available, false );
 		tile[13].setAttributes( town, available, true );
-		tile[14].setAttributes( wood, available, false );
-		tile[17].setAttributes( wood, available, false );
+		tile[14].setAttributes( desert, available, false );
+		tile[17].setAttributes( grass, available, false );
 		tile[18].setAttributes( wood, available, false );
 		tile[19].setAttributes( wood, available, true );
+		tile[22].setAttributes( desert, unavailable, false );
+		tile[23].setAttributes( grass, unavailable, false );
 		
 		for( int i = 0; i < (numberOfTiles + 1); i++ )
 		{

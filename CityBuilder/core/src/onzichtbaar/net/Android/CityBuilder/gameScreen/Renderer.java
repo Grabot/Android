@@ -37,6 +37,8 @@ public class Renderer extends Data
 	private SpriteBatch batch;
 	
 	private Skin skin;
+	private int selectedTile = 1;
+	private boolean hasWall = false;
 	
 	private float scaling_x = 0;
 	private float scaling_y = 0;
@@ -57,8 +59,13 @@ public class Renderer extends Data
 	private GameScreen game;
 	
 	private Image UserInterface;
-	
+	private Simulation simulation;
 	private TextureRegion region;
+	
+	private int Wood = 0;
+	private int Stone = 0;
+	private int Food = 0;
+	private int Gold = 0;
 	
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
@@ -90,6 +97,7 @@ public class Renderer extends Data
 	
 	public void DrawImages( Simulation simulation )
 	{
+		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
 		inputHandler.MapScroll();
 		inputHandler.MapZoom();
@@ -121,6 +129,9 @@ public class Renderer extends Data
 				
 				infoBoxDisplay.displayInfoBox(tileInfo, simulation, i);
 				drawTiles.drawSelected( simulation, batch, i );
+				
+				selectedTile = i;
+				hasWall = simulation.tiles.get(i).wall;
 			}
 		}
 		
@@ -184,10 +195,22 @@ public class Renderer extends Data
 		@Override
 		public void clicked (InputEvent event, float x, float y) 
 		{
-			resourceWood.setText( "Wood: " + 100 );
-			resourceStone.setText( "Stone: " + 100 );
-			resourceFood.setText( "Food: " + 100 );
-			resourceGold.setText( "Gold: " + 100 );
+			if( hasWall )
+			{
+				Wood = Wood + 50;
+				Stone = Stone + 100;
+				simulation.tiles.get(selectedTile).setWall( false );
+			}
+			else
+			{
+				Wood = Wood - 50;
+				Stone = Stone - 100;
+				simulation.tiles.get(selectedTile).setWall( true );
+			}
+			resourceWood.setText( "Wood: " + Wood );
+			resourceStone.setText( "Stone: " + Stone );
+			resourceFood.setText( "Food: " + Food );
+			resourceGold.setText( "Gold: " + Gold );
 		}
 		
 	};
