@@ -5,7 +5,880 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-01-08T18:46:00Z</updated>
+  <updated>2015-01-13T11:13:00Z</updated>
+  <entry>
+    <title>"Configuring It All Out" or "12-Factor App-Style Configuration with Spring"</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/13/configuring-it-all-out-or-12-factor-app-style-configuration-with-spring" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-01-10:1929</id>
+    <updated>2015-01-13T11:13:00Z</updated>
+    <content type="html">&lt;p&gt;Let&amp;rsquo;s establish some vocabulary, before we begin. When we talk about &lt;em&gt;configuration&lt;/em&gt; in Spring, we&amp;rsquo;re &lt;em&gt;usually&lt;/em&gt; talking about the inputs into the Spring framework&amp;rsquo;s various &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationContext.html"&gt;&lt;code&gt;ApplicationContext&lt;/code&gt;&lt;/a&gt; implementations that help the container understand what it is you want done. This might be an XML file to be fed into a &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/support/ClassPathXmlApplicationContext.html"&gt;&lt;code&gt;ClassPathXmlApplicationContext&lt;/code&gt;&lt;/a&gt;, or Java classes annotated a certain way to be fed into an &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/AnnotationConfigApplicationContext.html"&gt;&lt;code&gt;AnnotationConfigApplicationContext&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Another type of &lt;em&gt;configuration&lt;/em&gt;, as &lt;a href="http://12factor.net/config"&gt;nicely described in the 12-Factor application manifesto&lt;/a&gt;, is any of an application&amp;rsquo;s that is likely to vary between deploys (staging, production, developer environments, etc.), like service credentials and hostnames.&lt;/p&gt;&lt;p&gt;This second type of configuration, which should live external to the deployed application, has been well supported in Spring since the &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html"&gt;&lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt;&lt;/a&gt; class was introduced. Spring&amp;rsquo;s support for that type of configuration has come a long way since then and in this blog we&amp;rsquo;re going to look at that progression.&lt;/p&gt;&lt;h1&gt;&lt;a href="#the-code-propertyplaceholderconfigurer-code" class="anchor" name="the-code-propertyplaceholderconfigurer-code"&gt;&lt;/a&gt;The &lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;Spring&amp;rsquo;s offered the &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html"&gt;&lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt;&lt;/a&gt; since 2003. Spring 2.5 introduced XML namespace support and with it XML namespace support for property placeholder resolution. For example &lt;code&gt;&amp;lt;context:property-placeholder location = &amp;quot;simple.properties&amp;quot;/&amp;gt;&lt;/code&gt; would let us substitute bean definition literal values in the XML configuration for values assigned to keys in a (external) property file (in this case &lt;code&gt;simple.properties&lt;/code&gt; which may be on the classpath or external to the application). This property file might look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint properties"&gt;# Database Credentials&#xD;
+configuration.projectName = Spring Framework
+&lt;/code&gt;&lt;/pre&gt;&lt;h1&gt;&lt;a href="#the-code-environment-code-abstraction" class="anchor" name="the-code-environment-code-abstraction"&gt;&lt;/a&gt;The &lt;code&gt;Environment&lt;/code&gt; Abstraction&lt;/h1&gt;&lt;p&gt;This solution predates the introduction of Java configuration into Spring Framework proper in 3.0. Spring 3 made it easy to inject configuration values into Java component configuration using &lt;code&gt;@Value&lt;/code&gt;-annotations, like this: &lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java "&gt;@Value(&amp;quot;${configuration.projectName}&amp;quot;) &#xD;
+private String projectName; 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring 3.1 introduced the &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/env/Environment.html"&gt;&lt;code&gt;Environment&lt;/code&gt;&lt;/a&gt; abstraction. It provides a bit of runtime indirection between the runnning application and the environment in which it is running. The &lt;code&gt;Environment&lt;/code&gt; acts as a map of keys and values. You can configure where those values are read from by contributing a. Inject an object of type &lt;code&gt;Environment&lt;/code&gt; anywhere you want and ask it questions. By default Spring loads up system environment keys and values, like &lt;code&gt;line.separator&lt;/code&gt;. You can tell Spring to load up configuration keys from a file, specifically, using the &lt;code&gt;@PropertySource&lt;/code&gt; annotation.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;package env;&#xD;
+&#xD;
+import org.springframework.beans.factory.annotation.Autowired;&#xD;
+import org.springframework.beans.factory.annotation.Value;&#xD;
+import org.springframework.context.annotation.*;&#xD;
+import org.springframework.context.support.*;&#xD;
+import org.springframework.core.env.Environment;&#xD;
+&#xD;
+@Configuration&#xD;
+@ComponentScan&#xD;
+@PropertySource(&amp;quot;file:/path/to/simple.properties&amp;quot;)&#xD;
+public class Application {&#xD;
+&#xD;
+	@Bean&#xD;
+	static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {&#xD;
+		return new PropertySourcesPlaceholderConfigurer();&#xD;
+	}&#xD;
+&#xD;
+	@Value(&amp;quot;${configuration.projectName}&amp;quot;)&#xD;
+	void setProjectName(String projectName) {&#xD;
+		System.out.println(&amp;quot;setting project name: &amp;quot; + projectName);&#xD;
+	}&#xD;
+&#xD;
+	@Autowired&#xD;
+	void setEnvironment(Environment env) {&#xD;
+		System.out.println(&amp;quot;setting environment: &amp;quot; + &#xD;
+                      env.getProperty(&amp;quot;configuration.projectName&amp;quot;));&#xD;
+	}&#xD;
+&#xD;
+	public static void main(String args[]) throws Throwable {&#xD;
+		new AnnotationConfigApplicationContext(Application.class);&#xD;
+	}&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This example loads up the values from a file, &lt;code&gt;simple.properties&lt;/code&gt;, and then has one value, &lt;code&gt;configuration.projectName&lt;/code&gt;, injected using the &lt;code&gt;@Value&lt;/code&gt; annotation and then read again from Spring&amp;rsquo;s &lt;code&gt;Environment&lt;/code&gt; abstraction. To be able to inject the values with the &lt;code&gt;@Value&lt;/code&gt; annotation, we need to register a &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/support/PropertySourcesPlaceholderConfigurer.html"&gt;&lt;code&gt;PropertySourcesPlaceholderConfigurer&lt;/code&gt;&lt;/a&gt;. In this case, the output is &lt;code&gt;Spring Framework&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;The &lt;code&gt;Environment&lt;/code&gt; also brings the idea of &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/Profile.html"&gt;&lt;em&gt;profiles&lt;/em&gt;&lt;/a&gt;. It lets you ascribe labels (profiles) to groupings of beans. Use profiles to describe beans and bean graphs that change from one environment to another. You can activate one or more profiles at a time. Beans that do not have a profile assigned to them are always activated. Beans that have the profile &lt;code&gt;default&lt;/code&gt; are activated only when there are no other profiles are active.&lt;/p&gt;&lt;p&gt;Profiles let you describe sets of beans that need to be created differently in one environment versus another. You might, for example, use an embedded H2 &lt;code&gt;javax.sql.DataSource&lt;/code&gt; in your local &lt;code&gt;dev&lt;/code&gt; profile, but then switch to a &lt;code&gt;javax.sql.DataSource&lt;/code&gt; for PostgreSQL that&amp;rsquo;s resolved through a JNDI lookup or by reading the properties from an environment variable in &lt;a href="http://cloudfoundry.org"&gt;Cloud Foundry&lt;/a&gt; when the &lt;code&gt;prod&lt;/code&gt; profile is active. In both cases, your code works: you get a &lt;code&gt;javax.sql.DataSource&lt;/code&gt;, but the decision about &lt;em&gt;which&lt;/em&gt; specialized instance is used is decided by the active profile or profiles.&lt;/p&gt;&lt;p&gt;You should use this feature sparingly. Ideally, the object graph between one environment and another should remain fairly fixed.&lt;/p&gt;&lt;h1&gt;&lt;a href="#em-bootiful-em-configuration" class="anchor" name="em-bootiful-em-configuration"&gt;&lt;/a&gt;&lt;em&gt;Bootiful&lt;/em&gt; Configuration&lt;/h1&gt;&lt;p&gt;&lt;a href="http://spring.io/projects/spring-boot"&gt;Spring Boot&lt;/a&gt; improves things considerably. Spring Boot will read the properties in &lt;code&gt;src/main/resources/application.properties&lt;/code&gt; by default. &lt;a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html"&gt;If a profile is active&lt;/a&gt;, it will also automatically reads in the configuration files based on the profile name, like &lt;code&gt;src/main/resources/application-foo.properties&lt;/code&gt; where &lt;code&gt;foo&lt;/code&gt; is the current profile. If the &lt;a href="https://code.google.com/p/snakeyaml/"&gt;Snake YML library&lt;/a&gt; is on the classpath, then it will also automatically load YML files. Yeah, read that part again. YML is so good, and so worth a go! Here&amp;rsquo;s an example YML file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;configuration:&#xD;
+	projectName : Spring Boot&#xD;
+	someOtherKey : Some Other Value
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring Boot also made it much simpler to get the right result in common cases. It makes &lt;code&gt;-D&lt;/code&gt; arguments to the &lt;code&gt;java&lt;/code&gt; process and environment variables available as properties. It even normalizes them, so an environment variable &lt;code&gt;$CONFIGURATION_PROJECTNAME&lt;/code&gt; or a &lt;code&gt;-D&lt;/code&gt; argument of the form &lt;code&gt;-Dconfiguration.projectname&lt;/code&gt; both become accessible with the key &lt;code&gt;configuration.projectName&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Configuration values are strings, and if you have enough configuration values it can be unwieldy trying to make sure those keys don&amp;rsquo;t themselves become magic strings in the code. Spring Boot introduces a &lt;code&gt;@ConfigurationProperties&lt;/code&gt; component type. Annotate a POJO with &lt;code&gt;@ConfigurationProperties&lt;/code&gt; and specify a prefix, and Spring will attempt to map all properties that start with that prefix to the POJO&amp;rsquo;s properties. In the example below the value for &lt;code&gt;configuration.projectName&lt;/code&gt; will be mapped to an instance of the POJO that all code can then inject and dereference to read the (type-safe) values. In this way, you only have the mapping from a key in one place.&lt;/p&gt;&lt;p&gt;In the example below, properties will be resolved automatically from &lt;code&gt;src/main/resources/application.yml&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;package boot;&#xD;
+&#xD;
+import org.springframework.beans.factory.annotation.Autowired;&#xD;
+import org.springframework.boot.SpringApplication;&#xD;
+import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
+import org.springframework.boot.context.properties.ConfigurationProperties;&#xD;
+import org.springframework.stereotype.Component;&#xD;
+&#xD;
+// reads a value from src/main/resources/application.properties first&#xD;
+// but would also read:&#xD;
+//  java -Dconfiguration.projectName=..&#xD;
+//  export CONFIGURATION_PROJECTNAME=..&#xD;
+&#xD;
+@SpringBootApplication&#xD;
+public class Application {&#xD;
+&#xD;
+	@Autowired&#xD;
+	void setConfigurationProjectProperties(ConfigurationProjectProperties cp) {&#xD;
+		System.out.println(&amp;quot;configurationProjectProperties.projectName = &amp;quot; + cp.getProjectName());&#xD;
+	}&#xD;
+&#xD;
+	public static void main(String[] args) {&#xD;
+		SpringApplication.run(Application.class);&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+@Component&#xD;
+@ConfigurationProperties(&amp;quot;configuration&amp;quot;)&#xD;
+class ConfigurationProjectProperties {&#xD;
+&#xD;
+	private String projectName;&#xD;
+&#xD;
+	public String getProjectName() {&#xD;
+		return projectName;&#xD;
+	}&#xD;
+&#xD;
+	public void setProjectName(String projectName) {&#xD;
+		this.projectName = projectName;&#xD;
+	}&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring Boot uses the &lt;code&gt;@ConfigurationProps&lt;/code&gt; mechanism heavily to let users override bits of the system. You can see what property keys can be used to change things, for example, by adding the &lt;code&gt;org.springframework.boot:spring-boot-starter-actuator&lt;/code&gt; dependency to a Spring Boot-based web application and then visiting &lt;code&gt;http://127.0.0.1:8080/configprops&lt;/code&gt;. This will give you a list of supported configuration properties based on the types present on the classpath at runtime. As you add more Spring Boot types, you&amp;rsquo;ll see more properties.&lt;/p&gt;&lt;h1&gt;&lt;a href="#centralized-journaled-configuration-with-the-spring-cloud-configuration-support" class="anchor" name="centralized-journaled-configuration-with-the-spring-cloud-configuration-support"&gt;&lt;/a&gt;Centralized, Journaled Configuration with the Spring Cloud Configuration Support&lt;/h1&gt;&lt;p&gt;So far so good, but there are gaps in the approach so far:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;changes to an application&amp;rsquo;s configuration require restarts&lt;/li&gt;
+  &lt;li&gt;there is no traceability: how do we determine what changes were introduced into production and, if necessary, roll back?&lt;/li&gt;
+  &lt;li&gt;configuration is de-centralized and it&amp;rsquo;s not immediately apparent where to go to change what.&lt;/li&gt;
+  &lt;li&gt;sometimes configuration values should be encrypted and decrypted for security. There is no out-of-the-box support for this.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-cloud/spring-cloud.html"&gt;Spring Cloud&lt;/a&gt;, which builds upon Spring Boot and integrates various tools and libraries for working with microservices, including &lt;a href="https://github.com/netflix"&gt;the Netflix OSS stack&lt;/a&gt;, offers a &lt;a href="http://cloud.spring.io/spring-cloud-config/"&gt;configuration server&lt;/a&gt; and a client for that configuration server. This support, taken together, address these last three concerns.&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s look at a simple example. First, we&amp;rsquo;ll setup a configuration server. The configuration server is something to be shared among a set of applications or microservices based on Spring Cloud. You have to get it running, somewhere, once. Then, all other services need only know where to find the configuration service. The configuration service acts as a sort of proxy for configuration keys and values that it reads from a Git repository online or on a disk.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;package cloud.server;&#xD;
+&#xD;
+import org.springframework.boot.SpringApplication;&#xD;
+import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
+import org.springframework.cloud.config.server.EnableConfigServer;&#xD;
+&#xD;
+@SpringBootApplication&#xD;
+@EnableConfigServer&#xD;
+public class Application {&#xD;
+&#xD;
+	public static void main(String[] args) {&#xD;
+		SpringApplication.run(Application.class, args);&#xD;
+	}&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you manage things correctly, then the only configuration that lives with any of your services should be the configuration that tells the configuration service where to find the Git repository and the configuration that tells the other client services where to find the configuration service.&lt;/p&gt;&lt;p&gt;Here&amp;rsquo;s the configuration for the configuration service, &lt;code&gt;src/main/resources/application.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;server:&#xD;
+	port: 8888&#xD;
+&#xD;
+spring:&#xD;
+	cloud:&#xD;
+		config:&#xD;
+			server:&#xD;
+				git :&#xD;
+					uri: https://github.com/joshlong/microservices-lab-configuration&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This tells the Spring Cloud configuration service to look for configuration files for individual client services in the Git repository on my GitHub account. The URI could, of course, just as easily have been a Git repository on my local file system. The value used for the URI could also have been a property reference, of the form, &lt;code&gt;${SOME_URI}&lt;/code&gt;, that references - perhaps - an environment variable called &lt;code&gt;SOME_URI&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Run the application and you&amp;rsquo;ll be able to verify that your configuration service is working by pointing you browser at &lt;code&gt;http://localhost:8888/SERVICE/master&lt;/code&gt; where &lt;code&gt;SERVICE&lt;/code&gt; is the ID taken from your client service&amp;rsquo;s &lt;code&gt;boostrap.yml&lt;/code&gt;. Spring Cloud-based services look for a file called &lt;code&gt;src/main/resources/bootstrap.(properties,yml)&lt;/code&gt; that it expects to find to - you guessed it! - bootstrap the service. One of the things it expects to find in the &lt;code&gt;bootstrap.yml&lt;/code&gt; file is the ID of the service specified as a property, &lt;code&gt;spring.application.name&lt;/code&gt;. Here&amp;rsquo;s our configuration client&amp;rsquo;s &lt;code&gt;bootstrap.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;spring:&#xD;
+	application:&#xD;
+		name: config-client&#xD;
+		cloud:&#xD;
+			config:&#xD;
+				uri: http://localhost:8888
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the Spring Cloud microservice runs, it&amp;rsquo;ll see that its &lt;code&gt;spring.application.name&lt;/code&gt; is &lt;code&gt;config-client&lt;/code&gt;. It will contact the configuration service (which we&amp;rsquo;ve told Spring Cloud is running at &lt;code&gt;http://localhosst:8080&lt;/code&gt;, though this too could&amp;rsquo;ve been an environment variable) and ask it for any configuration. The configuration service returns back JSON that contains all the configuration values in the &lt;code&gt;application.(properties,yml)&lt;/code&gt; file as well as any service-specific configuration in &lt;code&gt;config-client.(yml,properties)&lt;/code&gt;. It will &lt;em&gt;also&lt;/em&gt; load any configuration for a given service &lt;em&gt;and&lt;/em&gt; a specific profile, e.g., &lt;code&gt;config-client-dev.properties&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;This all just happens automatically. In the following example, the configuration value is read from the configuration service.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;package cloud.client;&#xD;
+&#xD;
+import org.springframework.beans.factory.annotation.Autowired;&#xD;
+import org.springframework.beans.factory.annotation.Value;&#xD;
+import org.springframework.boot.SpringApplication;&#xD;
+import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
+import org.springframework.cloud.context.config.annotation.RefreshScope;&#xD;
+import org.springframework.core.env.Environment;&#xD;
+import org.springframework.web.bind.annotation.RequestMapping;&#xD;
+import org.springframework.web.bind.annotation.RestController;&#xD;
+&#xD;
+@SpringBootApplication&#xD;
+public class Application {&#xD;
+&#xD;
+	public static void main(String[] args) {&#xD;
+		SpringApplication.run(Application.class, args);&#xD;
+	}&#xD;
+&#xD;
+	@Autowired&#xD;
+	void setEnvironment(Environment e) {&#xD;
+		System.out.println(e.getProperty(&amp;quot;configuration.projectName&amp;quot;));&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+@RestController&#xD;
+@RefreshScope&#xD;
+class ProjectNameRestController {&#xD;
+&#xD;
+	@Value(&amp;quot;${configuration.projectName}&amp;quot;)&#xD;
+	private String projectName;&#xD;
+&#xD;
+	@RequestMapping(&amp;quot;/project-name&amp;quot;)&#xD;
+	String projectName() {&#xD;
+		return this.projectName;&#xD;
+	}&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;ProjectNameRestController&lt;/code&gt; is annotated with &lt;a href="http://cloud.spring.io/spring-cloud-config/spring-cloud-config.html#_refresh_scope"&gt;&lt;code&gt;@RefreshScope&lt;/code&gt;&lt;/a&gt;, a custom Spring Cloud &lt;em&gt;scope&lt;/em&gt; that lets any bean recreate itself (and re-read configuration values from the configuration service) in-place. There are various ways to trigger the refresh: send a &lt;code&gt;POST&lt;/code&gt; request to &lt;code&gt;http://127.0.0.1:8080/refresh&lt;/code&gt; (e.g.: &lt;code&gt;curl -d{} http://127.0.0.1:8080/refresh&lt;/code&gt;), use the auto-exposed JMX refresh endpoint, or use the Spring Cloud Bus.&lt;/p&gt;&lt;p&gt;The &lt;a href="http://cloud.spring.io/spring-cloud-bus/"&gt;Spring Cloud Bus&lt;/a&gt; links all services through a RabbitMQ powered-bus. This is particularly powerful. You can tell one (or thousands!) of microservices to refresh themselves by sending a single message to a message bus. This prevents downtime and is &lt;em&gt;much&lt;/em&gt; more friendly than having to systematically restart individual services or nodes.&lt;/p&gt;&lt;p&gt;To see all this in action, get the config client and config server running, being sure to point the config server to a Git repository that you can control and make changes to. Hit the REST endpoint and confirm that you see &lt;code&gt;Spring Cloud&lt;/code&gt;. Then make changes to the configuration file in Git, and at the very least &lt;code&gt;git commit&lt;/code&gt; them. Then trigger a refresh against the config client and revisit the REST endpoint again. You should see the updated value reflected!&lt;/p&gt;&lt;p&gt;The Spring Cloud configuration support &lt;em&gt;also&lt;/em&gt; &lt;a href="http://cloud.spring.io/spring-cloud-config/spring-cloud-config.html#_security_2"&gt;includes first-class support for security and encryption&lt;/a&gt;. I&amp;rsquo;ll leave you to explore that last mile on your own, but it&amp;rsquo;s fairly trivial and amounts to configuring a valid key.&lt;/p&gt;&lt;h1&gt;&lt;a href="#next-steps" class="anchor" name="next-steps"&gt;&lt;/a&gt;Next Steps&lt;/h1&gt;&lt;p&gt;We&amp;rsquo;ve covered a &lt;em&gt;lot&lt;/em&gt; here! Armed with all of this, it should be easy to package one artifact and then move that artifact from one environment to another without changes to the artifact itself. If you&amp;rsquo;re going to start an application today, I&amp;rsquo;d recommend starting on Spring Boot and Spring Cloud, especially now that we&amp;rsquo;ve looked at all the good stuff it brings you by default. Don&amp;rsquo;t forget &lt;a href="https://github.com/joshlong/configuring-it-all-out"&gt;to check out the code&lt;/a&gt; behind all of these examples.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: REST Services with RabbitMQ, Spring Integration and Node.JS</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/13/springone2gx-2014-replay-rest-services-with-rabbitmq-spring-integration-and-node-js" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1916</id>
+    <updated>2015-01-13T00:32:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speakers: Durai Arasan, Monish Unni - ETrade &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/rest-services-with-rabbitmq-spring-integration-and-nodejs"&gt;http://www.slideshare.net/SpringCentral/rest-services-with-rabbitmq-spring-integration-and-nodejs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; Data / Integration Track&lt;/p&gt;
+&lt;p&gt; Extending from last year's conversation in SpringOne2GX on real world use of RabbitMQ and Spring Integration, this talk will be centered around REST service as first class citizen in Spring Integration with RabbitMQ. How do you build REST services and integrate with Spring Integration and RabbitMQ? What kind of role Node.JS can play in your architecture to simplify complex problems? We will address all of these questions and provide insight into design and architecture challenges to bring enterprise services to support modern client applications that expect REST Services.&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/MZIPf9OipmE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay:  Inside spring.io: a Production Spring Reference Application</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/13/springone2gx-2014-replay-inside-spring-io-a-production-spring-reference-application" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1915</id>
+    <updated>2015-01-13T00:25:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Brian Clozel &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/inside-spring-iospringone2gx2014"&gt;http://www.slideshare.net/SpringCentral/inside-spring-iospringone2gx2014&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Core Spring Track &lt;/p&gt;
+&lt;p&gt;Come take a look inside the newly open-sourced reference application that powers the http://spring.io site, including: Idiomatic use of Spring Boot Taking advantage of Spring Framework 4 features A tour of our JavaScript frontend using cujoJS's curl, Bower and Gulp for a clean and modular design Zero-downtime deployment to Cloud Foundry using blue/green deployments And more, with plenty of time for Q&amp;amp;A&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/w7zSDMUJhcE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring and Angular JS: A Secure Single Page Application</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Dave Syer</name>
+    </author>
+    <id>tag:spring.io,2015-01-05:1903</id>
+    <updated>2015-01-12T12:20:00Z</updated>
+    <content type="html">&lt;p&gt;In this article we show some nice features of Spring Security, Spring Boot and Angular JS working together to provide a pleasant and secure user experience. It should be accessible to beginners with Spring and Angular JS, but there also is plenty of detail that will be of use to experts in either. This is actually the first in a series of articles on Spring Security and Angular JS, with new features exposed in each one successively. We&amp;rsquo;ll improve on the application in the &lt;a href="https://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii"&gt;second&lt;/a&gt; and subsequent installments, but the main changes after this are architectural rather than functional.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-and-the-single-page-application" class="anchor" name="spring-and-the-single-page-application"&gt;&lt;/a&gt;Spring and the Single Page Application&lt;/h2&gt;&lt;p&gt;HTML5, rich browser-based features, and the &amp;ldquo;single page application&amp;rdquo; are extremely valuable tools for modern developers, but any meaningful interactions will involve a backend server, so as well as static content (HTML, CSS and JavaScript) we are going to need a backend server. The backend server can play any or all of a number of roles: serving static content, sometimes (but not so often these days) rendering dynamic HTML, authenticating users, securing access to protected resources, and (last but not least) interacting with JavaScript in the browser through HTTP and JSON (sometimes referred to as a REST API).&lt;/p&gt;&lt;p&gt;Spring has always been a popular technology for building the backend features (especially in the enterprise), and with the advent of &lt;a href="http://projects.spring.io/spring-boot"&gt;Spring Boot&lt;/a&gt; things have never been easier. Let&amp;rsquo;s have a look at how to build a new single page application from nothing using Spring Boot, Angular JS and Twitter Bootstrap. There&amp;rsquo;s no particular reason to choose that specific stack, but it is quite popular, especially with the core Spring constituency in enterprise Java shops, so it&amp;rsquo;s a worthwhile starting point.&lt;/p&gt;&lt;h2&gt;&lt;a href="#create-a-new-project" class="anchor" name="create-a-new-project"&gt;&lt;/a&gt;Create a New Project&lt;/h2&gt;&lt;p&gt;We are going to step through creating this application in some detail, so that anyone who isn&amp;rsquo;t completely au fait with Spring and Angular can follow what is happening. If you prefer to cut to this chase, you can &lt;a href="#how-does-it-work"&gt;skip to the end&lt;/a&gt; where the application is working, and see how it all fits together. There are various options for creating a new project:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="#using-curl"&gt;Using curl on the command line&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#using-spring-boot-cli"&gt;Using Spring Boot CLI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#using-the-initializr-website"&gt;Using the Spring Initializr website&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#using-spring-tool-suite"&gt;Using Spring Tool Suite&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;The source code for the complete project we are going to build is in &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/basic"&gt;Github here&lt;/a&gt;, so you can just clone the project and work directly from there if you want. Then jump to the &lt;a href="#add-a-home-page"&gt;next section&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;span id="using-curl"&gt;&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a href="#using-curl" class="anchor" name="using-curl"&gt;&lt;/a&gt;Using Curl&lt;/h3&gt;&lt;p&gt;The easiest way to create a new project to get started is via the &lt;a href="https://start.spring.io"&gt;Spring Boot Initializr&lt;/a&gt;. E.g. using curl on a UN*X like system:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ mkdir ui &amp;amp;&amp;amp; cd ui&#xD;
+$ curl https://start.spring.io/starter.tgz -d style=web \&#xD;
+-d style=security -d name=ui | tar -xzvf - 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can then import that project (it&amp;rsquo;s a normal Maven Java project by default) into your favourite IDE, or just work with the files and &amp;ldquo;mvn&amp;rdquo; on the command line. Then jump to the &lt;a href="#add-a-home-page"&gt;next section&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;span id="using-spring-boot-cli"&gt;&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a href="#using-spring-boot-cli" class="anchor" name="using-spring-boot-cli"&gt;&lt;/a&gt;Using Spring Boot CLI&lt;/h3&gt;&lt;p&gt;You can create the same project using the &lt;a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started-installing-the-cli"&gt;Spring Boot CLI&lt;/a&gt;, like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ spring init --dependencies web,security ui/ &amp;amp;&amp;amp; cd ui
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then jump to the &lt;a href="#add-a-home-page"&gt;next section&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;span id="using-the-initializr-website"&gt;&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a href="#using-the-initializr-website" class="anchor" name="using-the-initializr-website"&gt;&lt;/a&gt;Using the Initializr Website&lt;/h3&gt;&lt;p&gt;If you prefer you can also get the same code directly as a .zip file from the &lt;a href="https://start.spring.io"&gt;Spring Boot Initializr&lt;/a&gt;. Just open it up in your browser and select dependencies &amp;ldquo;Web&amp;rdquo; and &amp;ldquo;Security&amp;rdquo;, then click on &amp;ldquo;Generate Project&amp;rdquo;. The .zip file contains a standard Maven or Gradle project in the root directory, so you might want to create an empty directory before you unpack it. Then jump to the &lt;a href="#add-a-home-page"&gt;next section&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;span id="using-spring-tool-suite"&gt;&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a href="#using-spring-tool-suite" class="anchor" name="using-spring-tool-suite"&gt;&lt;/a&gt;Using Spring Tool Suite&lt;/h3&gt;&lt;p&gt;In &lt;a href="http://spring.io/tools/sts"&gt;Spring Tool Suite&lt;/a&gt; (a set of Eclipse plugins) you can also create and import a project using a wizard at &lt;code&gt;File-&amp;gt;New-&amp;gt;Spring Starter Project&lt;/code&gt;. Then jump to the &lt;a href="#add-a-home-page"&gt;next section&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;span id="add-a-home-page"&gt;&lt;/span&gt;&lt;/p&gt;&lt;h2&gt;&lt;a href="#add-a-home-page" class="anchor" name="add-a-home-page"&gt;&lt;/a&gt;Add a Home Page&lt;/h2&gt;&lt;p&gt;The core of a single page application is a static &amp;ldquo;index.html&amp;rdquo;, so let&amp;rsquo;s go ahead and create one (in &amp;ldquo;src/main/resources/static&amp;rdquo; or &amp;ldquo;src/main/resources/public&amp;rdquo;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint html"&gt;&amp;lt;!doctype html&amp;gt;&#xD;
+&amp;lt;html&amp;gt;&#xD;
+&amp;lt;head&amp;gt;&#xD;
+&amp;lt;title&amp;gt;Hello AngularJS&amp;lt;/title&amp;gt;&#xD;
+&amp;lt;link href=&amp;quot;css/angular-bootstrap.css&amp;quot; rel=&amp;quot;stylesheet&amp;quot;&amp;gt;&#xD;
+&amp;lt;style type=&amp;quot;text/css&amp;quot;&amp;gt;&#xD;
+[ng\:cloak], [ng-cloak], .ng-cloak {&#xD;
+  display: none !important;&#xD;
+}&#xD;
+&amp;lt;/style&amp;gt;&#xD;
+&amp;lt;/head&amp;gt;&#xD;
+&#xD;
+&amp;lt;body ng-app=&amp;quot;hello&amp;quot;&amp;gt;&#xD;
+  &amp;lt;div class=&amp;quot;container&amp;quot;&amp;gt;&#xD;
+    &amp;lt;h1&amp;gt;Greeting&amp;lt;/h1&amp;gt;&#xD;
+    &amp;lt;div ng-controller=&amp;quot;home&amp;quot; ng-cloak class=&amp;quot;ng-cloak&amp;quot;&amp;gt;&#xD;
+      &amp;lt;p&amp;gt;The ID is {{greeting.id}}&amp;lt;/p&amp;gt;&#xD;
+      &amp;lt;p&amp;gt;The content is {{greeting.content}}&amp;lt;/p&amp;gt;&#xD;
+    &amp;lt;/div&amp;gt;&#xD;
+  &amp;lt;/div&amp;gt;&#xD;
+  &amp;lt;script src=&amp;quot;js/angular-bootstrap.js&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
+  &amp;lt;script src=&amp;quot;js/hello.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
+&amp;lt;/body&amp;gt;&#xD;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It&amp;rsquo;s pretty short and sweet because it is just going to say &amp;ldquo;Hello World&amp;rdquo;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#features-of-the-home-page" class="anchor" name="features-of-the-home-page"&gt;&lt;/a&gt;Features of the Home Page&lt;/h3&gt;&lt;p&gt;Salient features include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;Some CSS imported in the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt;, one placeholder for a file that doesn&amp;rsquo;t yet exist, but is named suggestively (&amp;ldquo;angular-bootstrap.css&amp;rdquo;) and one inline stylesheet defining the &lt;a href="https://docs.angularjs.org/api/ng/directive/ngCloak"&gt;&amp;ldquo;ng-cloak&amp;rdquo;&lt;/a&gt; class.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;The &amp;ldquo;ng-cloak&amp;rdquo; class is applied to the content &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; so that dynamic content is hidden until Angular JS has had a chance to process it (this prevents &amp;ldquo;flickering&amp;rdquo; during the initial page load).&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;The &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; is marked as &lt;code&gt;ng-app=&amp;quot;hello&amp;quot;&lt;/code&gt; which means we need to define a JavaScript module that Angular will recognise as an application called &amp;ldquo;hello&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;All the CSS classes (apart from &amp;ldquo;ng-cloak&amp;rdquo;) are from &lt;a href="http://getbootstrap.com/"&gt;Twitter Bootstrap&lt;/a&gt;. They will make things look pretty once we get the right stylesheets set up.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;The content in the greeting is marked up using handlebars, e.g. &lt;code&gt;{{greeting.content}}&lt;/code&gt; and this will be filled in later by Angular (using a &amp;ldquo;controller&amp;rdquo; called &amp;ldquo;home&amp;rdquo; according to the &lt;code&gt;ng-controller&lt;/code&gt; directive on the surrounding &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Angular JS (and Twitter Bootstrap) are included at the bottom of the &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; so that the browser can process all the HTML before it gets processed.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;We also include a separate &amp;ldquo;hello.js&amp;rdquo; which is where we are going to define the application behaviour.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We are going to create the script and stylesheet assets in a minute, but for now we can ignore the fact that they don&amp;rsquo;t exist.&lt;/p&gt;&lt;h3&gt;&lt;a href="#running-the-application" class="anchor" name="running-the-application"&gt;&lt;/a&gt;Running the Application&lt;/h3&gt;&lt;p&gt;Once the home page file is added, your application will be loadable in a browser (even though it doesn&amp;rsquo;t do much yet). On the command line you can do this&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ mvn spring-boot:run
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and go to a browser at &lt;a href="http://localhost:8080"&gt;http://localhost:8080&lt;/a&gt;. When you load the home page you should get a browser dialog asking for username and password (the username is &amp;ldquo;user&amp;rdquo; and the password is printed in the console logs on startup). There&amp;rsquo;s actually no content yet, so you should get a blank page with a &amp;ldquo;Greeting&amp;rdquo; header once you successfully authenticate.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Tip: if you don&amp;rsquo;t like scraping the console log for the password just add this to the &amp;ldquo;application.properties&amp;rdquo; (in &amp;ldquo;src/main/resources&amp;rdquo;): &lt;code&gt;security.user.password=password&lt;/code&gt; (and choose your own password). We did this in the sample code using &amp;ldquo;application.yml&amp;rdquo;.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;In an IDE, just run the &lt;code&gt;main()&lt;/code&gt; method in the application class (there is only one class, and it is called &lt;code&gt;UiApplication&lt;/code&gt; if you used the &amp;ldquo;curl&amp;rdquo; command above).&lt;/p&gt;&lt;p&gt;To package and run as a standalone JAR, you can do this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ mvn package&#xD;
+$ java -jar target/*.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#front-end-assets" class="anchor" name="front-end-assets"&gt;&lt;/a&gt;Front End Assets&lt;/h2&gt;&lt;p&gt;Entry-level tutorials on Angular and other front end technologies often just include the library assets directly from the internet (e.g. &lt;a href="https://docs.angularjs.org/misc/downloading"&gt;the Angular JS website&lt;/a&gt; itself recommends downloading from &lt;a href="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"&gt;Google CDN&lt;/a&gt;). Instead of doing that we are going to generate the &amp;ldquo;angular-bootstrap.js&amp;rdquo; asset by concatenating several files from such libraries. This is not strictly necessary to get the application working, but it &lt;em&gt;is&lt;/em&gt; best practice for a production application to consolidate scripts to avoid chatter between the browser and the server (or content delivery network). Since we aren&amp;rsquo;t modifying or customizing the CSS stylesheets it is also unecessary to generate the &amp;ldquo;angular-bootstrap.css&amp;rdquo;, and we could just use static assets from Google CDN for that as well. However, in a real application we almost certainly would want to modify the stylesheets and we wouldn&amp;rsquo;t want to edit the CSS sources by hand, so we would use a higher level tool (e.g. &lt;a href="http://lesscss.org/"&gt;Less&lt;/a&gt; or &lt;a href="http://sass-lang.com/"&gt;Sass&lt;/a&gt;), so we are going to use one too.&lt;/p&gt;&lt;p&gt;There are many different ways of doing this but for the purposes of this article we are going to use &lt;a href="http://alexo.github.io/wro4j/"&gt;wro4j&lt;/a&gt;, which is a Java-based toolchain for preprocessing and packaging front end assets. It can be used as a JIT (Just in Time) &lt;code&gt;Filter&lt;/code&gt; in any Servlet application, but it also has good support for build tools like Maven and Eclipse, and that is how we are going to use it. So we are going to build static resource files and bundle them in our application JAR.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Aside: Wro4j is probably not the tool of choice for hard-core front end developers - they would probably be using a node-based toolchain, with &lt;a href="http://bower.io/"&gt;bower&lt;/a&gt; and/or &lt;a href="http://gruntjs.com/"&gt;grunt&lt;/a&gt;. These are definitely excellent tools, and covered in great detail all over the internet, so please feel free to use them if you prefer. If you just put the outputs from those toolchains in &amp;ldquo;src/main/resources/static&amp;rdquo; then it will all work. I find wro4j comfortable because I am not a hard-core front end developer and I know how to use Java-based tooling.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;To create static resources at build time we add some magic to the Maven &lt;code&gt;pom.xml&lt;/code&gt; (it&amp;rsquo;s quite verbose, but boilerplate, so it could be extracted into a parent pom in Maven, or a shared task or plugin for Gradle):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;build&amp;gt;&#xD;
+  &amp;lt;resources&amp;gt;&#xD;
+    &amp;lt;resource&amp;gt;&#xD;
+      &amp;lt;directory&amp;gt;${project.basedir}/src/main/resources&amp;lt;/directory&amp;gt;&#xD;
+    &amp;lt;/resource&amp;gt;&#xD;
+    &amp;lt;resource&amp;gt;&#xD;
+      &amp;lt;directory&amp;gt;${project.build.directory}/generated-resources&amp;lt;/directory&amp;gt;&#xD;
+    &amp;lt;/resource&amp;gt;&#xD;
+  &amp;lt;/resources&amp;gt;&#xD;
+  &amp;lt;plugins&amp;gt;&#xD;
+    &amp;lt;plugin&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-boot-maven-plugin&amp;lt;/artifactId&amp;gt;&#xD;
+    &amp;lt;/plugin&amp;gt;&#xD;
+    &amp;lt;plugin&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;maven-resources-plugin&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;executions&amp;gt;&#xD;
+        &amp;lt;execution&amp;gt;&#xD;
+          &amp;lt;!-- Serves *only* to filter the wro.xml so it can get an absolute &#xD;
+            path for the project --&amp;gt;&#xD;
+          &amp;lt;id&amp;gt;copy-resources&amp;lt;/id&amp;gt;&#xD;
+          &amp;lt;phase&amp;gt;validate&amp;lt;/phase&amp;gt;&#xD;
+          &amp;lt;goals&amp;gt;&#xD;
+            &amp;lt;goal&amp;gt;copy-resources&amp;lt;/goal&amp;gt;&#xD;
+          &amp;lt;/goals&amp;gt;&#xD;
+          &amp;lt;configuration&amp;gt;&#xD;
+            &amp;lt;outputDirectory&amp;gt;${basedir}/target/wro&amp;lt;/outputDirectory&amp;gt;&#xD;
+            &amp;lt;resources&amp;gt;&#xD;
+              &amp;lt;resource&amp;gt;&#xD;
+                &amp;lt;directory&amp;gt;src/main/wro&amp;lt;/directory&amp;gt;&#xD;
+                &amp;lt;filtering&amp;gt;true&amp;lt;/filtering&amp;gt;&#xD;
+              &amp;lt;/resource&amp;gt;&#xD;
+            &amp;lt;/resources&amp;gt;&#xD;
+          &amp;lt;/configuration&amp;gt;&#xD;
+        &amp;lt;/execution&amp;gt;&#xD;
+      &amp;lt;/executions&amp;gt;&#xD;
+    &amp;lt;/plugin&amp;gt;&#xD;
+    &amp;lt;plugin&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;ro.isdc.wro4j&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;wro4j-maven-plugin&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;1.7.6&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;executions&amp;gt;&#xD;
+        &amp;lt;execution&amp;gt;&#xD;
+          &amp;lt;phase&amp;gt;generate-resources&amp;lt;/phase&amp;gt;&#xD;
+          &amp;lt;goals&amp;gt;&#xD;
+            &amp;lt;goal&amp;gt;run&amp;lt;/goal&amp;gt;&#xD;
+          &amp;lt;/goals&amp;gt;&#xD;
+        &amp;lt;/execution&amp;gt;&#xD;
+      &amp;lt;/executions&amp;gt;&#xD;
+      &amp;lt;configuration&amp;gt;&#xD;
+        &amp;lt;wroManagerFactory&amp;gt;ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory&amp;lt;/wroManagerFactory&amp;gt;&#xD;
+        &amp;lt;cssDestinationFolder&amp;gt;${project.build.directory}/generated-resources/static/css&amp;lt;/cssDestinationFolder&amp;gt;&#xD;
+        &amp;lt;jsDestinationFolder&amp;gt;${project.build.directory}/generated-resources/static/js&amp;lt;/jsDestinationFolder&amp;gt;&#xD;
+        &amp;lt;wroFile&amp;gt;${project.build.directory}/wro/wro.xml&amp;lt;/wroFile&amp;gt;&#xD;
+        &amp;lt;extraConfigFile&amp;gt;${basedir}/src/main/wro/wro.properties&amp;lt;/extraConfigFile&amp;gt;&#xD;
+        &amp;lt;contextFolder&amp;gt;${basedir}/src/main/wro&amp;lt;/contextFolder&amp;gt;&#xD;
+      &amp;lt;/configuration&amp;gt;&#xD;
+      &amp;lt;dependencies&amp;gt;&#xD;
+        &amp;lt;dependency&amp;gt;&#xD;
+          &amp;lt;groupId&amp;gt;org.webjars&amp;lt;/groupId&amp;gt;&#xD;
+          &amp;lt;artifactId&amp;gt;jquery&amp;lt;/artifactId&amp;gt;&#xD;
+          &amp;lt;version&amp;gt;2.1.1&amp;lt;/version&amp;gt;&#xD;
+        &amp;lt;/dependency&amp;gt;&#xD;
+        &amp;lt;dependency&amp;gt;&#xD;
+          &amp;lt;groupId&amp;gt;org.webjars&amp;lt;/groupId&amp;gt;&#xD;
+          &amp;lt;artifactId&amp;gt;angularjs&amp;lt;/artifactId&amp;gt;&#xD;
+          &amp;lt;version&amp;gt;1.3.8&amp;lt;/version&amp;gt;&#xD;
+        &amp;lt;/dependency&amp;gt;&#xD;
+        &amp;lt;dependency&amp;gt;&#xD;
+          &amp;lt;groupId&amp;gt;org.webjars&amp;lt;/groupId&amp;gt;&#xD;
+          &amp;lt;artifactId&amp;gt;bootstrap&amp;lt;/artifactId&amp;gt;&#xD;
+          &amp;lt;version&amp;gt;3.2.0&amp;lt;/version&amp;gt;&#xD;
+        &amp;lt;/dependency&amp;gt;&#xD;
+      &amp;lt;/dependencies&amp;gt;&#xD;
+    &amp;lt;/plugin&amp;gt;&#xD;
+  &amp;lt;/plugins&amp;gt;&#xD;
+&amp;lt;/build&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can copy that verbatim into your POM, or just scan it if you are following along from the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/basic/pom.xml#L43"&gt;source in Github&lt;/a&gt;. The main points are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;We are including some webjars libraries as dependencies (jquery and bootstrap for CSS and styling, and Angular JS for business logic). Some of the static resources in those jar files will be included in our generated &amp;ldquo;angular-bootstrap.*&amp;rdquo; files, but the jars themselves don&amp;rsquo;t need to be packaged with the application.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Twitter Bootstrap has a dependency on jQuery, so we include that as well. An Angular JS application that didn&amp;rsquo;t use Bootstrap wouldn&amp;rsquo;t need that since Angular has its own version of the features it needs from jQuery.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;The generated resources will go in &amp;ldquo;target/generated-resources&amp;rdquo;, and because that is declared in the &lt;code&gt;&amp;lt;resources/&amp;gt;&lt;/code&gt; section, they will be packaged in the output JAR from the project, and available on the classpath in the IDE (as long as we are using Maven tooling, e.g. m2e in Eclipse).&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;The wro4j-maven-plugin has some Eclipse integration features and you can install it from the Eclipse Marketplace (try it later if this is your first time - it&amp;rsquo;s not needed to complete the application). If you do that then Eclipse will watch the source files and re-generate the outputs if they change. If you run in debug mode then changes are immediately re-loadable in a browser.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Wro4j is controlled from an XML configuration file that doesn&amp;rsquo;t know about your build classpath, and only understand absolute file paths, so we have to create an absolute file location and insert it in &lt;code&gt;wro.xml&lt;/code&gt;. For that purpose we use Maven resource filtering and that is why there is an explicit &amp;ldquo;maven-resources-plugin&amp;rdquo; declaration.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;That&amp;rsquo;s all of the changes we are going to need to the POM. It remains to add the wro4j build files, which we have specified are going to live in &amp;ldquo;src/main/wro&amp;rdquo;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#wro4j-source-files" class="anchor" name="wro4j-source-files"&gt;&lt;/a&gt;Wro4j Source Files&lt;/h3&gt;&lt;p&gt;If you look in the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/basic/src/main/wro"&gt;source code in Github&lt;/a&gt; you will see there are only 3 files (and one of those is empty, ready for later customization):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;&lt;code&gt;wro.properties&lt;/code&gt; is a configuration file for the preprocessing and rendering engine in wro4j. You can use it to switch on and off various parts of the toolchain. In this case we use it to compile CSS from &lt;a href="http://lesscss.org/"&gt;Less&lt;/a&gt; and to minify JavaScript, ultimately combining the sources from all the libraries we need in two files.&lt;/p&gt;
+  &lt;pre&gt;&lt;code class="prettyprint"&gt;preProcessors=lessCssImport
+postProcessors=less4j,jsMin
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;&lt;code&gt;wro.xml&lt;/code&gt; declares a single &amp;ldquo;group&amp;rdquo; of resources called &amp;ldquo;angular-bootstrap&amp;rdquo;, and this ends up being the base name of the static resources that are generated. It includes references to &lt;code&gt;&amp;lt;css&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;js&amp;gt;&lt;/code&gt; elements in the webjars we added, and also to a local source file &lt;code&gt;main.less&lt;/code&gt;.&lt;/p&gt;
+  &lt;pre&gt;&lt;code class="prettyprint"&gt;&amp;lt;groups xmlns=&amp;quot;http://www.isdc.ro/wro&amp;quot;&amp;gt;
+  &amp;lt;group name=&amp;quot;angular-bootstrap&amp;quot;&amp;gt;
+  &amp;lt;css&amp;gt;webjar:bootstrap/3.2.0/less/bootstrap.less&amp;lt;/css&amp;gt;   
+    &amp;lt;css&amp;gt;file:${project.basedir}/src/main/wro/main.less&amp;lt;/css&amp;gt;
+    &amp;lt;js&amp;gt;webjar:jquery/2.1.1/jquery.min.js&amp;lt;/js&amp;gt;
+    &amp;lt;js&amp;gt;webjar:bootstrap/3.2.0/bootstrap.js&amp;lt;/js&amp;gt;
+    &amp;lt;js&amp;gt;webjar:angularjs/1.3.8/angular.min.js&amp;lt;/js&amp;gt;
+  &amp;lt;/group&amp;gt;
+&amp;lt;/groups&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;&lt;code&gt;main.less&lt;/code&gt; is empty, but could be used to customise the look and feel, changing the default settings in Twitter Bootstrap. E.g. to change the colours from default blue to light pink you could add a single line: &lt;code&gt;@brand-primary: #de8579;&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Copy those files to your project and run &amp;ldquo;mvn package&amp;rdquo; and you should see the &amp;ldquo;bootstrap-angular.*&amp;rdquo; resources show up in your JAR file. If you run the app now, you should see the CSS take effect, but the business logic and navigation is still missing.&lt;/p&gt;&lt;h2&gt;&lt;a href="#create-the-angular-application" class="anchor" name="create-the-angular-application"&gt;&lt;/a&gt;Create the Angular Application&lt;/h2&gt;&lt;p&gt;Let&amp;rsquo;s create the &amp;ldquo;hello&amp;rdquo; application (in &amp;ldquo;src/main/resources/static/js/hello.js&amp;rdquo; so that the &lt;code&gt;&amp;lt;script/&amp;gt;&lt;/code&gt; at the bottom of our &amp;ldquo;index.html&amp;rdquo; finds it in the right place).&lt;/p&gt;&lt;p&gt;A minimal Angular JS application looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [])&#xD;
+  .controller(&amp;#39;home&amp;#39;, function($scope) {&#xD;
+    $scope.greeting = {id: &amp;#39;xxx&amp;#39;, content: &amp;#39;Hello World!&amp;#39;}&#xD;
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The name of the application is &amp;ldquo;hello&amp;rdquo; and it has an empty (and redundant) &amp;ldquo;config&amp;rdquo; and an empty &amp;ldquo;controller&amp;rdquo; called &amp;ldquo;home&amp;rdquo;. The &amp;ldquo;home&amp;rdquo; controller will be called when we load the &amp;ldquo;index.html&amp;rdquo; because we have decorated the content &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; with &lt;code&gt;ng-controller=&amp;quot;home&amp;quot;&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Notice that we injected a magic &lt;code&gt;$scope&lt;/code&gt; into the controller function (Angular does &lt;a href="https://docs.angularjs.org/tutorial"&gt;dependency injection by naming convention&lt;/a&gt;, and recognises the names of your function parameters). The &lt;code&gt;$scope&lt;/code&gt; is then used inside the function to set up content and behaviour for the UI elements that this controller is responsible for.&lt;/p&gt;&lt;p&gt;If you added that file under &amp;ldquo;src/main/resources/static/js&amp;rdquo; your app should now be secure and functional, and it will say &amp;ldquo;Hello World!&amp;rdquo;. The &lt;code&gt;greeting&lt;/code&gt; is rendered by Angular in the HTML using the handlebar placeholders, &lt;code&gt;{{greeting.id}}&lt;/code&gt; and &lt;code&gt;{{greeting.content}}&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;&lt;span id="dynamic-content"/&gt;&lt;/p&gt;&lt;h2&gt;&lt;a href="#adding-dynamic-content" class="anchor" name="adding-dynamic-content"&gt;&lt;/a&gt;Adding Dynamic Content&lt;/h2&gt;&lt;p&gt;So far we have an application with a greeting that is hard coded. That&amp;rsquo;s useful for learning how things fit together, but really we expect content to come from a backend server, so let&amp;rsquo;s create an HTTP endpoint that we can use to grab a greeting. In your &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/basic/src/main/java/demo/UiApplication.java"&gt;application class&lt;/a&gt; (in &amp;ldquo;src/main/java/demo&amp;rdquo;), add the &lt;code&gt;@RestController&lt;/code&gt; annotation and define a new &lt;code&gt;@RequestMapping&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+public class UiApplication {&#xD;
+&#xD;
+  @RequestMapping(&amp;quot;/resource&amp;quot;)&#xD;
+  public Map&amp;lt;String,Object&amp;gt; home() {&#xD;
+    Map&amp;lt;String,Object&amp;gt; model = new HashMap&amp;lt;String,Object&amp;gt;();&#xD;
+    model.put(&amp;quot;id&amp;quot;, UUID.randomUUID().toString());&#xD;
+    model.put(&amp;quot;content&amp;quot;, &amp;quot;Hello World&amp;quot;);&#xD;
+    return model;&#xD;
+  }&#xD;
+&#xD;
+  public static void main(String[] args) {&#xD;
+    SpringApplication.run(UiApplication.class, args);&#xD;
+  }&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;&lt;p&gt;Note: Depending on the way you created your new project it might not be called &lt;code&gt;UiApplication&lt;/code&gt;, and it might have &lt;code&gt;@EnableAutoConfiguration @ComponentScan @Configuration&lt;/code&gt; instead of &lt;code&gt;@SpringBootApplication&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;Run that application and try to curl the &amp;ldquo;/resource&amp;rdquo; endpoint and you will find that it is secure by default:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ curl localhost:8080/resource&#xD;
+{&amp;quot;timestamp&amp;quot;:1420442772928,&amp;quot;status&amp;quot;:401,&amp;quot;error&amp;quot;:&amp;quot;Unauthorized&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;Full authentication is required to access this resource&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;/resource&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#loading-a-dynamic-resource-from-angular" class="anchor" name="loading-a-dynamic-resource-from-angular"&gt;&lt;/a&gt;Loading a Dynamic Resource from Angular&lt;/h3&gt;&lt;p&gt;So let&amp;rsquo;s grab that message in the browser. Modify the &amp;ldquo;home&amp;rdquo; controller to load the protected resource using XHR:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [])&#xD;
+  .controller(&amp;#39;home&amp;#39;, function($scope, $http) {&#xD;
+  $http.get(&amp;#39;/resource/&amp;#39;).success(function(data) {&#xD;
+    $scope.greeting = data;&#xD;
+  })&#xD;
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We injected an &lt;a href="https://docs.angularjs.org/api/ng/service/$http"&gt;&lt;code&gt;$http&lt;/code&gt; service&lt;/a&gt;, which is provided by Angular as a core feature, and used it to GET our resource. Angular passes us the JSON from the response body back to a callback function on success.&lt;/p&gt;&lt;p&gt;Run the application again (or just reload the home page in the browser), and you will see the dynamic message with its unique ID. So, even though the resource is protected and you can&amp;rsquo;t curl it directly, the browser was able to access the content. We have a secure single page application in less than a hundred lines of code!&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Note: You might need to force your browser to reload the static resources after you change them. In Chrome (and Firefox with a plugin) you can use &amp;ldquo;developer tools&amp;rdquo; (F12), and that might be enough. Or you might have to use CTRL+F5.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;&lt;span id="how-does-it-work"/&gt;&lt;/p&gt;&lt;h2&gt;&lt;a href="#how-does-it-work" class="anchor" name="how-does-it-work"&gt;&lt;/a&gt;How Does it Work?&lt;/h2&gt;&lt;p&gt;The interactions between the browser and the backend can be seen in your browser if you use some developer tools (usually F12 opens this up, works in Chrome by default, requires a plugin in Firefox). Here&amp;rsquo;s a summary:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Verb &lt;/th&gt;
+      &lt;th&gt;Path &lt;/th&gt;
+      &lt;th&gt;Status &lt;/th&gt;
+      &lt;th&gt;Response&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/ &lt;/td&gt;
+      &lt;td&gt;401 &lt;/td&gt;
+      &lt;td&gt;Browser prompts for authentication&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/ &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;index.html&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/css/angular-bootstrap.css &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Twitter bootstrap CSS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/js/angular-bootstrap.js &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Bootstrap and Angular JS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/js/hello.js &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Application logic&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/resource &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;JSON greeting&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;p&gt;You might not see the 401 because the browser treats the home page load as a single interaction, and you might see 2 requests for &amp;ldquo;/resource&amp;rdquo; because there is a &lt;a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing"&gt;CORS&lt;/a&gt; negotiation.&lt;/p&gt;&lt;p&gt;Look more closely at the requests and you will see that all of them have an &amp;ldquo;Authorization&amp;rdquo; header, something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;Authorization: Basic dXNlcjpwYXNzd29yZA==
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The browser is sending the username and password with every request (so remember to use HTTPS exclusively in production). There&amp;rsquo;s nothing &amp;ldquo;Angular&amp;rdquo; about that, so it works with your JavaScript framework or non-framework of choice.&lt;/p&gt;&lt;h3&gt;&lt;a href="#what-rsquo-s-wrong-with-that" class="anchor" name="what-rsquo-s-wrong-with-that"&gt;&lt;/a&gt;What&amp;rsquo;s Wrong with That?&lt;/h3&gt;&lt;p&gt;On the face of it, it seems like we did a pretty good job, it&amp;rsquo;s concise, easy to implement, all our data are secured by a secret password, and it would still work if we changed the front end or backend technologies. But there are some issues.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;Basic authentication is restricted to username and password authentication.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;The authentication UI is ubiquitous but ugly (browser dialog).&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;There is no protection from &lt;a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery"&gt;Cross Site Request Forgery&lt;/a&gt; (CSRF).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;CSRF isn&amp;rsquo;t really an issue with our application as it stands since it only needs to GET the backend resources (i.e. no state is changed in the server). As soon as you have a POST, PUT or DELETE in your application it simply isn&amp;rsquo;t secure any more by any reasonable modern measure.&lt;/p&gt;&lt;p&gt;In the &lt;a href="https://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii"&gt;next article in this series&lt;/a&gt; we will extend the application to use form-based authentication, which is a lot more flexible than HTTP Basic. Once we have a form we will need CSRF protection, and both Spring Security and Angular have some nice out-of-the box features to help with this. Spoiler: we are going to need to use the &lt;code&gt;HttpSession&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Thanks: I would like to thank everyone who helped me develop this series, and in particular &lt;a href="http://spring.io/team/rwinch"&gt;Rob Winch&lt;/a&gt; and &lt;a href="https://twitter.com/thspaeth"&gt;Thorsten Spaeth&lt;/a&gt; for their careful reviews of the articles and sources codes, and for teaching me a few tricks I didn&amp;rsquo;t know even about the parts I thought I was most familar with.&lt;/p&gt;
+&lt;/blockquote&gt;</content>
+  </entry>
+  <entry>
+    <title>The Login Page: Angular JS and Spring Security Part II</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Dave Syer</name>
+    </author>
+    <id>tag:spring.io,2015-01-05:1904</id>
+    <updated>2015-01-12T12:20:00Z</updated>
+    <content type="html">&lt;p&gt;In this article we continue &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;our discussion&lt;/a&gt; of how to use &lt;a href="http://projects.spring.io/spring-security"&gt;Spring Security&lt;/a&gt; with &lt;a href="http://angularjs.org"&gt;Angular JS&lt;/a&gt; in a &amp;ldquo;single page application&amp;rdquo;. Here we show how to use Angular JS to authenticate a user via a form and fetch a secure resource to render in the UI. This is the second in a series of articles, and you can catch up on the basic building blocks of the application or build it from scratch by reading the &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;first article&lt;/a&gt;, or you can just go straight to the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/single"&gt;source code in Github&lt;/a&gt;. In the first article we built a simple application that used HTTP Basic authentication to protect the backend resources. In this one we add a login form, give the user some control over whether to authenticate or not, and fix the issues with the first iteration (principally lack of CSRF protection).&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Reminder: if you are working through this article with the sample application, be sure to clear your browser cache of cookies and HTTP Basic credentials. In Chrome the best way to do that for a single server is to open a new incognito window.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#add-navigation-to-the-home-page" class="anchor" name="add-navigation-to-the-home-page"&gt;&lt;/a&gt;Add Navigation to the Home Page&lt;/h2&gt;&lt;p&gt;The core of a single page application is a static &amp;ldquo;index.html&amp;rdquo;. We already had a really basic one, but for this application we need to offer some navigation features (login, logout, home), so let&amp;rsquo;s modify it (in &amp;ldquo;src/main/resources/static&amp;rdquo;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint html"&gt;&amp;lt;!doctype html&amp;gt;&#xD;
+&amp;lt;html&amp;gt;&#xD;
+&amp;lt;head&amp;gt;&#xD;
+&amp;lt;title&amp;gt;Hello AngularJS&amp;lt;/title&amp;gt;&#xD;
+&amp;lt;link&#xD;
+	href=&amp;quot;css/angular-bootstrap.css&amp;quot;&#xD;
+	rel=&amp;quot;stylesheet&amp;quot;&amp;gt;&#xD;
+&amp;lt;style type=&amp;quot;text/css&amp;quot;&amp;gt;&#xD;
+[ng\:cloak], [ng-cloak], .ng-cloak {&#xD;
+	display: none !important;&#xD;
+}&#xD;
+&amp;lt;/style&amp;gt;&#xD;
+&amp;lt;/head&amp;gt;&#xD;
+&#xD;
+&amp;lt;body ng-app=&amp;quot;hello&amp;quot; ng-cloak class=&amp;quot;ng-cloak&amp;quot;&amp;gt;&#xD;
+	&amp;lt;div ng-controller=&amp;quot;navigation&amp;quot; class=&amp;quot;container&amp;quot;&amp;gt;&#xD;
+		&amp;lt;ul class=&amp;quot;nav nav-pills&amp;quot; role=&amp;quot;tablist&amp;quot;&amp;gt;&#xD;
+			&amp;lt;li class=&amp;quot;active&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;#/&amp;quot;&amp;gt;home&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&#xD;
+			&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#/login&amp;quot;&amp;gt;login&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&#xD;
+			&amp;lt;li ng-show=&amp;quot;authenticated&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;&amp;quot; ng-click=&amp;quot;logout()&amp;quot;&amp;gt;logout&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&#xD;
+		&amp;lt;/ul&amp;gt;&#xD;
+	&amp;lt;/div&amp;gt;&#xD;
+	&amp;lt;div ng-view class=&amp;quot;container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&#xD;
+	&amp;lt;script src=&amp;quot;js/angular-bootstrap.js&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
+	&amp;lt;script src=&amp;quot;js/hello.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
+&amp;lt;/body&amp;gt;&#xD;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It&amp;rsquo;s not much different than the original in fact. Salient features:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;There is a &lt;code&gt;&amp;lt;ul&amp;gt;&lt;/code&gt; for the navigation bar. All the links come straight back to the home page, but in a way that Angular will recognize once we get it set up with &amp;ldquo;routes&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;All the content is going to be added as &amp;ldquo;partials&amp;rdquo; in the &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; labelled &amp;ldquo;ng-view&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;The &amp;ldquo;ng-cloak&amp;rdquo; has been moved up to the body because we want to hide the whole page until Angular can work out which bits to render. Otherwise the menus and content can &amp;ldquo;flicker&amp;rdquo; as they are moved around when the page loads.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;As in the &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;first article&lt;/a&gt;, the front end assets &amp;ldquo;angular-bootstrap.css&amp;rdquo; and &amp;ldquo;angular-bootstrap.js&amp;rdquo; are generated from JAR libraries at build time.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;h2&gt;&lt;a href="#add-navigation-to-the-angular-application" class="anchor" name="add-navigation-to-the-angular-application"&gt;&lt;/a&gt;Add Navigation to the Angular Application&lt;/h2&gt;&lt;p&gt;Let&amp;rsquo;s modify the &amp;ldquo;hello&amp;rdquo; application (in &amp;ldquo;src/main/resources/public/js/hello.js&amp;rdquo;) to add some navigation features. We can start by adding some configuration for routes, so that the links in the home page actually do something. E.g.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ])&#xD;
+  .config(function($routeProvider) {&#xD;
+&#xD;
+	$routeProvider.when(&amp;#39;/&amp;#39;, {&#xD;
+		templateUrl : &amp;#39;home.html&amp;#39;,&#xD;
+		controller : &amp;#39;home&amp;#39;&#xD;
+	}).when(&amp;#39;/login&amp;#39;, {&#xD;
+		templateUrl : &amp;#39;login.html&amp;#39;,&#xD;
+		controller : &amp;#39;navigation&amp;#39;&#xD;
+	}).otherwise(&amp;#39;/&amp;#39;);&#xD;
+&#xD;
+  })&#xD;
+  .controller(&amp;#39;home&amp;#39;, function($scope, $http) {&#xD;
+    $http.get(&amp;#39;/resource/&amp;#39;).success(function(data) {&#xD;
+      $scope.greeting = data;&#xD;
+    })&#xD;
+  })&#xD;
+  .controller(&amp;#39;navigation&amp;#39;, function() {});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We added a dependency on an Angular module called &lt;a href="https://docs.angularjs.org/api/ngRoute"&gt;&amp;ldquo;ngRoute&amp;rdquo;&lt;/a&gt; and this allowed us to inject a magic &lt;code&gt;$routeProvider&lt;/code&gt; into the config function (Angular does dependency injection by naming convention, and recognizes the names of your function parameters). The &lt;code&gt;$routeProvider&lt;/code&gt; is then used inside the function to set up links to &amp;ldquo;/&amp;rdquo; (the &amp;ldquo;home&amp;rdquo; controller) and &amp;ldquo;/login&amp;rdquo; (the &amp;ldquo;login&amp;rdquo; controller). The &amp;ldquo;templateUrls&amp;rdquo; are relative paths from the root of the routes (i.e. &amp;ldquo;/&amp;rdquo;) to &amp;ldquo;partial&amp;rdquo; views that will be used to render the model created by each controller.&lt;/p&gt;&lt;p&gt;In order to use the &amp;ldquo;ngRoute&amp;rdquo; module, we need to add a line to the &amp;ldquo;wro.xml&amp;rdquo; configuration that builds the static assets (in &amp;ldquo;src/main/wro&amp;rdquo;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;groups xmlns=&amp;quot;http://www.isdc.ro/wro&amp;quot;&amp;gt;&#xD;
+  &amp;lt;group name=&amp;quot;angular-bootstrap&amp;quot;&amp;gt;&#xD;
+    ...&#xD;
+    &amp;lt;js&amp;gt;webjar:angularjs/1.3.8/angular-route.min.js&amp;lt;/js&amp;gt;&#xD;
+   &amp;lt;/group&amp;gt;&#xD;
+&amp;lt;/groups&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#the-greeting" class="anchor" name="the-greeting"&gt;&lt;/a&gt;The Greeting&lt;/h3&gt;&lt;p&gt;The greeting content from the old home page can go in &amp;ldquo;home.html&amp;rdquo; (right next to the &amp;ldquo;index.html&amp;rdquo; in &amp;ldquo;src/main/resources/static&amp;rdquo;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint html"&gt;&amp;lt;h1&amp;gt;Greeting&amp;lt;/h1&amp;gt;&#xD;
+&amp;lt;div ng-controller=&amp;quot;home&amp;quot; ng-show=&amp;quot;authenticated&amp;quot;&amp;gt;&#xD;
+	&amp;lt;p&amp;gt;The ID is {{greeting.id}}&amp;lt;/p&amp;gt;&#xD;
+	&amp;lt;p&amp;gt;The content is {{greeting.content}}&amp;lt;/p&amp;gt;&#xD;
+&amp;lt;/div&amp;gt;&#xD;
+&amp;lt;div  ng-show=&amp;quot;!authenticated&amp;quot;&amp;gt;&#xD;
+	&amp;lt;p&amp;gt;Login to see your greeting&amp;lt;/p&amp;gt;&#xD;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Since the user now has the choice whether to login or not (before it was all controlled by the browser), we need to distinguish in the UI between content that is secure and that which is not. We have anticipated this by adding references to an (as yet non-existent) &lt;code&gt;authenticated&lt;/code&gt; variable.&lt;/p&gt;&lt;h3&gt;&lt;a href="#the-login-form" class="anchor" name="the-login-form"&gt;&lt;/a&gt;The Login Form&lt;/h3&gt;&lt;p&gt;The login form goes in &amp;ldquo;login.html&amp;rdquo;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint html"&gt;&amp;lt;div class=&amp;quot;alert alert-danger&amp;quot; ng-show=&amp;quot;error&amp;quot;&amp;gt;&#xD;
+	There was a problem logging in. Please try again.&#xD;
+&amp;lt;/div&amp;gt;&#xD;
+&amp;lt;form role=&amp;quot;form&amp;quot; ng-submit=&amp;quot;login()&amp;quot;&amp;gt;&#xD;
+	&amp;lt;div class=&amp;quot;form-group&amp;quot;&amp;gt;&#xD;
+		&amp;lt;label for=&amp;quot;username&amp;quot;&amp;gt;Username:&amp;lt;/label&amp;gt; &amp;lt;input type=&amp;quot;text&amp;quot;&#xD;
+			class=&amp;quot;form-control&amp;quot; id=&amp;quot;username&amp;quot; name=&amp;quot;username&amp;quot; ng-model=&amp;quot;credentials.username&amp;quot;/&amp;gt;&#xD;
+	&amp;lt;/div&amp;gt;&#xD;
+	&amp;lt;div class=&amp;quot;form-group&amp;quot;&amp;gt;&#xD;
+		&amp;lt;label for=&amp;quot;password&amp;quot;&amp;gt;Password:&amp;lt;/label&amp;gt; &amp;lt;input type=&amp;quot;password&amp;quot;&#xD;
+			class=&amp;quot;form-control&amp;quot; id=&amp;quot;password&amp;quot; name=&amp;quot;password&amp;quot; ng-model=&amp;quot;credentials.password&amp;quot;/&amp;gt;&#xD;
+	&amp;lt;/div&amp;gt;&#xD;
+	&amp;lt;button type=&amp;quot;submit&amp;quot; class=&amp;quot;btn btn-primary&amp;quot;&amp;gt;Submit&amp;lt;/button&amp;gt;&#xD;
+&amp;lt;/form&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is a very standard login form, with 2 inputs for username and password and a button for submitting the form via &lt;a href="https://docs.angularjs.org/api/ng/directive/ngSubmit"&gt;&lt;code&gt;ng-submit&lt;/code&gt;&lt;/a&gt;. You don&amp;rsquo;t need an action on the form tag, so it&amp;rsquo;s probably better not to put one in at all. There is also an error message, shown only if the angular &lt;code&gt;$scope&lt;/code&gt; contains an &lt;code&gt;error&lt;/code&gt;. The form controls use &lt;a href="https://docs.angularjs.org/api/ng/directive/ngModel"&gt;&lt;code&gt;ng-model&lt;/code&gt;&lt;/a&gt; to pass data between the HTML and the Angular controller, and in this case we are using a &lt;code&gt;credentials&lt;/code&gt; object to hold the username and pasword. According to the routes we defined the login form is linked with the &amp;ldquo;navigation&amp;rdquo; controller, which is so far empty, so let&amp;rsquo;s head over to that to fill in some gaps.&lt;/p&gt;&lt;h2&gt;&lt;a href="#the-authentication-process" class="anchor" name="the-authentication-process"&gt;&lt;/a&gt;The Authentication Process&lt;/h2&gt;&lt;p&gt;To support the login form we just added we need to add some more features. On the client side these will be implemented in the &amp;ldquo;navigation&amp;rdquo; controller, and on the server it will be Spring Security configuration.&lt;/p&gt;&lt;h3&gt;&lt;a href="#submitting-the-login-form" class="anchor" name="submitting-the-login-form"&gt;&lt;/a&gt;Submitting the Login Form&lt;/h3&gt;&lt;p&gt;To submit the form we need to define the &lt;code&gt;login()&lt;/code&gt; function that we referenced already in the form via &lt;code&gt;ng-submit&lt;/code&gt;, and the &lt;code&gt;credentials&lt;/code&gt; object that we referenced via &lt;code&gt;ng-model&lt;/code&gt;. Let&amp;rsquo;s flesh out the &amp;ldquo;navigation&amp;rdquo; controller in &amp;ldquo;hello.js&amp;rdquo; (omitting the routes config and the &amp;ldquo;home&amp;rdquo; controller):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ]) // ... omitted code&#xD;
+.controller(&amp;#39;navigation&amp;#39;,&#xD;
+&#xD;
+  function($rootScope, $scope, $http, $location) {&#xD;
+&#xD;
+  var authenticate = function(callback) {&#xD;
+&#xD;
+    $http.get(&amp;#39;user&amp;#39;).success(function(data) {&#xD;
+      if (data.name) {&#xD;
+        $rootScope.authenticated = true;&#xD;
+      } else {&#xD;
+        $rootScope.authenticated = false;&#xD;
+      }&#xD;
+      callback &amp;amp;&amp;amp; callback();&#xD;
+    }).error(function() {&#xD;
+      $rootScope.authenticated = false;&#xD;
+      callback &amp;amp;&amp;amp; callback();&#xD;
+    });&#xD;
+&#xD;
+  }&#xD;
+&#xD;
+  authenticate();&#xD;
+  $scope.credentials = {};&#xD;
+  $scope.login = function() {&#xD;
+    $http.post(&amp;#39;login&amp;#39;, $.param($scope.credentials), {&#xD;
+      headers : {&#xD;
+        &amp;quot;content-type&amp;quot; : &amp;quot;application/x-www-form-urlencoded&amp;quot;&#xD;
+      }&#xD;
+    }).success(function(data) {&#xD;
+      authenticate(function() {&#xD;
+        if ($rootScope.authenticated) {&#xD;
+          $location.path(&amp;quot;/&amp;quot;);&#xD;
+          $scope.error = false;&#xD;
+        } else {&#xD;
+          $location.path(&amp;quot;/login&amp;quot;);&#xD;
+          $scope.error = true;&#xD;
+        }&#xD;
+      });&#xD;
+    }).error(function(data) {&#xD;
+      $location.path(&amp;quot;/login&amp;quot;);&#xD;
+      $scope.error = true;&#xD;
+      $rootScope.authenticated = false;&#xD;
+    })&#xD;
+  };&#xD;
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;All of the code in the &amp;ldquo;navigation&amp;rdquo; controller will be executed when the page loads because the &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; containing the menu bar is visible and is decorated with &lt;code&gt;ng-controller=&amp;quot;navigation&amp;quot;&lt;/code&gt;. In addition to initializing the &lt;code&gt;credentials&lt;/code&gt; object, it defines 2 functions, the &lt;code&gt;login()&lt;/code&gt; that we need in the form, and a local helper function &lt;code&gt;authenticate()&lt;/code&gt; which tries to load a &amp;ldquo;user&amp;rdquo; resource from the backend. The &lt;code&gt;authenticate()&lt;/code&gt; function is called when the controller is loaded to see if the user is actually already authenticated (e.g. if he had refreshed the browser in the middle of a session). We need the &lt;code&gt;authenticate()&lt;/code&gt; function to make a remote call because the actual authentication is done by the server, and we don&amp;rsquo;t want to trust the browser to keep track of it.&lt;/p&gt;&lt;p&gt;The &lt;code&gt;authenticate()&lt;/code&gt; function sets an application-wide flag called &lt;code&gt;authenticated&lt;/code&gt; which we have already used in our &amp;ldquo;home.html&amp;rdquo; to control which parts of the page are rendered. We do this using &lt;a href="https://docs.angularjs.org/api/ng/service/$rootScope"&gt;&lt;code&gt;$rootScope&lt;/code&gt;&lt;/a&gt; because it&amp;rsquo;s convenient and easy to follow, and we need to share the &lt;code&gt;authenticated&lt;/code&gt; flag between the &amp;ldquo;navigation&amp;rdquo; and the &amp;ldquo;home&amp;rdquo; controllers. Angular experts might prefer to share data through a shared user-defined service (but it ends up being the same mechanism).&lt;/p&gt;&lt;p&gt;The &lt;code&gt;login()&lt;/code&gt; makes a POST to a relative resource (relative to the deployment root of your application) &amp;ldquo;/login&amp;rdquo; with the form-encoded credentials in the body (Angular does everything in JSON by default so we had to be explicit about that). Instead of relying on being able to derive the authentication state from the result of the POST, the &lt;code&gt;login()&lt;/code&gt; function uses the &lt;code&gt;authenticate()&lt;/code&gt; helper. Using the result of the POST is tricky if we don&amp;rsquo;t know for sure what the server is going to do on success or failure, so it&amp;rsquo;s worth the extra network hop to verify the authentication in the general case (e.g. the Spring Security default behaviour is to send a 302 on success and failure, and Angular will follow the redirect, so we would have to actually parse the response from that). The &lt;code&gt;login()&lt;/code&gt; function also sets a local &lt;code&gt;$scope.error&lt;/code&gt; flag accordingly when we get the result of the authentication, which is used to control the display of the error message above the login form.&lt;/p&gt;&lt;h3&gt;&lt;a href="#the-currently-authenticated-user" class="anchor" name="the-currently-authenticated-user"&gt;&lt;/a&gt;The Currently Authenticated User&lt;/h3&gt;&lt;p&gt;To service the &lt;code&gt;authenticate()&lt;/code&gt; function we need to add a new endpoint to the backend:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+public class UiApplication {&#xD;
+  &#xD;
+  @RequestMapping(&amp;quot;/user&amp;quot;)&#xD;
+  public Principal user(Principal user) {&#xD;
+    return user;&#xD;
+  }&#xD;
+&#xD;
+  ...&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is a useful trick in a Spring Security application. If the &amp;ldquo;/user&amp;rdquo; resource is reachable then it will return the currently authenticated user (an &lt;a href="https://github.com/spring-projects/spring-security/blob/master/core/src/main/java/org/springframework/security/core/Authentication.java" title="Authentication"&gt;&lt;code&gt;Authentication&lt;/code&gt;&lt;/a&gt;), and otherwise Spring Security will intercept the request and send it through an &lt;a href="https://github.com/spring-projects/spring-security/blob/master/web/src/main/java/org/springframework/security/web/AuthenticationEntryPoint.java" title="AuthenticationEntryPoint"&gt;&lt;code&gt;AuthenticationEntryPoint&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;An alternative implementation of this &lt;code&gt;authenticate()&lt;/code&gt; (client side) and &amp;ldquo;/user&amp;rdquo; (server side) could just check the HTTP response from a simple GET of any protected resource (e.g. a 401 means &lt;code&gt;authenticated=false&lt;/code&gt;). This is slightly fragile because it depends on non-standard configuration of the server using a custom &lt;a href="https://github.com/spring-projects/spring-security/blob/master/web/src/main/java/org/springframework/security/web/AuthenticationEntryPoint.java" title="AuthenticationEntryPoint"&gt;&lt;code&gt;AuthenticationEntryPoint&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#handling-the-login-request-on-the-server" class="anchor" name="handling-the-login-request-on-the-server"&gt;&lt;/a&gt;Handling the Login Request on the Server&lt;/h3&gt;&lt;p&gt;Spring Security makes it easy to handle the login request. We just need to add some configuration to our &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/single/src/main/java/demo/UiApplication.java"&gt;main application class&lt;/a&gt; (e.g. as an inner class):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+public class UiApplication {&#xD;
+&#xD;
+  ...&#xD;
+&#xD;
+  @Configuration&#xD;
+  @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)&#xD;
+  protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {&#xD;
+    @Override&#xD;
+    protected void configure(HttpSecurity http) throws Exception {&#xD;
+      http&#xD;
+        .formLogin().and()&#xD;
+        .authorizeRequests()&#xD;
+          .antMatchers(&amp;quot;/index.html&amp;quot;, &amp;quot;/home.html&amp;quot;, &amp;quot;/login.html&amp;quot;, &amp;quot;/&amp;quot;).permitAll()&#xD;
+          .anyRequest().authenticated();&#xD;
+    }&#xD;
+  }&#xD;
+  &#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is a standard Spring Boot application with Spring Security customization, just adding a login form, and allowing anonymous access to the static (HTML) resources (the CSS and JS resources are already accessible by default). The HTML resources need to be available to anonymous users, not just ignored by Spring Security, for reasons that will become clear.&lt;/p&gt;&lt;h2&gt;&lt;a href="#csrf-protection" class="anchor" name="csrf-protection"&gt;&lt;/a&gt;CSRF Protection&lt;/h2&gt;&lt;p&gt;The application is almost ready to use, but if you try running it you will find that the login form doesn&amp;rsquo;t work. Look at the responses in the browser and you will see why:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;POST /login HTTP/1.1&#xD;
+...&#xD;
+Content-Type: application/x-www-form-urlencoded&#xD;
+&#xD;
+username=user&amp;amp;password=password&#xD;
+&#xD;
+HTTP/1.1 403 Forbidden&#xD;
+Set-Cookie: JSESSIONID=3941352C51ABB941781E1DF312DA474E; Path=/; HttpOnly&#xD;
+Content-Type: application/json;charset=UTF-8&#xD;
+Transfer-Encoding: chunked&#xD;
+...&#xD;
+&#xD;
+{&amp;quot;timestamp&amp;quot;:1420467113764,&amp;quot;status&amp;quot;:403,&amp;quot;error&amp;quot;:&amp;quot;Forbidden&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;Expected CSRF token not found. Has your session expired?&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;/login&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That&amp;rsquo;s good because it means that Spring Security&amp;rsquo;s built-in CSRF protection has kicked in to prevent us from shooting ourselves in the foot. All it wants is a token sent to it in a header called &amp;ldquo;X-CSRF&amp;rdquo;. The value of the CSRF token was available server side in the &lt;code&gt;HttpRequest&lt;/code&gt; attributes from the initial request that loaded the home page. To get it to the client we could render it using a dynamic HTML page on the server, or expose it via a custom endpoint, or else we could send it as a cookie. The last choice is the best because Angular has &lt;a href="https://docs.angularjs.org/api/ng/service/$http"&gt;built in support for CSRF&lt;/a&gt; (which it calls &amp;ldquo;XSRF&amp;rdquo;) based on cookies.&lt;/p&gt;&lt;p&gt;So all we need on the server is a custom filter that will send the cookie. Angular wants the cookie name to be &amp;ldquo;XSRF-TOKEN&amp;rdquo; and Spring Security provides it as a request attribute, so we just need to transfer the value from a request attribute to a cookie:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;public class CsrfHeaderFilter extends OncePerRequestFilter {&#xD;
+  @Override&#xD;
+  protected void doFilterInternal(HttpServletRequest request,&#xD;
+      HttpServletResponse response, FilterChain filterChain)&#xD;
+      throws ServletException, IOException {&#xD;
+    CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class&#xD;
+        .getName());&#xD;
+    if (csrf != null) {&#xD;
+      Cookie cookie = WebUtils.getCookie(request, &amp;quot;XSRF-TOKEN&amp;quot;);&#xD;
+      String token = csrf.getToken();&#xD;
+      if (cookie==null || token!=null &amp;amp;&amp;amp; !token.equals(cookie.getValue())) {&#xD;
+        cookie = new Cookie(&amp;quot;XSRF-TOKEN&amp;quot;, token);&#xD;
+        cookie.setPath(&amp;quot;/&amp;quot;);&#xD;
+        response.addCookie(cookie);&#xD;
+      }&#xD;
+    }&#xD;
+    filterChain.doFilter(request, response);&#xD;
+  }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To finish the job and make it completely generic we should be careful to set the cookie path to the context path of the application (instead of hard-coded to &amp;ldquo;/&amp;rdquo;), but this is good enough for the application we are working on. &lt;/p&gt;&lt;p&gt;We need to install this filter in the application somewhere, and it needs to go after the Spring Security &lt;code&gt;CsrfFilter&lt;/code&gt; so that the request attribute is available. Since we have Spring Security protecting these resources there&amp;rsquo;s no better place than in the Spring Security filter chain, e.g. extending the &lt;code&gt;SecurityConfiguration&lt;/code&gt; above:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Configuration&#xD;
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)&#xD;
+protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {&#xD;
+  @Override&#xD;
+  protected void configure(HttpSecurity http) throws Exception {&#xD;
+    http&#xD;
+      .formLogin().and()&#xD;
+      .authorizeRequests()&#xD;
+        .antMatchers(&amp;quot;/index.html&amp;quot;, &amp;quot;/home.html&amp;quot;, &amp;quot;/login.html&amp;quot;, &amp;quot;/&amp;quot;).permitAll().anyRequest()&#xD;
+        .authenticated().and()&#xD;
+      .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);&#xD;
+  }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The other thing we have to do on the server is tell Spring Security to expect the CSRF token in the format that Angular wants to send it back (a header called &amp;ldquo;X-XRSF-TOKEN&amp;rdquo; instead of the default &amp;ldquo;X-CSRF-TOKEN&amp;rdquo;). We do this by customizing the CSRF filter:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Override&#xD;
+protected void configure(HttpSecurity http) throws Exception {&#xD;
+  http&#xD;
+    .formLogin().and()&#xD;
+    ...&#xD;
+    .csrf().csrfTokenRepository(csrfTokenRepository());&#xD;
+}&#xD;
+&#xD;
+private CsrfTokenRepository csrfTokenRepository() {&#xD;
+  HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();&#xD;
+  repository.setHeaderName(&amp;quot;X-XSRF-TOKEN&amp;quot;);&#xD;
+  return repository;&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With those changes in place we don&amp;rsquo;t need to do anything on the client side and the login form is now working.&lt;/p&gt;&lt;h2&gt;&lt;a href="#logout" class="anchor" name="logout"&gt;&lt;/a&gt;Logout&lt;/h2&gt;&lt;p&gt;The application is almost finished functionally. The last thing we need to do is implement the logout feature that we sketched in the home page. Here&amp;rsquo;s a reminder what the navigation bar looks like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint html"&gt;&amp;lt;div ng-controller=&amp;quot;navigation&amp;quot; class=&amp;quot;container&amp;quot;&amp;gt;&#xD;
+  &amp;lt;ul class=&amp;quot;nav nav-pills&amp;quot; role=&amp;quot;tablist&amp;quot;&amp;gt;&#xD;
+    &amp;lt;li class=&amp;quot;active&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;#/&amp;quot;&amp;gt;home&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&#xD;
+    &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#/login&amp;quot;&amp;gt;login&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&#xD;
+    &amp;lt;li ng-show=&amp;quot;authenticated&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;&amp;quot; ng-click=&amp;quot;logout()&amp;quot;&amp;gt;logout&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&#xD;
+  &amp;lt;/ul&amp;gt;&#xD;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the user is authenticated then we show a &amp;ldquo;logout&amp;rdquo; link and hook it to a &lt;code&gt;logout()&lt;/code&gt; function in the &amp;ldquo;navigation&amp;rdquo; controller. The implementation of the function is relatively simple:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ]). &#xD;
+// ...&#xD;
+.controller(&amp;#39;navigation&amp;#39;, function(...) {&#xD;
+&#xD;
+...&#xD;
+&#xD;
+$scope.logout = function() {&#xD;
+  $http.post(&amp;#39;logout&amp;#39;, {}).success(function() {&#xD;
+    $rootScope.authenticated = false;&#xD;
+    $location.path(&amp;quot;/&amp;quot;);&#xD;
+  }).error(function(data) {&#xD;
+    $rootScope.authenticated = false;&#xD;
+  });&#xD;
+}&#xD;
+&#xD;
+...&#xD;
+&#xD;
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It sends an HTTP POST to &amp;ldquo;/logout&amp;rdquo; which we now need to implement on the server. This is straightforward:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Override&#xD;
+protected void configure(HttpSecurity http) throws Exception {&#xD;
+  http&#xD;
+    .formLogin().and()&#xD;
+    .logout()&#xD;
+    ...&#xD;
+  ;&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;(we just added &lt;code&gt;.logout()&lt;/code&gt; to the &lt;code&gt;HttpSecurity&lt;/code&gt; configuration builder).&lt;/p&gt;&lt;h2&gt;&lt;a href="#how-does-it-work" class="anchor" name="how-does-it-work"&gt;&lt;/a&gt;How Does it Work?&lt;/h2&gt;&lt;p&gt;The interactions between the browser and the backend can be seen in your browser if you use some developer tools (usually F12 opens this up, works in Chrome by default, requires a plugin in Firefox). Here&amp;rsquo;s a summary:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Verb &lt;/th&gt;
+      &lt;th&gt;Path &lt;/th&gt;
+      &lt;th&gt;Status &lt;/th&gt;
+      &lt;th&gt;Response&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/ &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;index.html&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/css/angular-bootstrap.css &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Twitter bootstrap CSS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/js/angular-bootstrap.js &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Bootstrap and Angular JS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/js/hello.js &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Application logic&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/user &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to login page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Whitelabel login page (ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/resource &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to login page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Whitelabel login page (ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login.html &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Angular login form partial&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;POST &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to home page (ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/user &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;JSON authenticated user&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/resource &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;JSON greeting&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;p&gt;The responses that are marked &amp;ldquo;ignored&amp;rdquo; above are HTML responses received by Angular in an XHR call, and since we aren&amp;rsquo;t processing that data the HTML is dropped on the floor. We do look for an authenticated user in the case of the &amp;ldquo;/user&amp;rdquo; resource, but since it isn&amp;rsquo;t there in the first call, that response is dropped.&lt;/p&gt;&lt;p&gt;Look more closely at the requests and you will see that they all have cookies. If you start with a clean browser (e.g. incognito in Chrome), the very first request has no cookies going off to the server, but the server sends back &amp;ldquo;Set-Cookie&amp;rdquo; for &amp;ldquo;JSESSIONID&amp;rdquo; (the regular &lt;code&gt;HttpSession&lt;/code&gt;) and &amp;ldquo;X-XSRF-TOKEN&amp;rdquo; (the CRSF cookie that we set up above). Subsequent requests all have those cookies, and they are important: the application doesn&amp;rsquo;t work without them, and they are providing some really basic security features (authentication and CSRF protection). The values of the cookies change when the user authenticates (after the POST) and this is another important security feature (preventing &lt;a href="http://en.wikipedia.org/wiki/Session_fixation"&gt;session fixation attacks&lt;/a&gt;).&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Note: it is not adequate for CSRF protection to rely on a cookie being sent back to the server because the browser will automatically send it even if you are not in a page loaded from your application (a Cross Site Scripting attack, otherwise known as &lt;a href="http://en.wikipedia.org/wiki/Cross-site_scripting"&gt;XSS&lt;/a&gt;). The header is not automatically sent, so the origin is under control. You might see that in our application the CSRF token is sent to the client as a cookie, so we will see it being sent back automatically by the browser, but it is the header that provides the protection.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#help-how-is-my-application-going-to-scale" class="anchor" name="help-how-is-my-application-going-to-scale"&gt;&lt;/a&gt;Help, How is My Application Going to Scale?&lt;/h2&gt;&lt;p&gt;&amp;ldquo;But wait&amp;hellip;&amp;rdquo; you are saying, &amp;ldquo;isn&amp;rsquo;t it Really Bad to use session state in a single-page application?&amp;rdquo; The answer to that question is going to have to be &amp;ldquo;mostly&amp;rdquo;, because it very definitely is a Good Thing to use the session for authentication and CSRF protection. That state has to be stored somewhere, and if you take it out of the session, you are going to have to put it somewhere else and manage it manually yourself, on both the server and the client. That&amp;rsquo;s just more code and probably more maintenance, and generally re-inventing a perfectly good wheel.&lt;/p&gt;&lt;p&gt;&amp;ldquo;But, but&amp;hellip;&amp;rdquo; you are going to respond, &amp;ldquo;how do I scale my application horizontally now?&amp;rdquo; This is the &amp;ldquo;real&amp;rdquo; question you were asking above, but it tends to get shortened to &amp;ldquo;session state is bad, I must be stateless&amp;rdquo;. Don&amp;rsquo;t panic. The main point to take on board here is that security &lt;em&gt;is&lt;/em&gt; stateful. You can&amp;rsquo;t have a secure, stateless application. So where are you going to store the state? That&amp;rsquo;s all there is to it. &lt;a href="https://spring.io/team/rwinch"&gt;Rob Winch&lt;/a&gt; gave a very useful and insightful talk at &lt;a href="https://skillsmatter.com/skillscasts/5398-the-state-of-securing-restful-apis-with-spring"&gt;Spring Exchange 2014&lt;/a&gt; explaining the need for state (and the ubiquity of it - TCP and SSL are stateful, so your system is stateful whether you knew it or not), which is probably worth a look if you want to look into this topic in more depth.&lt;/p&gt;&lt;p&gt;The good news is you have a choice. The easiest choice is to store the session data in-memory, and rely on sticky sessions in your load balancer to route requests from the same session back to the same JVM (they all support that somehow). That&amp;rsquo;s good enough to get you off the ground and will work for a &lt;em&gt;really&lt;/em&gt; large number of use cases. The other choice is to share the session data between instances of your application. As long as you are strict and only store the security data, it is small and changes infrequently (only when users log in and out, or their session times out), so there shouldn&amp;rsquo;t be any major infrastructure problems. It&amp;rsquo;s also really easy to do with &lt;a href="https://github.com/spring-projects/spring-session/"&gt;Spring Session&lt;/a&gt;. We&amp;rsquo;ll be using Spring Session in the next article in this series, so there&amp;rsquo;s no need to go into any detail about how to set it up here, but it is literally a few lines of code and a Redis server, which is super fast.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Tip: another easy way to set up shared session state is to deploy your application as a WAR file to Cloud Foundry &lt;a href="http://run.pivotal.io"&gt;Pivotal Web Services&lt;/a&gt; and bind it to a Redis service.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#but-what-about-my-custom-token-implementation-it-rsquo-s-stateless-look" class="anchor" name="but-what-about-my-custom-token-implementation-it-rsquo-s-stateless-look"&gt;&lt;/a&gt;But, What about My Custom Token Implementation (it&amp;rsquo;s Stateless, Look)?&lt;/h2&gt;&lt;p&gt;If that was your response to the last section, then read it again because maybe you didn&amp;rsquo;t get it the first time. It&amp;rsquo;s probably not stateless if you stored the token somewhere, but even if you didn&amp;rsquo;t (e.g. you use JWT encoded tokens), how are you going to provide CSRF protection? It&amp;rsquo;s important. Here&amp;rsquo;s a rule of thumb (attributed to Rob Winch): if your application or API is going to be accessed by a browser, you need CSRF protection. It&amp;rsquo;s not that you can&amp;rsquo;t do it without sessions, it&amp;rsquo;s just that you&amp;rsquo;d have to write all that code yourself, and what would be the point because it&amp;rsquo;s already implemented and works perfectly well on top of &lt;code&gt;HttpSession&lt;/code&gt; (which intuen is part of the container you are using and baked into specs since the very beginning)? Even if you decide you don&amp;rsquo;t need CSRF, and have a perfectly &amp;ldquo;stateless&amp;rdquo; (non-session based) token implementation, you still had to write extra code in the client to consume and use it, where you could have just delegated to the browser and server&amp;rsquo;s own built-in features: the browser always sends cookies, and the server always has a session (unless you switch it off). That code is not business logic, and it isn&amp;rsquo;t making you any money, it&amp;rsquo;s just an overhead, so even worse, it costs you money.&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;The application we have now is close to what a user might expect in a &amp;ldquo;real&amp;rdquo; application in a live environment, and it probably could be used as a template for building out into a more feature rich application with that architecture (single server with static content and JSON resources). We are using the &lt;code&gt;HttpSession&lt;/code&gt; for storing security data, relying on our clients to respect and use the cookies we send them, and we are comfortable with that because it lets us concentrate on our own business domain. In the next article we expand the architecture to a separate authentication and UI server, plus a standalone resource server for the JSON. This is obviously easily generalised to multiple resource servers. We are also going to introduce Spring Session into the stack and show how that can be used to share authentication data.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: How to get Groovy with Java 8</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/09/springone2gx-2014-replay-how-to-get-groovy-with-java-8" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1914</id>
+    <updated>2015-01-09T00:20:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Peter Ledbrook &lt;/p&gt;
+&lt;p&gt;More Groovy Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/groovy-java8-41242953"&gt;http://www.slideshare.net/SpringCentral/groovy-java8-41242953&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Java 8 has the biggest language changes since Java 5 introduced generics. Not only do you now have lambda functions and default methods, but you can make use of lazy collections via the new Streams API. What impact does this have on your Groovy applications? And does Groovy still provide an edge in terms of developer productivity?&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/OO9Y9O6u-J4" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Experiences using Grails in a Microservice Architecture</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-experiences-using-grails-in-a-microservice-architecture" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1912</id>
+    <updated>2015-01-08T22:31:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Jeff Beck &lt;/p&gt;
+&lt;p&gt;Essential Grails Track &lt;/p&gt;
+&lt;p&gt;Slides: http://www.slideshare.net/SpringCentral/experiences-using-grails-in-a-microservice-architecture-spring-one2gx2014-41177964 &lt;/p&gt;
+&lt;p&gt;For some web applications it does not make sense to have 1 monolithing process which handles all of the requirements of the application. More and more often Grails is showing up in microservice architectures where instead of building 1 monolithing web application which is responsible for all of the pieces of the application puzzle, microservice applications are being assembled which collectively solve the requirements of the larger application. Grails is very well suited for this type of architecture. A microservice based architecture can result in applications which are easier to build, easier to test, easier to extend and are easier to adapt to changing business requirements.&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/QbBksjK7mF8" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Android and Groovy, a winning pair?</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-android-and-groovy-a-winning-pair" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1911</id>
+    <updated>2015-01-08T22:27:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Cedric Champeau &lt;/p&gt;
+&lt;p&gt;More Groovy Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/groovy-android-41263570"&gt;http://www.slideshare.net/SpringCentral/groovy-android-41263570&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For 10 years, Groovy has dramatically improved the productivity of Java developers on the desktop. With unique like closures, builders, AST transformations, traits, optional static compilation and many more, Groovy turned out to be a very competitive language on the JVM. Compared to other JVM languages, Groovy has the major advantage of being totally Java-friendly, both in terms of syntax and interperability. But during those years, what happened on the mobile world? In particular, Android developers are used to develop applications in Java, so why Groovy, a JVM language, wouldn't be usable for Android development too? Can we ease the pain of Android developers too?&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/3MVbFd8ke2k" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring Session 1.0.0.RELEASE</title>
     <link rel="alternate" href="https://spring.io/blog/2015/01/08/spring-session-1-0-0-release" />
@@ -245,266 +1118,6 @@
     <id>tag:spring.io,2014-12-17:1893</id>
     <updated>2014-12-17T15:04:00Z</updated>
     <content type="html">&lt;p&gt;Spring Security OAuth 2.0.5.RELEASE is available now in all the usual Maven repositories. This is a bugfix release but nothing critical. We recommend upgrading if you are having trouble with customizing the Java config, since most of the issues resolved relate to that (for instance it is much easier to customize the password encoder for client secrets). There is a small breaking change for anyone using the &lt;code&gt;AuthorizationServerEndpointsConfigurer&lt;/code&gt; directly to configure a &lt;code&gt;ClientDetailsService&lt;/code&gt; (it doesn&amp;rsquo;t work that way, so you would be failing to configure it anyway).&lt;/p&gt;&lt;p&gt;For a range of samples using and displaying all the features of Spring Security OAuth please look in the github project (e.g. at the &lt;a href="https://github.com/spring-projects/spring-security-oauth/tree/master/tests"&gt;integration tests&lt;/a&gt; or the &lt;a href="https://github.com/spring-projects/spring-security-oauth/tree/master/samples"&gt;samples&lt;/a&gt;).&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - December 16th, 2014</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/17/this-week-in-spring-december-16th-2014" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2014-12-17:1892</id>
-    <updated>2014-12-17T00:18:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! In a few short weeks we&amp;rsquo;ll be in 2015! Will that be exciting? Of course. But this week&amp;rsquo;s pretty exciting as well! So much good stuff this week.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2014/12/11/spring-boot-1-2-0-released"&gt;Spring Boot 1.2.0 is here&lt;/a&gt;! So many new features for Java EE (Servlet 3.1-baseline, JTA, JMS and JNDI support) and improved Jackson output, Actuator endpoints, CLI updates and performance. Spring Cloud is already tracking 1.2 and will be based on this soon, as well. &lt;a href="http://start.spring.io"&gt;Get the bits&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2014/12/11/spring-boot-1-1-10-released"&gt;Spring Boot 1.1.10 is now available with numerous fixes&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Resident mad-scientist Andy Wilkinson just announced &lt;a href="https://spring.io/blog/2014/12/12/spring-io-platform-1-1-0-rc1-released"&gt;the latest cut of the Spring IO platform library&lt;/a&gt;. There are lots of things of note, but in particular it&amp;rsquo;s added support for Spring Integration Flow 1.0, Spring Integration Java DSL 1.0, and Spring Integration Splunk 1.1 and updated revisions for several projects besides.&lt;/li&gt;
-  &lt;li&gt;Spring Security lead &lt;a href="https://spring.io/blog/2014/12/11/spring-security-4-0-0-rc1-released"&gt;Rob Winch has announced Spring Security 4.0.0.RC1&lt;/a&gt;. Read his release-notes and try out the bits soon!&lt;/li&gt;
-  &lt;li&gt;Spring Data ninja Thomas Risbery has just &lt;a href="https://spring.io/blog/2014/12/16/spring-for-apache-hadoop-2-0-4-released"&gt;announced Spring for Apache Hadoop 2.0.4&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Spring Integration lead Gary Russell just &lt;a href="https://spring.io/blog/2014/12/15/spring-integration-spring-amqp-maintenance-releases-available"&gt;announced Spring Integration and Spring AMQP maintenance releases&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Join Gary Russell on Jan 27th as he shows new reasons why Spring Integration leads the ESB/Integration Framework market (2014 DZone research): &lt;a href="http://spring.io/blog/2014/12/02/webinar-introducing-the-java-dsl-for-spring-integration"&gt;Introducing the Java DSL for Spring Integration&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Is in-memory your thing? Join Luke Shannon Jan 13th and learn about how Spring MVC/Spring Boot applications can leverage GemFire for persistence in his talk &lt;a href="http://spring.io/blog/2014/12/02/webinar-building-scalable-data-applications-with-spring-and-gemfire"&gt;Building Scalable Data Applications with Spring and GemFire&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Check out the replay of Stepane Maldini&amp;rsquo;s webinar introducing &lt;a href="https://spring.io/blog/2014/12/11/webinar-replay-using-reactor-for-asynch-non-blocking-microservices"&gt;Reactor for asynchronous, non-blocking microservices&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://twitter.com/mraible"&gt;Matt Raible&lt;/a&gt; announced an update to his popular AppFuse starter project. One of the major changes: &lt;a href="http://raibledesigns.com/rd/entry/appfuse_reduced"&gt;it now uses the Spring IO platform dependency for ease-of-version and dependency management&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Hat Tip to Spring Data lead Oliver Gierke who sent me this useful post, &lt;a href="http://www.insaneprogramming.be/blog/2014/12/01/mongodb-java-comparison/"&gt;&lt;em&gt;A Simple Use-case Comparison of JVM Libraries for MongoDB&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Dennis wrote about &lt;a href="https://blog.codecentric.de/en/2014/10/log-management-spring-boot-applications-logstash-elastichsearch-kibana/"&gt;Spring Boot and Logstash, Kibana and ElasticSearch&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;CodeCentric &lt;a href="https://blog.codecentric.de/en/2014/11/spring-boot-starter-batch-web-1-3-0-released/"&gt;have released version 1.3.0 of their Spring Batch and Spring Boot-based starter&lt;/a&gt;. It now includes transaction-safe metrics.&lt;/li&gt;
-  &lt;li&gt;Speaking of Spring Boot starters, specifically, did you see &lt;a href="https://blog.codecentric.de/en/2014/11/extending-spring-boot-five-steps-writing-spring-boot-starter/"&gt;Tobias&amp;rsquo; post from last month on writing your own Spring Boot starter&lt;/a&gt;?&lt;/li&gt;
-&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring for Apache Hadoop 2.0.4 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/16/spring-for-apache-hadoop-2-0-4-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Thomas Risberg</name>
-    </author>
-    <id>tag:spring.io,2014-12-16:1891</id>
-    <updated>2014-12-16T18:26:00Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce that Spring for Apache Hadoop 2.0.4 has just been released and is now available from Maven Central and the Spring Repository. This release includes some bug fixes and enhancements to the HDFS writers and partitioning features. We have also added support for Apache Hadoop 2.6.0 and Cloudera CDH has been updated to version 5.2.0. More details can be found in the &lt;a href="http://docs.spring.io/spring-hadoop/docs/2.0.4.RELEASE/changelog.txt"&gt;changelog&lt;/a&gt; or in the &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10801&amp;version=14809"&gt;JIRA release notes&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Here is a complete list of the latest version designation to use for the various distro &amp;ldquo;flavors&amp;rdquo; published. The Apache Hadoop releases are available in Maven Central and all other releases are available in the &lt;a href="http://repo.spring.io/libs-release/"&gt;Spring Repository&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;2.0.4.RELEASE - Apache Hadoop 2.2.x [2.2.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-hadoop12 - Apache Hadoop 1.2.x [1.2.1]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-hadoop24 - Apache Hadoop 2.4.x [2.4.1]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-hadoop25 - Apache Hadoop 2.5.x [2.5.1]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-hadoop26 - Apache Hadoop 2.6.x [2.6.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-phd1 - Pivotal HD 1.1 [2.0.5-alpha-gphd-2.1.0.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-phd20 - Pivotal HD 2.0 [2.2.0-gphd-3.0.1.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-phd21 - Pivotal HD 2.1 [2.2.0-gphd-3.1.0.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-cdh4 - Cloudera CDH4 MR1 [2.0.0-mr1-cdh4.6.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-cdh5 - Cloudera CDH5 YARN [2.5.0-cdh5.2.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-hdp13 - Hortonworks Data Platform 1.3 [1.2.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-hdp20 - Hortonworks Data Platform 2.0 [2.2.0]&lt;/li&gt;
-  &lt;li&gt;2.0.4.RELEASE-hdp21 - Hortonworks Data Platform 2.1 [2.4.0]&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;We plan on adding support for Hortonworks HDP 2.2 in a future release.&lt;/p&gt;&lt;p&gt;The project page is at - &lt;a href="http://projects.spring.io/spring-hadoop/"&gt;http://projects.spring.io/spring-hadoop/&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Integration, Spring AMQP Maintenance Releases Available</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/15/spring-integration-spring-amqp-maintenance-releases-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Gary Russell</name>
-    </author>
-    <id>tag:spring.io,2014-12-15:1890</id>
-    <updated>2014-12-15T16:21:00Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce the availability of Spring Integration 4.1.1, 4.0.6, and Spring AMQP 1.4.1. In general, these are minor releases with a small number of bug fixes, but Spring Integration 4.1.1 adds support for decoding RFC 5424 syslog messages and Spring AMQP 1.4.1 adds support for the new &lt;a href="http://docs.spring.io/spring-amqp/docs/current/reference/html/amqp.html#direct-reply-to"&gt;Direct reply-to&lt;/a&gt; feature in RabbitMQ 3.4.&lt;/p&gt;&lt;p&gt;Spring Integration Java DSL 1.0.1, with a &lt;a href="https://github.com/spring-projects/spring-integration-java-dsl/issues/9"&gt;correction with the recipient list router&lt;/a&gt; is also available now.&lt;/p&gt;&lt;p&gt;For complete details of the release contents, see the corresponding release notes.&lt;/p&gt;&lt;p&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10121&amp;version=14822"&gt;Spring Integration 4.1.1. Release Notes&lt;/a&gt;&lt;br/&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10121&amp;version=14821"&gt;Spring Integration 4.0.6. Release Notes&lt;/a&gt;&lt;br/&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10450&amp;version=14824"&gt;Spring AMQP 1.4.1. Release Notes&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See the &lt;a href="http://projects.spring.io/spring-integration/"&gt;Spring Integration&lt;/a&gt; and &lt;a href="http://projects.spring.io/spring-amqp/"&gt;Spring AMQP&lt;/a&gt; project pages for more information.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring IO Platform 1.1.0.RC1 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/12/spring-io-platform-1-1-0-rc1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Andy Wilkinson</name>
-    </author>
-    <id>tag:spring.io,2014-12-11:1888</id>
-    <updated>2014-12-12T11:14:33Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce that RC1 of Spring IO Platform 1.1 is now available from &lt;a href="https://repo.spring.io/milestone"&gt;repo.spring.io&lt;/a&gt;. Please try out the release candidate and &lt;a href="https://github.com/spring-io/platform/issues"&gt;let us know&lt;/a&gt; if you encounter any problems.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="user-content-new-projects-in-11" class="anchor" href="#new-projects-in-11" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;New projects in 1.1&lt;/h3&gt;
-
-&lt;p&gt;The following projects are new to the Platform in 1.1:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Spring Integration Flow 1.0&lt;/li&gt;
-&lt;li&gt;Spring Integration Java DSL 1.0&lt;/li&gt;
-&lt;li&gt;Spring Integration Splunk 1.1&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;
-&lt;a id="user-content-projects-upgraded-in-11" class="anchor" href="#projects-upgraded-in-11" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Projects upgraded in 1.1&lt;/h3&gt;
-
-&lt;p&gt;Several projects have new minor versions in 1.1:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Spring Boot 1.2&lt;/li&gt;
-&lt;li&gt;Spring Cloud Connectors 1.1&lt;/li&gt;
-&lt;li&gt;Spring Data JPA 1.7&lt;/li&gt;
-&lt;li&gt;Spring Data MongoDB 1.6&lt;/li&gt;
-&lt;li&gt;Spring Data Neo4J 3.2&lt;/li&gt;
-&lt;li&gt;Spring Data Redis 1.4&lt;/li&gt;
-&lt;li&gt;Spring Data REST 2.2&lt;/li&gt;
-&lt;li&gt;Spring Data Solr 1.3&lt;/li&gt;
-&lt;li&gt;Spring Framework 4.1&lt;/li&gt;
-&lt;li&gt;Spring Integration 4.1&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Numerous third-party dependencies have also been updated.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="user-content-further-information" class="anchor" href="#further-information" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Further information&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/1.1.0.RC1/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security 4.0.0.RC1 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/11/spring-security-4-0-0-rc1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Rob Winch</name>
-    </author>
-    <id>tag:spring.io,2014-12-11:1887</id>
-    <updated>2014-12-11T15:23:00Z</updated>
-    <content type="html">&lt;p&gt;We are please to announce the release of Spring Security 4.0.0.RC1. This release resolved &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10040&amp;amp;version=14683"&gt;40 tickets&lt;/a&gt;. You can find a highlight of the changes below.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-&lt;strong&gt;Updated Defaults&lt;/strong&gt; - As security evolves, so does Spring Security. We took this opportunity to ensure that the defaults were more secure. For example, the XML Namespace support now enables CSRF protection by default.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;Polish WebSocket Security&lt;/strong&gt; - We received very valuable feedback from the community which allowed us to polish the WebSocket security. We also added XML Namespace configuration support for WebSocket security. Details can be found on the update blog &lt;a href="http://spring.io/blog/2014/08/21/preview-spring-security-websocket-support"&gt;Preview Spring Security WebSocket Support&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;Minimum Dependency Versions&lt;/strong&gt; - The minimum dependency versions have been bumped up. For example, Spring Security now requires Spring 4.1.x. &lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;Removed Deprecations&lt;/strong&gt; - while this may not be everyone's favorite feature, it is necessary to clean up unnecessary code. This makes the code base easier to understand and maintain. &lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;Documentation Formats&lt;/strong&gt; - when we updated to using asciidoctor, the PDF and HTML Multi Page outputs were removed. We once again provide &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/"&gt;HTML Single&lt;/a&gt;, &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/html/"&gt;HTML Multi Page&lt;/a&gt;, &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/epub/spring-security-reference.epub"&gt;EPub&lt;/a&gt; and &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/pdf/spring-security-reference.pdf"&gt;PDF&lt;/a&gt; outputs.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;Simplified Configuration&lt;/strong&gt; - By leveraging Spring 4.x new features, Spring Security's minimal configuration has been drastically simplified. For example, the minimal configuration to secure a web application can be seen below:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class="highlight highlight-java"&gt;&lt;pre&gt;@&lt;span class="pl-stj"&gt;EnableWebSecurity&lt;/span&gt;
-&lt;span class="pl-s"&gt;public&lt;/span&gt; &lt;span class="pl-s"&gt;class&lt;/span&gt; &lt;span class="pl-en"&gt;SecurityConfig&lt;/span&gt; {
-
-    &lt;span class="pl-st"&gt;@Autowired&lt;/span&gt;
-    &lt;span class="pl-s"&gt;public&lt;/span&gt; &lt;span class="pl-st"&gt;void&lt;/span&gt; &lt;span class="pl-en"&gt;configureGlobal&lt;/span&gt;(&lt;span class="pl-stj"&gt;AuthenticationManagerBuilder&lt;/span&gt; &lt;span class="pl-v"&gt;auth&lt;/span&gt;) &lt;span class="pl-s"&gt;throws&lt;/span&gt; &lt;span class="pl-stj"&gt;Exception&lt;/span&gt; {
-        auth
-            .inMemoryAuthentication()
-                .withUser(&lt;span class="pl-s1"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;user&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;)&lt;span class="pl-k"&gt;.&lt;/span&gt;password(&lt;span class="pl-s1"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;password&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;)&lt;span class="pl-k"&gt;.&lt;/span&gt;roles(&lt;span class="pl-s1"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;USER&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;);
-    }
-}&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Please try out the updates and provide feedback. Our current plan is to go GA in January.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Spring Security&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SEC"&gt;JIRA&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/"&gt;Reference&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Boot 1.2.0 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/11/spring-boot-1-2-0-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Phil Webb</name>
-    </author>
-    <id>tag:spring.io,2014-12-10:1886</id>
-    <updated>2014-12-11T04:59:00Z</updated>
-    <content type="html">&lt;p&gt;I am pleased to announce that Spring Boot 1.2.0 has been released and is available from &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.springframework.boot%22"&gt;Maven Central&lt;/a&gt;. This release adds a significant number of new features and improvements over 1.1 and is a recommended upgrade for all users. For &lt;a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.2-Release-Notes#upgrading-from-spring-boot-11"&gt;upgrade instructions&lt;/a&gt; and &lt;a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.2-Release-Notes#new-and-noteworthy"&gt;"new and noteworthy"&lt;/a&gt; features please see the &lt;a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.2-Release-Notes"&gt;release notes&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here are some of the highlights of this release:&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-servlet-31" class="anchor" href="#servlet-31" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Servlet 3.1&lt;/h2&gt;
-
-&lt;p&gt;Spring Boot now uses Servlet 3.1 when running with an embedded servlet container. Tomcat 8, Jetty 9 and Undertow 1.1 are all supported options. In addition, WebSocket support has been improved and is now automatically configured for all supported servers. If you need to stick to Servlet 3.0, Tomcat 7 and Jetty 8 are still supported.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-springbootapplication" class="anchor" href="#springbootapplication" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;@SpringBootApplication&lt;/h2&gt;
-
-&lt;p&gt;If you find yourself typing &lt;code&gt;@Configuration&lt;/code&gt; + &lt;code&gt;@EnableAutoConfiguration&lt;/code&gt; + &lt;code&gt;@ComponentScan&lt;/code&gt; whenever you start a new Spring Boot application, you might like the new &lt;code&gt;@SpringBootApplication&lt;/code&gt; annotation. You can use it as a quick alternative for those three annotations and save yourself some typing. It works particularly well if you structure your code as we &lt;a href="http://docs.spring.io/spring-boot/docs/1.2.x/reference/htmlsingle/#using-boot-structuring-your-code"&gt;recommend in the reference documentation&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-jta-support-and-java-ee" class="anchor" href="#jta-support-and-java-ee" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;JTA Support and Java EE&lt;/h2&gt;
-
-&lt;p&gt;Spring Boot 1.2 now supports distributed JTA transactions across multiple XA resources using either an &lt;a href="http://www.atomikos.com/"&gt;Atomikos&lt;/a&gt; or &lt;a href="http://docs.codehaus.org/display/BTM/Home"&gt;Bitronix&lt;/a&gt; embedded transaction manager. JTA transactions are also supported when deploying to a suitable Java EE Application Server. &lt;/p&gt;
-
-&lt;p&gt;Java EE support in general had been refreshed with Spring Boot 1.2. This &lt;a href="http://spring.io/blog/2014/11/23/bootiful-java-ee-support-in-spring-boot-1-2"&gt;blog post&lt;/a&gt; from &lt;a href="https://spring.io/team/jlong"&gt;Josh Long&lt;/a&gt; provides an excellent primer.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-jackson-customization" class="anchor" href="#jackson-customization" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Jackson customization&lt;/h2&gt;
-
-&lt;p&gt;Jackson configuration has been greatly improved with Spring Boot 1.2. You can now configure most Jackson options from your &lt;code&gt;application.properties&lt;/code&gt; file. See this &lt;a href="http://spring.io/blog/2014/12/02/latest-jackson-integration-improvements-in-spring"&gt;excellent blog post&lt;/a&gt; from &lt;a href="http://spring.io/team/sdeleuze"&gt;Sébastien Deleuze&lt;/a&gt; for more background on Spring's general support for Jackson.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-jms-support" class="anchor" href="#jms-support" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;JMS Support&lt;/h2&gt;
-
-&lt;p&gt;Spring 4.1 introduced some nice &lt;a href="http://spring.io/blog/2014/04/30/spring-4-1-s-upcoming-jms-improvements"&gt;enhancements to its JMS support&lt;/a&gt; and you can now use these seamlessly from Spring Boot. The &lt;code&gt;@EnableJms&lt;/code&gt; annotation is also auto-configured whenever you have &lt;code&gt;spring-jms.jar&lt;/code&gt; on your classpath. &lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-actuator-updates" class="anchor" href="#actuator-updates" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Actuator updates&lt;/h2&gt;
-
-&lt;p&gt;There have been lots of updates to the actuator module with Spring Boot 1.2. We now provide additional metrics (including DataSource metrics, Tomcat session metrics and improved System metrics). There is also better integration with the &lt;a href="https://dropwizard.github.io/metrics/"&gt;Dropwizard "Metrics" library&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;/health&lt;/code&gt; endpoint has been improved to provide DataSource and disk space monitoring. It is also more secure now and won't expose so much information on an unauthenticated connection. &lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-cli-updates" class="anchor" href="#cli-updates" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;CLI Updates&lt;/h2&gt;
-
-&lt;p&gt;The &lt;code&gt;spring&lt;/code&gt; CLI tool has been improved with a couple of new commands. You can now type &lt;code&gt;spring init&lt;/code&gt; to use the &lt;a href="http://start.spring.io"&gt;start.spring.io&lt;/a&gt; service. For example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ spring init -d=web myapp.zip
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Will download a zip containing a basic Spring Boot web application.&lt;/p&gt;
-
-&lt;p&gt;The CLI also now supports extensions. You can &lt;code&gt;spring install &amp;lt;maven coordinates&amp;gt;&lt;/code&gt; to add extensions from a Maven repository.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-performance-improvements" class="anchor" href="#performance-improvements" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Performance improvements&lt;/h2&gt;
-
-&lt;p&gt;Despite adding more auto-configuration, Spring Boot 1.2 should actually be slightly faster than 1.1. We've tried to optimize the code-base as much as possible and do lots of little tricks to make the startup time as fast as possible. The Tomcat sample application starts in well under 3 seconds on most machines.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="user-content-numerous-other-changes" class="anchor" href="#numerous-other-changes" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Numerous other changes&lt;/h2&gt;
-
-&lt;p&gt;We've made many other small improvements and enhancements for Spring Boot 1.2. There is better JNDI support, enhanced banner support, support for "Spring Cloud Connectors", improved Spring MVC defaults and a new email "starter POM". Additionally, support for third-party libraries has been extended to cover &lt;a href="http://logging.apache.org/log4j/2.x/"&gt;Log4J2&lt;/a&gt;, &lt;a href="https://code.google.com/p/google-gson/"&gt;GSON&lt;/a&gt; and &lt;a href="https://jersey.java.net/"&gt;Jersey&lt;/a&gt;. For a complete list of the changes please refer to the &lt;a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.2-Release-Notes"&gt;release notes&lt;/a&gt; and the &lt;a href="http://docs.spring.io/spring-boot/docs/1.2.x/reference/htmlsingle"&gt;updated reference guide&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;Thanks again to everyone that continues to support and contribute to Spring Boot. Many of the enhancements in this release were contributed or driven by the community. Please keep up the good work and continue to raise &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;issues&lt;/a&gt; and &lt;a href="https://github.com/spring-projects/spring-boot/pulls"&gt;pull requests&lt;/a&gt;!&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/1.2.0.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Boot 1.1.10 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/11/spring-boot-1-1-10-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Phil Webb</name>
-    </author>
-    <id>tag:spring.io,2014-12-10:1885</id>
-    <updated>2014-12-11T04:58:00Z</updated>
-    <content type="html">&lt;p&gt;Spring Boot 1.1.10 has been released and is available now from &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.springframework.boot%22"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;
-
-&lt;p&gt;This maintenance release includes a small &lt;a href="https://github.com/spring-projects/spring-boot/issues?q=milestone%3A1.1.9"&gt;number of fixes&lt;/a&gt; and enhancements and is recommended for anyone that doesn't yet want to upgrade to the &lt;a href="http://spring.io/blog/2014/12/11/spring-boot-1-2-0-released"&gt;new 1.2.0 release&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/1.1.9.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar Replay: Using Reactor for Asynch/non-blocking Microservices</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/11/webinar-replay-using-reactor-for-asynch-non-blocking-microservices" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2014-12-12:1889</id>
-    <updated>2014-12-11T04:58:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: Stephane Maldini  &lt;/p&gt;
-
-&lt;p&gt;Slides:&lt;a href="https://speakerdeck.com/smaldini/introduction-to-reactor-and-reactive-streams"&gt;https://speakerdeck.com/smaldini/introduction-to-reactor-and-reactive-streams&lt;/a&gt; &lt;/p&gt;
-
-&lt;p&gt;What is the role of asynchronous, non-blocking style-communication in microservices? Join Stephane Maldini for a revealing look at why reactive components are so important in an eventually-consistent approach like microservice architecture. When services own their data and are completely independent, having a (reactive) abstraction layer can perform a variety of roles. Being able to parallelize resources a microservice owns is an important technique. Another might be as an event bus, pulling state data from various micro services dynamically, checking against the cached, fairly up-to-date local copy. While a microservice has “all” the data it needs from other services to respond to a request, this data is not necessarily up-to-date—an important constraint to be prepared to accept. Stephane will also discuss other async use cases outside of microservices and how &lt;a href="http://www.reactive-streams.org"&gt;www.reactive-streams.org&lt;/a&gt; protocol support allows levels of portability across vendor implementations.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/bn1zZDMyFpI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</content>
   </entry>
 </feed>
 

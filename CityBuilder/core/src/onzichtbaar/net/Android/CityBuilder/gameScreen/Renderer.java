@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import onzichtbaar.net.Android.CityBuilder.load.Data;
 import onzichtbaar.net.Android.CityBuilder.load.DisplayInfoBox;
 import onzichtbaar.net.Android.CityBuilder.load.DrawTiles;
-import onzichtbaar.net.Android.CityBuilder.load.Skin_Setup;
 import onzichtbaar.net.Android.CityBuilder.load.TouchInput;
 import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
 
@@ -37,6 +36,7 @@ public class Renderer extends Data
 	private SpriteBatch batch;
 	
 	private Skin skin;
+	
 	private int selectedTile = 1;
 	private boolean hasWall = false;
 	
@@ -49,12 +49,11 @@ public class Renderer extends Data
 	
 	private TextField tileInfo;
 	private TextField levelText;
+	private TextField resourceCitizens;
 	private TextField resourceWood;
 	private TextField resourceStone;
 	private TextField resourceFood;
 	private TextField resourceGold;
-	
-	private Skin_Setup skin_setup;
 	
 	private GameScreen game;
 	
@@ -78,7 +77,7 @@ public class Renderer extends Data
 		scaling_x = width/ScreenHeight;
 		scaling_y = height/ScreenWidth;
 
-		InfoBox = new Texture( Gdx.files.internal( "UITest.png" ));
+		InfoBox = new Texture( Gdx.files.internal( "images/UITest.png" ));
 		
 		region = new TextureRegion(InfoBox, 0, 0, InfoBox.getWidth(), InfoBox.getHeight());
 
@@ -144,36 +143,38 @@ public class Renderer extends Data
 		UserInterface.setBounds(880, 80, 400, 600);
 		UserInterface.setVisible( true );
 		
-		skin_setup = new Skin_Setup();
-		skin = new Skin();
-		skin = skin_setup.set_skin();
-		
+		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+
 		tileInfo = new TextField( "", skin );
 		tileInfo.setDisabled(true);
-		tileInfo.setBounds( 1030, 530, 300, 20 );
+		tileInfo.setBounds( 1030, 530, 100, 20 );
 		tileInfo.setVisible( false );
 		
 		levelText = new TextField( "Level 1", skin );
 		levelText.setDisabled(true);
-		levelText.setBounds(30, 680, 300, 20 );
+		levelText.setBounds(30, 680, 100, 20 );
 		levelText.setVisible( true );
 		
 		resourceWood = new TextField( "Wood: ", skin );
 		resourceStone = new TextField( "Stone: ", skin );
 		resourceFood = new TextField( "Food: ", skin );
 		resourceGold = new TextField( "Gold: ", skin );
+		resourceCitizens = new TextField( "Citizens: ", skin );
 		resourceWood.setDisabled( true );
 		resourceStone.setDisabled( true );
 		resourceFood.setDisabled( true );
 		resourceGold.setDisabled( true );
-		resourceWood.setBounds( 150, 680, 300, 20 );
-		resourceStone.setBounds( 350, 680, 300, 20 );
-		resourceFood.setBounds( 550, 680, 300, 20 );
-		resourceGold.setBounds( 750, 680, 300, 20 );
+		resourceCitizens.setDisabled( true );
+		resourceWood.setBounds( 30, 650, 100, 20 );
+		resourceStone.setBounds( 30, 620, 100, 20 );
+		resourceFood.setBounds( 30, 590, 100, 20 );
+		resourceGold.setBounds( 30, 560, 100, 20 );
+		resourceCitizens.setBounds( 30,  530, 100, 20);
 		resourceWood.setVisible( true );
 		resourceStone.setVisible( true );
 		resourceFood.setVisible( true );
 		resourceGold.setVisible( true );
+		resourceCitizens.setVisible( true );
 		
 		woodButton = new TextButton("Build Wall", skin );
 		woodButton.setBounds(980, 220, 200, 50 );
@@ -187,6 +188,7 @@ public class Renderer extends Data
 		stage.addActor( resourceStone );
 		stage.addActor( resourceFood );
 		stage.addActor( resourceGold );
+		stage.addActor( resourceCitizens );
 		stage.addActor( woodButton );
 	}
 	
@@ -211,6 +213,7 @@ public class Renderer extends Data
 			resourceStone.setText( "Stone: " + Stone );
 			resourceFood.setText( "Food: " + Food );
 			resourceGold.setText( "Gold: " + Gold );
+			resourceCitizens.setText( "Citizens: " + (citizens.size() - 1) );
 		}
 		
 	};
