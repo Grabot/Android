@@ -7167,3 +7167,1995 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-08 22:27:32.438
 !MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 04:14:14.866
+!MESSAGE Crashlytics had a problem querying for a software update.
+Stack trace:
+java.net.UnknownHostException: api.crashlytics.com
+api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getSoftwareIntegration(RestfulWebApi.java:1020)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.findPlatformUpdate(AbstractAndroidIde.java:254)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findIntegration(EclipseUpdateFinder.java:50)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findBootstrapperUpdate(EclipseUpdateFinder.java:83)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findBootstrapperUpdate(EclipseUpdateFinder.java:1)
+	at com.crashlytics.tools.bootstrap.UpdateManager.updateBootstrapper(UpdateManager.java:121)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.checkForUpdates(UpdateManager.java:94)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.run(UpdateManager.java:75)
+	at java.lang.Thread.run(Unknown Source)
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 04:14:14.915
+!MESSAGE Crashlytics had a problem querying for a software update.
+Stack trace:
+java.net.UnknownHostException: api.crashlytics.com
+api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getSoftwareIntegration(RestfulWebApi.java:1020)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.findPlatformUpdate(AbstractAndroidIde.java:254)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findIntegration(EclipseUpdateFinder.java:50)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findComponentsUpdate(EclipseUpdateFinder.java:88)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findComponentsUpdate(EclipseUpdateFinder.java:1)
+	at com.crashlytics.tools.bootstrap.UpdateManager.updateDynamicComponents(UpdateManager.java:145)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.checkForUpdates(UpdateManager.java:99)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.run(UpdateManager.java:75)
+	at java.lang.Thread.run(Unknown Source)
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 04:14:14.918
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2015-01-09 04:14:14.934
+!MESSAGE Connection to http://dist.springsource.com/release/STS/doc/updates.xml failed on dist.springsource.com. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: dist.springsource.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:242)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:130)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:150)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:575)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:425)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1074)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.openStreams(HttpClientRetrieveFileTransfer.java:621)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:879)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:570)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.MultiProtocolRetrieveAdapter.sendRetrieveRequest(MultiProtocolRetrieveAdapter.java:106)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:422)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.read(FileReader.java:273)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.stream(RepositoryTransport.java:172)
+	at sun.reflect.GeneratedMethodAccessor110.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springsource.ide.eclipse.commons.internal.core.net.P2TransportService.stream(P2TransportService.java:139)
+	at org.springsource.ide.eclipse.commons.core.HttpUtil.stream(HttpUtil.java:165)
+	at org.springsource.ide.eclipse.dashboard.internal.ui.editors.AggregateFeedJob$1.run(AggregateFeedJob.java:145)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2015-01-09 04:14:14.985
+!MESSAGE Connection to https://spring.io/blog.atom failed on spring.io. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: spring.io
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:242)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:130)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:150)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:575)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:425)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1074)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.openStreams(HttpClientRetrieveFileTransfer.java:621)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:879)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:570)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.MultiProtocolRetrieveAdapter.sendRetrieveRequest(MultiProtocolRetrieveAdapter.java:106)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:422)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.read(FileReader.java:273)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.stream(RepositoryTransport.java:172)
+	at sun.reflect.GeneratedMethodAccessor110.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springsource.ide.eclipse.commons.internal.core.net.P2TransportService.stream(P2TransportService.java:139)
+	at org.springsource.ide.eclipse.commons.core.HttpUtil.stream(HttpUtil.java:165)
+	at org.springsource.ide.eclipse.dashboard.internal.ui.editors.AggregateFeedJob$1.run(AggregateFeedJob.java:145)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 11:10:27.923
+!MESSAGE Crashlytics had a problem querying for a software update.
+Stack trace:
+java.net.UnknownHostException: api.crashlytics.com
+api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getSoftwareIntegration(RestfulWebApi.java:1020)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.findPlatformUpdate(AbstractAndroidIde.java:254)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findIntegration(EclipseUpdateFinder.java:50)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findBootstrapperUpdate(EclipseUpdateFinder.java:83)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findBootstrapperUpdate(EclipseUpdateFinder.java:1)
+	at com.crashlytics.tools.bootstrap.UpdateManager.updateBootstrapper(UpdateManager.java:121)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.checkForUpdates(UpdateManager.java:94)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.run(UpdateManager.java:75)
+	at java.lang.Thread.run(Unknown Source)
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 11:10:27.931
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 11:10:27.950
+!MESSAGE Crashlytics had a problem querying for a software update.
+Stack trace:
+java.net.UnknownHostException: api.crashlytics.com
+api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getSoftwareIntegration(RestfulWebApi.java:1020)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.findPlatformUpdate(AbstractAndroidIde.java:254)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findIntegration(EclipseUpdateFinder.java:50)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findComponentsUpdate(EclipseUpdateFinder.java:88)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findComponentsUpdate(EclipseUpdateFinder.java:1)
+	at com.crashlytics.tools.bootstrap.UpdateManager.updateDynamicComponents(UpdateManager.java:145)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.checkForUpdates(UpdateManager.java:99)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.run(UpdateManager.java:75)
+	at java.lang.Thread.run(Unknown Source)
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 11:10:27.990
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 11:10:28.027
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 11:10:28.073
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 11:10:28.104
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 11:10:28.144
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 11:10:28.180
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 11:35:08.542
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2015-01-09 11:35:08.556
+!MESSAGE Connection to http://dist.springsource.com/release/STS/doc/updates.xml failed on dist.springsource.com. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: dist.springsource.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:242)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:130)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:150)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:575)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:425)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1074)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.openStreams(HttpClientRetrieveFileTransfer.java:621)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:879)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:570)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.MultiProtocolRetrieveAdapter.sendRetrieveRequest(MultiProtocolRetrieveAdapter.java:106)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:422)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.read(FileReader.java:273)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.stream(RepositoryTransport.java:172)
+	at sun.reflect.GeneratedMethodAccessor110.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springsource.ide.eclipse.commons.internal.core.net.P2TransportService.stream(P2TransportService.java:139)
+	at org.springsource.ide.eclipse.commons.core.HttpUtil.stream(HttpUtil.java:165)
+	at org.springsource.ide.eclipse.dashboard.internal.ui.editors.AggregateFeedJob$1.run(AggregateFeedJob.java:145)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2015-01-09 11:35:08.566
+!MESSAGE Connection to https://spring.io/blog.atom failed on spring.io. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: spring.io
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:242)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:130)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:150)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:575)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:425)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1074)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.openStreams(HttpClientRetrieveFileTransfer.java:621)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:879)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:570)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.MultiProtocolRetrieveAdapter.sendRetrieveRequest(MultiProtocolRetrieveAdapter.java:106)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:422)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.read(FileReader.java:273)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.stream(RepositoryTransport.java:172)
+	at sun.reflect.GeneratedMethodAccessor110.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springsource.ide.eclipse.commons.internal.core.net.P2TransportService.stream(P2TransportService.java:139)
+	at org.springsource.ide.eclipse.commons.core.HttpUtil.stream(HttpUtil.java:165)
+	at org.springsource.ide.eclipse.dashboard.internal.ui.editors.AggregateFeedJob$1.run(AggregateFeedJob.java:145)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY com.crashlytics.java 4 0 2015-01-09 12:18:51.680
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\961\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\961\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+
+!ENTRY com.crashlytics.java 4 0 2015-01-09 12:18:51.681
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\961\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\961\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+
+!ENTRY com.crashlytics.java 4 0 2015-01-09 12:18:51.682
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\961\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\961\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 12:18:51.728
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findClassImpl(ClasspathManager.java:548)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClassImpl(ClasspathManager.java:492)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:465)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at com.crashlytics.tools.eclipse.ThreadedAssemblyListener.dispose(ThreadedAssemblyListener.java:84)
+	at com.crashlytics.tools.eclipse.CrashlyticsAdtPlugin.stop(CrashlyticsAdtPlugin.java:268)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:804)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 49 more
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 12:18:51.729
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\.cp\libs\json_simple-1.1.jar
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findClassImpl(ClasspathManager.java:548)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClassImpl(ClasspathManager.java:492)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:465)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at com.crashlytics.tools.eclipse.ThreadedAssemblyListener.dispose(ThreadedAssemblyListener.java:84)
+	at com.crashlytics.tools.eclipse.CrashlyticsAdtPlugin.stop(CrashlyticsAdtPlugin.java:268)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:804)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\.cp\libs\json_simple-1.1.jar (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 49 more
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 12:18:51.732
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in com.crashlytics.tools.eclipse.CrashlyticsAdtPlugin.stop() of bundle com.crashlytics.tools.eclipse.core.
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:791)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:804)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.lang.NoClassDefFoundError: com/crashlytics/tools/eclipse/ThreadedAssemblyListener$5
+	at com.crashlytics.tools.eclipse.ThreadedAssemblyListener.dispose(ThreadedAssemblyListener.java:84)
+	at com.crashlytics.tools.eclipse.CrashlyticsAdtPlugin.stop(CrashlyticsAdtPlugin.java:268)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	... 28 more
+Caused by: java.lang.ClassNotFoundException: com.crashlytics.tools.eclipse.ThreadedAssemblyListener$5 cannot be found by com.crashlytics.tools.eclipse.core_3.2.1.201412162151
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:501)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	... 33 more
+Root exception:
+java.lang.NoClassDefFoundError: com/crashlytics/tools/eclipse/ThreadedAssemblyListener$5
+	at com.crashlytics.tools.eclipse.ThreadedAssemblyListener.dispose(ThreadedAssemblyListener.java:84)
+	at com.crashlytics.tools.eclipse.CrashlyticsAdtPlugin.stop(CrashlyticsAdtPlugin.java:268)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:804)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.lang.ClassNotFoundException: com.crashlytics.tools.eclipse.ThreadedAssemblyListener$5 cannot be found by com.crashlytics.tools.eclipse.core_3.2.1.201412162151
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:501)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	... 33 more
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 12:18:51.733
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 12:18:51.734
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 12:18:51.735
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\964\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+
+!ENTRY com.crashlytics.tools.eclipse.exporter 4 0 2015-01-09 12:18:51.736
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\965\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\965\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+
+!ENTRY com.crashlytics.tools.eclipse.exporter 4 0 2015-01-09 12:18:51.737
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\965\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\965\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+
+!ENTRY com.crashlytics.tools.eclipse.exporter 4 0 2015-01-09 12:18:51.737
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+java.io.IOException: Exception in opening zip file: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\965\1\bundlefile
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:329)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.basicOpen(ZipBundleFile.java:86)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getZipFile(ZipBundleFile.java:99)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.checkedOpen(ZipBundleFile.java:72)
+	at org.eclipse.osgi.baseadaptor.bundlefile.ZipBundleFile.getEntry(ZipBundleFile.java:244)
+	at org.eclipse.fx.osgi.patch.PFBundleFile.getEntry(PFBundleFile.java:84)
+	at org.eclipse.osgi.baseadaptor.bundlefile.BundleFileWrapperChain.getEntry(BundleFileWrapperChain.java:43)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry0(BaseData.java:114)
+	at org.eclipse.osgi.baseadaptor.BaseData.getEntry(BaseData.java:105)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getEntry0(AbstractBundle.java:1251)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findInResolved(ManifestLocalization.java:164)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.findResource(ManifestLocalization.java:158)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.lookupResourceBundle(ManifestLocalization.java:115)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getResourceBundle(ManifestLocalization.java:91)
+	at org.eclipse.osgi.framework.internal.core.ManifestLocalization.getHeaders(ManifestLocalization.java:52)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:965)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getHeaders(AbstractBundle.java:912)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorkerPrivileged(AbstractBundle.java:837)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle$4.run(AbstractBundle.java:786)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstallWorker(AbstractBundle.java:810)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.uninstall(AbstractBundle.java:784)
+	at com.crashlytics.tools.bootstrap.osgi.OsgiBootstrapper.unloadComponents(OsgiBootstrapper.java:171)
+	at com.crashlytics.tools.eclipse.updater.UpdaterPlugin.stop(UpdaterPlugin.java:126)
+	at com.crashlytics.tools.eclipse.workbench.WorkbenchPlugin.stop(WorkbenchPlugin.java:135)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:566)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1206)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:592)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:692)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:600)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+Caused by: java.io.FileNotFoundException: C:\Program Files\eclipse\configuration\org.eclipse.osgi\bundles\965\1\bundlefile (The system cannot find the path specified)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at java.util.zip.ZipFile.<init>(Unknown Source)
+	at org.eclipse.osgi.framework.util.SecureAction.getZipFile(SecureAction.java:312)
+	... 46 more
+!SESSION 2015-01-09 15:25:13.134 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.eclipse.mylyn.tasks.ui 4 0 2015-01-09 17:40:50.234
+!MESSAGE Could not load repository template extension contributed by org.springsource.ide.eclipse.dashboard.ui with connectorKind jira
+
+!ENTRY org.eclipse.mylyn.tasks.ui 4 0 2015-01-09 17:40:50.244
+!MESSAGE Could not load repository template extension contributed by org.springsource.ide.eclipse.dashboard.ui with connectorKind jira
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-09 17:41:02.052
+!MESSAGE --- Workbench plugin started. ---
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-09 17:41:02.052
+!MESSAGE --- Crashlytics Updater Plugin is starting ---
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-09 17:41:02.052
+!MESSAGE Starting com.crashlytics.tools.eclipse.updater(2.1.0.201412162152) with location: C:/Program Files/eclipse/configuration/
+	 Managed plugins version: 0.0.0
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-09 17:41:02.062
+!MESSAGE {internal=false, fabric=true}
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-09 17:41:02.640
+!MESSAGE  OsgiBootstrapper - Installing 5 bundles from D:\Documents\GitHub\Android\.metadata\.plugins\com.crashlytics.tools.eclipse.workbench\.crashlytics_data\.bundles...
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-09 17:41:03.012
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.app_3.2.1.201412162151 [968]
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-09 17:41:03.135
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.core_3.2.1.201412162151 [969]
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-09 17:41:03.417
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.exporter_3.2.1.201412162151 [970]
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-01-09 17:41:03.507
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\s138362'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.223
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.224
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.224
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.225
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.226
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.226
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.227
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.227
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 17:41:09.228
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2015-01-09 19:34:43.984
+!MESSAGE Connection to http://dist.springsource.com/release/STS/doc/updates.xml failed on dist.springsource.com. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: dist.springsource.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:242)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:130)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:150)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:575)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:425)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1074)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.openStreams(HttpClientRetrieveFileTransfer.java:621)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:879)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:570)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.MultiProtocolRetrieveAdapter.sendRetrieveRequest(MultiProtocolRetrieveAdapter.java:106)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:422)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.read(FileReader.java:273)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.stream(RepositoryTransport.java:172)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springsource.ide.eclipse.commons.internal.core.net.P2TransportService.stream(P2TransportService.java:139)
+	at org.springsource.ide.eclipse.commons.core.HttpUtil.stream(HttpUtil.java:165)
+	at org.springsource.ide.eclipse.dashboard.internal.ui.editors.AggregateFeedJob$1.run(AggregateFeedJob.java:145)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2015-01-09 19:34:43.988
+!MESSAGE Connection to https://spring.io/blog.atom failed on spring.io. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: spring.io
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:242)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:130)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:150)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:575)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:425)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1074)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.openStreams(HttpClientRetrieveFileTransfer.java:621)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:879)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:570)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.MultiProtocolRetrieveAdapter.sendRetrieveRequest(MultiProtocolRetrieveAdapter.java:106)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:422)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.read(FileReader.java:273)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.stream(RepositoryTransport.java:172)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springsource.ide.eclipse.commons.internal.core.net.P2TransportService.stream(P2TransportService.java:139)
+	at org.springsource.ide.eclipse.commons.core.HttpUtil.stream(HttpUtil.java:165)
+	at org.springsource.ide.eclipse.dashboard.internal.ui.editors.AggregateFeedJob$1.run(AggregateFeedJob.java:145)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 19:34:43.996
+!MESSAGE Crashlytics had a problem querying for a software update.
+Stack trace:
+java.net.UnknownHostException: api.crashlytics.com
+api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getSoftwareIntegration(RestfulWebApi.java:1020)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.findPlatformUpdate(AbstractAndroidIde.java:254)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findIntegration(EclipseUpdateFinder.java:50)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findBootstrapperUpdate(EclipseUpdateFinder.java:83)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findBootstrapperUpdate(EclipseUpdateFinder.java:1)
+	at com.crashlytics.tools.bootstrap.UpdateManager.updateBootstrapper(UpdateManager.java:121)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.checkForUpdates(UpdateManager.java:94)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.run(UpdateManager.java:75)
+	at java.lang.Thread.run(Unknown Source)
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-09 19:34:43.999
+!MESSAGE Crashlytics execution failed during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+java.util.concurrent.ExecutionException: java.net.UnknownHostException: api.crashlytics.com
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getAndroidSDK(RestfulWebApi.java:1051)
+	at com.crashlytics.tools.android.DefaultSDKManager.updateCachedSDK(DefaultSDKManager.java:88)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:48)
+	at com.crashlytics.tools.android.ThreadedSDKManager$2.call(ThreadedSDKManager.java:45)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	... 4 more
+
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-09 19:34:44.004
+!MESSAGE Crashlytics had a problem querying for a software update.
+Stack trace:
+java.net.UnknownHostException: api.crashlytics.com
+api.crashlytics.com
+java.net.UnknownHostException: api.crashlytics.com
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:314)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:357)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:218)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:194)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:85)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:186)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:137)
+	at com.crashlytics.api.RestfulWebApi.request(RestfulWebApi.java:126)
+	at com.crashlytics.api.RestfulWebApi.requestJSON(RestfulWebApi.java:959)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:946)
+	at com.crashlytics.api.RestfulWebApi.getJSON(RestfulWebApi.java:941)
+	at com.crashlytics.api.RestfulWebApi.getSoftwareIntegration(RestfulWebApi.java:1020)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.findPlatformUpdate(AbstractAndroidIde.java:254)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findIntegration(EclipseUpdateFinder.java:50)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findComponentsUpdate(EclipseUpdateFinder.java:88)
+	at com.crashlytics.tools.eclipse.EclipseUpdateFinder.findComponentsUpdate(EclipseUpdateFinder.java:1)
+	at com.crashlytics.tools.bootstrap.UpdateManager.updateDynamicComponents(UpdateManager.java:145)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.checkForUpdates(UpdateManager.java:99)
+	at com.crashlytics.tools.bootstrap.UpdateManager$WorkerRunnable.run(UpdateManager.java:75)
+	at java.lang.Thread.run(Unknown Source)
+
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2015-01-09 20:05:59.797
+!MESSAGE Connection to https://spring.io/blog.atom failed on spring.io. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: spring.io
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:242)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:130)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:150)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:575)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:425)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1074)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.openStreams(HttpClientRetrieveFileTransfer.java:621)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:879)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:570)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.MultiProtocolRetrieveAdapter.sendRetrieveRequest(MultiProtocolRetrieveAdapter.java:106)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:422)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.read(FileReader.java:273)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.stream(RepositoryTransport.java:172)
+	at sun.reflect.GeneratedMethodAccessor111.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springsource.ide.eclipse.commons.internal.core.net.P2TransportService.stream(P2TransportService.java:139)
+	at org.springsource.ide.eclipse.commons.core.HttpUtil.stream(HttpUtil.java:165)
+	at org.springsource.ide.eclipse.dashboard.internal.ui.editors.AggregateFeedJob$1.run(AggregateFeedJob.java:145)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2015-01-09 20:06:10.072
+!MESSAGE Connection to http://dist.springsource.com/release/STS/doc/updates.xml failed on dist.springsource.com. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: dist.springsource.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:242)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:130)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:150)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:121)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:575)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:425)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1074)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.openStreams(HttpClientRetrieveFileTransfer.java:621)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:879)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer.sendRetrieveRequest(AbstractRetrieveFileTransfer.java:570)
+	at org.eclipse.ecf.provider.filetransfer.retrieve.MultiProtocolRetrieveAdapter.sendRetrieveRequest(MultiProtocolRetrieveAdapter.java:106)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:422)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.read(FileReader.java:273)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.stream(RepositoryTransport.java:172)
+	at sun.reflect.GeneratedMethodAccessor111.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springsource.ide.eclipse.commons.internal.core.net.P2TransportService.stream(P2TransportService.java:139)
+	at org.springsource.ide.eclipse.commons.core.HttpUtil.stream(HttpUtil.java:165)
+	at org.springsource.ide.eclipse.dashboard.internal.ui.editors.AggregateFeedJob$1.run(AggregateFeedJob.java:145)
+	at java.lang.Thread.run(Unknown Source)
+!SESSION 2015-01-12 01:37:29.802 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.eclipse.mylyn.tasks.ui 4 0 2015-01-12 01:37:51.094
+!MESSAGE Could not load repository template extension contributed by org.springsource.ide.eclipse.dashboard.ui with connectorKind jira
+
+!ENTRY org.eclipse.mylyn.tasks.ui 4 0 2015-01-12 01:37:51.104
+!MESSAGE Could not load repository template extension contributed by org.springsource.ide.eclipse.dashboard.ui with connectorKind jira
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-12 01:38:02.044
+!MESSAGE --- Workbench plugin started. ---
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-12 01:38:02.044
+!MESSAGE --- Crashlytics Updater Plugin is starting ---
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-12 01:38:02.054
+!MESSAGE Starting com.crashlytics.tools.eclipse.updater(2.1.0.201412162152) with location: C:/Program Files/eclipse/configuration/
+	 Managed plugins version: 0.0.0
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-12 01:38:02.054
+!MESSAGE {internal=false, fabric=true}
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-12 01:38:02.544
+!MESSAGE  OsgiBootstrapper - Installing 5 bundles from D:\Documents\GitHub\Android\.metadata\.plugins\com.crashlytics.tools.eclipse.workbench\.crashlytics_data\.bundles...
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-12 01:38:02.964
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.app_3.2.1.201412162151 [973]
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-12 01:38:03.054
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.core_3.2.1.201412162151 [974]
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-01-12 01:38:03.124
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\s138362'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-12 01:38:03.366
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.exporter_3.2.1.201412162151 [975]
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.799
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.801
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.801
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.802
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.802
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.803
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.803
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.804
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-12 01:38:16.804
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 4 0 2015-01-12 01:39:16.825
+!MESSAGE Crashlytics was interrupted during its update of the SDK for api key eb14045f4ab515fc968536acf5fa0aee34852743
+Stack trace:
+java.lang.InterruptedException
+null
+java.lang.InterruptedException
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer.doAcquireSharedInterruptibly(Unknown Source)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquireSharedInterruptibly(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerGet(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at com.crashlytics.tools.android.ThreadedSDKManager.updateCachedSDK(ThreadedSDKManager.java:45)
+	at com.crashlytics.tools.ide.android.AbstractAndroidIde.updateThenRefreshSDKs(AbstractAndroidIde.java:141)
+	at com.crashlytics.tools.ide.android.AndroidPluginSupport$SDKUpdateBehavior.run(AndroidPluginSupport.java:73)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(Unknown Source)
+	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!SESSION 2015-01-13 20:23:26.216 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.eclipse.mylyn.tasks.ui 4 0 2015-01-13 20:25:39.755
+!MESSAGE Could not load repository template extension contributed by org.springsource.ide.eclipse.dashboard.ui with connectorKind jira
+
+!ENTRY org.eclipse.mylyn.tasks.ui 4 0 2015-01-13 20:25:39.764
+!MESSAGE Could not load repository template extension contributed by org.springsource.ide.eclipse.dashboard.ui with connectorKind jira
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-13 20:25:40.497
+!MESSAGE --- Workbench plugin started. ---
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-13 20:25:40.498
+!MESSAGE --- Crashlytics Updater Plugin is starting ---
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-13 20:25:40.501
+!MESSAGE Starting com.crashlytics.tools.eclipse.updater(2.1.0.201412162152) with location: C:/Program Files/eclipse/configuration/
+	 Managed plugins version: 0.0.0
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 1 0 2015-01-13 20:25:40.501
+!MESSAGE {internal=false, fabric=true}
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-13 20:25:40.742
+!MESSAGE  OsgiBootstrapper - Installing 5 bundles from D:\Documents\GitHub\Android\.metadata\.plugins\com.crashlytics.tools.eclipse.workbench\.crashlytics_data\.bundles...
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-13 20:25:40.966
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.app_3.2.1.201412162151 [978]
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-13 20:25:41.011
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.core_3.2.1.201412162151 [979]
+
+!ENTRY com.crashlytics.tools.eclipse.workbench 0 0 2015-01-13 20:25:41.208
+!MESSAGE  OsgiBootstrapper - Starting OSGi bundle com.crashlytics.tools.eclipse.exporter_3.2.1.201412162151 [980]
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-01-13 20:25:42.167
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'G:\'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.156
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.158
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.160
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.165
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.166
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.167
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.168
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.168
+!MESSAGE Unknown font: Helvetica
+
+!ENTRY com.crashlytics.tools.eclipse.core 2 0 2015-01-13 20:28:25.169
+!MESSAGE Unknown font: Helvetica
