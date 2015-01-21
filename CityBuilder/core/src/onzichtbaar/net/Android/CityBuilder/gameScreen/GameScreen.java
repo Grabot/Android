@@ -36,7 +36,6 @@ public class GameScreen implements Screen
 		
 		simulation = new Simulation( this, citizens );
 		renderer = new Renderer( this, camera, stage, batch, citizens );
-		
 	}
 
 	@Override

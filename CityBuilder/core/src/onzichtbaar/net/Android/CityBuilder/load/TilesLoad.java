@@ -11,7 +11,7 @@ public class TilesLoad extends Data
 	
 	public TilesLoad()
 	{
-		tile[0] = null;
+		tile[0] = new Tile( new Vector( 0, 0 ), 99, unavailable, false );
 		int x = 0;
 		int y = 0;
 		for( int i = 1; i < (numberOfTiles + 1); i++ )

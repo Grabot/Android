@@ -47,6 +47,7 @@ public class Renderer extends Data
 	
 	private TextButton woodButton;
 	private TextButton chopForestButton;
+	private TextButton chopStoneButton;
 	
 	private TextField tileInfo;
 	private TextField levelText;
@@ -98,7 +99,8 @@ public class Renderer extends Data
 		inputHandler.MapZoom();
 		
 		drawTiles.fillTiles( simulation, batch );
-		
+
+		int tileCounter = 0;
 		boolean[] tileTouch = simulation.getTileTouch();
 		for( int i = 0; i < simulation.tiles.size(); i++ )
 		{
@@ -115,21 +117,37 @@ public class Renderer extends Data
 				
 				if( simulation.tiles.get(i).colour == available )
 				{
-					woodButton.setVisible( true );
-				}
-				else
-				{
-					woodButton.setVisible( false );
-				}
-				
-				if( simulation.tiles.get(i).type == wood )
-				{
 					chopForestButton.setVisible( true );
+					woodButton.setVisible( true );
+					chopStoneButton.setVisible( true );
+					
+
+					if( simulation.tiles.get(i).type == wood )
+					{
+						chopForestButton.setVisible( true );
+					}
+					else
+					{
+						chopForestButton.setVisible( false );
+					}
+					
+					if( simulation.tiles.get(i).type == dwayne )
+					{
+						chopStoneButton.setVisible( true );
+					}
+					else
+					{
+						chopStoneButton.setVisible( false );
+					}
+					
 				}
 				else
 				{
 					chopForestButton.setVisible( false );
+					woodButton.setVisible( false );
+					chopStoneButton.setVisible( false );
 				}
+				
 				
 				infoBoxDisplay.displayInfoBox(tileInfo, simulation, i);
 				drawTiles.drawSelected( simulation, batch, i );
@@ -137,8 +155,20 @@ public class Renderer extends Data
 				selectedTile = i;
 				hasWall = simulation.tiles.get(i).wall;
 			}
+			else
+			{
+				tileCounter ++;
+			}
 		}
-		
+
+		if( tileCounter == simulation.tiles.size())
+		{
+			//nothing selected
+			infoBoxDisplay.displayInfoBox(tileInfo, simulation, 0);
+			chopForestButton.setVisible( false );
+			woodButton.setVisible( false );
+			chopStoneButton.setVisible( false );
+		}
 	}
 	
 
@@ -152,7 +182,7 @@ public class Renderer extends Data
 
 		tileInfo = new TextField( "", skin );
 		tileInfo.setDisabled(true);
-		tileInfo.setBounds( 1030, 530, 100, 20 );
+		tileInfo.setBounds( 1000, 530, 160, 20 );
 		tileInfo.setVisible( false );
 		
 		levelText = new TextField( "Level 1", skin );
@@ -191,6 +221,11 @@ public class Renderer extends Data
 		chopForestButton.setVisible( false );
 		chopForestButton.addListener(chopForestListener);
 		
+		chopStoneButton = new TextButton("Chop Stone", skin );
+		chopStoneButton.setBounds(980, 280, 200, 50 );
+		chopStoneButton.setVisible( false );
+		chopStoneButton.addListener(chopStoneListener);
+		
 		stage.addActor( UserInterface);
 		stage.addActor( tileInfo );
 		stage.addActor( levelText );
@@ -201,6 +236,7 @@ public class Renderer extends Data
 		stage.addActor( resourceCitizens );
 		stage.addActor( woodButton );
 		stage.addActor( chopForestButton );
+		stage.addActor( chopStoneButton );
 		
 		resourceWood.setText( "Wood: " + game.Wood );
 		resourceStone.setText( "Stone: " + game.Stone );
@@ -235,6 +271,18 @@ public class Renderer extends Data
 		{
 			game.Wood += 50;
 			resourceWood.setText( "Wood: " + game.Wood );
+			simulation.tiles.get(selectedTile).setType( grass );
+		}
+		
+	};
+	
+	public ClickListener chopStoneListener = new ClickListener() 
+	{
+		@Override
+		public void clicked (InputEvent event, float x, float y) 
+		{
+			game.Stone += 200;
+			resourceStone.setText( "Stone: " + game.Stone );
 			simulation.tiles.get(selectedTile).setType( grass );
 		}
 		
