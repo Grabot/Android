@@ -24,6 +24,11 @@ public class GameScreen implements Screen
 	
 	int level;
 	
+	public int Wood = 0;
+	public int Stone = 0;
+	public int Food = 0;
+	public int Gold = 0;
+	
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;

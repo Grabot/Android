@@ -103,27 +103,6 @@ public class Simulation extends Data
         	this.cameraZ = cameraZ;
         }
         
-        public boolean BoxTouch()
-        {
-        	if( touched_down )
-        	{
-	        	if( touchX > 550 )
-	        	{
-	        		touchedBox = true;
-	        	}
-	        	else
-	        	{
-	        		touchedBox = false;
-	        	}
-        	}
-        	else
-        	{
-        		touchedBox = true;
-        	}
-        	
-        	return touchedBox;
-        }
-        
         public void endGame( int i )
         {
 			game.Game_Finished( i, citizens );
@@ -132,9 +111,31 @@ public class Simulation extends Data
         private void checkTouch()
         {
         	touch_distance_x = ((touchX-(ScreenWidth/2))*cameraZ + cameraX);
-        	touch_distance_y = (((touchY-(ScreenHeight/2))*cameraZ - cameraY)*-1);
-        	
-          }
+        	touch_distance_y = (((touchY-(ScreenHeight/2))*cameraZ - cameraY)*-1); 	
+        }
+        
+        public void BuildWall( boolean build, int selectedTile )
+        {
+        	if( build )
+        	{
+        		if( game.Wood >= 50 && game.Stone >= 100 )
+        		{
+    				game.Wood = game.Wood - 50;
+    				game.Stone = game.Stone - 100;
+    				tiles.get(selectedTile).setWall( true );
+        		}
+        		else
+        		{
+        			//not enough resources
+        		}
+        	}
+        	else if( !build )
+        	{
+				game.Wood = game.Wood + 50;
+				game.Stone = game.Stone + 100;
+				tiles.get(selectedTile).setWall( false );
+        	}
+        }
         
         private void TileTouch()
         {

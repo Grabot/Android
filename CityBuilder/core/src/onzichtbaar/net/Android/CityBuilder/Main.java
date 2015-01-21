@@ -1,12 +1,5 @@
 package onzichtbaar.net.Android.CityBuilder;
 
-import java.util.ArrayList;
-
-import onzichtbaar.net.Android.CityBuilder.gameScreen.GameScreen;
-import onzichtbaar.net.Android.CityBuilder.load.Screen;
-import onzichtbaar.net.Android.CityBuilder.load.Vector;
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
-
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -22,7 +15,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
+import java.util.ArrayList;
+import onzichtbaar.net.Android.CityBuilder.gameScreen.GameScreen;
+import onzichtbaar.net.Android.CityBuilder.load.Screen;
+import onzichtbaar.net.Android.CityBuilder.load.Vector;
+import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
 public class Main implements ApplicationListener, InputProcessor
 {
 	
@@ -155,7 +152,6 @@ public class Main implements ApplicationListener, InputProcessor
 		
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
-
 		//stage.setCamera( camera );
 	}
 
@@ -209,7 +205,6 @@ public class Main implements ApplicationListener, InputProcessor
 				fast_press = false;
 			}
 			just_touched = 0;
-			
 			//touchX1 = 1200;
 			//touchY1 = 1200;
 		}

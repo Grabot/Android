@@ -5,7 +5,111 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-01-13T11:13:00Z</updated>
+  <updated>2015-01-15T16:51:46Z</updated>
+  <entry>
+    <title>Spring IO Platform 1.1.1 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/15/spring-io-platform-1-1-1-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Andy Wilkinson</name>
+    </author>
+    <id>tag:spring.io,2015-01-15:1931</id>
+    <updated>2015-01-15T16:51:46Z</updated>
+    <content type="html">&lt;p&gt;We are pleased to announce that &lt;a href="http://platform.spring.io/platform"&gt;Spring IO Platform&lt;/a&gt; 1.1.1.RELEASE is now available from both &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.spring.platform"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;The main highlight of this release is the addition of &lt;a href="https://spring.io/blog/2015/01/08/spring-session-1-0-0-release"&gt;Spring Session 1.0.0.RELEASE&lt;/a&gt; to the Platform.&lt;/p&gt;&lt;p&gt;In addition, this release also upgrades the versions of a number of the projects to pick up their latest maintenance releases:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring AMQP 1.4.2.RELEASE&lt;/li&gt;
+  &lt;li&gt;Spring Boot 1.2.1.RELEASE&lt;/li&gt;
+  &lt;li&gt;Spring Framework 4.1.4.RELEASE&lt;/li&gt;
+  &lt;li&gt;Spring Integration 4.1.2.RELEASE&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;The versions of many third-party dependencies have also been updated.&lt;/p&gt;&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/1.1.1.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Spring Integration - Java Configuration and More</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-spring-integration-java-configuration-and-more" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1920</id>
+    <updated>2015-01-14T01:28:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Gary Russell &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014integration-41083190"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014integration-41083190&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Data / Integration Track &lt;/p&gt;
+&lt;p&gt;There have been 2 major releases of Spring Integration since the last SpringOne 2GX. The 3.0 release added a number of important new components and provided extensive improvements to SpEL support enabling much richer SpEL processing. The 4.0 release added more components and extensive support for annotation-based config, reducing or even eliminating the need for XML configuration. It also laid the groundwork for the Java DSL extension. In this session we will examine many of these new features in detail. It will be mostly hands-on demonstration and code walk throughs. &lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/TSW33RXoJNc" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Caching and Messaging Improvements in Spring Framework 4.1</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-caching-and-messaging-improvements-in-spring-framework-4-1" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1917</id>
+    <updated>2015-01-14T01:27:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speakers:Juergen Hoeller, Stéphane Nicoll &lt;/p&gt;
+&lt;p&gt;Core Spring Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/201409-springonecachingmessaging"&gt;http://www.slideshare.net/SpringCentral/201409-springonecachingmessaging&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;This session showcases major new features along the lines of two key themes in Spring Framework 4.1: We’ll start with numerous improvements around the caching abstraction, as requested by the community, including the support for JCache (JSR-107) standard annotations. We’ll then move on to messaging-related features such as annotated JMS listener endpoints with flexible method signatures, using the messaging abstraction introduced in Spring Framework 4.0 and therefore aligning our core JMS support with our STOMP endpoint style.&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/zKQrMdB6B08" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: From 0 to Spring Security 4.0</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-from-0-to-spring-security-4-0" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1918</id>
+    <updated>2015-01-14T01:26:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Rob Winch &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-security0to40-41084141"&gt;http://www.slideshare.net/SpringCentral/spring-security0to40-41084141&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Core Spring Track &lt;/p&gt;
+&lt;p&gt;Spring Security is a framework that focuses on providing both authentication and authorization to Java applications. Like all Spring projects, the real power of Spring Security is found in how easily it can be extended to meet custom requirements. In this presentation Rob will start with an insecure application and incrementally Spring Security 4 to demonstrate how easily you can secure your application. Throughout the presentation, new features found in Spring Security 4 will be highlighted. Whether you are new to Spring Security or are wanting to learn what is new in Spring Security 4, this presentation is a must!&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/TjlDbIIJBi8" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Spring Framework on Java 8</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-spring-framework-on-java-8" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1919</id>
+    <updated>2015-01-14T01:25:00Z</updated>
+    <content type="html">&lt;p&gt;Speakers:Juergen Hoeller &lt;/p&gt;
+&lt;p&gt;Core Spring Track &lt;/p&gt;
+&lt;p&gt;Slides:&lt;a href="http://www.slideshare.net/SpringCentral/spring-on-java-8"&gt; http://www.slideshare.net/SpringCentral/spring-on-java-8 &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Spring has a track record of providing dedicated support for new Java generations in a timely fashion, and now it’s right about time to go Java 8: With Spring Framework 4.0, we're providing in-depth support for all relevant OpenJDK 8 features, including lambda expressions, JSR-310 Date and Time, parameter name discovery, and java.util.concurrent enhancements. This talk will illustrate basic Spring Framework 4.0 concepts, and selected Java 8 features within Spring's programming model, exploring the impact on application architectures. &lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/-_aWK8T_YMI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>This Week in Spring - January 13th, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/14/this-week-in-spring-january-13th-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-01-14:1930</id>
+    <updated>2015-01-14T01:24:22Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;. We&amp;rsquo;ve got a lot to talk about. Our own &lt;a href="https://twitter.com/pieterhumphrey"&gt;Pieter Humphrey&lt;/a&gt; has been tirelessly working to get the replays of the SpringOne2GX 2014 show available online and there are a &lt;em&gt;slew&lt;/em&gt; of them this week! What a win!&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The good Dr. Syer, former lead of Spring Batch, co-lead of Spring Boot, Spring Cloud and Spring Security OAuth, and a rockstar to various Spring projects including Spring itself, over the years, has kicked off a series of posts on very practical matters related to securing Angular.js applications with Spring. The first one, &lt;a href="https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application"&gt;Spring and Angular JS: A Secure Single Page Application&lt;/a&gt;, introduces the basics of connecting an Angular.js-based client to a backend API. The second, &lt;a href="https://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii"&gt;&lt;em&gt;The Login Page: Angular JS and Spring Security Part II&lt;/em&gt;&lt;/a&gt;, introduces the login form. Bookmark this series!&lt;/li&gt;
+  &lt;li&gt;The amazing, sleep-intolerant, &lt;a href="https://spring.io/blog/2015/01/08/spring-session-1-0-0-release"&gt;Rob Winch has just announced Spring Session 1.0&lt;/a&gt;. Spring Session, for those who&amp;rsquo;ve not been paying attention, is a drop in proxy API for the standard Servlet HTTP Session API. Install it, and then delegate HTTP session persistence to other backend implementations like Redis. This is ideal for a lot of reasons: if you are using a Java EE application server and want to scale out session replication, you can use an engine that was better designed for it. It&amp;rsquo;s a safe bet that the team behind Cassandra and Redis have thought about data replication more than the team behind Glassfish, isn&amp;rsquo;t it? If you&amp;rsquo;re deploying your application to a PaaS like Cloud Foundry or Heroku, where session replication isn&amp;rsquo;t enabled by default, then this gives you an easy way to add it, and to do so in a manner that&amp;rsquo;s consistant from one environment to another.&lt;/li&gt;
+  &lt;li&gt;I put together a &lt;a href="https://spring.io/blog/2015/01/13/configuring-it-all-out-or-12-factor-app-style-configuration-with-spring"&gt;blog on how Spring supports 12-Factor application style &lt;em&gt;configuration&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Our pal Nicolas Frankel is at it again, this time with a nice post on using &lt;a href="http://blog.frankel.ch/spring-profiles-or-maven-profiles"&gt;Spring&amp;rsquo;s profiles and Maven&amp;rsquo;s profiles&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2015/01/08/spring-boot-1-2-1-released"&gt;Spring Boot 1.2.1, mostly a maintenance release, has just been released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Check out this SpringOne2GX 2014 replay of Janne Valkealahti&amp;rsquo;s talk, &lt;a href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-painless-build-and-deploy-for-yarn-applications-with-spring"&gt;&lt;em&gt;Painless Build and Deploy for YARN Applications with Spring&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Check out Groovy ninja Cedric Champeau&amp;rsquo;s SpringOne2GX 2014 talk, &lt;a href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-android-and-groovy-a-winning-pair"&gt;Android and Groovy: a Winning Pair&lt;/a&gt;. This talk is hot off the heels of his announcement of support for Groovy on Android, immediately after Apple announced Swift - a Groovy-like language for iOS. Naturally, it gained a &lt;em&gt;lot&lt;/em&gt; of interest, and this talk fills in the gaps. Check it out!&lt;/li&gt;
+  &lt;li&gt;Jeff Beck&amp;rsquo;s talk, &lt;a href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-experiences-using-grails-in-a-microservice-architecture"&gt;&lt;em&gt;Experiences using Grails in A Microservice Architecture&lt;/em&gt;&lt;/a&gt;, is now available. It&amp;rsquo;s a worthy watch for insight into pain-points in making the move to micorservices.&lt;/li&gt;
+  &lt;li&gt;Longtime readers of this roundup will no doubt remember my former teammate &lt;a href="http://twitter.com/pledbrook"&gt;Peter Ledbrook&lt;/a&gt;. I serve as the Spring Developer Advocate, and he served as the Grails Developer Advocate, and taught me a whole world of things. I mention that all to say that if you want to learn from one of the best, you should check out his talks, including this one, &lt;a href="https://spring.io/blog/2015/01/09/springone2gx-2014-replay-how-to-get-groovy-with-java-8"&gt;&lt;em&gt;How to get Groovy with Java 8&lt;/em&gt;&lt;/a&gt;, from SpringOne2GX 2014.&lt;/li&gt;
+  &lt;li&gt;Speaking of Peter, he &lt;em&gt;also&lt;/em&gt; wrote this amazing post on &lt;a href="https://twitter.com/pledbrook/status/554613928438026240"&gt;Groovy &amp;amp; Java 8&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Check out Brian Clozel&amp;rsquo;s SpringOne2GX 2014 talk on the guts of the open-source &lt;a href="https://spring.io/blog/2015/01/13/springone2gx-2014-replay-inside-spring-io-a-production-spring-reference-application"&gt;Spring IO reference application and website&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;ETrade&amp;rsquo;s Durai Arasan and Monish Unni &lt;a href="https://spring.io/blog/2015/01/13/springone2gx-2014-replay-rest-services-with-rabbitmq-spring-integration-and-node-js"&gt;gave a nice talk on building REST services with Spring Integration and Node.js&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Speaking of our pal Nicolas Frankel, check out his book,&lt;a href="https://leanpub.com/integrationtest"&gt;&lt;em&gt;Integration Testing from Trenches&lt;/em&gt;, which has a large section on Spring&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>"Configuring It All Out" or "12-Factor App-Style Configuration with Spring"</title>
     <link rel="alternate" href="https://spring.io/blog/2015/01/13/configuring-it-all-out-or-12-factor-app-style-configuration-with-spring" />
@@ -132,7 +236,7 @@ spring:&#xD;
 				git :&#xD;
 					uri: https://github.com/joshlong/microservices-lab-configuration&#xD;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This tells the Spring Cloud configuration service to look for configuration files for individual client services in the Git repository on my GitHub account. The URI could, of course, just as easily have been a Git repository on my local file system. The value used for the URI could also have been a property reference, of the form, &lt;code&gt;${SOME_URI}&lt;/code&gt;, that references - perhaps - an environment variable called &lt;code&gt;SOME_URI&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Run the application and you&amp;rsquo;ll be able to verify that your configuration service is working by pointing you browser at &lt;code&gt;http://localhost:8888/SERVICE/master&lt;/code&gt; where &lt;code&gt;SERVICE&lt;/code&gt; is the ID taken from your client service&amp;rsquo;s &lt;code&gt;boostrap.yml&lt;/code&gt;. Spring Cloud-based services look for a file called &lt;code&gt;src/main/resources/bootstrap.(properties,yml)&lt;/code&gt; that it expects to find to - you guessed it! - bootstrap the service. One of the things it expects to find in the &lt;code&gt;bootstrap.yml&lt;/code&gt; file is the ID of the service specified as a property, &lt;code&gt;spring.application.name&lt;/code&gt;. Here&amp;rsquo;s our configuration client&amp;rsquo;s &lt;code&gt;bootstrap.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This tells the Spring Cloud configuration service to look for configuration files for individual client services in the Git repository on my GitHub account. The URI could, of course, just as easily have been a Git repository on my local file system. The value used for the URI could also have been a property reference, of the form, &lt;code&gt;${SOME_URI}&lt;/code&gt;, that references - perhaps - an environment variable called &lt;code&gt;SOME_URI&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Run the application and you&amp;rsquo;ll be able to verify that your configuration service is working by pointing your browser at &lt;code&gt;http://localhost:8888/SERVICE/master&lt;/code&gt; where &lt;code&gt;SERVICE&lt;/code&gt; is the ID taken from your client service&amp;rsquo;s &lt;code&gt;boostrap.yml&lt;/code&gt;. Spring Cloud-based services look for a file called &lt;code&gt;src/main/resources/bootstrap.(properties,yml)&lt;/code&gt; that it expects to find to - you guessed it! - bootstrap the service. One of the things it expects to find in the &lt;code&gt;bootstrap.yml&lt;/code&gt; file is the ID of the service specified as a property, &lt;code&gt;spring.application.name&lt;/code&gt;. Here&amp;rsquo;s our configuration client&amp;rsquo;s &lt;code&gt;bootstrap.yml&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint yaml"&gt;spring:&#xD;
 	application:&#xD;
 		name: config-client&#xD;
@@ -861,7 +965,7 @@ protected void configure(HttpSecurity http) throws Exception {&#xD;
     <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
 &lt;p&gt;Speaker: Jeff Beck &lt;/p&gt;
 &lt;p&gt;Essential Grails Track &lt;/p&gt;
-&lt;p&gt;Slides: http://www.slideshare.net/SpringCentral/experiences-using-grails-in-a-microservice-architecture-spring-one2gx2014-41177964 &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/experiences-using-grails-in-a-microservice-architecture-spring-one2gx2014-41177964"&gt;http://www.slideshare.net/SpringCentral/experiences-using-grails-in-a-microservice-architecture-spring-one2gx2014-41177964 &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;For some web applications it does not make sense to have 1 monolithing process which handles all of the requirements of the application. More and more often Grails is showing up in microservice architectures where instead of building 1 monolithing web application which is responsible for all of the pieces of the application puzzle, microservice applications are being assembled which collectively solve the requirements of the larger application. Grails is very well suited for this type of architecture. A microservice based architecture can result in applications which are easier to build, easier to test, easier to extend and are easier to adapt to changing business requirements.&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/QbBksjK7mF8" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
   </entry>
   <entry>
@@ -984,140 +1088,6 @@ protected void configure(HttpSecurity http) throws Exception {&#xD;
     <id>tag:spring.io,2014-12-30:1901</id>
     <updated>2014-12-30T18:23:53Z</updated>
     <content type="html">&lt;p&gt;Dear Spring community,&lt;/p&gt;&lt;p&gt;It&amp;rsquo;s my pleasure to announce that Spring Framework 4.1.4, 4.0.9 and 3.2.13 have been released just in time for New Year&amp;rsquo;s Eve! These maintenance releases fix various minor issues and provide several minor improvements as well; please see JIRA for details.&lt;/p&gt;&lt;p&gt;Note that 4.0.9 is conceived as the last release in the 4.0.x line, concluding twelve months of active 4.0.x maintenance. We strongly recommend an upgrade to 4.1.x; your next maintenance release after 4.0.9 will be 4.1.5 which you need to be prepared to upgrade to.&lt;/p&gt;&lt;p&gt;Furthermore, please note that the 3.2.x line - and therefore the entire 3.x generation - is approaching its end of life in 2015. We are still committed to basic maintenance for critical issues; however, don&amp;rsquo;t expect more than two or three further 3.2.x releases down the road.&lt;/p&gt;&lt;p&gt;The Spring Framework team is now working towards the 4.2 release, with a release candidate scheduled for early May and general availability planned for late June. You may look forward to annotation-driven application events, declarative HTTP caching, first-class support for Server-Sent Events in Spring MVC, data binding and conversion for JSR-354 Money &amp;amp; Currency, and many other new features&amp;hellip; 4.2 will be designed as a straightforward upgrade from 4.1.x, with the same system requirements and general dependencies.&lt;/p&gt;&lt;p&gt;A Happy New Year,&lt;/p&gt;&lt;p&gt;Juergen&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring XD 1.1 M2 and 1.0.3 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/23/spring-xd-1-1-m2-and-1-0-3-released" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Mark Pollack</name>
-    </author>
-    <id>tag:spring.io,2014-12-23:1899</id>
-    <updated>2014-12-23T22:12:41Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the Spring XD team, I am very pleased to announce the second milestone release of Spring XD 1.1 and the 1.0.3 maintenance release.&lt;/p&gt;&lt;p&gt;Download Links:&lt;br/&gt;* 1.1.0.M2 RELEASE: &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/xd/spring-xd/1.1.0.M2/spring-xd-1.1.0.M2-dist.zip"&gt;zip&lt;/a&gt;, 1.0.3.RELEASE: &lt;a href="http://repo.spring.io/release/org/springframework/xd/spring-xd/1.0.3.RELEASE/spring-xd-1.0.3.RELEASE-dist.zip"&gt;zip&lt;/a&gt;&lt;/p&gt;&lt;p&gt;The 1.1 M2 release includes bug fixes and enhancements as well as several new features:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Application-Configuration#kafka"&gt;Kafka based Message Bus&lt;/a&gt;. If Kafka is your middleware du jour, you will feel right at home.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Application-Configuration#rabbitmq"&gt;Batching and compression support for RabbitMQ&lt;/a&gt; provides significantly increased effective message rate throughput.&lt;/li&gt;
-  &lt;li&gt;Develop Processor modules using &lt;a href="https://github.com/reactor/reactor"&gt;Project Reactor’s&lt;/a&gt; Stream API. The &lt;a href="https://reactor.github.io/docs/api/2.0.0.M2/reactor/rx/Stream.html"&gt;Stream API&lt;/a&gt; is based on the &lt;a href="http://www.reactive-streams.org/"&gt;Reactive Streams specification&lt;/a&gt; that provides a standard for asynchronous stream processing with non-blocking backpressure. This allows you to use a functional programming model as the basis for processing event streams. Combined with XD’s support for &lt;a href="https://github.com/spring-projects/spring-xd/wiki/Deployment#stream-partitioning"&gt;Data Partitioning on the Message Bus&lt;/a&gt;, you can create very powerful distributed stream processing solutions.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Modules#module-packaging"&gt;Easily develop, test, and package custom modules&lt;/a&gt;. A parent pom bootstraps all the dependencies required for building a custom module and bundles your module and dependencies into a single uberjar file. There is also support for &lt;a href="https://github.com/spring-projects/spring-xd/wiki/Creating-a-Processor-Module#write-a-test"&gt;integration testing your module&lt;/a&gt; with JUnit using an embedded single node server.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Creating-a-Processor-Module#register-the-module"&gt;Upload custom modules&lt;/a&gt; to the admin server over HTTP.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Application-Configuration#customizing-authorization"&gt;Role based authorization of REST endpoints&lt;/a&gt; give you control over “who can do what”.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Application-Configuration#file-based-authentication"&gt;File based authentication&lt;/a&gt; as a simple alternative to LDAP.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Batch-Jobs#running-sqoop-as-a-batch-job-sqoop"&gt;Sqoop Batch job integration&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Please see the &lt;a href="https://github.com/spring-projects/spring-xd-samples/tree/master/reactor-moving-average"&gt;reactor-moving-average project&lt;/a&gt; for an example of using Reactor’s Stream API and the &lt;a href="https://github.com/spring-projects/spring-xd-samples/tree/master/si-dsl-module"&gt;si-dsl-module&lt;/a&gt; for a complete example of developing a custom module.&lt;/p&gt;&lt;p&gt;Of note for the next release of Spring XD 1.1 RC1 we will be including support for&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Processor modules that use Spark Streaming&lt;/li&gt;
-  &lt;li&gt;Processor modules that use RxJava&lt;/li&gt;
-  &lt;li&gt;Kafka Message Bus and Kafka source improvements based on a revamped &lt;a href="https://github.com/spring-projects/spring-integration-kafka"&gt;Spring Kafka Library&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Granular security ACLs to support who can create or destroy streams and jobs&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Feedback is very important, so please get in touch with questions and comments via&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="http://stackoverflow.com/questions/tagged/spring-xd"&gt;StackOverflow&lt;/a&gt; &lt;code&gt;spring-xd&lt;/code&gt; tag&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://jira.spring.io/browse/XD/?selectedTab=com.atlassian.jira.jira-projects-plugin:summary-panel"&gt;Spring JIRA&lt;/a&gt; or &lt;a href="https://github.com/spring-projects/spring-xd/issues"&gt;GitHub Issues&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud 1.0.0.RC1 Available Now</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/19/spring-cloud-1-0-0-rc1-available-now" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Dave Syer</name>
-    </author>
-    <id>tag:spring.io,2014-12-19:1898</id>
-    <updated>2014-12-19T16:36:48Z</updated>
-    <content type="html">&lt;p&gt;Another cheerful holiday message from the Spring team: &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; 1.0.0.RC1 is now available in the &lt;a href="http://repo.spring.io"&gt;http://repo.spring.io&lt;/a&gt; Maven repository. There are plenty of new features including&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;p&gt;Support for Hystrix metrics aggregation via an annotation &lt;code&gt;@EnableTurbine&lt;/code&gt; and &lt;code&gt;@EnableTurbineAmqp&lt;/code&gt; (for an AMQP-based collector)&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;A rehaul of the Ribbon configuration making it more friendly for Spring users. You can now configure each Ribbon client in its own &lt;code&gt;ApplicationContext&lt;/code&gt; using &lt;code&gt;@RibbonClient&lt;/code&gt; and override various bits, like the &lt;code&gt;LoadBalancer&lt;/code&gt;, or the &lt;code&gt;ServerListFilter&lt;/code&gt;, by providing &lt;code&gt;@Bean&lt;/code&gt; definitions.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;&lt;code&gt;DiscoveryHealthIndicator&lt;/code&gt; is now a composite that users can add information to by declaring &lt;code&gt;@Beans&lt;/code&gt; of type &lt;code&gt;DiscoveryHealthIndicator&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Discovery is now abstracted away from Eureka into a new spring-cloud-commons library, and enabled via new annotations like &lt;code&gt;@EnableDiscoveryClient&lt;/code&gt; (instead of the old &lt;code&gt;@EnableEurekaClient&lt;/code&gt;). The same pattern also applies to circuit breakers&lt;br/&gt;and &lt;code&gt;@EnableCircuitBreaker&lt;/code&gt; replaces &lt;code&gt;@EnableHystrix&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Several improvements to the Zuul proxy, including automatic updates when the Eureka catalog changes, support for form-encoded POSTs, external configuration of the routes and authentication scheme for each client.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Declarative configuration of which routes require OAuth2 authentication in Spring Cloud Security.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Support for labels (like git branches) in the &amp;ldquo;native&amp;rdquo; profile of the Config Server (looks in subdirectory of the search locations).&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Fail fast option in Config Server and Client if the required URI to locate config data is invalid.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Out of the box support for JSON messages in the Spring Cloud Bus.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;A nice framework for Feign configuration based on a new &lt;code&gt;@FeignClient&lt;/code&gt; annotation (a bit like Spring Data repositories).&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Some of the bus and starter modules have been re-organized and renamed, and there is a new (optional) parent pom for user apps. The full list of starters in RC1 is&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter: provides the config client and basic Spring Boot dependencies&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-bus-amqp: for bus clients over AMQP&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-cloudfoundry: Cloud Foundry specific features&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-eureka: service discovery client with Netflix Eureka&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-eureka-server: service discovery server with Netflix Eureka&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-hystrix: circuit break client with Netflix Hystrix&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-hystrix-dashboard: circuit break dashboard with Netflix Hystrix&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-security: single sign on and OAuth2 resource server short cuts&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-turbine: HTTP-based Hystrix metric aggregation with Netflix Turbine 1.0&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-turbine-amqp: AMQP-based Hystrix metric aggregation with Netflix Turbine 2.0&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;spring-cloud-starter-zuul: basic Zuul proxy with auto-registration of discovered services&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;There are loads of samples in the &lt;a href="https://github.com/spring-cloud-samples/"&gt;spring-cloud-samples&lt;/a&gt; repositories. Please try the bits out that you might use and for those of you who already did, thanks, and continue to hit it as hard as you can and come back with feedback. Happy Holidays!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring for Apache Hadoop 2.1.0.M3 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/18/spring-for-apache-hadoop-2-1-0-m3-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Thomas Risberg</name>
-    </author>
-    <id>tag:spring.io,2014-12-19:1897</id>
-    <updated>2014-12-18T22:09:00Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce the third milestone release of Spring for Apache Hadoop 2.1. The release is now available in the &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-hadoop/2.1.0.M3/"&gt;Spring IO repository&lt;/a&gt;&lt;/p&gt;&lt;p&gt;We have worked on improving the YARN and data store writers. There are also new @Configuration changes and improvements to the Boot auto configuration features. See the &lt;a href="http://docs.spring.io/spring-hadoop/docs/2.1.0.M3/changelog.txt"&gt;full changelog&lt;/a&gt; for more details.&lt;/p&gt;&lt;p&gt;Beginning with the Spring for Apache Hadoop 2.1 version, we now only support Hadoop 2.0 APIs and no longer provide backwards compatibility with older Hadoop v1 distributions. If you need support for older Hadoop versions please use the 2.0.4 or 1.1.0 versions of Spring for Apache Hadoop.&lt;/p&gt;&lt;p&gt;We provide support and &amp;ldquo;flavored&amp;rdquo; versions for the following distributions:&lt;br/&gt;- Apache Hadoop 2.4.1 (2.1.0.M3-hadoop24)&lt;br/&gt;- Apache Hadoop 2.5.1 (2.1.0.M3)&lt;br/&gt;- Apache Hadoop 2.6.0 (2.1.0.M3-hadoop26)&lt;br/&gt;- Pivotal HD 2.1 (2.1.0.M3-phd21)&lt;br/&gt;- Cloudera CDH5 (2.1.0.M3-cdh5)&lt;br/&gt;- Hortonworks HDP 2.1 (2.1.0.M3-hdp21)&lt;/p&gt;&lt;p&gt;The default distribution version is now Apache Hadoop 2.5.1. We continue to update the supported versions and have now added Apache Hadoop 2.6.0. We also added Hortonworks HDP 2.2 to the build and will provide that option as a pre-packaged flavor in the next release.&lt;/p&gt;&lt;p&gt;For more project specific information please see the &lt;a href="http://projects.spring.io/spring-hadoop/"&gt;project page&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring IO Platform 1.1.0 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/17/spring-io-platform-1-1-0-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Andy Wilkinson</name>
-    </author>
-    <id>tag:spring.io,2014-12-17:1895</id>
-    <updated>2014-12-17T20:03:16Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce that &lt;a href="http://platform.spring.io/platform"&gt;Spring IO Platform&lt;/a&gt; 1.1.0 has been released is available from &lt;a href="https://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.spring.platform"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;h3&gt;&lt;a href="#new-projects-in-1-1" class="anchor" name="new-projects-in-1-1"&gt;&lt;/a&gt;New projects in 1.1&lt;/h3&gt;&lt;p&gt;The following projects are new to the Platform in 1.1:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring Integration Flow 1.0&lt;/li&gt;
-  &lt;li&gt;Spring Integration Java DSL 1.0&lt;/li&gt;
-  &lt;li&gt;Spring Integration Splunk 1.1&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#projects-upgraded-in-1-1" class="anchor" name="projects-upgraded-in-1-1"&gt;&lt;/a&gt;Projects upgraded in 1.1&lt;/h3&gt;&lt;p&gt;Several projects have new minor versions in 1.1:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring Boot 1.2&lt;/li&gt;
-  &lt;li&gt;Spring Cloud Connectors 1.1&lt;/li&gt;
-  &lt;li&gt;Spring Data JPA 1.7&lt;/li&gt;
-  &lt;li&gt;Spring Data MongoDB 1.6&lt;/li&gt;
-  &lt;li&gt;Spring Data Neo4J 3.2&lt;/li&gt;
-  &lt;li&gt;Spring Data Redis 1.4&lt;/li&gt;
-  &lt;li&gt;Spring Data REST 2.2&lt;/li&gt;
-  &lt;li&gt;Spring Data Solr 1.3&lt;/li&gt;
-  &lt;li&gt;Spring Framework 4.1&lt;/li&gt;
-  &lt;li&gt;Spring Integration 4.1&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Numerous third-party dependencies have also been updated.&lt;/p&gt;&lt;h3&gt;&lt;a href="#further-information" class="anchor" name="further-information"&gt;&lt;/a&gt;Further information&lt;/h3&gt;&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/1.1.0.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring IO Platform 1.0.4 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/17/spring-io-platform-1-0-4-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Andy Wilkinson</name>
-    </author>
-    <id>tag:spring.io,2014-12-17:1894</id>
-    <updated>2014-12-17T20:02:20Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce that &lt;a href="http://platform.spring.io/platform"&gt;Spring IO Platform&lt;/a&gt; 1.0.4 is now available from both &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.spring.platform"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;This maintenance release upgrades the versions of a number of the projects in the Platform to pick up their latest maintenance releases:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Groovy 2.3.8&lt;/li&gt;
-  &lt;li&gt;Spring Boot 1.1.10&lt;/li&gt;
-  &lt;li&gt;Spring for Apache Hadoop 2.0.4&lt;/li&gt;
-  &lt;li&gt;Spring Security OAuth 2.0.5&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;The versions of many third-party dependencies have also been updated.&lt;/p&gt;&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/1.0.4.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security OAuth 2.0.5.RELEASE Available Now</title>
-    <link rel="alternate" href="https://spring.io/blog/2014/12/17/spring-security-oauth-2-0-5-release-available-now" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Dave Syer</name>
-    </author>
-    <id>tag:spring.io,2014-12-17:1893</id>
-    <updated>2014-12-17T15:04:00Z</updated>
-    <content type="html">&lt;p&gt;Spring Security OAuth 2.0.5.RELEASE is available now in all the usual Maven repositories. This is a bugfix release but nothing critical. We recommend upgrading if you are having trouble with customizing the Java config, since most of the issues resolved relate to that (for instance it is much easier to customize the password encoder for client secrets). There is a small breaking change for anyone using the &lt;code&gt;AuthorizationServerEndpointsConfigurer&lt;/code&gt; directly to configure a &lt;code&gt;ClientDetailsService&lt;/code&gt; (it doesn&amp;rsquo;t work that way, so you would be failing to configure it anyway).&lt;/p&gt;&lt;p&gt;For a range of samples using and displaying all the features of Spring Security OAuth please look in the github project (e.g. at the &lt;a href="https://github.com/spring-projects/spring-security-oauth/tree/master/tests"&gt;integration tests&lt;/a&gt; or the &lt;a href="https://github.com/spring-projects/spring-security-oauth/tree/master/samples"&gt;samples&lt;/a&gt;).&lt;/p&gt;</content>
   </entry>
 </feed>
 

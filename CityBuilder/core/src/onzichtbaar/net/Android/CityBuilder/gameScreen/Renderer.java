@@ -46,6 +46,7 @@ public class Renderer extends Data
 	private Texture InfoBox;
 	
 	private TextButton woodButton;
+	private TextButton chopForestButton;
 	
 	private TextField tileInfo;
 	private TextField levelText;
@@ -60,11 +61,6 @@ public class Renderer extends Data
 	private Image UserInterface;
 	private Simulation simulation;
 	private TextureRegion region;
-	
-	private int Wood = 0;
-	private int Stone = 0;
-	private int Food = 0;
-	private int Gold = 0;
 	
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
@@ -126,6 +122,15 @@ public class Renderer extends Data
 					woodButton.setVisible( false );
 				}
 				
+				if( simulation.tiles.get(i).type == wood )
+				{
+					chopForestButton.setVisible( true );
+				}
+				else
+				{
+					chopForestButton.setVisible( false );
+				}
+				
 				infoBoxDisplay.displayInfoBox(tileInfo, simulation, i);
 				drawTiles.drawSelected( simulation, batch, i );
 				
@@ -181,6 +186,11 @@ public class Renderer extends Data
 		woodButton.setVisible( false );
 		woodButton.addListener(woodButtonListener);
 		
+		chopForestButton = new TextButton("Chop Forest", skin );
+		chopForestButton.setBounds(980, 280, 200, 50 );
+		chopForestButton.setVisible( false );
+		chopForestButton.addListener(chopForestListener);
+		
 		stage.addActor( UserInterface);
 		stage.addActor( tileInfo );
 		stage.addActor( levelText );
@@ -190,6 +200,13 @@ public class Renderer extends Data
 		stage.addActor( resourceGold );
 		stage.addActor( resourceCitizens );
 		stage.addActor( woodButton );
+		stage.addActor( chopForestButton );
+		
+		resourceWood.setText( "Wood: " + game.Wood );
+		resourceStone.setText( "Stone: " + game.Stone );
+		resourceFood.setText( "Food: " + game.Food );
+		resourceGold.setText( "Gold: " + game.Gold );
+		resourceCitizens.setText( "Citizens: " + (citizens.size() - 1) );
 	}
 	
 	public ClickListener woodButtonListener = new ClickListener() 
@@ -199,21 +216,26 @@ public class Renderer extends Data
 		{
 			if( hasWall )
 			{
-				Wood = Wood + 50;
-				Stone = Stone + 100;
-				simulation.tiles.get(selectedTile).setWall( false );
+				simulation.BuildWall( false, selectedTile );
 			}
 			else
 			{
-				Wood = Wood - 50;
-				Stone = Stone - 100;
-				simulation.tiles.get(selectedTile).setWall( true );
+				simulation.BuildWall( true, selectedTile );
 			}
-			resourceWood.setText( "Wood: " + Wood );
-			resourceStone.setText( "Stone: " + Stone );
-			resourceFood.setText( "Food: " + Food );
-			resourceGold.setText( "Gold: " + Gold );
-			resourceCitizens.setText( "Citizens: " + (citizens.size() - 1) );
+			resourceWood.setText( "Wood: " + game.Wood );
+			resourceStone.setText( "Stone: " + game.Stone );
+		}
+		
+	};
+	
+	public ClickListener chopForestListener = new ClickListener() 
+	{
+		@Override
+		public void clicked (InputEvent event, float x, float y) 
+		{
+			game.Wood += 50;
+			resourceWood.setText( "Wood: " + game.Wood );
+			simulation.tiles.get(selectedTile).setType( grass );
 		}
 		
 	};
