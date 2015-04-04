@@ -41,8 +41,8 @@ public class Simulation extends Data
         private boolean down_pressed = false;
         private boolean up_pressed = false;
         
-        private boolean[] tileSelected = new boolean[105];
-        private boolean[] firstTouchTile = new boolean[105];
+        private boolean[] tileSelected = new boolean[60001];
+        private boolean[] firstTouchTile = new boolean[60001];
         private boolean tileTouched = false;
         private boolean touchedBox = true;
     	

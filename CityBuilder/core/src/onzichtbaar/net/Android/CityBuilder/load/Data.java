@@ -9,15 +9,15 @@ public abstract class Data
 	protected int tileWidth = 64;
 	protected int tileHeight = 64;
 	
-	protected int tileStartWidth = 126;
-	protected int tileStartHeight = 126;
+	protected int tileStartWidth = 800;
+	protected int tileStartHeight = 640;
 	
-	protected int gridSizeWidth = 5;
-	protected int gridSizeHeight = 5;
-	protected int numberOfTiles = 25;
+	protected int gridSizeWidth = 250;
+	protected int gridSizeHeight = 250;
+	protected int numberOfTiles = 60000;
 
-	protected int unavailable = 10;
-	protected int available = 11;
+	protected int unavailable = 50;
+	protected int available = 51;
 	
 	protected int grass = 1;
 	protected int wood = 2;
@@ -25,5 +25,9 @@ public abstract class Data
 	protected int sheep = 4;
 	protected int desert = 5;
 	protected int dwayne = 6;
+	protected int gold = 7;
+	protected int water = 8;
+	protected int iron = 9;
+	protected int coal = 10;
 
 }

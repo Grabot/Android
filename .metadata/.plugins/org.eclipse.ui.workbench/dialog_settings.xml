@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="392" key="DIALOG_X_ORIGIN"/>
-		<item value="24" key="DIALOG_Y_ORIGIN"/>
-	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
-		<item value="596" key="dialogHeight"/>
 		<item value="1152" key="dialogWidth"/>
-		<list key="textEntries">
-		</list>
-		<list key="orderedElements">
-		</list>
+		<item value="596" key="dialogHeight"/>
 		<list key="orderedProviders">
 		</list>
 		<list key="textArray">
 		</list>
+		<list key="orderedElements">
+		</list>
+		<list key="textEntries">
+		</list>
+	</section>
+	<section name="WorkbenchPreferenceDialogSettings">
+		<item value="24" key="DIALOG_Y_ORIGIN"/>
+		<item value="392" key="DIALOG_X_ORIGIN"/>
 	</section>
 	<section name="ImportExportAction">
 		<item value="org.springsource.ide.eclipse.gradle.wizards.import" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>

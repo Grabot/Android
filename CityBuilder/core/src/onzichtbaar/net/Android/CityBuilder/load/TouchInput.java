@@ -69,6 +69,7 @@ public class TouchInput
 		}
 		else if( touchedDown && !firstPress )
 		{
+			/*
 			if( ((currentX + offsetX) <= -280) && offsetX < 0 )
 			{
 				touchSideRight = true;
@@ -84,7 +85,9 @@ public class TouchInput
 					offsetX = ((firstX - touchX)*currentZoom);
 				}
 			}
-			
+			*/
+			offsetX = ((firstX - touchX)*currentZoom);
+			/*
 			if( ((currentY - offsetY) <= -150) && offsetY > 0 )
 			{
 				touchUp = true;
@@ -97,6 +100,8 @@ public class TouchInput
 			{
 				offsetY = ((firstY - touchY)*currentZoom);
 			}
+			*/
+			offsetY = ((firstY - touchY)*currentZoom);
 		}
 		
 		if( !touchedDown )
@@ -181,7 +186,7 @@ public class TouchInput
 		
 		if( down_pressed )
 		{
-			if(camera.zoom >= 0.5f )
+			if(camera.zoom >= 3.5f )
 			{
 				
 			}
