@@ -1,3 +1,3 @@
 /overig/test/.nb-gradle/private/
 /CityBuilder/.nb-gradle/private/
-.metadata/**
+*/.metadata/
