@@ -9,6 +9,7 @@ public class DisplayInfoBox extends Data
 	
 	public DisplayInfoBox()
 	{
+		
 	}
 	
 	public void displayInfoBox( TextField tileInfo, Simulation simulation, int type )
