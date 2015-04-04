@@ -1,0 +1,120 @@
+package onzichtbaar.net.Android.CityBuilder.load;
+
+import java.util.ArrayList;
+
+import onzichtbaar.net.Android.CityBuilder.objects.Tile;
+
+public class TilesLoad extends Data
+{
+	private Tile[] tile = new Tile[40001];
+	public ArrayList<Tile> tiles = new ArrayList<Tile>();
+	
+	public TilesLoad()
+	{
+		tile[0] = new Tile( new Vector( 0, 0 ), 99, unavailable, false );
+		int x = 0;
+		int y = 0;
+		for( int i = 1; i < (numberOfTiles + 1); i++ )
+		{
+			tile[i] = new Tile( new Vector((-tileStartWidth + (tileWidth * x)), (tileStartHeight - (tileHeight * y))), grass, available, false );
+			
+			if( (i % gridSizeWidth) == 0 )
+			{
+				x = x - gridSizeWidth;
+				y++;
+			}
+			
+			x++;
+		}
+		
+		//row 1
+		tile[1].setAttributes( iron, available, false );
+		tile[2].setAttributes( iron, available, false );
+		tile[3].setAttributes( iron, available, false );
+		tile[4].setAttributes( iron, available, false );
+		tile[5].setAttributes( iron, available, false );
+		tile[6].setAttributes( iron, available, false );
+		tile[7].setAttributes( iron, available, false );
+		tile[8].setAttributes( iron, available, false );
+		tile[9].setAttributes( iron, available, false );
+		tile[10].setAttributes( grass, available, false );
+		tile[11].setAttributes( grass, available, false );
+		tile[12].setAttributes( grass, available, false );
+		tile[13].setAttributes( grass, available, false );
+		tile[14].setAttributes( grass, available, false );
+		tile[15].setAttributes( grass, available, false );
+		tile[16].setAttributes( water, available, false );
+		tile[17].setAttributes( water, available, false );
+		tile[18].setAttributes( water, available, false );
+		tile[19].setAttributes( water, available, false );
+		tile[20].setAttributes( grass, available, false );
+		tile[21].setAttributes( grass, available, false );
+		tile[22].setAttributes( grass, available, false );
+		tile[23].setAttributes( grass, available, false );
+		tile[24].setAttributes( grass, available, false );
+		
+		//row 2
+		tile[25].setAttributes( iron, available, false );
+		tile[26].setAttributes( iron, available, false );
+		tile[27].setAttributes( iron, available, false );
+		tile[28].setAttributes( iron, available, false );
+		tile[29].setAttributes( iron, available, false );
+		tile[30].setAttributes( iron, available, false );
+		tile[31].setAttributes( iron, available, false );
+		tile[32].setAttributes( iron, available, false );
+		tile[33].setAttributes( iron, available, false );
+		tile[34].setAttributes( grass, available, false );
+		tile[35].setAttributes( grass, available, false );
+		tile[36].setAttributes( grass, available, false );
+		tile[37].setAttributes( grass, available, false );
+		tile[38].setAttributes( grass, available, false );
+		tile[39].setAttributes( water, available, false );
+		tile[40].setAttributes( water, available, false );
+		tile[41].setAttributes( water, available, false );
+		tile[42].setAttributes( water, available, false );
+		tile[43].setAttributes( water, available, false );
+		tile[44].setAttributes( grass, available, false );
+		tile[45].setAttributes( grass, available, false );
+		tile[46].setAttributes( grass, available, false );
+		tile[47].setAttributes( grass, available, false );
+		tile[48].setAttributes( grass, available, false );
+		tile[49].setAttributes( grass, available, false );
+		
+		//row 2
+		tile[25].setAttributes( iron, available, false );
+		tile[26].setAttributes( iron, available, false );
+		tile[27].setAttributes( iron, available, false );
+		tile[28].setAttributes( iron, available, false );
+		tile[29].setAttributes( iron, available, false );
+		tile[30].setAttributes( iron, available, false );
+		tile[31].setAttributes( iron, available, false );
+		tile[32].setAttributes( iron, available, false );
+		tile[33].setAttributes( iron, available, false );
+		tile[34].setAttributes( grass, available, false );
+		tile[35].setAttributes( grass, available, false );
+		tile[36].setAttributes( grass, available, false );
+		tile[37].setAttributes( grass, available, false );
+		tile[38].setAttributes( grass, available, false );
+		tile[39].setAttributes( water, available, false );
+		tile[40].setAttributes( water, available, false );
+		tile[41].setAttributes( water, available, false );
+		tile[42].setAttributes( water, available, false );
+		tile[43].setAttributes( water, available, false );
+		tile[44].setAttributes( grass, available, false );
+		tile[45].setAttributes( grass, available, false );
+		tile[46].setAttributes( grass, available, false );
+		tile[47].setAttributes( grass, available, false );
+		tile[48].setAttributes( grass, available, false );
+		tile[49].setAttributes( grass, available, false );
+		
+		for( int i = 0; i < (numberOfTiles + 1); i++ )
+		{
+			tiles.add(tile[i] );
+		}
+	}
+
+	public ArrayList<Tile> getTiles()
+	{
+		return tiles;
+	}
+}

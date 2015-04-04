@@ -1,0 +1,561 @@
+package onzichtbaar.net.Android.CityBuilder.load;
+
+import onzichtbaar.net.Android.CityBuilder.objects.Tile;
+
+public class setAttributes extends Data
+{
+	private Tile[] tile = new Tile[40001];
+	
+	public setAttributes(Tile[] tile)
+	{
+		this.tile = tile;
+	}
+	
+	public void attributes()
+	{
+		//row 1
+		tile[1].setAttributes( iron, available, false );
+		tile[2].setAttributes( iron, available, false );
+		tile[3].setAttributes( iron, available, false );
+		tile[4].setAttributes( iron, available, false );
+		tile[5].setAttributes( iron, available, false );
+		tile[6].setAttributes( iron, available, false );
+		tile[7].setAttributes( iron, available, false );
+		tile[8].setAttributes( iron, available, false );
+		tile[9].setAttributes( iron, available, false );
+		tile[10].setAttributes( grass, available, false );
+		tile[11].setAttributes( grass, available, false );
+		tile[12].setAttributes( grass, available, false );
+		tile[13].setAttributes( grass, available, false );
+		tile[14].setAttributes( grass, available, false );
+		tile[15].setAttributes( grass, available, false );
+		tile[16].setAttributes( water, available, false );
+		tile[17].setAttributes( water, available, false );
+		tile[18].setAttributes( water, available, false );
+		tile[19].setAttributes( water, available, false );
+		tile[20].setAttributes( grass, available, false );
+		tile[21].setAttributes( grass, available, false );
+		tile[22].setAttributes( grass, available, false );
+		tile[23].setAttributes( grass, available, false );
+		tile[24].setAttributes( grass, available, false );
+		tile[25].setAttributes( grass, available, false );
+		
+		//row 2
+		tile[26].setAttributes( iron, available, false );
+		tile[27].setAttributes( iron, available, false );
+		tile[28].setAttributes( iron, available, false );
+		tile[29].setAttributes( iron, available, false );
+		tile[30].setAttributes( iron, available, false );
+		tile[31].setAttributes( iron, available, false );
+		tile[32].setAttributes( iron, available, false );
+		tile[33].setAttributes( iron, available, false );
+		tile[34].setAttributes( iron, available, false );
+		tile[35].setAttributes( grass, available, false );
+		tile[36].setAttributes( grass, available, false );
+		tile[37].setAttributes( grass, available, false );
+		tile[38].setAttributes( grass, available, false );
+		tile[39].setAttributes( grass, available, false );
+		tile[40].setAttributes( water, available, false );
+		tile[41].setAttributes( water, available, false );
+		tile[42].setAttributes( water, available, false );
+		tile[43].setAttributes( water, available, false );
+		tile[44].setAttributes( water, available, false );
+		tile[45].setAttributes( grass, available, false );
+		tile[46].setAttributes( grass, available, false );
+		tile[47].setAttributes( grass, available, false );
+		tile[48].setAttributes( grass, available, false );
+		tile[49].setAttributes( grass, available, false );
+		tile[50].setAttributes( grass, available, false );
+		
+		//row 3
+		tile[51].setAttributes( iron, available, false );
+		tile[52].setAttributes( iron, available, false );
+		tile[53].setAttributes( iron, available, false );
+		tile[54].setAttributes( iron, available, false );
+		tile[55].setAttributes( iron, available, false );
+		tile[56].setAttributes( iron, available, false );
+		tile[57].setAttributes( iron, available, false );
+		tile[58].setAttributes( iron, available, false );
+		tile[59].setAttributes( grass, available, false );
+		tile[60].setAttributes( grass, available, false );
+		tile[61].setAttributes( grass, available, false );
+		tile[62].setAttributes( grass, available, false );
+		tile[63].setAttributes( grass, available, false );
+		tile[64].setAttributes( grass, available, false );
+		tile[65].setAttributes( water, available, false );
+		tile[66].setAttributes( water, available, false );
+		tile[67].setAttributes( water, available, false );
+		tile[68].setAttributes( water, available, false );
+		tile[69].setAttributes( grass, available, false );
+		tile[70].setAttributes( grass, available, false );
+		tile[71].setAttributes( grass, available, false );
+		tile[72].setAttributes( grass, available, false );
+		tile[73].setAttributes( grass, available, false );
+		tile[74].setAttributes( grass, available, false );
+		tile[75].setAttributes( grass, available, false );
+		
+		//row 4
+		tile[76].setAttributes( grass, available, false );
+		tile[77].setAttributes( grass, available, false );
+		tile[78].setAttributes( iron, available, false );
+		tile[79].setAttributes( iron, available, false );
+		tile[80].setAttributes( iron, available, false );
+		tile[81].setAttributes( iron, available, false );
+		tile[82].setAttributes( iron, available, false );
+		tile[83].setAttributes( iron, available, false );
+		tile[84].setAttributes( grass, available, false );
+		tile[85].setAttributes( grass, available, false );
+		tile[86].setAttributes( grass, available, false );
+		tile[87].setAttributes( grass, available, false );
+		tile[88].setAttributes( grass, available, false );
+		tile[89].setAttributes( water, available, false );
+		tile[90].setAttributes( water, available, false );
+		tile[91].setAttributes( water, available, false );
+		tile[92].setAttributes( water, available, false );
+		tile[93].setAttributes( water, available, false );
+		tile[94].setAttributes( grass, available, false );
+		tile[95].setAttributes( grass, available, false );
+		tile[96].setAttributes( grass, available, false );
+		tile[97].setAttributes( grass, available, false );
+		tile[98].setAttributes( grass, available, false );
+		tile[99].setAttributes( grass, available, false );
+		tile[100].setAttributes( grass, available, false );
+		
+		//row 5
+		tile[101].setAttributes( grass, available, false );
+		tile[102].setAttributes( grass, available, false );
+		tile[103].setAttributes( grass, available, false );
+		tile[104].setAttributes( grass, available, false );
+		tile[105].setAttributes( iron, available, false );
+		tile[106].setAttributes( iron, available, false );
+		tile[107].setAttributes( iron, available, false );
+		tile[108].setAttributes( grass, available, false );
+		tile[109].setAttributes( grass, available, false );
+		tile[110].setAttributes( grass, available, false );
+		tile[111].setAttributes( grass, available, false );
+		tile[112].setAttributes( water, available, false );
+		tile[113].setAttributes( water, available, false );
+		tile[114].setAttributes( water, available, false );
+		tile[115].setAttributes( water, available, false );
+		tile[116].setAttributes( water, available, false );
+		tile[117].setAttributes( grass, available, false );
+		tile[118].setAttributes( grass, available, false );
+		tile[119].setAttributes( grass, available, false );
+		tile[120].setAttributes( grass, available, false );
+		tile[121].setAttributes( grass, available, false );
+		tile[122].setAttributes( grass, available, false );
+		tile[123].setAttributes( grass, available, false );
+		tile[124].setAttributes( grass, available, false );
+		tile[125].setAttributes( grass, available, false );
+		
+		//row 6
+		tile[126].setAttributes( grass, available, false );
+		tile[127].setAttributes( grass, available, false );
+		tile[128].setAttributes( grass, available, false );
+		tile[129].setAttributes( grass, available, false );
+		tile[130].setAttributes( iron, available, false );
+		tile[131].setAttributes( iron, available, false );
+		tile[132].setAttributes( grass, available, false );
+		tile[133].setAttributes( grass, available, false );
+		tile[134].setAttributes( water, available, false );
+		tile[135].setAttributes( water, available, false );
+		tile[136].setAttributes( water, available, false );
+		tile[137].setAttributes( water, available, false );
+		tile[138].setAttributes( water, available, false );
+		tile[139].setAttributes( water, available, false );
+		tile[140].setAttributes( water, available, false );
+		tile[141].setAttributes( water, available, false );
+		tile[142].setAttributes( grass, available, false );
+		tile[143].setAttributes( iron, available, false );
+		tile[144].setAttributes( iron, available, false );
+		tile[145].setAttributes( grass, available, false );
+		tile[146].setAttributes( grass, available, false );
+		tile[147].setAttributes( grass, available, false );
+		tile[148].setAttributes( grass, available, false );
+		tile[149].setAttributes( grass, available, false );
+		tile[150].setAttributes( grass, available, false );
+		
+		//row 7
+		tile[151].setAttributes( grass, available, false );
+		tile[152].setAttributes( grass, available, false );
+		tile[153].setAttributes( grass, available, false );
+		tile[154].setAttributes( grass, available, false );
+		tile[155].setAttributes( grass, available, false );
+		tile[156].setAttributes( grass, available, false );
+		tile[157].setAttributes( grass, available, false );
+		tile[158].setAttributes( water, available, false );
+		tile[159].setAttributes( water, available, false );
+		tile[160].setAttributes( water, available, false );
+		tile[161].setAttributes( water, available, false );
+		tile[162].setAttributes( water, available, false );
+		tile[163].setAttributes( water, available, false );
+		tile[164].setAttributes( water, available, false );
+		tile[165].setAttributes( grass, available, false );
+		tile[166].setAttributes( grass, available, false );
+		tile[167].setAttributes( grass, available, false );
+		tile[168].setAttributes( iron, available, false );
+		tile[169].setAttributes( iron, available, false );
+		tile[170].setAttributes( grass, available, false );
+		tile[171].setAttributes( grass, available, false );
+		tile[172].setAttributes( grass, available, false );
+		tile[173].setAttributes( grass, available, false );
+		tile[174].setAttributes( grass, available, false );
+		tile[175].setAttributes( grass, available, false );
+		
+		//row 8
+		tile[151].setAttributes( dwayne, available, false );
+		tile[152].setAttributes( dwayne, available, false );
+		tile[153].setAttributes( dwayne, available, false );
+		tile[154].setAttributes( grass, available, false );
+		tile[155].setAttributes( grass, available, false );
+		tile[156].setAttributes( grass, available, false );
+		tile[157].setAttributes( grass, available, false );
+		tile[158].setAttributes( water, available, false );
+		tile[159].setAttributes( water, available, false );
+		tile[160].setAttributes( water, available, false );
+		tile[161].setAttributes( water, available, false );
+		tile[162].setAttributes( water, available, false );
+		tile[163].setAttributes( water, available, false );
+		tile[164].setAttributes( grass, available, false );
+		tile[165].setAttributes( grass, available, false );
+		tile[166].setAttributes( iron, available, false );
+		tile[167].setAttributes( iron, available, false );
+		tile[168].setAttributes( iron, available, false );
+		tile[169].setAttributes( iron, available, false );
+		tile[170].setAttributes( grass, available, false );
+		tile[171].setAttributes( grass, available, false );
+		tile[172].setAttributes( grass, available, false );
+		tile[173].setAttributes( grass, available, false );
+		tile[174].setAttributes( grass, available, false );
+		tile[175].setAttributes( grass, available, false );
+		
+		//row 9
+		tile[176].setAttributes( dwayne, available, false );
+		tile[177].setAttributes( dwayne, available, false );
+		tile[178].setAttributes( grass, available, false );
+		tile[179].setAttributes( grass, available, false );
+		tile[180].setAttributes( grass, available, false );
+		tile[181].setAttributes( water, available, false );
+		tile[182].setAttributes( water, available, false );
+		tile[183].setAttributes( water, available, false );
+		tile[184].setAttributes( water, available, false );
+		tile[185].setAttributes( water, available, false );
+		tile[186].setAttributes( grass, available, false );
+		tile[187].setAttributes( grass, available, false );
+		tile[188].setAttributes( grass, available, false );
+		tile[189].setAttributes( iron, available, false );
+		tile[190].setAttributes( iron, available, false );
+		tile[191].setAttributes( iron, available, false );
+		tile[192].setAttributes( iron, available, false );
+		tile[193].setAttributes( iron, available, false );
+		tile[194].setAttributes( grass, available, false );
+		tile[195].setAttributes( grass, available, false );
+		tile[196].setAttributes( grass, available, false );
+		tile[197].setAttributes( wood, available, false );
+		tile[198].setAttributes( grass, available, false );
+		tile[199].setAttributes( grass, available, false );
+		tile[200].setAttributes( grass, available, false );
+		
+		//row 10
+		tile[201].setAttributes( dwayne, available, false );
+		tile[202].setAttributes( dwayne, available, false );
+		tile[203].setAttributes( dwayne, available, false );
+		tile[204].setAttributes( grass, available, false );
+		tile[205].setAttributes( grass, available, false );
+		tile[206].setAttributes( water, available, false );
+		tile[207].setAttributes( water, available, false );
+		tile[208].setAttributes( water, available, false );
+		tile[209].setAttributes( water, available, false );
+		tile[210].setAttributes( water, available, false );
+		tile[211].setAttributes( grass, available, false );
+		tile[212].setAttributes( grass, available, false );
+		tile[213].setAttributes( grass, available, false );
+		tile[214].setAttributes( iron, available, false );
+		tile[215].setAttributes( iron, available, false );
+		tile[216].setAttributes( iron, available, false );
+		tile[217].setAttributes( iron, available, false );
+		tile[218].setAttributes( grass, available, false );
+		tile[219].setAttributes( grass, available, false );
+		tile[220].setAttributes( grass, available, false );
+		tile[221].setAttributes( wood, available, false );
+		tile[222].setAttributes( wood, available, false );
+		tile[223].setAttributes( wood, available, false );
+		tile[224].setAttributes( grass, available, false );
+		tile[225].setAttributes( grass, available, false );
+		
+		//row 11
+		tile[226].setAttributes( dwayne, available, false );
+		tile[227].setAttributes( dwayne, available, false );
+		tile[228].setAttributes( dwayne, available, false );
+		tile[229].setAttributes( dwayne, available, false );
+		tile[230].setAttributes( grass, available, false );
+		tile[231].setAttributes( water, available, false );
+		tile[232].setAttributes( water, available, false );
+		tile[233].setAttributes( water, available, false );
+		tile[234].setAttributes( water, available, false );
+		tile[235].setAttributes( water, available, false );
+		tile[236].setAttributes( grass, available, false );
+		tile[237].setAttributes( grass, available, false );
+		tile[238].setAttributes( grass, available, false );
+		tile[239].setAttributes( grass, available, false );
+		tile[240].setAttributes( grass, available, false );
+		tile[241].setAttributes( grass, available, false );
+		tile[242].setAttributes( grass, available, false );
+		tile[243].setAttributes( grass, available, false );
+		tile[244].setAttributes( grass, available, false );
+		tile[245].setAttributes( wood, available, false );
+		tile[246].setAttributes( dwayne, available, false );
+		tile[247].setAttributes( dwayne, available, false );
+		tile[248].setAttributes( wood, available, false );
+		tile[249].setAttributes( grass, available, false );
+		tile[250].setAttributes( grass, available, false );
+		
+		//row 12
+		tile[251].setAttributes( dwayne, available, false );
+		tile[252].setAttributes( dwayne, available, false );
+		tile[253].setAttributes( dwayne, available, false );
+		tile[254].setAttributes( dwayne, available, false );
+		tile[255].setAttributes( water, available, false );
+		tile[256].setAttributes( water, available, false );
+		tile[257].setAttributes( water, available, false );
+		tile[258].setAttributes( water, available, false );
+		tile[259].setAttributes( water, available, false );
+		tile[260].setAttributes( water, available, false );
+		tile[261].setAttributes( grass, available, false );
+		tile[262].setAttributes( grass, available, false );
+		tile[263].setAttributes( grass, available, false );
+		tile[264].setAttributes( grass, available, false );
+		tile[265].setAttributes( grass, available, false );
+		tile[266].setAttributes( grass, available, false );
+		tile[267].setAttributes( grass, available, false );
+		tile[268].setAttributes( grass, available, false );
+		tile[269].setAttributes( wood, available, false );
+		tile[270].setAttributes( dwayne, available, false );
+		tile[271].setAttributes( dwayne, available, false );
+		tile[272].setAttributes( dwayne, available, false );
+		tile[273].setAttributes( grass, available, false );
+		tile[274].setAttributes( grass, available, false );
+		tile[275].setAttributes( grass, available, false );
+		
+		//row 13
+		tile[276].setAttributes( dwayne, available, false );
+		tile[277].setAttributes( dwayne, available, false );
+		tile[278].setAttributes( dwayne, available, false );
+		tile[279].setAttributes( grass, available, false );
+		tile[280].setAttributes( grass, available, false );
+		tile[281].setAttributes( water, available, false );
+		tile[282].setAttributes( water, available, false );
+		tile[283].setAttributes( water, available, false );
+		tile[284].setAttributes( water, available, false );
+		tile[285].setAttributes( water, available, false );
+		tile[286].setAttributes( grass, available, false );
+		tile[287].setAttributes( grass, available, false );
+		tile[288].setAttributes( town, available, false );
+		tile[289].setAttributes( grass, available, false );
+		tile[290].setAttributes( grass, available, false );
+		tile[291].setAttributes( grass, available, false );
+		tile[292].setAttributes( grass, available, false );
+		tile[293].setAttributes( dwayne, available, false );
+		tile[294].setAttributes( wood, available, false );
+		tile[295].setAttributes( wood, available, false );
+		tile[296].setAttributes( wood, available, false );
+		tile[297].setAttributes( grass, available, false );
+		tile[298].setAttributes( grass, available, false );
+		tile[299].setAttributes( grass, available, false );
+		tile[300].setAttributes( grass, available, false );
+		
+		//row 14
+		tile[301].setAttributes( dwayne, available, false );
+		tile[302].setAttributes( dwayne, available, false );
+		tile[303].setAttributes( grass, available, false );
+		tile[304].setAttributes( grass, available, false );
+		tile[305].setAttributes( grass, available, false );
+		tile[306].setAttributes( water, available, false );
+		tile[307].setAttributes( water, available, false );
+		tile[308].setAttributes( water, available, false );
+		tile[309].setAttributes( water, available, false );
+		tile[310].setAttributes( water, available, false );
+		tile[311].setAttributes( grass, available, false );
+		tile[312].setAttributes( grass, available, false );
+		tile[313].setAttributes( grass, available, false );
+		tile[314].setAttributes( grass, available, false );
+		tile[315].setAttributes( wood, available, false );
+		tile[316].setAttributes( wood, available, false );
+		tile[317].setAttributes( wood, available, false );
+		tile[318].setAttributes( wood, available, false );
+		tile[319].setAttributes( wood, available, false );
+		tile[320].setAttributes( grass, available, false );
+		tile[321].setAttributes( grass, available, false );
+		tile[322].setAttributes( grass, available, false );
+		tile[323].setAttributes( grass, available, false );
+		tile[324].setAttributes( grass, available, false );
+		tile[325].setAttributes( grass, available, false );
+		
+		//row 15
+		tile[326].setAttributes( dwayne, available, false );
+		tile[327].setAttributes( wood, available, false );
+		tile[328].setAttributes( wood, available, false );
+		tile[329].setAttributes( wood, available, false );
+		tile[330].setAttributes( grass, available, false );
+		tile[331].setAttributes( grass, available, false );
+		tile[332].setAttributes( water, available, false );
+		tile[333].setAttributes( water, available, false );
+		tile[334].setAttributes( water, available, false );
+		tile[335].setAttributes( water, available, false );
+		tile[336].setAttributes( grass, available, false );
+		tile[337].setAttributes( grass, available, false );
+		tile[338].setAttributes( dwayne, available, false );
+		tile[339].setAttributes( wood, available, false );
+		tile[340].setAttributes( dwayne, available, false );
+		tile[341].setAttributes( dwayne, available, false );
+		tile[342].setAttributes( wood, available, false );
+		tile[343].setAttributes( wood, available, false );
+		tile[344].setAttributes( wood, available, false );
+		tile[345].setAttributes( grass, available, false );
+		tile[346].setAttributes( grass, available, false );
+		tile[347].setAttributes( grass, available, false );
+		tile[348].setAttributes( grass, available, false );
+		tile[349].setAttributes( grass, available, false );
+		tile[350].setAttributes( grass, available, false );
+		
+		//row 16
+		tile[351].setAttributes( dwayne, available, false );
+		tile[352].setAttributes( dwayne, available, false );
+		tile[353].setAttributes( wood, available, false );
+		tile[354].setAttributes( wood, available, false );
+		tile[355].setAttributes( grass, available, false );
+		tile[356].setAttributes( grass, available, false );
+		tile[357].setAttributes( water, available, false );
+		tile[358].setAttributes( water, available, false );
+		tile[359].setAttributes( water, available, false );
+		tile[360].setAttributes( water, available, false );
+		tile[361].setAttributes( grass, available, false );
+		tile[362].setAttributes( dwayne, available, false );
+		tile[363].setAttributes( dwayne, available, false );
+		tile[364].setAttributes( dwayne, available, false );
+		tile[365].setAttributes( dwayne, available, false );
+		tile[366].setAttributes( dwayne, available, false );
+		tile[367].setAttributes( wood, available, false );
+		tile[368].setAttributes( grass, available, false );
+		tile[369].setAttributes( grass, available, false );
+		tile[370].setAttributes( grass, available, false );
+		tile[371].setAttributes( grass, available, false );
+		tile[372].setAttributes( grass, available, false );
+		tile[373].setAttributes( grass, available, false );
+		tile[374].setAttributes( grass, available, false );
+		tile[375].setAttributes( grass, available, false );
+		
+		//row 17
+		tile[376].setAttributes( wood, available, false );
+		tile[377].setAttributes( wood, available, false );
+		tile[378].setAttributes( wood, available, false );
+		tile[379].setAttributes( wood, available, false );
+		tile[380].setAttributes( water, available, false );
+		tile[381].setAttributes( water, available, false );
+		tile[382].setAttributes( water, available, false );
+		tile[383].setAttributes( water, available, false );
+		tile[384].setAttributes( water, available, false );
+		tile[385].setAttributes( water, available, false );
+		tile[386].setAttributes( grass, available, false );
+		tile[387].setAttributes( dwayne, available, false );
+		tile[388].setAttributes( dwayne, available, false );
+		tile[389].setAttributes( dwayne, available, false );
+		tile[390].setAttributes( dwayne, available, false );
+		tile[391].setAttributes( dwayne, available, false );
+		tile[392].setAttributes( dwayne, available, false );
+		tile[393].setAttributes( grass, available, false );
+		tile[394].setAttributes( grass, available, false );
+		tile[395].setAttributes( grass, available, false );
+		tile[396].setAttributes( grass, available, false );
+		tile[397].setAttributes( grass, available, false );
+		tile[398].setAttributes( grass, available, false );
+		tile[399].setAttributes( grass, available, false );
+		tile[400].setAttributes( grass, available, false );
+		
+		//row 18
+		tile[401].setAttributes( wood, available, false );
+		tile[402].setAttributes( wood, available, false );
+		tile[403].setAttributes( wood, available, false );
+		tile[404].setAttributes( wood, available, false );
+		tile[405].setAttributes( grass, available, false );
+		tile[406].setAttributes( water, available, false );
+		tile[407].setAttributes( water, available, false );
+		tile[408].setAttributes( water, available, false );
+		tile[409].setAttributes( water, available, false );
+		tile[410].setAttributes( water, available, false );
+		tile[411].setAttributes( dwayne, available, false );
+		tile[412].setAttributes( dwayne, available, false );
+		tile[413].setAttributes( dwayne, available, false );
+		tile[414].setAttributes( dwayne, available, false );
+		tile[415].setAttributes( dwayne, available, false );
+		tile[416].setAttributes( dwayne, available, false );
+		tile[417].setAttributes( dwayne, available, false );
+		tile[418].setAttributes( grass, available, false );
+		tile[419].setAttributes( grass, available, false );
+		tile[420].setAttributes( grass, available, false );
+		tile[421].setAttributes( grass, available, false );
+		tile[422].setAttributes( grass, available, false );
+		tile[423].setAttributes( grass, available, false );
+		tile[424].setAttributes( grass, available, false );
+		tile[425].setAttributes( grass, available, false );
+		
+		//row 19
+		tile[426].setAttributes( wood, available, false );
+		tile[427].setAttributes( wood, available, false );
+		tile[428].setAttributes( wood, available, false );
+		tile[429].setAttributes( wood, available, false );
+		tile[430].setAttributes( grass, available, false );
+		tile[431].setAttributes( grass, available, false );
+		tile[432].setAttributes( water, available, false );
+		tile[433].setAttributes( water, available, false );
+		tile[434].setAttributes( water, available, false );
+		tile[435].setAttributes( water, available, false );
+		tile[436].setAttributes( grass, available, false );
+		tile[437].setAttributes( dwayne, available, false );
+		tile[438].setAttributes( dwayne, available, false );
+		tile[439].setAttributes( dwayne, available, false );
+		tile[440].setAttributes( dwayne, available, false );
+		tile[441].setAttributes( dwayne, available, false );
+		tile[442].setAttributes( wood, available, false );
+		tile[443].setAttributes( wood, available, false );
+		tile[444].setAttributes( grass, available, false );
+		tile[445].setAttributes( grass, available, false );
+		tile[446].setAttributes( grass, available, false );
+		tile[447].setAttributes( grass, available, false );
+		tile[448].setAttributes( grass, available, false );
+		tile[449].setAttributes( grass, available, false );
+		tile[450].setAttributes( grass, available, false );
+		
+		//row 19
+		tile[426].setAttributes( wood, available, false );
+		tile[427].setAttributes( wood, available, false );
+		tile[428].setAttributes( wood, available, false );
+		tile[429].setAttributes( wood, available, false );
+		tile[430].setAttributes( grass, available, false );
+		tile[431].setAttributes( grass, available, false );
+		tile[432].setAttributes( water, available, false );
+		tile[433].setAttributes( water, available, false );
+		tile[434].setAttributes( water, available, false );
+		tile[435].setAttributes( water, available, false );
+		tile[436].setAttributes( grass, available, false );
+		tile[437].setAttributes( dwayne, available, false );
+		tile[438].setAttributes( dwayne, available, false );
+		tile[439].setAttributes( dwayne, available, false );
+		tile[440].setAttributes( dwayne, available, false );
+		tile[441].setAttributes( dwayne, available, false );
+		tile[442].setAttributes( wood, available, false );
+		tile[443].setAttributes( wood, available, false );
+		tile[444].setAttributes( grass, available, false );
+		tile[445].setAttributes( grass, available, false );
+		tile[446].setAttributes( grass, available, false );
+		tile[447].setAttributes( grass, available, false );
+		tile[448].setAttributes( grass, available, false );
+		tile[449].setAttributes( grass, available, false );
+		tile[450].setAttributes( grass, available, false );
+	}
+	
+	public Tile getTile( int i )
+	{
+		return tile[i];
+	}
+}
