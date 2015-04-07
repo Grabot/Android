@@ -172,6 +172,12 @@ public class Renderer extends Data
 				progress = 0;
 			}
 		}
+		else
+		{
+			MiningBar.setVisible( false );
+			MiningBarFill.setVisible( false );
+			progress = 0;
+		}
 	}
 	
 

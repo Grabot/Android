@@ -152,6 +152,7 @@ public class Simulation extends Data
         	if( !touched_down )
         	{
         		pressed = 0;
+        		startMining = false;
         	}
         	
         	if( tileTouched )
