@@ -11,12 +11,12 @@ public class TilesLoad extends Data
 	
 	public TilesLoad()
 	{
-		tile[0] = new Tile( new Vector( 0, 0 ), 99, unavailable, false );
+		tile[0] = new Tile( new Vector( 0, 0 ), 99, unavailable, false, 0 );
 		int x = 0;
 		int y = 0;
 		for( int i = 1; i < (numberOfTiles + 1); i++ )
 		{
-			tile[i] = new Tile( new Vector((-tileStartWidth + (tileWidth * x)), (tileStartHeight - (tileHeight * y))), grass, available, false );
+			tile[i] = new Tile( new Vector((-tileStartWidth + (tileWidth * x)), (tileStartHeight - (tileHeight * y))), grass, available, false, 2000 );
 			
 			if( (i % gridSizeWidth) == 0 )
 			{

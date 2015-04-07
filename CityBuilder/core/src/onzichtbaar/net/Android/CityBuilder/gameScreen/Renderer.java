@@ -44,12 +44,13 @@ public class Renderer extends Data
 	private float scaling_y = 0;
 	
 	private Texture InfoBox;
+	private Texture progressBar;
+	private Texture progressBarFill;
 	
 	private TextButton woodButton;
-	private TextButton chopForestButton;
-	private TextButton chopStoneButton;
 	
 	private TextField tileInfo;
+	private TextField resourceInfo;
 	private TextField levelText;
 	private TextField resourceCitizens;
 	private TextField resourceWood;
@@ -60,8 +61,16 @@ public class Renderer extends Data
 	private GameScreen game;
 	
 	private Image UserInterface;
+	private Image MiningBar;
+	private Image MiningBarFill;
+	
 	private Simulation simulation;
+	
 	private TextureRegion region;
+	private TextureRegion progressRegion;
+	private TextureRegion progressFillRegion;
+	
+	private int progress = 0;
 	
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
@@ -75,8 +84,12 @@ public class Renderer extends Data
 		scaling_y = height/ScreenWidth;
 
 		InfoBox = new Texture( Gdx.files.internal( "images/UITest.png" ));
+		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
+		progressBarFill = new Texture( Gdx.files.internal( "data/progressBarFill.png" ));
 		
 		region = new TextureRegion(InfoBox, 0, 0, InfoBox.getWidth(), InfoBox.getHeight());
+		progressRegion = new TextureRegion( progressBar, 0, 0, progressBar.getWidth(), progressBar.getHeight() );
+		progressFillRegion = new TextureRegion( progressBarFill, 0, 0, progressBarFill.getWidth(), progressBarFill.getHeight() );
 
 		infoBoxDisplay = new DisplayInfoBox();
 		inputHandler = new TouchInput();
@@ -100,6 +113,7 @@ public class Renderer extends Data
 		
 		drawTiles.fillTiles( simulation, batch );
 
+		
 		int tileCounter = 0;
 		boolean[] tileTouch = simulation.getTileTouch();
 		for( int i = 0; i < simulation.tiles.size(); i++ )
@@ -117,35 +131,11 @@ public class Renderer extends Data
 				
 				if( simulation.tiles.get(i).colour == available )
 				{
-					chopForestButton.setVisible( true );
 					woodButton.setVisible( true );
-					chopStoneButton.setVisible( true );
-					
-
-					if( simulation.tiles.get(i).type == wood )
-					{
-						chopForestButton.setVisible( true );
-					}
-					else
-					{
-						chopForestButton.setVisible( false );
-					}
-					
-					if( simulation.tiles.get(i).type == dwayne )
-					{
-						chopStoneButton.setVisible( true );
-					}
-					else
-					{
-						chopStoneButton.setVisible( false );
-					}
-					
 				}
 				else
 				{
-					chopForestButton.setVisible( false );
 					woodButton.setVisible( false );
-					chopStoneButton.setVisible( false );
 				}
 				
 				
@@ -160,14 +150,27 @@ public class Renderer extends Data
 				tileCounter ++;
 			}
 		}
+		
 
 		if( tileCounter == simulation.tiles.size())
 		{
 			//nothing selected
 			infoBoxDisplay.displayInfoBox(tileInfo, simulation, 0);
-			chopForestButton.setVisible( false );
 			woodButton.setVisible( false );
-			chopStoneButton.setVisible( false );
+		}
+		resourceInfo.setText("resources");
+		resourceInfo.setVisible( true );
+		
+		if( simulation.getMining() )
+		{
+			MiningBar.setVisible( true );
+			MiningBarFill.setVisible( true );
+			MiningBarFill.setBounds(305, 205, (5 + progress), 20 );
+			progress += 5;
+			if( progress >= 585 )
+			{
+				progress = 0;
+			}
 		}
 	}
 	
@@ -178,12 +181,25 @@ public class Renderer extends Data
 		UserInterface.setBounds(880, 80, 400, 600);
 		UserInterface.setVisible( true );
 		
+		MiningBar = new Image(progressRegion);
+		MiningBar.setBounds(300, 200, 600, 30 );
+		MiningBar.setVisible( false );
+		
+		MiningBarFill = new Image( progressFillRegion );
+		MiningBarFill.setBounds(305, 205, 5, 20 );
+		MiningBarFill.setVisible( false );
+		
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
 		tileInfo = new TextField( "", skin );
 		tileInfo.setDisabled(true);
 		tileInfo.setBounds( 1000, 530, 160, 20 );
 		tileInfo.setVisible( false );
+		
+		resourceInfo = new TextField( "", skin );
+		resourceInfo.setDisabled( true );
+		resourceInfo.setBounds( 1000, 430, 160, 20 );
+		resourceInfo.setVisible( false );
 		
 		levelText = new TextField( "Level 1", skin );
 		levelText.setDisabled(true);
@@ -216,18 +232,11 @@ public class Renderer extends Data
 		woodButton.setVisible( false );
 		woodButton.addListener(woodButtonListener);
 		
-		chopForestButton = new TextButton("Chop Forest", skin );
-		chopForestButton.setBounds(980, 280, 200, 50 );
-		chopForestButton.setVisible( false );
-		chopForestButton.addListener(chopForestListener);
-		
-		chopStoneButton = new TextButton("Chop Stone", skin );
-		chopStoneButton.setBounds(980, 280, 200, 50 );
-		chopStoneButton.setVisible( false );
-		chopStoneButton.addListener(chopStoneListener);
-		
 		stage.addActor( UserInterface);
+		stage.addActor( MiningBar );
+		stage.addActor( MiningBarFill );
 		stage.addActor( tileInfo );
+		stage.addActor( resourceInfo );
 		stage.addActor( levelText );
 		stage.addActor( resourceWood );
 		stage.addActor( resourceStone );
@@ -235,8 +244,6 @@ public class Renderer extends Data
 		stage.addActor( resourceGold );
 		stage.addActor( resourceCitizens );
 		stage.addActor( woodButton );
-		stage.addActor( chopForestButton );
-		stage.addActor( chopStoneButton );
 		
 		resourceWood.setText( "Wood: " + game.Wood );
 		resourceStone.setText( "Stone: " + game.Stone );

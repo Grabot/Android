@@ -13,6 +13,7 @@ public class DisplayInfoBox extends Data
 	
 	public void displayInfoBox( TextField tileInfo, Simulation simulation, int type )
 	{
+		tileInfo.setText( type + "simulation.tiles.get(type).type" );
 		if( simulation.tiles.get(type).type == grass )
 		{
 			tileInfo.setText( type + " grass" );
@@ -36,6 +37,22 @@ public class DisplayInfoBox extends Data
 		else if( simulation.tiles.get(type).type == dwayne )
 		{
 			tileInfo.setText( type + " dwayne" );
+		}
+		else if( simulation.tiles.get(type).type == iron )
+		{
+			tileInfo.setText( type + " iron" );
+		}
+		else if( simulation.tiles.get(type).type == gold )
+		{
+			tileInfo.setText( type + " gold" );
+		}
+		else if( simulation.tiles.get(type).type == water )
+		{
+			tileInfo.setText( type + " water" );
+		}
+		else if( simulation.tiles.get(type).type == coal )
+		{
+			tileInfo.setText( type + " coal" );
 		}
 		else
 		{

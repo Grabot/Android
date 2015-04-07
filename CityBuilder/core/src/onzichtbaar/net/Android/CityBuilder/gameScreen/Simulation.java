@@ -35,11 +35,14 @@ public class Simulation extends Data
 		
     	private float distance = 0;
 		
+    	private int pressed = 0;
+    	
 		private boolean touched_down = false;
         private boolean back_pressed = false;
         private boolean fast_press = false;
         private boolean down_pressed = false;
         private boolean up_pressed = false;
+        private boolean scrolling = false;
         
         private boolean[] tileSelected = new boolean[60001];
         private boolean[] firstTouchTile = new boolean[60001];
@@ -48,6 +51,8 @@ public class Simulation extends Data
     	
         float touch_distance_x = 999;
         float touch_distance_y = 999;
+        
+        private boolean startMining = false;
 		
 		public static final String LOG = Simulation.class.getSimpleName();
                 
@@ -103,6 +108,11 @@ public class Simulation extends Data
         	this.cameraZ = cameraZ;
         }
         
+        public void isScrolling( boolean scrolling )
+        {
+        	this.scrolling = scrolling;
+        }
+        
         public void endGame( int i )
         {
 			game.Game_Finished( i, citizens );
@@ -139,10 +149,29 @@ public class Simulation extends Data
         
         private void TileTouch()
         {
+        	if( !touched_down )
+        	{
+        		pressed = 0;
+        	}
+        	
         	if( tileTouched )
         	{
         		if( touched_down )
         		{
+        			pressed ++;
+        			
+        			if( pressed >= 20 )
+        			{
+        				if( !scrolling )
+        				{
+        					startMining = true;
+        				}
+        			}
+        			else
+        			{
+        				startMining = false;
+        			}
+        			
         			for( int i = 1; i < tiles.size(); i++ )
                 	{
         				tileSelected[i] = false;
@@ -201,5 +230,9 @@ public class Simulation extends Data
         {
         	return tileSelected;
         }
-     
+        
+        public boolean getMining()
+        {
+        	return startMining;
+        }
 }

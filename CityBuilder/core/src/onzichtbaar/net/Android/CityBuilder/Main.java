@@ -186,23 +186,24 @@ public class Main implements ApplicationListener, InputProcessor
 			}
 			else
 			{
+				just_touched += 1;
 				distance = 0;
 			}
 			
 			touched_down = true;
-			just_touched += 1;
 		}
 		else
 		{
 			touched_down = false;
 			if( (just_touched < 10) && (just_touched != 0) )
 			{
+				System.out.println("fast press");
 				fast_press = true;
 				just_touched = 0;
 			}
 			else
 			{
-				fast_press = false;
+				fast_press = true;
 			}
 			just_touched = 0;
 			//touchX1 = 1200;

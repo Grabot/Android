@@ -34,6 +34,7 @@ public class TouchInput
 	
 	private boolean down_pressed = false;
 	private boolean up_pressed = false;
+	private boolean scrolling = false;
 
 	private float distance = 0;
 	
@@ -102,6 +103,12 @@ public class TouchInput
 			}
 			*/
 			offsetY = ((firstY - touchY)*currentZoom);
+			
+			if( Math.sqrt((offsetX*offsetX + offsetY*offsetY)) >= 20 )
+			{
+				scrolling = true;
+			}
+			
 		}
 		
 		if( !touchedDown )
@@ -111,6 +118,7 @@ public class TouchInput
 			currentY = (currentY - offsetY);
 			offsetX = 0;
 			offsetY = 0;
+			scrolling = false;
 			
 			if( touchSideRight )
 			{
@@ -134,7 +142,7 @@ public class TouchInput
 				touchBottom = false;
 			}
 		}
-		
+		simulation.isScrolling( scrolling );
 	}
 
 	public void MapZoom()
