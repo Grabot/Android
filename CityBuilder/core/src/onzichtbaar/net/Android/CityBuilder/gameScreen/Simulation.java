@@ -36,6 +36,7 @@ public class Simulation extends Data
     	private float distance = 0;
 		
     	private int pressed = 0;
+    	private int miningProgress = 0;
     	
 		private boolean touched_down = false;
         private boolean back_pressed = false;
@@ -52,7 +53,7 @@ public class Simulation extends Data
         float touch_distance_x = 999;
         float touch_distance_y = 999;
         
-        private boolean startMining = false;
+        private boolean MiningSequence = false;
 		
 		public static final String LOG = Simulation.class.getSimpleName();
                 
@@ -149,11 +150,6 @@ public class Simulation extends Data
         
         private void TileTouch()
         {
-        	if( !touched_down )
-        	{
-        		pressed = 0;
-        		startMining = false;
-        	}
         	
         	if( tileTouched )
         	{
@@ -165,12 +161,27 @@ public class Simulation extends Data
         			{
         				if( !scrolling )
         				{
-        					startMining = true;
+        					MiningSequence = true;
+        					miningProgress += 5;
+        					
+        					if( miningProgress >= 585 )
+        					{
+        						for( int i = 1; i < tiles.size(); i++ )
+        	                	{
+        							if(	tileSelected[i] )
+        							{
+        								tiles.get(i).resources = (tiles.get(i).resources-1);
+        							}
+        	                	}
+        						System.out.println("done mining");
+        						miningProgress= 0;
+        					}
         				}
         			}
         			else
         			{
-        				startMining = false;
+        				miningProgress = 0;
+        				MiningSequence = false;
         			}
         			
         			for( int i = 1; i < tiles.size(); i++ )
@@ -193,7 +204,13 @@ public class Simulation extends Data
             		}
             	}
         	}
-        	
+
+        	if( !touched_down )
+        	{
+        		miningProgress = 0;
+        		pressed = 0;
+        		MiningSequence = false;
+        	}
         }
         
         
@@ -234,6 +251,11 @@ public class Simulation extends Data
         
         public boolean getMining()
         {
-        	return startMining;
+        	return MiningSequence;
+        }
+        
+        public int getMiningProgress()
+        {
+        	return miningProgress;
         }
 }

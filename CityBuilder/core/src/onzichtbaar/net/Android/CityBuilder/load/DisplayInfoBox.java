@@ -11,7 +11,7 @@ public class DisplayInfoBox extends Data
 	{
 	}
 	
-	public void displayInfoBox( TextField tileInfo, Simulation simulation, int type )
+	public void displayInfoBox( TextField tileInfo, TextField resourceInfo, Simulation simulation, int type )
 	{
 		tileInfo.setText( type + "simulation.tiles.get(type).type" );
 		if( simulation.tiles.get(type).type == grass )
@@ -59,6 +59,9 @@ public class DisplayInfoBox extends Data
 			tileInfo.setText( "nothing selected" );
 		}
 		tileInfo.setVisible( true );
+		
+		resourceInfo.setText( "resources: " + simulation.tiles.get(type).resources );
+		resourceInfo.setVisible( true );
 	}
 
 }

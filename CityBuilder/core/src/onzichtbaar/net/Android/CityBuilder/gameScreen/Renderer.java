@@ -70,8 +70,6 @@ public class Renderer extends Data
 	private TextureRegion progressRegion;
 	private TextureRegion progressFillRegion;
 	
-	private int progress = 0;
-	
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
@@ -139,7 +137,7 @@ public class Renderer extends Data
 				}
 				
 				
-				infoBoxDisplay.displayInfoBox(tileInfo, simulation, i);
+				infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, i);
 				drawTiles.drawSelected( simulation, batch, i );
 				
 				selectedTile = i;
@@ -155,28 +153,20 @@ public class Renderer extends Data
 		if( tileCounter == simulation.tiles.size())
 		{
 			//nothing selected
-			infoBoxDisplay.displayInfoBox(tileInfo, simulation, 0);
+			infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, 0);
 			woodButton.setVisible( false );
 		}
-		resourceInfo.setText("resources");
-		resourceInfo.setVisible( true );
 		
 		if( simulation.getMining() )
 		{
 			MiningBar.setVisible( true );
 			MiningBarFill.setVisible( true );
-			MiningBarFill.setBounds(305, 205, (5 + progress), 20 );
-			progress += 5;
-			if( progress >= 585 )
-			{
-				progress = 0;
-			}
+			MiningBarFill.setBounds(305, 205, (0 + simulation.getMiningProgress()), 20 );
 		}
 		else
 		{
 			MiningBar.setVisible( false );
 			MiningBarFill.setVisible( false );
-			progress = 0;
 		}
 	}
 	
