@@ -1,12 +1,12 @@
-package onzichtbaar.net.Android.CityBuilder.gameScreen;
+package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
-import onzichtbaar.net.Android.CityBuilder.load.Data;
-import onzichtbaar.net.Android.CityBuilder.load.DisplayInfoBox;
-import onzichtbaar.net.Android.CityBuilder.load.DrawTiles;
-import onzichtbaar.net.Android.CityBuilder.load.TouchInput;
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
+import CityBuilder.load.Data;
+import CityBuilder.load.DisplayInfoBox;
+import CityBuilder.load.DrawTiles;
+import CityBuilder.load.TouchInput;
+import CityBuilder.objects.Citizen;
 import Enums.TileType;
 
 import com.badlogic.gdx.Gdx;

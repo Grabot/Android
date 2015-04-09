@@ -1,9 +1,11 @@
-package onzichtbaar.net.Android.CityBuilder.gameScreen;
+package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
-import onzichtbaar.net.Android.CityBuilder.load.Screen;
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
+import CityBuilder.load.Screen;
+import CityBuilder.load.TilesLoad;
+import CityBuilder.objects.Citizen;
+import CityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -13,6 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class GameScreen implements Screen
 {
+
+	public ArrayList<Tile> tiles = new ArrayList<Tile>();
+	
 	public static final String LOG = Simulation.class.getSimpleName();
 	
 	private Simulation simulation;
@@ -29,12 +34,18 @@ public class GameScreen implements Screen
 	public int Food = 0;
 	public int Gold = 0;
 	
+	private TilesLoad tileLoad;
+	
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		Gdx.app.log( LOG, "Creating opening screen" );
+
+		tileLoad = new TilesLoad();
+
+		tiles = tileLoad.getTiles();
 		
-		simulation = new Simulation( this, citizens );
+		simulation = new Simulation( this, citizens, tiles );
 		renderer = new Renderer( this, camera, stage, batch, citizens );
 	}
 

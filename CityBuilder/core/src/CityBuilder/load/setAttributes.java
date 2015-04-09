@@ -1,7 +1,9 @@
-package onzichtbaar.net.Android.CityBuilder.load;
+package CityBuilder.load;
 
+import CityBuilder.objects.Tile;
 import Enums.TileType;
-import onzichtbaar.net.Android.CityBuilder.objects.Tile;
+
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class setAttributes extends Data
 {

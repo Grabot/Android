@@ -1,8 +1,8 @@
-package onzichtbaar.net.Android.CityBuilder.load;
+package CityBuilder.load;
 
 import java.util.ArrayList;
 
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
+import CityBuilder.objects.Citizen;
 
 import com.badlogic.gdx.Application;
 

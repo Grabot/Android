@@ -3,9 +3,10 @@ package onzichtbaar.net.Android.CityBuilder;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 
+import CityBuilder.Main;
+
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
-import onzichtbaar.net.Android.CityBuilder.Main;
 
 public class IOSLauncher extends IOSApplication.Delegate {
     @Override

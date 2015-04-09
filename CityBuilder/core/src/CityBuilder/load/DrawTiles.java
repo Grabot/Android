@@ -1,6 +1,6 @@
-package onzichtbaar.net.Android.CityBuilder.load;
+package CityBuilder.load;
 
-import onzichtbaar.net.Android.CityBuilder.gameScreen.Simulation;
+import CityBuilder.gameScreen.Simulation;
 import Enums.TileType;
 
 import com.badlogic.gdx.Gdx;
@@ -105,6 +105,8 @@ public class DrawTiles extends Data
 		
 		for( int i = 1; i < (numberOfTiles + 1); i++ )
 		{
+			simulation.tiles.get(i).drawTile( batch );
+			/*
 			batch.draw( SquareTileRegionGrass, -SquareTileGrass.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileGrass.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileGrass.getWidth()/2, SquareTileGrass.getHeight()/2, SquareTileGrass.getWidth(), SquareTileGrass.getHeight(), 1, 1, -90, false);
 		
 			if( simulation.tiles.get(i).getType() == TileType.town )
@@ -351,6 +353,7 @@ public class DrawTiles extends Data
 					batch.draw( SquareTileRegionWallFull, -SquareTileWallFull.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallFull.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallFull.getWidth()/2, SquareTileWallFull.getHeight()/2, SquareTileWallFull.getWidth(), SquareTileWallFull.getHeight(), 1, 1, 0, false);
 				}
 			}
+			*/
 		}
 	}
 	

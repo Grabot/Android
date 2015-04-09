@@ -1,12 +1,12 @@
-package onzichtbaar.net.Android.CityBuilder.gameScreen;
+package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
-import onzichtbaar.net.Android.CityBuilder.load.Data;
-import onzichtbaar.net.Android.CityBuilder.load.TilesLoad;
-import onzichtbaar.net.Android.CityBuilder.load.Vector;
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
-import onzichtbaar.net.Android.CityBuilder.objects.Tile;
+import CityBuilder.load.Data;
+import CityBuilder.load.TilesLoad;
+import CityBuilder.load.Vector;
+import CityBuilder.objects.Citizen;
+import CityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Gdx;
 
@@ -16,8 +16,6 @@ public class Simulation extends Data {
 	public ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
-
-	private TilesLoad tileLoad;
 
 	private float emma = 0;
 	private float watson = 0;
@@ -58,11 +56,11 @@ public class Simulation extends Data {
 
 	private GameScreen game;
 
-	public Simulation(GameScreen game, ArrayList<Citizen> citizens) {
+	public Simulation(GameScreen game, ArrayList<Citizen> citizens, ArrayList<Tile> tiles ) {
+		this.tiles = tiles;
 		this.game = game;
 		this.citizens = citizens;
 
-		tileLoad = new TilesLoad();
 		populate();
 	}
 
@@ -70,8 +68,6 @@ public class Simulation extends Data {
 		for (int m = 1; m < tiles.size(); m++) {
 			firstTouchTile[m] = true;
 		}
-
-		tiles = tileLoad.getTiles();
 
 		Gdx.app.log(Simulation.LOG, "Game Screen populated");
 	}

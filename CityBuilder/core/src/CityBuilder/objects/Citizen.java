@@ -1,4 +1,4 @@
-package onzichtbaar.net.Android.CityBuilder.objects;
+package CityBuilder.objects;
 
 public class Citizen 
 {

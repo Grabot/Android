@@ -1,9 +1,10 @@
-package onzichtbaar.net.Android.CityBuilder.load;
+package CityBuilder.load;
 
 import java.util.ArrayList;
 
-import Enums.TileType;
-import onzichtbaar.net.Android.CityBuilder.objects.Tile;
+import CityBuilder.objects.Tile;
+
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class TilesLoad extends Data
 {
@@ -12,12 +13,12 @@ public class TilesLoad extends Data
 	
 	public TilesLoad()
 	{
-		tile[0] = new Tile( new Vector( 0, 0 ), TileType.none, unavailable, false, 0 );
+		tile[0] = new Tile( new Vector( 0, 0 ));
 		int x = 0;
 		int y = 0;
 		for( int i = 1; i < (numberOfTiles + 1); i++ )
 		{
-			tile[i] = new Tile( new Vector((-tileStartWidth + (tileWidth * x)), (tileStartHeight - (tileHeight * y))), TileType.grass, available, false, 2000 );
+			tile[i] = new Tile( new Vector((-tileStartWidth + (tileWidth * x)), (tileStartHeight - (tileHeight * y))));
 			
 			if( (i % gridSizeWidth) == 0 )
 			{

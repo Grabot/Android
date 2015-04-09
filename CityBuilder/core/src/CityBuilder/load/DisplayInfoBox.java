@@ -1,6 +1,6 @@
-package onzichtbaar.net.Android.CityBuilder.load;
+package CityBuilder.load;
 
-import onzichtbaar.net.Android.CityBuilder.gameScreen.Simulation;
+import CityBuilder.gameScreen.Simulation;
 import Enums.TileType;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;

@@ -1,7 +1,9 @@
-package onzichtbaar.net.Android.CityBuilder.objects;
+package CityBuilder.objects;
 
+import CityBuilder.load.Vector;
 import Enums.TileType;
-import onzichtbaar.net.Android.CityBuilder.load.Vector;
+
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Tile 
 {
@@ -11,13 +13,12 @@ public class Tile
 	private final Vector position = new Vector( );
 	private boolean wall = false;
 	
-	public Tile( Vector position, TileType type, int colour, boolean wall, int resources )
+	private Grass grass;
+	private Water water;
+	
+	public Tile( Vector position )
     {
             this.position.set( position );
-            this.type = type;
-            this.colour = colour;
-            this.wall = wall;
-            this.resources = resources;
     }
 	
 	public void setAttributes( TileType type, int colour, boolean wall, int resources )
@@ -26,6 +27,27 @@ public class Tile
 		this.colour = colour;
 		this.wall = wall;
 		this.resources = resources;
+		
+		if( type.toString().equals("grass") )
+		{
+			grass = new Grass( this );
+		}
+		else if( type.toString().equals("water") )
+		{
+			water = new Water( this );
+		}
+	}
+	
+	public void drawTile( Batch batch )
+	{
+		if( type.toString().equals("grass") )
+		{
+			grass.draw( batch );
+		}
+		else if( type.toString().equals("water") )
+		{
+			water.draw( batch );
+		}
 	}
 
 	public TileType getType() {
