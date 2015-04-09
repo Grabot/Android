@@ -1,20 +1,13 @@
-Android Projects
+CityBuilder Application for Android
 
 Overview
 --------
-It's looking nice
+The github repository for a new Android game project
 
 Dependencies
 --------
-My Mother
-
-Building
------------
-My House
-
-Documentation
--------------
-haha documentation
+the Libgdx framwork
+Gradle
 
 Author
 ------
