@@ -19,15 +19,6 @@ public abstract class Data
 	protected int unavailable = 50;
 	protected int available = 51;
 	
-	protected int grass = 1;
-	protected int wood = 2;
-	protected int town = 3;
-	protected int sheep = 4;
-	protected int desert = 5;
-	protected int dwayne = 6;
-	protected int gold = 7;
-	protected int water = 8;
-	protected int iron = 9;
-	protected int coal = 10;
+	
 
 }

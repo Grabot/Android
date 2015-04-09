@@ -7,6 +7,7 @@ import onzichtbaar.net.Android.CityBuilder.load.DisplayInfoBox;
 import onzichtbaar.net.Android.CityBuilder.load.DrawTiles;
 import onzichtbaar.net.Android.CityBuilder.load.TouchInput;
 import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
+import Enums.TileType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -118,7 +119,7 @@ public class Renderer extends Data
 		{
 			if( tileTouch[i] )
 			{
-				if( simulation.tiles.get(i).wall )
+				if( simulation.tiles.get(i).isWall() )
 				{
 					woodButton.setText( "Remove wall" );
 				}
@@ -127,7 +128,7 @@ public class Renderer extends Data
 					woodButton.setText( "Build wall" );
 				}
 				
-				if( simulation.tiles.get(i).colour == available )
+				if( simulation.tiles.get(i).getColour() == available )
 				{
 					woodButton.setVisible( true );
 				}
@@ -141,7 +142,7 @@ public class Renderer extends Data
 				drawTiles.drawSelected( simulation, batch, i );
 				
 				selectedTile = i;
-				hasWall = simulation.tiles.get(i).wall;
+				hasWall = simulation.tiles.get(i).isWall();
 			}
 			else
 			{
@@ -274,7 +275,7 @@ public class Renderer extends Data
 		{
 			game.Wood += 50;
 			resourceWood.setText( "Wood: " + game.Wood );
-			simulation.tiles.get(selectedTile).setType( grass );
+			simulation.tiles.get(selectedTile).setType( TileType.grass );
 		}
 		
 	};
@@ -286,7 +287,7 @@ public class Renderer extends Data
 		{
 			game.Stone += 200;
 			resourceStone.setText( "Stone: " + game.Stone );
-			simulation.tiles.get(selectedTile).setType( grass );
+			simulation.tiles.get(selectedTile).setType( TileType.grass );
 		}
 		
 	};

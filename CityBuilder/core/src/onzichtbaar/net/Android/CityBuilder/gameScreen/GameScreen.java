@@ -82,7 +82,5 @@ public class GameScreen implements Screen
 	{
 		return citizens;
 	}
-	
-	
 
 }

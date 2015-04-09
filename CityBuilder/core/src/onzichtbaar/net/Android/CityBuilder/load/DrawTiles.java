@@ -1,6 +1,7 @@
 package onzichtbaar.net.Android.CityBuilder.load;
 
 import onzichtbaar.net.Android.CityBuilder.gameScreen.Simulation;
+import Enums.TileType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -104,54 +105,54 @@ public class DrawTiles extends Data
 		
 		for( int i = 1; i < (numberOfTiles + 1); i++ )
 		{
-			batch.draw( SquareTileRegionGrass, -SquareTileGrass.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileGrass.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileGrass.getWidth()/2, SquareTileGrass.getHeight()/2, SquareTileGrass.getWidth(), SquareTileGrass.getHeight(), 1, 1, -90, false);
+			batch.draw( SquareTileRegionGrass, -SquareTileGrass.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileGrass.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileGrass.getWidth()/2, SquareTileGrass.getHeight()/2, SquareTileGrass.getWidth(), SquareTileGrass.getHeight(), 1, 1, -90, false);
 		
-			if( simulation.tiles.get(i).type == town )
+			if( simulation.tiles.get(i).getType() == TileType.town )
 			{
-				batch.draw( SquareTileRegionHouse, -SquareTileHouse.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileHouse.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileHouse.getWidth()/2, SquareTileHouse.getHeight()/2, SquareTileHouse.getWidth(), SquareTileHouse.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionHouse, -SquareTileHouse.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileHouse.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileHouse.getWidth()/2, SquareTileHouse.getHeight()/2, SquareTileHouse.getWidth(), SquareTileHouse.getHeight(), 1, 1, -90, false);
 			}
-			else if( simulation.tiles.get(i).type == grass )
+			else if( simulation.tiles.get(i).getType() == TileType.grass )
 			{
 			}
-			else if( simulation.tiles.get(i).type == desert )
+			else if( simulation.tiles.get(i).getType() == TileType.desert )
 			{
-				batch.draw( SquareTileRegionDirt, -SquareTileDirt.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileDirt.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileDirt.getWidth()/2, SquareTileDirt.getHeight()/2, SquareTileDirt.getWidth(), SquareTileDirt.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionDirt, -SquareTileDirt.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileDirt.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileDirt.getWidth()/2, SquareTileDirt.getHeight()/2, SquareTileDirt.getWidth(), SquareTileDirt.getHeight(), 1, 1, -90, false);
 			}
-			else if( simulation.tiles.get(i).type == wood )
+			else if( simulation.tiles.get(i).getType() == TileType.wood )
 			{
-				batch.draw( SquareTileRegionWood, -SquareTileForest.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileForest.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileForest.getWidth()/2, SquareTileForest.getHeight()/2, SquareTileForest.getWidth(), SquareTileForest.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionWood, -SquareTileForest.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileForest.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileForest.getWidth()/2, SquareTileForest.getHeight()/2, SquareTileForest.getWidth(), SquareTileForest.getHeight(), 1, 1, -90, false);
 			}
-			else if( simulation.tiles.get(i).type == dwayne )
+			else if( simulation.tiles.get(i).getType() == TileType.dwayne )
 			{
-				batch.draw( SquareTileRegionDwayne, -SquareTileDwayne.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileDwayne.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileDwayne.getWidth()/2, SquareTileDwayne.getHeight()/2, SquareTileDwayne.getWidth(), SquareTileDwayne.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionDwayne, -SquareTileDwayne.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileDwayne.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileDwayne.getWidth()/2, SquareTileDwayne.getHeight()/2, SquareTileDwayne.getWidth(), SquareTileDwayne.getHeight(), 1, 1, -90, false);
 			}
-			else if( simulation.tiles.get(i).type == gold )
+			else if( simulation.tiles.get(i).getType() == TileType.gold )
 			{
-				batch.draw( SquareTileRegionGold, -SquareTileGold.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileGold.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileGold.getWidth()/2, SquareTileGold.getHeight()/2, SquareTileGold.getWidth(), SquareTileGold.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionGold, -SquareTileGold.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileGold.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileGold.getWidth()/2, SquareTileGold.getHeight()/2, SquareTileGold.getWidth(), SquareTileGold.getHeight(), 1, 1, -90, false);
 			}
-			else if( simulation.tiles.get(i).type == water )
+			else if( simulation.tiles.get(i).getType() == TileType.water )
 			{
-				batch.draw( SquareTileRegionWater, -SquareTileWater.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWater.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWater.getWidth()/2, SquareTileWater.getHeight()/2, SquareTileWater.getWidth(), SquareTileWater.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionWater, -SquareTileWater.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWater.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWater.getWidth()/2, SquareTileWater.getHeight()/2, SquareTileWater.getWidth(), SquareTileWater.getHeight(), 1, 1, -90, false);
 			}
-			else if( simulation.tiles.get(i).type == iron )
+			else if( simulation.tiles.get(i).getType() == TileType.iron )
 			{
-				batch.draw( SquareTileRegionIron, -SquareTileIron.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileIron.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileIron.getWidth()/2, SquareTileIron.getHeight()/2, SquareTileIron.getWidth(), SquareTileIron.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionIron, -SquareTileIron.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileIron.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileIron.getWidth()/2, SquareTileIron.getHeight()/2, SquareTileIron.getWidth(), SquareTileIron.getHeight(), 1, 1, -90, false);
 			}
-			else if( simulation.tiles.get(i).type == coal )
+			else if( simulation.tiles.get(i).getType() == TileType.coal )
 			{
-				batch.draw( SquareTileRegionCoal, -SquareTileCoal.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileCoal.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileCoal.getWidth()/2, SquareTileCoal.getHeight()/2, SquareTileCoal.getWidth(), SquareTileCoal.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionCoal, -SquareTileCoal.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileCoal.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileCoal.getWidth()/2, SquareTileCoal.getHeight()/2, SquareTileCoal.getWidth(), SquareTileCoal.getHeight(), 1, 1, -90, false);
 			}
 			
-			if( simulation.tiles.get(i).colour == available )
+			if( simulation.tiles.get(i).getColour() == available )
 			{
 			}
-			else if( simulation.tiles.get(i).colour == unavailable )
+			else if( simulation.tiles.get(i).getColour() == unavailable )
 			{
 				SquareTileRegionUnavailable = new TextureRegion( SquareUnavailable, 0, 0, SquareUnavailable.getWidth(), SquareUnavailable.getHeight() );
-				batch.draw( SquareTileRegionUnavailable, -SquareUnavailable.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareUnavailable.getHeight()/2 + simulation.tiles.get(i).position.y, SquareUnavailable.getWidth()/2, SquareUnavailable.getHeight()/2, SquareUnavailable.getWidth(), SquareUnavailable.getHeight(), 1, 1, -90, false);
+				batch.draw( SquareTileRegionUnavailable, -SquareUnavailable.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareUnavailable.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareUnavailable.getWidth()/2, SquareUnavailable.getHeight()/2, SquareUnavailable.getWidth(), SquareUnavailable.getHeight(), 1, 1, -90, false);
 			}
 			
-			if( simulation.tiles.get(i).wall )
+			if( simulation.tiles.get(i).isWall() )
 			{
 				boolean wallTop = false;
 				boolean wallLeft = false;
@@ -162,42 +163,42 @@ public class DrawTiles extends Data
 				boolean wallBottomLeft = false;
 				boolean wallBottomRight = false;
 				
-				if( simulation.tiles.get(i - gridSizeWidth).wall )
+				if( simulation.tiles.get(i - gridSizeWidth).isWall() )
 				{
 					wallTop = true;
 				}
 				
-				if( simulation.tiles.get(i-(gridSizeWidth+1)).wall )
+				if( simulation.tiles.get(i-(gridSizeWidth+1)).isWall() )
 				{
 					wallTopLeft = true;
 				}
 				
-				if( simulation.tiles.get(i-(gridSizeWidth-1)).wall )
+				if( simulation.tiles.get(i-(gridSizeWidth-1)).isWall() )
 				{
 					wallTopRight = true;
 				}
 
-				if( simulation.tiles.get(i - 1).wall )
+				if( simulation.tiles.get(i - 1).isWall() )
 				{
 					wallLeft = true;
 				}
 
-				if( simulation.tiles.get(i + 1).wall )
+				if( simulation.tiles.get(i + 1).isWall() )
 				{
 					wallRight = true;
 				}
 				
-				if( simulation.tiles.get(i + gridSizeWidth).wall )
+				if( simulation.tiles.get(i + gridSizeWidth).isWall() )
 				{
 					wallBottom = true;
 				}
 				
-				if( simulation.tiles.get(i + (gridSizeWidth-1)).wall )
+				if( simulation.tiles.get(i + (gridSizeWidth-1)).isWall() )
 				{
 					wallBottomLeft = true;
 				}
 				
-				if( simulation.tiles.get(i + (gridSizeWidth+1)).wall )
+				if( simulation.tiles.get(i + (gridSizeWidth+1)).isWall() )
 				{
 					wallBottomRight = true;
 				}
@@ -205,149 +206,149 @@ public class DrawTiles extends Data
 				if( !wallTop && !wallLeft && !wallRight && !wallBottom )
 				{	
 					//no wall around it
-					batch.draw( SquareTileRegionWallFull, -SquareTileWallFull.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallFull.getHeight()/2 + simulation.tiles.get(i).position.y, 0, 0, SquareTileWallFull.getWidth(), SquareTileWallFull.getHeight(), 1, 1, 0, false);
+					batch.draw( SquareTileRegionWallFull, -SquareTileWallFull.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallFull.getHeight()/2 + simulation.tiles.get(i).getPosition().y, 0, 0, SquareTileWallFull.getWidth(), SquareTileWallFull.getHeight(), 1, 1, 0, false);
 				}
 				else if( wallTop && !wallLeft && !wallRight && !wallBottom )
 				{
 					//only wall above
-					batch.draw( SquareTileRegionWallTriple, -SquareTileWallTriple.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallTriple.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallTriple.getWidth()/2, SquareTileWallTriple.getHeight()/2, SquareTileWallTriple.getWidth(), SquareTileWallTriple.getHeight(), 1, 1, 90, false);
+					batch.draw( SquareTileRegionWallTriple, -SquareTileWallTriple.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallTriple.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallTriple.getWidth()/2, SquareTileWallTriple.getHeight()/2, SquareTileWallTriple.getWidth(), SquareTileWallTriple.getHeight(), 1, 1, 90, false);
 				}
 				else if( !wallTop && !wallLeft && !wallRight && wallBottom )
 				{
 					//only wall below
-					batch.draw( SquareTileRegionWallTriple, -SquareTileWallTriple.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallTriple.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallTriple.getWidth()/2, SquareTileWallTriple.getHeight()/2, SquareTileWallTriple.getWidth(), SquareTileWallTriple.getHeight(), 1, 1, -90, false);
+					batch.draw( SquareTileRegionWallTriple, -SquareTileWallTriple.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallTriple.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallTriple.getWidth()/2, SquareTileWallTriple.getHeight()/2, SquareTileWallTriple.getWidth(), SquareTileWallTriple.getHeight(), 1, 1, -90, false);
 				}
 				else if( !wallTop && wallLeft && !wallRight && !wallBottom )
 				{
 					//only wall to the left
-					batch.draw( SquareTileRegionWallTriple, -SquareTileWallTriple.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallTriple.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallTriple.getWidth()/2, SquareTileWallTriple.getHeight()/2, SquareTileWallTriple.getWidth(), SquareTileWallTriple.getHeight(), 1, 1, 180, false);
+					batch.draw( SquareTileRegionWallTriple, -SquareTileWallTriple.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallTriple.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallTriple.getWidth()/2, SquareTileWallTriple.getHeight()/2, SquareTileWallTriple.getWidth(), SquareTileWallTriple.getHeight(), 1, 1, 180, false);
 				}
 				else if( !wallTop && !wallLeft && wallRight && !wallBottom )
 				{
 					//only wall to the right
-					batch.draw( SquareTileRegionWallTriple, -SquareTileWallTriple.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallTriple.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallTriple.getWidth()/2, SquareTileWallTriple.getHeight()/2, SquareTileWallTriple.getWidth(), SquareTileWallTriple.getHeight(), 1, 1, 0, false);
+					batch.draw( SquareTileRegionWallTriple, -SquareTileWallTriple.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallTriple.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallTriple.getWidth()/2, SquareTileWallTriple.getHeight()/2, SquareTileWallTriple.getWidth(), SquareTileWallTriple.getHeight(), 1, 1, 0, false);
 				}
 				else if( wallTop && wallLeft && !wallRight && !wallBottom )
 				{
 					//wall to the top and the left
 					if( !wallTopLeft )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 90, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 90, false);
 					}
-					batch.draw( SquareTileRegionWallDouble, -SquareTileWallDouble.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallDouble.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallDouble.getWidth()/2, SquareTileWallDouble.getHeight()/2, SquareTileWallDouble.getWidth(), SquareTileWallDouble.getHeight(), 1, 1, 90, false);
+					batch.draw( SquareTileRegionWallDouble, -SquareTileWallDouble.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallDouble.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallDouble.getWidth()/2, SquareTileWallDouble.getHeight()/2, SquareTileWallDouble.getWidth(), SquareTileWallDouble.getHeight(), 1, 1, 90, false);
 				}
 				else if( wallTop && !wallLeft && wallRight && !wallBottom )
 				{
 					//wall to the top and the right
 					if( !wallTopRight )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 0, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 0, false);
 					}
-					batch.draw( SquareTileRegionWallDouble, -SquareTileWallDouble.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallDouble.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallDouble.getWidth()/2, SquareTileWallDouble.getHeight()/2, SquareTileWallDouble.getWidth(), SquareTileWallDouble.getHeight(), 1, 1, 0, false);
+					batch.draw( SquareTileRegionWallDouble, -SquareTileWallDouble.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallDouble.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallDouble.getWidth()/2, SquareTileWallDouble.getHeight()/2, SquareTileWallDouble.getWidth(), SquareTileWallDouble.getHeight(), 1, 1, 0, false);
 				}
 				else if( wallTop && !wallLeft && !wallRight && wallBottom )
 				{
 					//wall to the top and the bottom
-					batch.draw( SquareTileRegionWallSides, -SquareTileWallSides.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallSides.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallSides.getWidth()/2, SquareTileWallSides.getHeight()/2, SquareTileWallSides.getWidth(), SquareTileWallSides.getHeight(), 1, 1, 90, false);
+					batch.draw( SquareTileRegionWallSides, -SquareTileWallSides.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallSides.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallSides.getWidth()/2, SquareTileWallSides.getHeight()/2, SquareTileWallSides.getWidth(), SquareTileWallSides.getHeight(), 1, 1, 90, false);
 				}
 				else if( !wallTop && wallLeft && wallRight && !wallBottom )
 				{
 					//wall to the left and the right
-					batch.draw( SquareTileRegionWallSides, -SquareTileWallSides.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallSides.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallSides.getWidth()/2, SquareTileWallSides.getHeight()/2, SquareTileWallSides.getWidth(), SquareTileWallSides.getHeight(), 1, 1, 0, false);
+					batch.draw( SquareTileRegionWallSides, -SquareTileWallSides.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallSides.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallSides.getWidth()/2, SquareTileWallSides.getHeight()/2, SquareTileWallSides.getWidth(), SquareTileWallSides.getHeight(), 1, 1, 0, false);
 				}
 				else if( !wallTop && wallLeft && !wallRight && wallBottom )
 				{
 					//wall to the left and the bottom
 					if( !wallBottomLeft )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 180, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 180, false);
 					}
-					batch.draw( SquareTileRegionWallDouble, -SquareTileWallDouble.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallDouble.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallDouble.getWidth()/2, SquareTileWallDouble.getHeight()/2, SquareTileWallDouble.getWidth(), SquareTileWallDouble.getHeight(), 1, 1, 180, false);
+					batch.draw( SquareTileRegionWallDouble, -SquareTileWallDouble.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallDouble.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallDouble.getWidth()/2, SquareTileWallDouble.getHeight()/2, SquareTileWallDouble.getWidth(), SquareTileWallDouble.getHeight(), 1, 1, 180, false);
 				}
 				else if( !wallTop && !wallLeft && wallRight && wallBottom )
 				{
 					//wall to the right and the bottom
 					if( !wallBottomRight )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, -90, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, -90, false);
 					}
-					batch.draw( SquareTileRegionWallDouble, -SquareTileWallDouble.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallDouble.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallDouble.getWidth()/2, SquareTileWallDouble.getHeight()/2, SquareTileWallDouble.getWidth(), SquareTileWallDouble.getHeight(), 1, 1, -90, false);
+					batch.draw( SquareTileRegionWallDouble, -SquareTileWallDouble.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallDouble.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallDouble.getWidth()/2, SquareTileWallDouble.getHeight()/2, SquareTileWallDouble.getWidth(), SquareTileWallDouble.getHeight(), 1, 1, -90, false);
 				}
 				else if( wallTop && wallLeft && wallRight && !wallBottom )
 				{
 					//wall to the top, to the left and to the right
 					if( !wallTopLeft )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 90, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 90, false);
 					}
 					if( !wallTopRight )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 0, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 0, false);
 					}
-					batch.draw( SquareTileRegionWallSingle, -SquareTileWallSingle.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallSingle.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallSingle.getWidth()/2, SquareTileWallSingle.getHeight()/2, SquareTileWallSingle.getWidth(), SquareTileWallSingle.getHeight(), 1, 1, 0, false);
+					batch.draw( SquareTileRegionWallSingle, -SquareTileWallSingle.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallSingle.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallSingle.getWidth()/2, SquareTileWallSingle.getHeight()/2, SquareTileWallSingle.getWidth(), SquareTileWallSingle.getHeight(), 1, 1, 0, false);
 				}
 				else if( wallTop && wallLeft && !wallRight && wallBottom )
 				{
 					//wall to the top, to the left and to the bottom
 					if( !wallTopLeft )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 90, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 90, false);
 					}
 					if( !wallBottomLeft )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 180, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 180, false);
 					}
-					batch.draw( SquareTileRegionWallSingle, -SquareTileWallSingle.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallSingle.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallSingle.getWidth()/2, SquareTileWallSingle.getHeight()/2, SquareTileWallSingle.getWidth(), SquareTileWallSingle.getHeight(), 1, 1, 90, false);
+					batch.draw( SquareTileRegionWallSingle, -SquareTileWallSingle.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallSingle.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallSingle.getWidth()/2, SquareTileWallSingle.getHeight()/2, SquareTileWallSingle.getWidth(), SquareTileWallSingle.getHeight(), 1, 1, 90, false);
 				}
 				else if( !wallTop && wallLeft && wallRight && wallBottom )
 				{
 					//wall to the top, to the left and to the right
 					if( !wallBottomRight )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, -90, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, -90, false);
 					}
 					if( !wallBottomLeft )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 180, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 180, false);
 					}
-					batch.draw( SquareTileRegionWallSingle, -SquareTileWallSingle.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallSingle.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallSingle.getWidth()/2, SquareTileWallSingle.getHeight()/2, SquareTileWallSingle.getWidth(), SquareTileWallSingle.getHeight(), 1, 1, 180, false);
+					batch.draw( SquareTileRegionWallSingle, -SquareTileWallSingle.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallSingle.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallSingle.getWidth()/2, SquareTileWallSingle.getHeight()/2, SquareTileWallSingle.getWidth(), SquareTileWallSingle.getHeight(), 1, 1, 180, false);
 				}
 				else if( wallTop && !wallLeft && wallRight && wallBottom )
 				{
 					//wall to the top, to the right and to the bottom
 					if( !wallTopRight )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 0, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 0, false);
 					}
 					if( !wallBottomRight )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, -90, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, -90, false);
 					}
-					batch.draw( SquareTileRegionWallSingle, -SquareTileWallSingle.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallSingle.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallSingle.getWidth()/2, SquareTileWallSingle.getHeight()/2, SquareTileWallSingle.getWidth(), SquareTileWallSingle.getHeight(), 1, 1, -90, false);
+					batch.draw( SquareTileRegionWallSingle, -SquareTileWallSingle.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallSingle.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallSingle.getWidth()/2, SquareTileWallSingle.getHeight()/2, SquareTileWallSingle.getWidth(), SquareTileWallSingle.getHeight(), 1, 1, -90, false);
 				}
 				else if( wallTop && wallLeft && wallRight && wallBottom )
 				{
 					if( !wallTopLeft )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 90, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 90, false);
 					}
 					if( !wallTopRight )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 0, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 0, false);
 					}
 					if( !wallBottomLeft )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 180, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, 180, false);
 					}
 					if( !wallBottomRight )
 					{
-						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, -90, false);
+						batch.draw( SquareTileRegionWallCorner, -SquareTileWallCorner.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallCorner.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallCorner.getWidth()/2, SquareTileWallCorner.getHeight()/2, SquareTileWallCorner.getWidth(), SquareTileWallCorner.getHeight(), 1, 1, -90, false);
 					}
 					//walls everywhere
 				}
 				else
 				{
-					batch.draw( SquareTileRegionWallFull, -SquareTileWallFull.getWidth()/2 + simulation.tiles.get(i).position.x, -SquareTileWallFull.getHeight()/2 + simulation.tiles.get(i).position.y, SquareTileWallFull.getWidth()/2, SquareTileWallFull.getHeight()/2, SquareTileWallFull.getWidth(), SquareTileWallFull.getHeight(), 1, 1, 0, false);
+					batch.draw( SquareTileRegionWallFull, -SquareTileWallFull.getWidth()/2 + simulation.tiles.get(i).getPosition().x, -SquareTileWallFull.getHeight()/2 + simulation.tiles.get(i).getPosition().y, SquareTileWallFull.getWidth()/2, SquareTileWallFull.getHeight()/2, SquareTileWallFull.getWidth(), SquareTileWallFull.getHeight(), 1, 1, 0, false);
 				}
 			}
 		}
@@ -355,7 +356,7 @@ public class DrawTiles extends Data
 	
 	public void drawSelected( Simulation simulation, Batch batch, int tileNumber )
 	{
-		batch.draw( SquareTileRegionSelected, (-SquareTileSelected.getWidth()/2 + simulation.tiles.get(tileNumber).position.x), (-SquareTileSelected.getHeight()/2 + simulation.tiles.get(tileNumber).position.y), 0, 0, SquareTileSelected.getWidth(), SquareTileSelected.getHeight(), 1, 1, 0, false);
+		batch.draw( SquareTileRegionSelected, (-SquareTileSelected.getWidth()/2 + simulation.tiles.get(tileNumber).getPosition().x), (-SquareTileSelected.getHeight()/2 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, SquareTileSelected.getWidth(), SquareTileSelected.getHeight(), 1, 1, 0, false);
 	}
 
 }
