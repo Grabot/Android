@@ -35,9 +35,9 @@ public class DisplayInfoBox extends Data
 		{
 			tileInfo.setText( type + " desert" );
 		}
-		else if( simulation.tiles.get(type).getType() == TileType.dwayne )
+		else if( simulation.tiles.get(type).getType() == TileType.stone )
 		{
-			tileInfo.setText( type + " dwayne" );
+			tileInfo.setText( type + " stone" );
 		}
 		else if( simulation.tiles.get(type).getType() == TileType.iron )
 		{

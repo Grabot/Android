@@ -1,4 +1,6 @@
-package CityBuilder.objects;
+package CityBuilder.objects.attributes;
+
+import CityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

@@ -206,9 +206,9 @@ public class setAttributes extends Data
 		tile[175].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 8
-		tile[151].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[152].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[153].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[151].setAttributes( TileType.stone, available, false, 2000 );
+		tile[152].setAttributes( TileType.stone, available, false, 2000 );
+		tile[153].setAttributes( TileType.stone, available, false, 2000 );
 		tile[154].setAttributes( TileType.grass, available, false, 2000 );
 		tile[155].setAttributes( TileType.grass, available, false, 2000 );
 		tile[156].setAttributes( TileType.grass, available, false, 2000 );
@@ -233,8 +233,8 @@ public class setAttributes extends Data
 		tile[175].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 9
-		tile[176].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[177].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[176].setAttributes( TileType.stone, available, false, 2000 );
+		tile[177].setAttributes( TileType.stone, available, false, 2000 );
 		tile[178].setAttributes( TileType.grass, available, false, 2000 );
 		tile[179].setAttributes( TileType.grass, available, false, 2000 );
 		tile[180].setAttributes( TileType.grass, available, false, 2000 );
@@ -260,9 +260,9 @@ public class setAttributes extends Data
 		tile[200].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 10
-		tile[201].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[202].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[203].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[201].setAttributes( TileType.stone, available, false, 2000 );
+		tile[202].setAttributes( TileType.stone, available, false, 2000 );
+		tile[203].setAttributes( TileType.stone, available, false, 2000 );
 		tile[204].setAttributes( TileType.grass, available, false, 2000 );
 		tile[205].setAttributes( TileType.grass, available, false, 2000 );
 		tile[206].setAttributes( TileType.water, available, false, 2000 );
@@ -287,10 +287,10 @@ public class setAttributes extends Data
 		tile[225].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 11
-		tile[226].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[227].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[228].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[229].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[226].setAttributes( TileType.stone, available, false, 2000 );
+		tile[227].setAttributes( TileType.stone, available, false, 2000 );
+		tile[228].setAttributes( TileType.stone, available, false, 2000 );
+		tile[229].setAttributes( TileType.stone, available, false, 2000 );
 		tile[230].setAttributes( TileType.grass, available, false, 2000 );
 		tile[231].setAttributes( TileType.water, available, false, 2000 );
 		tile[232].setAttributes( TileType.water, available, false, 2000 );
@@ -307,17 +307,17 @@ public class setAttributes extends Data
 		tile[243].setAttributes( TileType.grass, available, false, 2000 );
 		tile[244].setAttributes( TileType.grass, available, false, 2000 );
 		tile[245].setAttributes( TileType.wood, available, false, 2000 );
-		tile[246].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[247].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[246].setAttributes( TileType.stone, available, false, 2000 );
+		tile[247].setAttributes( TileType.stone, available, false, 2000 );
 		tile[248].setAttributes( TileType.wood, available, false, 2000 );
 		tile[249].setAttributes( TileType.grass, available, false, 2000 );
 		tile[250].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 12
-		tile[251].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[252].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[253].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[254].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[251].setAttributes( TileType.stone, available, false, 2000 );
+		tile[252].setAttributes( TileType.stone, available, false, 2000 );
+		tile[253].setAttributes( TileType.stone, available, false, 2000 );
+		tile[254].setAttributes( TileType.stone, available, false, 2000 );
 		tile[255].setAttributes( TileType.water, available, false, 2000 );
 		tile[256].setAttributes( TileType.water, available, false, 2000 );
 		tile[257].setAttributes( TileType.water, available, false, 2000 );
@@ -333,17 +333,17 @@ public class setAttributes extends Data
 		tile[267].setAttributes( TileType.grass, available, false, 2000 );
 		tile[268].setAttributes( TileType.grass, available, false, 2000 );
 		tile[269].setAttributes( TileType.wood, available, false, 2000 );
-		tile[270].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[271].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[272].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[270].setAttributes( TileType.stone, available, false, 2000 );
+		tile[271].setAttributes( TileType.stone, available, false, 2000 );
+		tile[272].setAttributes( TileType.stone, available, false, 2000 );
 		tile[273].setAttributes( TileType.grass, available, false, 2000 );
 		tile[274].setAttributes( TileType.grass, available, false, 2000 );
 		tile[275].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 13
-		tile[276].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[277].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[278].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[276].setAttributes( TileType.stone, available, false, 2000 );
+		tile[277].setAttributes( TileType.stone, available, false, 2000 );
+		tile[278].setAttributes( TileType.stone, available, false, 2000 );
 		tile[279].setAttributes( TileType.grass, available, false, 2000 );
 		tile[280].setAttributes( TileType.grass, available, false, 2000 );
 		tile[281].setAttributes( TileType.water, available, false, 2000 );
@@ -358,7 +358,7 @@ public class setAttributes extends Data
 		tile[290].setAttributes( TileType.grass, available, false, 2000 );
 		tile[291].setAttributes( TileType.grass, available, false, 2000 );
 		tile[292].setAttributes( TileType.grass, available, false, 2000 );
-		tile[293].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[293].setAttributes( TileType.stone, available, false, 2000 );
 		tile[294].setAttributes( TileType.wood, available, false, 2000 );
 		tile[295].setAttributes( TileType.wood, available, false, 2000 );
 		tile[296].setAttributes( TileType.wood, available, false, 2000 );
@@ -368,8 +368,8 @@ public class setAttributes extends Data
 		tile[300].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 14
-		tile[301].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[302].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[301].setAttributes( TileType.stone, available, false, 2000 );
+		tile[302].setAttributes( TileType.stone, available, false, 2000 );
 		tile[303].setAttributes( TileType.grass, available, false, 2000 );
 		tile[304].setAttributes( TileType.grass, available, false, 2000 );
 		tile[305].setAttributes( TileType.grass, available, false, 2000 );
@@ -395,7 +395,7 @@ public class setAttributes extends Data
 		tile[325].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 15
-		tile[326].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[326].setAttributes( TileType.stone, available, false, 2000 );
 		tile[327].setAttributes( TileType.wood, available, false, 2000 );
 		tile[328].setAttributes( TileType.wood, available, false, 2000 );
 		tile[329].setAttributes( TileType.wood, available, false, 2000 );
@@ -407,10 +407,10 @@ public class setAttributes extends Data
 		tile[335].setAttributes( TileType.water, available, false, 2000 );
 		tile[336].setAttributes( TileType.grass, available, false, 2000 );
 		tile[337].setAttributes( TileType.grass, available, false, 2000 );
-		tile[338].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[338].setAttributes( TileType.stone, available, false, 2000 );
 		tile[339].setAttributes( TileType.wood, available, false, 2000 );
-		tile[340].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[341].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[340].setAttributes( TileType.stone, available, false, 2000 );
+		tile[341].setAttributes( TileType.stone, available, false, 2000 );
 		tile[342].setAttributes( TileType.wood, available, false, 2000 );
 		tile[343].setAttributes( TileType.wood, available, false, 2000 );
 		tile[344].setAttributes( TileType.wood, available, false, 2000 );
@@ -422,8 +422,8 @@ public class setAttributes extends Data
 		tile[350].setAttributes( TileType.grass, available, false, 2000 );
 		
 		//row 16
-		tile[351].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[352].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[351].setAttributes( TileType.stone, available, false, 2000 );
+		tile[352].setAttributes( TileType.stone, available, false, 2000 );
 		tile[353].setAttributes( TileType.wood, available, false, 2000 );
 		tile[354].setAttributes( TileType.wood, available, false, 2000 );
 		tile[355].setAttributes( TileType.grass, available, false, 2000 );
@@ -433,11 +433,11 @@ public class setAttributes extends Data
 		tile[359].setAttributes( TileType.water, available, false, 2000 );
 		tile[360].setAttributes( TileType.water, available, false, 2000 );
 		tile[361].setAttributes( TileType.grass, available, false, 2000 );
-		tile[362].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[363].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[364].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[365].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[366].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[362].setAttributes( TileType.stone, available, false, 2000 );
+		tile[363].setAttributes( TileType.stone, available, false, 2000 );
+		tile[364].setAttributes( TileType.stone, available, false, 2000 );
+		tile[365].setAttributes( TileType.stone, available, false, 2000 );
+		tile[366].setAttributes( TileType.stone, available, false, 2000 );
 		tile[367].setAttributes( TileType.wood, available, false, 2000 );
 		tile[368].setAttributes( TileType.grass, available, false, 2000 );
 		tile[369].setAttributes( TileType.grass, available, false, 2000 );
@@ -460,12 +460,12 @@ public class setAttributes extends Data
 		tile[384].setAttributes( TileType.water, available, false, 2000 );
 		tile[385].setAttributes( TileType.water, available, false, 2000 );
 		tile[386].setAttributes( TileType.grass, available, false, 2000 );
-		tile[387].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[388].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[389].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[390].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[391].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[392].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[387].setAttributes( TileType.stone, available, false, 2000 );
+		tile[388].setAttributes( TileType.stone, available, false, 2000 );
+		tile[389].setAttributes( TileType.stone, available, false, 2000 );
+		tile[390].setAttributes( TileType.stone, available, false, 2000 );
+		tile[391].setAttributes( TileType.stone, available, false, 2000 );
+		tile[392].setAttributes( TileType.stone, available, false, 2000 );
 		tile[393].setAttributes( TileType.grass, available, false, 2000 );
 		tile[394].setAttributes( TileType.grass, available, false, 2000 );
 		tile[395].setAttributes( TileType.grass, available, false, 2000 );
@@ -486,13 +486,13 @@ public class setAttributes extends Data
 		tile[408].setAttributes( TileType.water, available, false, 2000 );
 		tile[409].setAttributes( TileType.water, available, false, 2000 );
 		tile[410].setAttributes( TileType.water, available, false, 2000 );
-		tile[411].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[412].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[413].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[414].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[415].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[416].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[417].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[411].setAttributes( TileType.stone, available, false, 2000 );
+		tile[412].setAttributes( TileType.stone, available, false, 2000 );
+		tile[413].setAttributes( TileType.stone, available, false, 2000 );
+		tile[414].setAttributes( TileType.stone, available, false, 2000 );
+		tile[415].setAttributes( TileType.stone, available, false, 2000 );
+		tile[416].setAttributes( TileType.stone, available, false, 2000 );
+		tile[417].setAttributes( TileType.stone, available, false, 2000 );
 		tile[418].setAttributes( TileType.grass, available, false, 2000 );
 		tile[419].setAttributes( TileType.grass, available, false, 2000 );
 		tile[420].setAttributes( TileType.grass, available, false, 2000 );
@@ -514,11 +514,11 @@ public class setAttributes extends Data
 		tile[434].setAttributes( TileType.water, available, false, 2000 );
 		tile[435].setAttributes( TileType.water, available, false, 2000 );
 		tile[436].setAttributes( TileType.grass, available, false, 2000 );
-		tile[437].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[438].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[439].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[440].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[441].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[437].setAttributes( TileType.stone, available, false, 2000 );
+		tile[438].setAttributes( TileType.stone, available, false, 2000 );
+		tile[439].setAttributes( TileType.stone, available, false, 2000 );
+		tile[440].setAttributes( TileType.stone, available, false, 2000 );
+		tile[441].setAttributes( TileType.stone, available, false, 2000 );
 		tile[442].setAttributes( TileType.wood, available, false, 2000 );
 		tile[443].setAttributes( TileType.wood, available, false, 2000 );
 		tile[444].setAttributes( TileType.grass, available, false, 2000 );
@@ -542,8 +542,8 @@ public class setAttributes extends Data
 		tile[460].setAttributes( TileType.water, available, false, 2000 );
 		tile[461].setAttributes( TileType.grass, available, false, 2000 );
 		tile[462].setAttributes( TileType.grass, available, false, 2000 );
-		tile[463].setAttributes( TileType.dwayne, available, false, 2000 );
-		tile[464].setAttributes( TileType.dwayne, available, false, 2000 );
+		tile[463].setAttributes( TileType.stone, available, false, 2000 );
+		tile[464].setAttributes( TileType.stone, available, false, 2000 );
 		tile[465].setAttributes( TileType.wood, available, false, 2000 );
 		tile[466].setAttributes( TileType.wood, available, false, 2000 );
 		tile[467].setAttributes( TileType.wood, available, false, 2000 );
