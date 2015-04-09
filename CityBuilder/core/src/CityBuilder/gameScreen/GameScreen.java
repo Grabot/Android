@@ -41,8 +41,8 @@ public class GameScreen implements Screen
 		this.citizens = citizens;
 		Gdx.app.log( LOG, "Creating opening screen" );
 
+		//map layout
 		tileLoad = new TilesLoad();
-
 		tiles = tileLoad.getTiles();
 		
 		simulation = new Simulation( this, citizens, tiles );
