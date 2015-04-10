@@ -1,6 +1,6 @@
-package onzichtbaar.net.Android.CityBuilder.load;
+package Load;
 
-import onzichtbaar.net.Android.CityBuilder.gameScreen.Simulation;
+import GameScreen.Simulation;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -51,12 +51,14 @@ public class TouchInput
 		this.camera = camera;
 		this.simulation = simulation;
 		
+		/*
 		this.touchedDown = simulation.getTouchedDown();
 		this.touchX = simulation.getTouchX();
 		this.touchY = simulation.getTouchY();
 		this.down_pressed = simulation.getDown();
 		this.up_pressed = simulation.getUp();
 		this.distance = simulation.getDistance();
+		*/
 	}
 	
 	public void MapScroll()

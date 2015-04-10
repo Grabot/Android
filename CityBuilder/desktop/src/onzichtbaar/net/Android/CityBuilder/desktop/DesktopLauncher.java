@@ -1,8 +1,9 @@
 package onzichtbaar.net.Android.CityBuilder.desktop;
 
+import CityBuilder.Main;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import onzichtbaar.net.Android.CityBuilder.Main;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

@@ -1,9 +1,10 @@
 package onzichtbaar.net.Android.CityBuilder.client;
 
+import CityBuilder.Main;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import onzichtbaar.net.Android.CityBuilder.Main;
 
 public class HtmlLauncher extends GwtApplication {
 

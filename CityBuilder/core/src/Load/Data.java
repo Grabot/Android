@@ -1,4 +1,4 @@
-package onzichtbaar.net.Android.CityBuilder.load;
+package Load;
 
 public abstract class Data 
 {

@@ -1,9 +1,9 @@
-package onzichtbaar.net.Android.CityBuilder.gameScreen;
+package GameScreen;
 
 import java.util.ArrayList;
 
-import onzichtbaar.net.Android.CityBuilder.load.Screen;
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
+import object.Citizen;
+import Load.Screen;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;

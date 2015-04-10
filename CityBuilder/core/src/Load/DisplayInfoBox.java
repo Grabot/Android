@@ -1,7 +1,7 @@
-package onzichtbaar.net.Android.CityBuilder.load;
+package Load;
 
-import onzichtbaar.net.Android.CityBuilder.gameScreen.Simulation;
-import Enums.TileType;
+import tile.TileType;
+import GameScreen.Simulation;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
@@ -12,6 +12,7 @@ public class DisplayInfoBox extends Data
 	{
 	}
 	
+	/*
 	public void displayInfoBox( TextField tileInfo, TextField resourceInfo, Simulation simulation, int type )
 	{
 		tileInfo.setText( type + "simulation.tiles.get(type).getType()" );
@@ -61,8 +62,8 @@ public class DisplayInfoBox extends Data
 		}
 		tileInfo.setVisible( true );
 		
-		resourceInfo.setText( "resources: " + simulation.tiles.get(type).getResources() );
-		resourceInfo.setVisible( true );
+		//resourceInfo.setText( "resources: " + simulation.tiles.get(type).getResources() );
+		//resourceInfo.setVisible( true );
 	}
-
+*/
 }

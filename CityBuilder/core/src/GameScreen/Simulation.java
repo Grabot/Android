@@ -1,23 +1,23 @@
-package onzichtbaar.net.Android.CityBuilder.gameScreen;
+package GameScreen;
 
 import java.util.ArrayList;
 
-import onzichtbaar.net.Android.CityBuilder.load.Data;
-import onzichtbaar.net.Android.CityBuilder.load.TilesLoad;
-import onzichtbaar.net.Android.CityBuilder.load.Vector;
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
-import onzichtbaar.net.Android.CityBuilder.objects.Tile;
+import object.Citizen;
+import object.Vector;
+import tile.Tile;
+import Levels.Level;
+import Levels.Level1;
+import Load.Data;
 
 import com.badlogic.gdx.Gdx;
 
 public class Simulation extends Data {
 	private Citizen[] citizen = new Citizen[100];
 
-	public ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
 
-	private TilesLoad tileLoad;
+	private Level level;
 
 	private float emma = 0;
 	private float watson = 0;
@@ -44,8 +44,6 @@ public class Simulation extends Data {
 	private boolean up_pressed = false;
 	private boolean scrolling = false;
 
-	private boolean[] tileSelected = new boolean[60001];
-	private boolean[] firstTouchTile = new boolean[60001];
 	private boolean tileTouched = false;
 	private boolean touchedBox = true;
 
@@ -62,19 +60,10 @@ public class Simulation extends Data {
 		this.game = game;
 		this.citizens = citizens;
 
-		tileLoad = new TilesLoad();
-		populate();
+		level = new Level1();
 	}
 
-	public void populate() {
-		for (int m = 1; m < tiles.size(); m++) {
-			firstTouchTile[m] = true;
-		}
-
-		tiles = tileLoad.getTiles();
-
-		Gdx.app.log(Simulation.LOG, "Game Screen populated");
-	}
+	
 
 	public void variables(float touchX, float touchY, float width, float height, boolean touched_down, boolean fast_press, boolean back_pressed, boolean down_pressed, boolean up_pressed, float distance) {
 		this.width = width;
@@ -93,7 +82,7 @@ public class Simulation extends Data {
 
 	public void update(float delta) {
 		checkTouch();
-		TileTouch();
+		//TileTouch();
 	}
 
 	public void updateScroll(float cameraX, float cameraY, float cameraZ) {
@@ -120,17 +109,16 @@ public class Simulation extends Data {
 			if (game.Wood >= 50 && game.Stone >= 100) {
 				game.Wood = game.Wood - 50;
 				game.Stone = game.Stone - 100;
-				tiles.get(selectedTile).setWall(true);
 			} else {
 				// not enough resources
 			}
 		} else if (!build) {
 			game.Wood = game.Wood + 50;
 			game.Stone = game.Stone + 100;
-			tiles.get(selectedTile).setWall(false);
 		}
 	}
 
+	/*
 	private void TileTouch() {
 
 		if (tileTouched) {
@@ -216,4 +204,6 @@ public class Simulation extends Data {
 	public int getMiningProgress() {
 		return miningProgress;
 	}
+	
+	*/
 }

@@ -1,13 +1,13 @@
-package onzichtbaar.net.Android.CityBuilder.gameScreen;
+package GameScreen;
 
 import java.util.ArrayList;
 
-import onzichtbaar.net.Android.CityBuilder.load.Data;
-import onzichtbaar.net.Android.CityBuilder.load.DisplayInfoBox;
-import onzichtbaar.net.Android.CityBuilder.load.DrawTiles;
-import onzichtbaar.net.Android.CityBuilder.load.TouchInput;
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
-import Enums.TileType;
+import object.Citizen;
+import tile.TileType;
+import Load.Data;
+import Load.DisplayInfoBox;
+import Load.DrawTiles;
+import Load.TouchInput;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -112,37 +112,17 @@ public class Renderer extends Data
 		
 		drawTiles.fillTiles( simulation, batch );
 
-		
+		/*
 		int tileCounter = 0;
 		boolean[] tileTouch = simulation.getTileTouch();
 		for( int i = 0; i < simulation.tiles.size(); i++ )
 		{
 			if( tileTouch[i] )
 			{
-				if( simulation.tiles.get(i).isWall() )
-				{
-					woodButton.setText( "Remove wall" );
-				}
-				else
-				{
-					woodButton.setText( "Build wall" );
-				}
-				
-				if( simulation.tiles.get(i).getColour() == available )
-				{
-					woodButton.setVisible( true );
-				}
-				else
-				{
-					woodButton.setVisible( false );
-				}
-				
-				
 				infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, i);
 				drawTiles.drawSelected( simulation, batch, i );
 				
 				selectedTile = i;
-				hasWall = simulation.tiles.get(i).isWall();
 			}
 			else
 			{
@@ -169,6 +149,7 @@ public class Renderer extends Data
 			MiningBar.setVisible( false );
 			MiningBarFill.setVisible( false );
 		}
+		*/
 	}
 	
 
@@ -275,7 +256,7 @@ public class Renderer extends Data
 		{
 			game.Wood += 50;
 			resourceWood.setText( "Wood: " + game.Wood );
-			simulation.tiles.get(selectedTile).setType( TileType.grass );
+			//simulation.tiles.get(selectedTile).setType( TileType.grass );
 		}
 		
 	};
@@ -287,7 +268,7 @@ public class Renderer extends Data
 		{
 			game.Stone += 200;
 			resourceStone.setText( "Stone: " + game.Stone );
-			simulation.tiles.get(selectedTile).setType( TileType.grass );
+			//simulation.tiles.get(selectedTile).setType( TileType.grass );
 		}
 		
 	};

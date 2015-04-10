@@ -1,4 +1,7 @@
-package onzichtbaar.net.Android.CityBuilder;
+package CityBuilder;
+
+import GameScreen.GameScreen;
+import Load.Screen;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
@@ -15,11 +18,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import java.util.ArrayList;
-import onzichtbaar.net.Android.CityBuilder.gameScreen.GameScreen;
-import onzichtbaar.net.Android.CityBuilder.load.Screen;
-import onzichtbaar.net.Android.CityBuilder.load.Vector;
-import onzichtbaar.net.Android.CityBuilder.objects.Citizen;
+
+import object.Citizen;
+import object.Vector;
 public class Main implements ApplicationListener, InputProcessor
 {
 	
