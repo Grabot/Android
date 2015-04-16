@@ -82,7 +82,7 @@ public class Main implements ApplicationListener, InputProcessor
 		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, width, height);
-		camera.position.set( 0, 0, 50 );
+		camera.position.set( 0, 0, 10 );
 	    
 	    batch = new SpriteBatch();
 	    
