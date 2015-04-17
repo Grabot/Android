@@ -4,7 +4,7 @@ import tile.Tile;
 
 public class Level {
 
-	protected Tile[][] tiles;
+	protected Tile[][] level;
 	private int width;
 	private int height;
 	
@@ -12,7 +12,7 @@ public class Level {
 		this.width = width;
 		this.height = height;
 		
-		tiles = new Tile[width][height];
+		level = new Tile[width][height];
 	}
 	
 	public int getWidth() {

@@ -2,7 +2,6 @@ package Load;
 
 import java.util.ArrayList;
 
-import object.Citizen;
 
 import com.badlogic.gdx.Application;
 
@@ -32,7 +31,5 @@ public interface Screen
 	   */
 	  public void dispose ();
 	  
-	  public int level ();
 	  
-	  public ArrayList<Citizen> citizens ();
 }
