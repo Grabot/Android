@@ -2,12 +2,12 @@ package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
+import CityBuilder.enums.TileType;
 import CityBuilder.load.Data;
 import CityBuilder.load.DisplayInfoBox;
 import CityBuilder.load.DrawTiles;
 import CityBuilder.load.TouchInput;
 import CityBuilder.objects.Citizen;
-import Enums.TileType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;

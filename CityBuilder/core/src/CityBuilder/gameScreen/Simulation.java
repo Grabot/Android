@@ -17,9 +17,6 @@ public class Simulation extends Data {
 
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
 
-	private float emma = 0;
-	private float watson = 0;
-
 	private float width = 0;
 	private float height = 0;
 
@@ -65,7 +62,7 @@ public class Simulation extends Data {
 	}
 
 	public void populate() {
-		for (int m = 1; m < tiles.size(); m++) {
+		for (int m = 0; m < tiles.size(); m++) {
 			firstTouchTile[m] = true;
 		}
 
@@ -162,7 +159,7 @@ public class Simulation extends Data {
 		}
 
 		if (fast_press) {
-			for (int k = 1; k < tiles.size(); k++) {
+			for (int k = 0; k < tiles.size(); k++) {
 				if ((tiles.get(k).getPosition().distance(new Vector(touch_distance_x, touch_distance_y)) < ((tileWidth / 2) + 1)) && !tileTouched) {
 					tileSelected[k] = true;
 					tileTouched = true;

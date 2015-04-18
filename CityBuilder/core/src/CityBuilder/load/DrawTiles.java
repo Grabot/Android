@@ -21,7 +21,7 @@ public class DrawTiles extends Data
 
 	public void fillTiles( Simulation simulation, Batch batch )
 	{
-		for( int i = 1; i < (numberOfTiles + 1); i++ )
+		for( int i = 0; i < simulation.tiles.size(); i++ )
 		{
 			simulation.tiles.get(i).drawTile( batch );
 		}

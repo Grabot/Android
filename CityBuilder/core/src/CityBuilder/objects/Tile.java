@@ -1,5 +1,6 @@
 package CityBuilder.objects;
 
+import CityBuilder.enums.TileType;
 import CityBuilder.load.Vector;
 import CityBuilder.objects.attributes.Grass;
 import CityBuilder.objects.attributes.Iron;
@@ -7,9 +8,11 @@ import CityBuilder.objects.attributes.Stone;
 import CityBuilder.objects.attributes.Town;
 import CityBuilder.objects.attributes.Water;
 import CityBuilder.objects.attributes.Wood;
-import Enums.TileType;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Tile 
 {

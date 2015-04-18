@@ -1,7 +1,7 @@
 package CityBuilder.load;
 
+import CityBuilder.enums.TileType;
 import CityBuilder.gameScreen.Simulation;
-import Enums.TileType;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 

@@ -2,6 +2,7 @@ package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
+import CityBuilder.enums.TileType;
 import CityBuilder.load.Screen;
 import CityBuilder.load.TilesLoad;
 import CityBuilder.objects.Citizen;
@@ -10,7 +11,9 @@ import CityBuilder.objects.Tile;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class GameScreen implements Screen
@@ -36,6 +39,9 @@ public class GameScreen implements Screen
 	
 	private TilesLoad tileLoad;
 	
+	private Texture SquareTileGrass;
+	private TextureRegion SquareTileRegionGrass;
+	
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
@@ -44,6 +50,9 @@ public class GameScreen implements Screen
 		//map layout
 		tileLoad = new TilesLoad();
 		tiles = tileLoad.getTiles();
+		
+		SquareTileGrass = new Texture( Gdx.files.internal( "images/Grass.png" ));
+		SquareTileRegionGrass = new TextureRegion( SquareTileGrass, 0, 0, SquareTileGrass.getWidth(), SquareTileGrass.getHeight() );		
 		
 		simulation = new Simulation( this, citizens, tiles );
 		renderer = new Renderer( this, camera, stage, batch, citizens );
