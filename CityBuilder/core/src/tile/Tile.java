@@ -1,20 +1,26 @@
 package tile;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 
 public class Tile {
+	
 	private TileType type;
-	private boolean isResource;
+	
+	protected TileSpriteAdapter spriteAdapter; 
+	protected boolean isResource;
 
 	public Tile(TileType type) {
 		this.setType(type);
-		this.isResource = false;
 	}
 	
-	public Tile(TileType type, boolean isResource) {
-		this.setType(type);
-		this.isResource = isResource;
+	public Sprite getSprite() {
+		if (spriteAdapter == null)
+			return null;
+		
+		return spriteAdapter.getSprite(this);
 	}
-
+	
 	public TileType getType() {
 		return type;
 	}
@@ -24,7 +30,7 @@ public class Tile {
 	}
 	
 	public boolean isResource() {
-		return isResource;
+		return false;
 	}
 
 }

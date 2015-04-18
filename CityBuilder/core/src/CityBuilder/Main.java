@@ -1,5 +1,9 @@
 package CityBuilder;
 
+import renderer.LevelRenderer;
+import levels.Level1;
+import managers.SettingManager;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,12 +14,11 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class Main implements ApplicationListener {
 
-    static final int WORLD_WIDTH = 25;
-    static final int WORLD_HEIGHT = 25;
-
     private OrthographicCamera camera;
     private SpriteBatch batch;
 
+    private GameState gameState;
+    
     @Override
     public void create() {
         float w = Gdx.graphics.getWidth();
@@ -25,6 +28,10 @@ public class Main implements ApplicationListener {
         camera.update();
 
         batch = new SpriteBatch();
+        
+        // Create new gamestate
+        gameState = new GameState();
+        gameState.setLevel(new Level1());
     }
 
     @Override
@@ -37,7 +44,7 @@ public class Main implements ApplicationListener {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         batch.begin();
-
+        LevelRenderer.render(batch, gameState.getLevel());
         
         
         batch.end();
@@ -63,13 +70,13 @@ public class Main implements ApplicationListener {
             camera.translate(0, 3, 0);
         }
 
-        camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, 100/camera.viewportWidth);
+        camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, gameState.getLevel().getWidth() * SettingManager.WORLD_WIDTH / camera.viewportWidth);
 
         float effectiveViewportWidth = camera.viewportWidth * camera.zoom;
         float effectiveViewportHeight = camera.viewportHeight * camera.zoom;
 
-        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
+        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, gameState.getLevel().getWidth() * SettingManager.WORLD_WIDTH - effectiveViewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, gameState.getLevel().getHeight() * SettingManager.WORLD_HEIGHT - effectiveViewportHeight / 2f);
     }
 
     @Override

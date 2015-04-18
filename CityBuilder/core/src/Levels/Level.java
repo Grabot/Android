@@ -1,4 +1,4 @@
-package Levels;
+package levels;
 
 import tile.Tile;
 
@@ -23,4 +23,8 @@ public class Level {
 		return height;
 	}
 
+	public Tile getTile(int x, int y) {
+		return level[x][y];
+	}
+	
 }
