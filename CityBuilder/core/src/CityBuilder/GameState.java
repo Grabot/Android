@@ -1,6 +1,6 @@
 package CityBuilder;
 
-import levels.Level;
+import level.Level;
 
 public class GameState {
 	

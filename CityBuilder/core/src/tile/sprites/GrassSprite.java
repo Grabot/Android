@@ -3,9 +3,9 @@ package tile.sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import tile.TileSpriteAdapter;
+import tile.TileSprite;
 
-public class GrassSprite extends TileSpriteAdapter {
+public class GrassSprite extends TileSprite {
 
 	private static final GrassSprite instance = new GrassSprite();
  

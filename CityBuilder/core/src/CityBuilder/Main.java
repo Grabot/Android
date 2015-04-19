@@ -1,7 +1,7 @@
 package CityBuilder;
 
 import renderer.LevelRenderer;
-import levels.Level1;
+import level.Level1;
 import managers.SettingManager;
 
 import com.badlogic.gdx.ApplicationListener;

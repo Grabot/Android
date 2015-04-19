@@ -7,7 +7,7 @@ public class Tile {
 	
 	private TileType type;
 	
-	protected TileSpriteAdapter spriteAdapter; 
+	protected ITileSprite spriteAdapter; 
 	protected boolean isResource;
 
 	public Tile(TileType type) {

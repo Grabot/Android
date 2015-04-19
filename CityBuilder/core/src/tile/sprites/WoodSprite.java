@@ -3,9 +3,9 @@ package tile.sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import tile.ResourceTileSpriteAdapter;
+import tile.TileSprite;
 
-public class WoodSprite extends ResourceTileSpriteAdapter {
+public class WoodSprite extends TileSprite {
 
 	private static final WoodSprite instance = new WoodSprite();
  
