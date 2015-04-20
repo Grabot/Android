@@ -6,10 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public abstract class TileSprite implements ITileSprite {
 
-	protected Sprite standard;
-	protected Sprite resourceDepleted;
+	protected LayeredSprite standard;
+	protected LayeredSprite resourceDepleted;
 	
-	@Override
 	public Sprite getSprite(Tile tile) {
 		Sprite sprite = standard;
 

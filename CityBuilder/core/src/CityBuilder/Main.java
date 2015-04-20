@@ -25,6 +25,7 @@ public class Main implements ApplicationListener {
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(30, 30 * (h / w));
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+        camera.zoom = 5;
         camera.update();
 
         batch = new SpriteBatch();

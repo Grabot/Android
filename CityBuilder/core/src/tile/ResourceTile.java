@@ -1,6 +1,5 @@
 package tile;
 
-
 public class ResourceTile extends Tile {
 
 	private int startAmount;
@@ -25,6 +24,4 @@ public class ResourceTile extends Tile {
 		
 		return value;
 	}
-
-		
 }
