@@ -11,11 +11,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class Main implements ApplicationListener {
 
     private OrthographicCamera camera;
     private SpriteBatch batch;
+    private SpriteBatch guibatch;
 
     private GameState gameState;
     
@@ -29,6 +32,7 @@ public class Main implements ApplicationListener {
         camera.update();
 
         batch = new SpriteBatch();
+        guibatch = new SpriteBatch();
         
         // Create new gamestate
         gameState = new GameState();
@@ -46,9 +50,14 @@ public class Main implements ApplicationListener {
         
         batch.begin();
         LevelRenderer.render(batch, gameState.getLevel());
-        
-        
         batch.end();
+
+        guibatch.begin();
+        Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        TextField txtField = new TextField("test", skin);
+        txtField.draw(guibatch, 1.0f);
+        guibatch.end();
+        
     }
 
     private void handleInput() {
