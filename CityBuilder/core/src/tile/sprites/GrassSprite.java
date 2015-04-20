@@ -12,6 +12,9 @@ public class GrassSprite extends TileSprite {
  
 	protected GrassSprite() {
 		standard = new LayeredSprite(new Sprite(new Texture("images/Grass.png")));
+		
+		selected = new LayeredSprite(new Sprite(new Texture("images/Grass.png")));
+		selected.add(new Sprite(new Texture("images/SquareSelectedSmall.png")));
 	}
  
 	public static GrassSprite getInstance() {

@@ -55,6 +55,7 @@ public class Main implements ApplicationListener {
         guibatch.begin();
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         TextField txtField = new TextField("test", skin);
+        txtField.setPosition(20f, 20f);
         txtField.draw(guibatch, 1.0f);
         guibatch.end();
         
