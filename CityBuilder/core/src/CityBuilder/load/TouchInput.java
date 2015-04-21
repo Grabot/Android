@@ -2,7 +2,10 @@ package CityBuilder.load;
 
 import CityBuilder.gameScreen.Simulation;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 
 public class TouchInput 
 {
@@ -12,7 +15,7 @@ public class TouchInput
 	private float touchX = 1700;
 	private float touchY = 1700;
 	
-	private float offsetX = 60;
+	private float offsetX = 0;
 	private float offsetY = 0;
 	
 	private boolean firstPress = true;
@@ -25,7 +28,7 @@ public class TouchInput
 	
 	private float currentX = 0;
 	private float currentY = 0;
-	private float currentZoom = 0.5f;
+	private float currentZoom = 1f;
 	
 	private boolean touchSideRight = false;
 	private boolean touchSideLeft = false;
@@ -41,9 +44,23 @@ public class TouchInput
 	private OrthographicCamera camera;
 	private Simulation simulation;
 	
-	public TouchInput()
+	private float width = 0;
+	private float height = 0;
+	
+	private int mapSizeWidth = (25*64);
+	private int mapSizeHeight = (25*64);
+	
+	private int overShootX = 480;
+	private int overShootY = 320;
+	
+	public TouchInput( OrthographicCamera camera, float width, float height )
 	{
+		this.width = width;
+		this.height = height;
 		
+		currentX = camera.position.x;
+		currentY = camera.position.y;
+		currentZoom = camera.zoom;
 	}
 	
 	public void variables( OrthographicCamera camera, Simulation simulation )
@@ -70,39 +87,12 @@ public class TouchInput
 		}
 		else if( touchedDown && !firstPress )
 		{
-			/*
-			if( ((currentX + offsetX) <= -280) && offsetX < 0 )
-			{
-				touchSideRight = true;
-			}
-			else if( ((currentX + offsetX) >= 280) && offsetX > 0 )
-			{
-				touchSideLeft = true;
-			}
-			else
-			{
-				if(!touchSideRight || !touchSideLeft )
-				{
-					offsetX = ((firstX - touchX)*currentZoom);
-				}
-			}
-			*/
+			
 			offsetX = ((firstX - touchX)*currentZoom);
-			/*
-			if( ((currentY - offsetY) <= -150) && offsetY > 0 )
-			{
-				touchUp = true;
-			}
-			else if( ((currentY - offsetY) >= 150) && offsetY < 0 )
-			{
-				touchBottom = true;
-			}
-			else
-			{
-				offsetY = ((firstY - touchY)*currentZoom);
-			}
-			*/
+			offsetX = MathUtils.clamp(offsetX, (((((width/2)*currentZoom) - 32 ) - currentX) - (overShootX*currentZoom)), (((((640*currentZoom) - 32 ) - currentX)+mapSizeWidth-(width*currentZoom) )) + (overShootX*currentZoom));
+
 			offsetY = ((firstY - touchY)*currentZoom);
+			offsetY = MathUtils.clamp(offsetY, -((((mapSizeHeight - ((height/2)*currentZoom))-currentY)-32) + (overShootY*currentZoom)), (-(((((height/2)*currentZoom)-32) - currentY)) + (overShootY*currentZoom)) );
 			
 			if( Math.sqrt((offsetX*offsetX + offsetY*offsetY)) >= 20 )
 			{
@@ -165,18 +155,18 @@ public class TouchInput
 		if( touchedDown && !firstPinch )
 		{
 
-			//Gdx.app.log( "Zoomtest", "zoomSpeed: " + zoomSpeed );
-
 			zoomSpeed = firstDistance - distance;
-			
+
+			Gdx.app.log( "Zoomtest", "zoomSpeed: " + zoomSpeed );
+
 			if( camera.zoom <= 0.2 && zoomSpeed <= 0 )
 			{
 				currentZoom = 0.2f;
 				zoomSpeed = 0;
 			}
-			else if( camera.zoom >= 0.5 && zoomSpeed > 0)
+			else if( camera.zoom >= 1 && zoomSpeed > 0)
 			{
-				currentZoom = 0.5f;
+				currentZoom = 1f;
 				zoomSpeed = 0;
 			}
 			else
@@ -194,30 +184,18 @@ public class TouchInput
 		
 		if( down_pressed )
 		{
-			if(camera.zoom >= 3.5f )
-			{
-				
-			}
-			else
-			{
-				camera.zoom += 0.1;
-				currentZoom += 0.1;
-			}
+			camera.zoom += 0.1;
+			currentZoom += 0.1;
 		}
 		else if( up_pressed )
 		{
-			if(camera.zoom <= 0.2 )
-			{
-				
-			}
-			else
-			{
-				camera.zoom -= 0.1;
-				currentZoom -= 0.1;
-			}
+			camera.zoom -= 0.1;
+			currentZoom -= 0.1;
 		}
 		
-
+		//System.out.println("position x: " + camera.position.x + " position y: " + camera.position.y + " zoom: " + camera.zoom );
+		//camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, 1.2f);
+		
 		camera.position.x = (currentX + offsetX);
 		camera.position.y = (currentY - offsetY);
 		

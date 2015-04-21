@@ -91,27 +91,25 @@ public class Renderer extends Data
 		progressFillRegion = new TextureRegion( progressBarFill, 0, 0, progressBarFill.getWidth(), progressBarFill.getHeight() );
 
 		infoBoxDisplay = new DisplayInfoBox();
-		inputHandler = new TouchInput();
+		inputHandler = new TouchInput( camera, width, height );
 		drawTiles = new DrawTiles();
 		
 		this.stage = stage;
 		this.camera = camera;
 		this.batch = batch;
-
-		camera.zoom = 0.5f;
 		
 		drawStage();
 	}
 	
 	public void DrawImages( Simulation simulation )
 	{
+		
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
 		inputHandler.MapScroll();
 		inputHandler.MapZoom();
 		
 		drawTiles.fillTiles( simulation, batch );
-
 		
 		int tileCounter = 0;
 		boolean[] tileTouch = simulation.getTileTouch();

@@ -81,8 +81,8 @@ public class Main implements ApplicationListener, InputProcessor
 		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, width, height);
-		camera.position.set( 0, 0, 50 );
-	    
+		camera.position.set( camera.viewportWidth / 2f, ((camera.viewportHeight / 2f)+(5*64)), 0.5f );
+		
 	    batch = new SpriteBatch();
 	    
 	    stage = new Stage(new ScreenViewport());
@@ -118,7 +118,7 @@ public class Main implements ApplicationListener, InputProcessor
 		
 		//tell the camera to update its matrices.
 		camera.update();
-	    
+
 		//tell the SpriteBatch to render in the
 		//coordinate system specified by the camera.
 		batch.setProjectionMatrix(camera.combined);
@@ -129,16 +129,16 @@ public class Main implements ApplicationListener, InputProcessor
 		Application app = Gdx.app;
 		
 		fpsLogger.log();
-		
+
 		screen.update( delta, touchX1, touchY1, width, height, touched_down, fast_press, back_pressed, down_pressed, enter_pressed, up_pressed, distance );
-		
+
 		enter_pressed = false;
 		back_pressed = false;
 		down_pressed = false;
 		up_pressed = false;
-		
+
 		screen.render( app );
-		
+
 		if (screen.isDone( ))
 	    {
 	        // dispose the current screen

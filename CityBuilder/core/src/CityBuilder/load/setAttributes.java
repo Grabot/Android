@@ -691,6 +691,7 @@ public class setAttributes extends Data
 		tile[24][22].setAttributes( TileType.grass, available, false, 2000 );
 		tile[24][23].setAttributes( TileType.grass, available, false, 2000 );
 		tile[24][24].setAttributes( TileType.grass, available, false, 2000 );
+			
 	}
 	
 	public Tile getTile( int i, int j )
