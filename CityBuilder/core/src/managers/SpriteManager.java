@@ -17,7 +17,4 @@ public class SpriteManager {
 		return instance;
 	}
 	
-	
-	
-	
 }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -20,7 +21,6 @@ public class Main implements ApplicationListener {
 	private Stage stage;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private SpriteBatch guibatch;
 
 	private GameState gameState;
 
@@ -35,7 +35,6 @@ public class Main implements ApplicationListener {
 
 		stage = new Stage();
 		batch = new SpriteBatch();
-		guibatch = new SpriteBatch();
 
 		// Create new gamestate
 		gameState = new GameState();
@@ -68,7 +67,10 @@ public class Main implements ApplicationListener {
 
 		test++;
 		txtField.setText(String.format("%d", test));
-		
+		if (Gdx.input.isTouched()){
+			Vector3 vec = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			System.out.println(vec);
+		}
 		
 		stage.draw();
 	}
