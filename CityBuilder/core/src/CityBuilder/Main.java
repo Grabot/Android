@@ -11,103 +11,115 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class Main implements ApplicationListener {
 
-    private OrthographicCamera camera;
-    private SpriteBatch batch;
-    private SpriteBatch guibatch;
+	private Stage stage;
+	private OrthographicCamera camera;
+	private SpriteBatch batch;
+	private SpriteBatch guibatch;
 
-    private GameState gameState;
-    
-    @Override
-    public void create() {
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
-        camera = new OrthographicCamera(30, 30 * (h / w));
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        camera.zoom = 5;
-        camera.update();
+	private GameState gameState;
 
-        batch = new SpriteBatch();
-        guibatch = new SpriteBatch();
-        
-        // Create new gamestate
-        gameState = new GameState();
-        gameState.setLevel(new Level1());
-    }
+	@Override
+	public void create() {
+		float w = Gdx.graphics.getWidth();
+		float h = Gdx.graphics.getHeight();
+		camera = new OrthographicCamera(30, 30 * (h / w));
+		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+		camera.zoom = 5;
+		camera.update();
 
-    @Override
-    public void render() {
-        handleInput();
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
+		stage = new Stage();
+		batch = new SpriteBatch();
+		guibatch = new SpriteBatch();
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
-        batch.begin();
-        LevelRenderer.render(batch, gameState.getLevel());
-        batch.end();
+		// Create new gamestate
+		gameState = new GameState();
+		gameState.setLevel(new Level1());
+		
+		// temp
+		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		txtField = new TextField("test", skin);
+		txtField.setPosition(20f, 20f);
 
-        guibatch.begin();
-        Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-        TextField txtField = new TextField("test", skin);
-        txtField.setPosition(20f, 20f);
-        txtField.draw(guibatch, 1.0f);
-        guibatch.end();
-        
-    }
+		stage.addActor(txtField);
+		stage.draw();
+	}
+	
+	TextField txtField;
+	int test = 0;
 
-    private void handleInput() {
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            camera.zoom += 0.02;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            camera.zoom -= 0.02;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            camera.translate(-3, 0, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            camera.translate(3, 0, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            camera.translate(0, -3, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            camera.translate(0, 3, 0);
-        }
+	@Override
+	public void render() {
+		handleInput();
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 
-        camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, gameState.getLevel().getWidth() * SettingManager.WORLD_WIDTH / camera.viewportWidth);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        float effectiveViewportWidth = camera.viewportWidth * camera.zoom;
-        float effectiveViewportHeight = camera.viewportHeight * camera.zoom;
+		batch.begin();
+		LevelRenderer.render(batch, gameState.getLevel());
+		batch.end();
 
-        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, gameState.getLevel().getWidth() * SettingManager.WORLD_WIDTH - effectiveViewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, gameState.getLevel().getHeight() * SettingManager.WORLD_HEIGHT - effectiveViewportHeight / 2f);
-    }
+		test++;
+		txtField.setText(String.format("%d", test));
+		
+		
+		stage.draw();
+	}
 
-    @Override
-    public void resize(int width, int height) {
-        camera.viewportWidth = 30f;
-        camera.viewportHeight = 30f * height/width;
-        camera.update();
-    }
+	private void handleInput() {
+		if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+			camera.zoom += 0.02;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+			camera.zoom -= 0.02;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			camera.translate(-3, 0, 0);
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			camera.translate(3, 0, 0);
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			camera.translate(0, -3, 0);
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			camera.translate(0, 3, 0);
+		}
 
-    @Override
-    public void resume() {
-    }
+		camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, gameState.getLevel().getWidth() * SettingManager.WORLD_WIDTH / camera.viewportWidth);
 
-    @Override
-    public void dispose() {
-        batch.dispose();
-    }
+		float effectiveViewportWidth = camera.viewportWidth * camera.zoom;
+		float effectiveViewportHeight = camera.viewportHeight * camera.zoom;
 
-    @Override
-    public void pause() {
-    }
+		camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, gameState.getLevel().getWidth() * SettingManager.WORLD_WIDTH - effectiveViewportWidth / 2f);
+		camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, gameState.getLevel().getHeight() * SettingManager.WORLD_HEIGHT - effectiveViewportHeight / 2f);
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		camera.viewportWidth = 30f;
+		camera.viewportHeight = 30f * height / width;
+		camera.update();
+	}
+
+	@Override
+	public void resume() {
+	}
+
+	@Override
+	public void dispose() {
+		batch.dispose();
+	}
+
+	@Override
+	public void pause() {
+	}
 
 }
