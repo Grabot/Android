@@ -169,6 +169,8 @@ public class Main implements ApplicationListener, InputProcessor
 		
 		batch.end();
 		
+		//inventoryActor.setVisible(true);
+		
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		//stage.setCamera( camera );
