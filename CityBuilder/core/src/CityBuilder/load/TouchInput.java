@@ -184,16 +184,16 @@ public class TouchInput
 		
 		if( down_pressed )
 		{
-			camera.zoom += 0.1;
 			currentZoom += 0.1;
 		}
 		else if( up_pressed )
 		{
-			camera.zoom -= 0.1;
 			currentZoom -= 0.1;
 		}
+
 		
-		//System.out.println("position x: " + camera.position.x + " position y: " + camera.position.y + " zoom: " + camera.zoom );
+		currentZoom = MathUtils.clamp( currentZoom, 0.1f, 2f );
+		camera.zoom = currentZoom;
 		//camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, 1.2f);
 		
 		camera.position.x = (currentX + offsetX);
