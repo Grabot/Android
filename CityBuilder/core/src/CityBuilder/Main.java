@@ -1,8 +1,12 @@
 package CityBuilder;
 
+import java.util.ArrayList;
+
 import CityBuilder.gameScreen.GameScreen;
 import CityBuilder.load.Screen;
 import CityBuilder.load.Vector;
+import CityBuilder.load.inventory.Inventory;
+import CityBuilder.load.inventory.InventoryActor;
 import CityBuilder.objects.Citizen;
 
 import com.badlogic.gdx.Application;
@@ -11,6 +15,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -19,9 +24,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import java.util.ArrayList;
 public class Main implements ApplicationListener, InputProcessor
 {
 	
@@ -58,7 +63,7 @@ public class Main implements ApplicationListener, InputProcessor
 	private Texture texture;
 	private Sprite sprite;
 	
-	private Stage stage;
+	public static Stage stage;
 
 	private InputMultiplexer inputMultiplexer = new InputMultiplexer();
 	
@@ -66,9 +71,15 @@ public class Main implements ApplicationListener, InputProcessor
 
 	private Citizen[] citizen = new Citizen[100];
 	
+	private InventoryActor inventoryActor;
+	
+	public static final AssetManager assets = new AssetManager();
+	
 	@Override
 	public void create()
 	{
+		Texture.setAssetManager(assets);
+		
 		citizens.add(null);
     	citizens.add( new Citizen( "Sander", 23, 100, "unemployed" ));
     	citizens.add(new Citizen( "Izzy", 19, 100, "unemployed" ));
@@ -95,6 +106,12 @@ public class Main implements ApplicationListener, InputProcessor
         Gdx.input.setCatchBackKey(true);
         
 		screen = new GameScreen( Gdx.app, camera, stage, batch, citizens );
+		
+		Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+		
+		DragAndDrop dragAndDrop = new DragAndDrop();
+		inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, skin);
+		stage.addActor(inventoryActor);
 		
 		Gdx.app.log( Main.LOG, "Creating game" );
 	}

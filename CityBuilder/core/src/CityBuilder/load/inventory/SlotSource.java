@@ -17,56 +17,57 @@ public class SlotSource extends Source {
 
 	private Slot sourceSlot;
 
-	public SlotSource(SlotActor actor) {
-		super(actor);
-		this.sourceSlot = actor.getSlot();
-	}
+    public SlotSource(SlotActor actor) {
+        super(actor);
+        this.sourceSlot = actor.getSlot();
+    }
 
-	@Override
-	public Payload dragStart(InputEvent event, float x, float y, int pointer) {
-		if (sourceSlot.getAmount() == 0) {
-			return null;
-		}
+    @Override
+    public Payload dragStart(InputEvent event, float x, float y, int pointer) {
+        if (sourceSlot.getAmount() == 0) {
+            return null;
+        }
 
-		Payload payload = new Payload();
-		Slot payloadSlot = new Slot(sourceSlot.getItem(), sourceSlot.getAmount());
-		sourceSlot.take(sourceSlot.getAmount());
-		payload.setObject(payloadSlot);
+        Payload payload = new Payload();
+        Slot payloadSlot = new Slot(sourceSlot.getItem(), sourceSlot.getAmount());
+        sourceSlot.take(sourceSlot.getAmount());
+        payload.setObject(payloadSlot);
 
-		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
-        //TextureAtlas icons = Main.assets.get("icons/icons.atlas", TextureAtlas.class);
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
         TextureRegion icon = icons.findRegion(payloadSlot.getItem().getTextureRegion());
 
-		Actor dragActor = new Image(icon);
-		payload.setDragActor(dragActor);
+        Actor dragActor = new Image(icon);
+        payload.setDragActor(dragActor);
 
-		Actor validDragActor = new Image(icon);
-		// validDragActor.setColor(0, 1, 0, 1);
-		payload.setValidDragActor(validDragActor);
+        Actor validDragActor = new Image(icon);
+        payload.setValidDragActor(validDragActor);
 
-		Actor invalidDragActor = new Image(icon);
-		// invalidDragActor.setColor(1, 0, 0, 1);
-		payload.setInvalidDragActor(invalidDragActor);
+        Actor invalidDragActor = new Image(icon);
+        payload.setInvalidDragActor(invalidDragActor);
 
-		return payload;
-	}
+        return payload;
+    }
 
-	@Override
-	public void dragStop(InputEvent event, float x, float y, int pointer, Payload payload, Target target) {
-		Slot payloadSlot = (Slot) payload.getObject();
-		if (target != null) {
-			Slot targetSlot = ((SlotActor) target.getActor()).getSlot();
-			if (targetSlot.getItem() == payloadSlot.getItem() || targetSlot.getItem() == null) {
-				targetSlot.add(payloadSlot.getItem(), payloadSlot.getAmount());
-			} else {
-				Item targetType = targetSlot.getItem();
-				int targetAmount = targetSlot.getAmount();
-				targetSlot.take(targetAmount);
-				targetSlot.add(payloadSlot.getItem(), payloadSlot.getAmount());
-				sourceSlot.add(targetType, targetAmount);
-			}
-		} else {
-			sourceSlot.add(payloadSlot.getItem(), payloadSlot.getAmount());
-		}
-	}
+    @Override
+    public void dragStop(InputEvent event, float x, float y, int pointer, Payload payload, Target target) {
+        Slot payloadSlot = (Slot) payload.getObject();
+        // the payload was dropped over a valid target
+        if (target != null) {
+            Slot targetSlot = ((SlotActor) target.getActor()).getSlot();
+            // if the item is the same, stack it
+            if (targetSlot.getItem() == payloadSlot.getItem() || targetSlot.getItem() == null) {
+                targetSlot.add(payloadSlot.getItem(), payloadSlot.getAmount());
+            } else {
+                // the item is not the same, thus switch the items
+                Item targetType = targetSlot.getItem();
+                int targetAmount = targetSlot.getAmount();
+                targetSlot.take(targetAmount);
+                targetSlot.add(payloadSlot.getItem(), payloadSlot.getAmount());
+                sourceSlot.add(targetType, targetAmount);
+            }
+        } else {
+            // the payload was not dropped over a target, thus put it back to where it came from
+            sourceSlot.add(payloadSlot.getItem(), payloadSlot.getAmount());
+        }
+    }
 }
