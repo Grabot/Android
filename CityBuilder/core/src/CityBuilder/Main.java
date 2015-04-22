@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.sun.scenario.Settings;
 
 public class Main implements ApplicationListener {
 
@@ -69,7 +70,15 @@ public class Main implements ApplicationListener {
 		txtField.setText(String.format("%d", test));
 		if (Gdx.input.isTouched()){
 			Vector3 vec = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-			System.out.println(vec);
+			
+			int x = (int) Math.floor(vec.x / SettingManager.WORLD_WIDTH);
+			int y = (int) Math.floor(vec.y / SettingManager.WORLD_HEIGHT);
+			
+					
+			//gameState.getLevel().getTile(x, y)
+			
+			
+			System.out.println(String.format("{%d,%d} : %s", x, y, gameState.getLevel().getTile(x, y).getType().toString()));
 		}
 		
 		stage.draw();
