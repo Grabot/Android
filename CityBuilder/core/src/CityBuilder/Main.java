@@ -71,7 +71,6 @@ public class Main implements ApplicationListener, InputProcessor
 
 	private Citizen[] citizen = new Citizen[100];
 	
-	private InventoryActor inventoryActor;
 	
 	public static final AssetManager assets = new AssetManager();
 	
@@ -106,12 +105,6 @@ public class Main implements ApplicationListener, InputProcessor
         Gdx.input.setCatchBackKey(true);
         
 		screen = new GameScreen( Gdx.app, camera, stage, batch, citizens );
-		
-		Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
-		
-		DragAndDrop dragAndDrop = new DragAndDrop();
-		inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, skin);
-		stage.addActor(inventoryActor);
 		
 		Gdx.app.log( Main.LOG, "Creating game" );
 	}
@@ -169,8 +162,6 @@ public class Main implements ApplicationListener, InputProcessor
 		
 		batch.end();
 		
-		//inventoryActor.setVisible(true);
-		
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		//stage.setCamera( camera );
@@ -218,13 +209,12 @@ public class Main implements ApplicationListener, InputProcessor
 			touched_down = false;
 			if( (just_touched < 10) && (just_touched != 0) )
 			{
-				System.out.println("fast press");
 				fast_press = true;
 				just_touched = 0;
 			}
 			else
 			{
-				fast_press = true;
+				fast_press = false;
 			}
 			just_touched = 0;
 			//touchX1 = 1200;

@@ -7,6 +7,8 @@ import CityBuilder.load.Data;
 import CityBuilder.load.DisplayInfoBox;
 import CityBuilder.load.DrawTiles;
 import CityBuilder.load.TouchInput;
+import CityBuilder.load.inventory.Inventory;
+import CityBuilder.load.inventory.InventoryActor;
 import CityBuilder.objects.Citizen;
 
 import com.badlogic.gdx.Gdx;
@@ -21,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
 public class Renderer extends Data
 {
@@ -38,17 +41,16 @@ public class Renderer extends Data
 	
 	private Skin skin;
 	
-	private int selectedTile = 1;
+	private int selectedTile = -1;
 	private boolean hasWall = false;
 	
 	private float scaling_x = 0;
 	private float scaling_y = 0;
 	
+	private TextButton inventoryButton;
 	private Texture InfoBox;
 	private Texture progressBar;
 	private Texture progressBarFill;
-	
-	private TextButton woodButton;
 	
 	private TextField tileInfo;
 	private TextField resourceInfo;
@@ -70,6 +72,8 @@ public class Renderer extends Data
 	private TextureRegion region;
 	private TextureRegion progressRegion;
 	private TextureRegion progressFillRegion;
+	
+	private InventoryActor inventoryActor;
 	
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
@@ -103,6 +107,7 @@ public class Renderer extends Data
 	
 	public void DrawImages( Simulation simulation )
 	{
+		//inventoryActor.setVisible( true );
 		
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
@@ -111,49 +116,12 @@ public class Renderer extends Data
 		
 		drawTiles.fillTiles( simulation, batch );
 		
-		int tileCounter = 0;
-		boolean[] tileTouch = simulation.getTileTouch();
-		for( int i = 0; i < simulation.tiles.size(); i++ )
-		{
-			if( tileTouch[i] )
-			{
-				if( simulation.tiles.get(i).isWall() )
-				{
-					woodButton.setText( "Remove wall" );
-				}
-				else
-				{
-					woodButton.setText( "Build wall" );
-				}
-				
-				if( simulation.tiles.get(i).getColour() == available )
-				{
-					woodButton.setVisible( true );
-				}
-				else
-				{
-					woodButton.setVisible( false );
-				}
-				
-				
-				infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, i);
-				drawTiles.drawSelected( simulation, batch, i );
-				
-				selectedTile = i;
-				hasWall = simulation.tiles.get(i).isWall();
-			}
-			else
-			{
-				tileCounter ++;
-			}
-		}
+		this.selectedTile = simulation.TileTouch();
 		
-
-		if( tileCounter == simulation.tiles.size())
+		if( selectedTile >= 0 )
 		{
-			//nothing selected
-			infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, 0);
-			woodButton.setVisible( false );
+			infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, selectedTile);
+			drawTiles.drawSelected( simulation, batch, selectedTile );
 		}
 		
 		if( simulation.getMining() )
@@ -191,6 +159,11 @@ public class Renderer extends Data
 		tileInfo.setBounds( 1000, 530, 160, 20 );
 		tileInfo.setVisible( false );
 		
+		inventoryButton = new TextButton( "inventory", skin );
+		inventoryButton.setDisabled( false );
+		inventoryButton.setBounds(1150, 30, 100, 100);
+		inventoryButton.setVisible( true );
+		
 		resourceInfo = new TextField( "", skin );
 		resourceInfo.setDisabled( true );
 		resourceInfo.setBounds( 1000, 430, 160, 20 );
@@ -222,10 +195,10 @@ public class Renderer extends Data
 		resourceGold.setVisible( true );
 		resourceCitizens.setVisible( true );
 		
-		woodButton = new TextButton("Build Wall", skin );
-		woodButton.setBounds(980, 220, 200, 50 );
-		woodButton.setVisible( false );
-		woodButton.addListener(woodButtonListener);
+		Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+		
+		DragAndDrop dragAndDrop = new DragAndDrop();
+		inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, skin);
 		
 		stage.addActor( UserInterface);
 		stage.addActor( MiningBar );
@@ -238,7 +211,8 @@ public class Renderer extends Data
 		stage.addActor( resourceFood );
 		stage.addActor( resourceGold );
 		stage.addActor( resourceCitizens );
-		stage.addActor( woodButton );
+		stage.addActor( inventoryButton );
+		stage.addActor( inventoryActor );
 		
 		resourceWood.setText( "Wood: " + game.Wood );
 		resourceStone.setText( "Stone: " + game.Stone );
@@ -246,49 +220,6 @@ public class Renderer extends Data
 		resourceGold.setText( "Gold: " + game.Gold );
 		resourceCitizens.setText( "Citizens: " + (citizens.size() - 1) );
 	}
-	
-	public ClickListener woodButtonListener = new ClickListener() 
-	{
-		@Override
-		public void clicked (InputEvent event, float x, float y) 
-		{
-			if( hasWall )
-			{
-				simulation.BuildWall( false, selectedTile );
-			}
-			else
-			{
-				simulation.BuildWall( true, selectedTile );
-			}
-			resourceWood.setText( "Wood: " + game.Wood );
-			resourceStone.setText( "Stone: " + game.Stone );
-		}
-		
-	};
-	
-	public ClickListener chopForestListener = new ClickListener() 
-	{
-		@Override
-		public void clicked (InputEvent event, float x, float y) 
-		{
-			game.Wood += 50;
-			resourceWood.setText( "Wood: " + game.Wood );
-			simulation.tiles.get(selectedTile).setType( TileType.grass );
-		}
-		
-	};
-	
-	public ClickListener chopStoneListener = new ClickListener() 
-	{
-		@Override
-		public void clicked (InputEvent event, float x, float y) 
-		{
-			game.Stone += 200;
-			resourceStone.setText( "Stone: " + game.Stone );
-			simulation.tiles.get(selectedTile).setType( TileType.grass );
-		}
-		
-	};
 	
 	public void dispose()
 	{

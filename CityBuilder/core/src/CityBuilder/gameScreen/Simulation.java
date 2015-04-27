@@ -43,6 +43,8 @@ public class Simulation extends Data {
 	private boolean[] firstTouchTile = new boolean[60001];
 	private boolean tileTouched = false;
 	private boolean touchedBox = true;
+	
+	private int selectedTile = -1;
 
 	float touch_distance_x = 999;
 	float touch_distance_y = 999;
@@ -86,7 +88,6 @@ public class Simulation extends Data {
 
 	public void update(float delta) {
 		checkTouch();
-		TileTouch();
 	}
 
 	public void updateScroll(float cameraX, float cameraY, float cameraZ) {
@@ -108,70 +109,48 @@ public class Simulation extends Data {
 		touch_distance_y = (((touchY - (ScreenHeight / 2)) * cameraZ - cameraY) * -1);
 	}
 
-	public void BuildWall(boolean build, int selectedTile) {
-		if (build) {
-			if (game.Wood >= 50 && game.Stone >= 100) {
-				game.Wood = game.Wood - 50;
-				game.Stone = game.Stone - 100;
-				tiles.get(selectedTile).setWall(true);
-			} else {
-				// not enough resources
-			}
-		} else if (!build) {
-			game.Wood = game.Wood + 50;
-			game.Stone = game.Stone + 100;
-			tiles.get(selectedTile).setWall(false);
-		}
-	}
+	public int TileTouch()
+	{
+		int tileX = Math.round((touch_distance_x)/64);
+		int tileY = Math.round((touch_distance_y)/64);
+		tileY = ((tileY-24)*-1);
+		
+		if (touched_down) 
+		{
+			selectedTile = ((tileY*25)+tileX);
+			if (pressed >= 20) 
+			{
+				if (!scrolling) 
+				{
+					MiningSequence = true;
+					miningProgress += 5;
 
-	private void TileTouch() {
-
-		if (tileTouched) {
-			if (touched_down) {
-				pressed++;
-
-				if (pressed >= 20) {
-					if (!scrolling) {
-						MiningSequence = true;
-						miningProgress += 5;
-
-						if (miningProgress >= 585) {
-							for (int i = 1; i < tiles.size(); i++) {
-								if (tileSelected[i]) {
-									tiles.get(i).setResources(tiles.get(i).getResources() - 1);
-								}
-							}
-							System.out.println("done mining");
-							miningProgress = 0;
-						}
+					if (miningProgress >= 585) 
+					{
+						tiles.get(selectedTile).setResources(tiles.get(selectedTile).getResources() - 1);
+						miningProgress = 0;
 					}
-				} else {
-					miningProgress = 0;
-					MiningSequence = false;
-				}
-
-				for (int i = 1; i < tiles.size(); i++) {
-					tileSelected[i] = false;
-
-				}
-				tileTouched = false;
-			}
-		}
-
-		if (fast_press) {
-			for (int k = 0; k < tiles.size(); k++) {
-				if ((tiles.get(k).getPosition().distance(new Vector(touch_distance_x, touch_distance_y)) < ((tileWidth / 2) + 1)) && !tileTouched) {
-					tileSelected[k] = true;
-					tileTouched = true;
 				}
 			}
-		}
+			
+			if( scrolling )
+			{
+				pressed = 0;
+				selectedTile = -1;
+				miningProgress = 0;
+				MiningSequence = false;
+			}
 
-		if (!touched_down) {
+			pressed++;
+		}
+		else
+		{
 			miningProgress = 0;
-			pressed = 0;
 			MiningSequence = false;
+			pressed = 0;
 		}
+		
+		return selectedTile;
 	}
 
 	public boolean getTouchedDown() {
