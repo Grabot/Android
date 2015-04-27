@@ -15,13 +15,13 @@ public class InventoryActor extends Window {
         //getButtonTable().add(closeButton).height(getPadTop());
 
         // basic layout
-        setPosition(400, 100);
-        defaults().space(8);
+        setPosition(700, 300);
         row().fill().expandX();
 
         // run through all slots and create SlotActors for each
         int i = 0;
-        for (Slot slot : inventory.getSlots()) {
+        for (Slot slot : inventory.getSlots()) 
+        {
             SlotActor slotActor = new SlotActor(skin, slot);
 
             // this can be ignored for now and will be explained in part III
@@ -32,7 +32,8 @@ public class InventoryActor extends Window {
 
             i++;
             // every 5 cells, we are going to jump to a new row
-            if (i % 5 == 0) {
+            if (i % 8 == 0) 
+            {
                 row();
             }
         }

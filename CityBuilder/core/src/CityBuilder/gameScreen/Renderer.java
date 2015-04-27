@@ -39,10 +39,9 @@ public class Renderer extends Data
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	
-	private Skin skin;
-	
 	private int selectedTile = -1;
-	private boolean hasWall = false;
+	
+	private boolean inventoryOn = false;
 	
 	private float scaling_x = 0;
 	private float scaling_y = 0;
@@ -107,39 +106,50 @@ public class Renderer extends Data
 	
 	public void DrawImages( Simulation simulation )
 	{
-		//inventoryActor.setVisible( true );
-		
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
-		inputHandler.MapScroll();
-		inputHandler.MapZoom();
 		
 		drawTiles.fillTiles( simulation, batch );
 		
-		this.selectedTile = simulation.TileTouch();
-		
-		if( selectedTile >= 0 )
-		{
-			infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, selectedTile);
-			drawTiles.drawSelected( simulation, batch, selectedTile );
-		}
-		
-		if( simulation.getMining() )
-		{
-			MiningBar.setVisible( true );
-			MiningBarFill.setVisible( true );
-			MiningBarFill.setBounds(305, 205, (0 + simulation.getMiningProgress()), 20 );
+		if( !inventoryOn )
+		{			
+			inputHandler.MapScroll();
+			inputHandler.MapZoom();
+			
+			this.selectedTile = simulation.TileTouch();
+			
+			if( selectedTile >= 0 )
+			{
+				infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, selectedTile);
+				drawTiles.drawSelected( simulation, batch, selectedTile );
+			}
+			
+			if( simulation.getMining() )
+			{
+				MiningBar.setVisible( true );
+				MiningBarFill.setVisible( true );
+				MiningBarFill.setBounds(305, 205, (0 + simulation.getMiningProgress()), 20 );
+			}
+			else
+			{
+				MiningBar.setVisible( false );
+				MiningBarFill.setVisible( false );
+			}
+			
+			inventoryActor.setVisible( false );
 		}
 		else
 		{
-			MiningBar.setVisible( false );
-			MiningBarFill.setVisible( false );
+			inventoryActor.setVisible( true );
 		}
 	}
 	
 
 	private void drawStage()
 	{
+		Skin inventorySkin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		
 		UserInterface = new Image(region);
 		UserInterface.setBounds(880, 80, 400, 600);
 		UserInterface.setVisible( true );
@@ -152,14 +162,12 @@ public class Renderer extends Data
 		MiningBarFill.setBounds(305, 205, 5, 20 );
 		MiningBarFill.setVisible( false );
 		
-		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-
 		tileInfo = new TextField( "", skin );
 		tileInfo.setDisabled(true);
 		tileInfo.setBounds( 1000, 530, 160, 20 );
 		tileInfo.setVisible( false );
 		
-		inventoryButton = new TextButton( "inventory", skin );
+		inventoryButton = new TextButton( "inventory", inventorySkin );
 		inventoryButton.setDisabled( false );
 		inventoryButton.setBounds(1150, 30, 100, 100);
 		inventoryButton.setVisible( true );
@@ -195,10 +203,9 @@ public class Renderer extends Data
 		resourceGold.setVisible( true );
 		resourceCitizens.setVisible( true );
 		
-		Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
-		
 		DragAndDrop dragAndDrop = new DragAndDrop();
-		inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, skin);
+		inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, inventorySkin);
+		inventoryActor.setMovable( false );
 		
 		stage.addActor( UserInterface);
 		stage.addActor( MiningBar );
@@ -219,7 +226,18 @@ public class Renderer extends Data
 		resourceFood.setText( "Food: " + game.Food );
 		resourceGold.setText( "Gold: " + game.Gold );
 		resourceCitizens.setText( "Citizens: " + (citizens.size() - 1) );
+
+		inventoryButton.addListener( InventoryListener );
 	}
+	
+	public ClickListener InventoryListener = new ClickListener() 
+	{
+		@Override
+		public void clicked (InputEvent event, float x, float y) 
+		{
+			inventoryOn = ! inventoryOn;
+		}
+	};
 	
 	public void dispose()
 	{
