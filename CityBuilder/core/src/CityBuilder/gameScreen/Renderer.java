@@ -2,7 +2,6 @@ package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
-import CityBuilder.enums.TileType;
 import CityBuilder.load.Data;
 import CityBuilder.load.DisplayInfoBox;
 import CityBuilder.load.DrawTiles;
@@ -15,6 +14,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -73,6 +73,7 @@ public class Renderer extends Data
 	private TextureRegion progressFillRegion;
 	
 	private InventoryActor inventoryActor;
+	private TextureAtlas atlas;
 	
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
@@ -84,6 +85,8 @@ public class Renderer extends Data
 
 		scaling_x = width/ScreenHeight;
 		scaling_y = height/ScreenWidth;
+		
+		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/InitialPack.pack"));
 
 		InfoBox = new Texture( Gdx.files.internal( "images/UITest.png" ));
 		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
@@ -109,7 +112,7 @@ public class Renderer extends Data
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
 		
-		drawTiles.fillTiles( simulation, batch );
+		drawTiles.fillTiles( simulation, batch, atlas );
 		
 		if( !inventoryOn )
 		{			
@@ -121,7 +124,7 @@ public class Renderer extends Data
 			if( selectedTile >= 0 )
 			{
 				infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, selectedTile);
-				drawTiles.drawSelected( simulation, batch, selectedTile );
+				drawTiles.drawSelected( simulation, batch, atlas, selectedTile );
 			}
 			
 			if( simulation.getMining() )

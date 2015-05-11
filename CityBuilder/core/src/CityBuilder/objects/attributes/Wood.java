@@ -5,6 +5,7 @@ import CityBuilder.objects.Tile;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Wood 
@@ -26,10 +27,12 @@ public class Wood
 		SquareTileRegionGrass = new TextureRegion( SquareTileGrass, 0, 0, SquareTileGrass.getWidth(), SquareTileGrass.getHeight() );		
 	}
 	
-	public void draw( Batch batch )
+	public void draw( Batch batch, TextureAtlas atlas )
 	{	
-		batch.draw( SquareTileRegionGrass, -SquareTileGrass.getWidth()/2 + tile.getPosition().x , -SquareTileGrass.getHeight()/2 + tile.getPosition().y, SquareTileGrass.getWidth()/2, SquareTileGrass.getHeight()/2, SquareTileGrass.getWidth(), SquareTileGrass.getHeight(), 1, 1, -90, false);
+		TextureRegion SquareTileRegionGrass = atlas.findRegion("Grass");
+		batch.draw( SquareTileRegionGrass, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	
-		batch.draw( SquareTileRegionWood, -SquareTileWood.getWidth()/2 + tile.getPosition().x , -SquareTileWood.getHeight()/2 + tile.getPosition().y, SquareTileWood.getWidth()/2, SquareTileWood.getHeight()/2, SquareTileWood.getWidth(), SquareTileWood.getHeight(), 1, 1, -90, false);
+		TextureRegion SquareTileRegionTree = atlas.findRegion("pinetree");
+		batch.draw( SquareTileRegionTree, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	}
 }

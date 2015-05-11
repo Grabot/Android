@@ -60,8 +60,6 @@ public class Main implements ApplicationListener, InputProcessor
 	
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private Texture texture;
-	private Sprite sprite;
 	
 	public static Stage stage;
 
@@ -72,12 +70,9 @@ public class Main implements ApplicationListener, InputProcessor
 	private Citizen[] citizen = new Citizen[100];
 	
 	
-	public static final AssetManager assets = new AssetManager();
-	
 	@Override
 	public void create()
 	{
-		Texture.setAssetManager(assets);
 		
 		citizens.add(null);
     	citizens.add( new Citizen( "Sander", 23, 100, "unemployed" ));

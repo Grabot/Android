@@ -5,6 +5,7 @@ import CityBuilder.objects.Tile;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Town 
@@ -27,10 +28,12 @@ public class Town
 	
 	}
 	
-	public void draw( Batch batch )
+	public void draw( Batch batch, TextureAtlas atlas )
 	{
-		batch.draw( SquareTileRegionGrass, -SquareTileGrass.getWidth()/2 + tile.getPosition().x , -SquareTileGrass.getHeight()/2 + tile.getPosition().y, SquareTileGrass.getWidth()/2, SquareTileGrass.getHeight()/2, SquareTileGrass.getWidth(), SquareTileGrass.getHeight(), 1, 1, -90, false);
+		TextureRegion SquareTileRegionGrass = atlas.findRegion("Grass");
+		batch.draw( SquareTileRegionGrass, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		
-		batch.draw( SquareTileRegionTown, -SquareTileTown.getWidth()/2 + tile.getPosition().x , -SquareTileTown.getHeight()/2 + tile.getPosition().y, SquareTileTown.getWidth()/2, SquareTileTown.getHeight()/2, SquareTileTown.getWidth(), SquareTileTown.getHeight(), 1, 1, -90, false);
+		TextureRegion SquareTileRegionTown = atlas.findRegion("HouseBrown");
+		batch.draw( SquareTileRegionTown, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	}
 }

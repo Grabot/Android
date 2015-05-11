@@ -1,0 +1,82 @@
+
+InitialPack.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+UITest
+  rotate: false
+  xy: 1, 1
+  size: 150, 230
+  orig: 150, 230
+  offset: 0, 0
+  index: -1
+coalOreSmall
+  rotate: false
+  xy: 153, 167
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+dirt
+  rotate: false
+  xy: 153, 101
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+goldOreSmall
+  rotate: false
+  xy: 219, 167
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grass
+  rotate: false
+  xy: 153, 35
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+HouseBrown
+  rotate: false
+  xy: 219, 101
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+ironOreSmall
+  rotate: false
+  xy: 285, 167
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+pinetree
+  rotate: false
+  xy: 219, 35
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+SquareGreySmall
+  rotate: false
+  xy: 285, 101
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+SquareSelectedSmall
+  rotate: false
+  xy: 351, 167
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+water
+  rotate: false
+  xy: 285, 35
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

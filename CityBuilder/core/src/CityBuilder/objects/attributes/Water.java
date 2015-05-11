@@ -5,6 +5,7 @@ import CityBuilder.objects.Tile;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Water 
@@ -21,8 +22,9 @@ public class Water
 		SquareTileRegionWater = new TextureRegion( SquareTileWater, 0, 0, SquareTileWater.getWidth(), SquareTileWater.getHeight() );		
 	}
 	
-	public void draw( Batch batch )
+	public void draw( Batch batch, TextureAtlas atlas )
 	{
-		batch.draw( SquareTileRegionWater, -SquareTileWater.getWidth()/2 + tile.getPosition().x , -SquareTileWater.getHeight()/2 + tile.getPosition().y, SquareTileWater.getWidth()/2, SquareTileWater.getHeight()/2, SquareTileWater.getWidth(), SquareTileWater.getHeight(), 1, 1, -90, false);
+		TextureRegion SquareTileRegionWater = atlas.findRegion("water");
+		batch.draw( SquareTileRegionWater, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	}
 }

@@ -9,10 +9,8 @@ import CityBuilder.objects.attributes.Town;
 import CityBuilder.objects.attributes.Water;
 import CityBuilder.objects.attributes.Wood;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Tile 
 {
@@ -67,31 +65,31 @@ public class Tile
 		}
 	}
 	
-	public void drawTile( Batch batch )
+	public void drawTile( Batch batch, TextureAtlas atlas )
 	{
 		if( type.toString().equals("grass") )
 		{
-			grass.draw( batch );
+			grass.draw( batch, atlas );
 		}
 		else if( type.toString().equals("water") )
 		{
-			water.draw( batch );
+			water.draw( batch, atlas );
 		}
 		else if( type.toString().equals("iron") )
 		{
-			iron.draw( batch );
+			iron.draw( batch, atlas );
 		}
 		else if( type.toString().equals("stone") )
 		{
-			stone.draw( batch );
+			stone.draw( batch, atlas );
 		}
 		else if( type.toString().equals("wood") )
 		{
-			wood.draw( batch );
+			wood.draw( batch, atlas );
 		}
 		else if( type.toString().equals("town") )
 		{
-			town.draw( batch );
+			town.draw( batch, atlas );
 		}
 	}
 

@@ -5,6 +5,7 @@ import CityBuilder.objects.Tile;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Iron 
@@ -21,8 +22,9 @@ public class Iron
 		SquareTileRegionIron = new TextureRegion( SquareTileIron, 0, 0, SquareTileIron.getWidth(), SquareTileIron.getHeight() );		
 	}
 	
-	public void draw( Batch batch )
+	public void draw( Batch batch, TextureAtlas atlas )
 	{
-		batch.draw( SquareTileRegionIron, -SquareTileIron.getWidth()/2 + tile.getPosition().x , -SquareTileIron.getHeight()/2 + tile.getPosition().y, SquareTileIron.getWidth()/2, SquareTileIron.getHeight()/2, SquareTileIron.getWidth(), SquareTileIron.getHeight(), 1, 1, -90, false);
+		TextureRegion SquareTileRegionIron = atlas.findRegion("ironOreSmall");
+		batch.draw( SquareTileRegionIron, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	}
 }
