@@ -36,6 +36,11 @@ public class SlotSource extends Source {
         TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
         TextureRegion icon = icons.findRegion(payloadSlot.getItem().getTextureRegion());
 
+        System.out.println("width: " + icon.getRegionWidth());
+
+        //icon.setRegionX(2);
+        //icon.setRegionY(2);
+
         Actor dragActor = new Image(icon);
         payload.setDragActor(dragActor);
 

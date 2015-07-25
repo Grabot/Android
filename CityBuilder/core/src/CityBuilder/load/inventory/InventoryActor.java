@@ -23,6 +23,7 @@ public class InventoryActor extends Window {
         for (Slot slot : inventory.getSlots()) 
         {
             SlotActor slotActor = new SlotActor(skin, slot);
+            slotActor.setSize(90, 90);
 
             // this can be ignored for now and will be explained in part III
             dragAndDrop.addSource(new SlotSource(slotActor));

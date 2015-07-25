@@ -208,7 +208,11 @@ public class Renderer extends Data
 		
 		DragAndDrop dragAndDrop = new DragAndDrop();
 		inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, inventorySkin);
+		inventoryActor.setSize(800, 600);
+		
 		inventoryActor.setMovable( false );
+		
+		System.out.println("size inventory width: " + inventoryActor.getWidth() + " height: " + inventoryActor.getHeight() );
 		
 		stage.addActor( UserInterface);
 		stage.addActor( MiningBar );

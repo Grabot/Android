@@ -10,7 +10,8 @@ public class Slot {
 
     private Array<SlotListener> slotListeners = new Array<SlotListener>();
 
-    public Slot(Item item, int amount) {
+    public Slot(Item item, int amount) 
+    {
         this.item = item;
         this.amount = amount;
     }

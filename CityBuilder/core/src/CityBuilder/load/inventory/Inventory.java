@@ -10,12 +10,13 @@ public class Inventory {
     public Inventory() {
         slots = new Array<Slot>(40);
         for (int i = 0; i < 40; i++) {
-            slots.add(new Slot(null, 0));
+        	Slot slot = new Slot(null, 0 );
+            slots.add(slot);
         }
 
         // create some random items
         for (Slot slot : slots) {
-        	slot.add(Item.values()[1],1);
+        	slot.add(Item.values()[MathUtils.random(0, 10)],1);
         }
 
         // create a few random empty slots
