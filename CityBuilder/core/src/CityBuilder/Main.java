@@ -235,7 +235,7 @@ public class Main implements ApplicationListener, InputProcessor
 	@Override
 	public boolean keyDown(int keycode) 
 	{
-		if( keycode == Keys.ESCAPE || keycode == Keys.BACK )
+		if( keycode == Keys.ESCAPE || keycode == Keys.BACK ||keycode == Keys.Q )
 		{
 			Gdx.app.exit();
 	        back_pressed = true;

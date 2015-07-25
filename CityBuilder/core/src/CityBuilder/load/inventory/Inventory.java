@@ -8,22 +8,24 @@ public class Inventory {
     private Array<Slot> slots;
 
     public Inventory() {
-        slots = new Array<Slot>(40);
-        for (int i = 0; i < 40; i++) {
+        slots = new Array<Slot>(72);
+        for (int i = 0; i < 72; i++) {
         	Slot slot = new Slot(null, 0 );
             slots.add(slot);
         }
 
         // create some random items
-        for (Slot slot : slots) {
-        	slot.add(Item.values()[MathUtils.random(0, 10)],1);
-        }
+ 		for (Slot slot : slots) {
+ 			slot.add(Item.values()[1], 1);
+ 		}
 
         // create a few random empty slots
+ 		/*
         for (int i = 0; i < 20; i++) {
             Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
             randomSlot.take(randomSlot.getAmount());
         }
+        */
     }
 
     public int checkInventory(Item item) {

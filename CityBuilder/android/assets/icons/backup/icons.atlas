@@ -13,7 +13,7 @@ batterybase
 bluecrystal
   rotate: false
   xy: 1, 151
-  size: 70, 70
+  size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 48

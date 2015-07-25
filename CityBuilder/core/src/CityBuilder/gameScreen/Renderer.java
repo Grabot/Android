@@ -53,12 +53,6 @@ public class Renderer extends Data
 	
 	private TextField tileInfo;
 	private TextField resourceInfo;
-	private TextField levelText;
-	private TextField resourceCitizens;
-	private TextField resourceWood;
-	private TextField resourceStone;
-	private TextField resourceFood;
-	private TextField resourceGold;
 	
 	private GameScreen game;
 	
@@ -116,6 +110,7 @@ public class Renderer extends Data
 		
 		if( !inventoryOn )
 		{			
+			UserInterface.setVisible(true);
 			inputHandler.MapScroll();
 			inputHandler.MapZoom();
 			
@@ -143,6 +138,9 @@ public class Renderer extends Data
 		}
 		else
 		{
+			UserInterface.setVisible( false );
+			tileInfo.setVisible( false );
+			resourceInfo.setVisible( false );
 			inventoryActor.setVisible( true );
 		}
 	}
@@ -180,59 +178,21 @@ public class Renderer extends Data
 		resourceInfo.setBounds( 1000, 430, 160, 20 );
 		resourceInfo.setVisible( false );
 		
-		levelText = new TextField( "Level 1", skin );
-		levelText.setDisabled(true);
-		levelText.setBounds(30, 680, 100, 20 );
-		levelText.setVisible( true );
-		
-		resourceWood = new TextField( "Wood: ", skin );
-		resourceStone = new TextField( "Stone: ", skin );
-		resourceFood = new TextField( "Food: ", skin );
-		resourceGold = new TextField( "Gold: ", skin );
-		resourceCitizens = new TextField( "Citizens: ", skin );
-		resourceWood.setDisabled( true );
-		resourceStone.setDisabled( true );
-		resourceFood.setDisabled( true );
-		resourceGold.setDisabled( true );
-		resourceCitizens.setDisabled( true );
-		resourceWood.setBounds( 30, 650, 100, 20 );
-		resourceStone.setBounds( 30, 620, 100, 20 );
-		resourceFood.setBounds( 30, 590, 100, 20 );
-		resourceGold.setBounds( 30, 560, 100, 20 );
-		resourceCitizens.setBounds( 30,  530, 100, 20);
-		resourceWood.setVisible( true );
-		resourceStone.setVisible( true );
-		resourceFood.setVisible( true );
-		resourceGold.setVisible( true );
-		resourceCitizens.setVisible( true );
-		
 		DragAndDrop dragAndDrop = new DragAndDrop();
 		inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, inventorySkin);
-		inventoryActor.setSize(800, 600);
-		
+		//inventoryActor.setSize(800, 600);
+		inventoryActor.setPosition(10, 10);
 		inventoryActor.setMovable( false );
 		
-		System.out.println("size inventory width: " + inventoryActor.getWidth() + " height: " + inventoryActor.getHeight() );
+		//System.out.println("size inventory width: " + inventoryActor.getWidth() + " height: " + inventoryActor.getHeight() );
 		
 		stage.addActor( UserInterface);
 		stage.addActor( MiningBar );
 		stage.addActor( MiningBarFill );
 		stage.addActor( tileInfo );
 		stage.addActor( resourceInfo );
-		stage.addActor( levelText );
-		stage.addActor( resourceWood );
-		stage.addActor( resourceStone );
-		stage.addActor( resourceFood );
-		stage.addActor( resourceGold );
-		stage.addActor( resourceCitizens );
 		stage.addActor( inventoryButton );
 		stage.addActor( inventoryActor );
-		
-		resourceWood.setText( "Wood: " + game.Wood );
-		resourceStone.setText( "Stone: " + game.Stone );
-		resourceFood.setText( "Food: " + game.Food );
-		resourceGold.setText( "Gold: " + game.Gold );
-		resourceCitizens.setText( "Citizens: " + (citizens.size() - 1) );
 
 		inventoryButton.addListener( InventoryListener );
 	}

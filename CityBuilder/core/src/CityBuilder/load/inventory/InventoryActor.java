@@ -15,7 +15,6 @@ public class InventoryActor extends Window {
         //getButtonTable().add(closeButton).height(getPadTop());
 
         // basic layout
-        setPosition(700, 300);
         row().fill().expandX();
 
         // run through all slots and create SlotActors for each
@@ -23,7 +22,6 @@ public class InventoryActor extends Window {
         for (Slot slot : inventory.getSlots()) 
         {
             SlotActor slotActor = new SlotActor(skin, slot);
-            slotActor.setSize(90, 90);
 
             // this can be ignored for now and will be explained in part III
             dragAndDrop.addSource(new SlotSource(slotActor));
