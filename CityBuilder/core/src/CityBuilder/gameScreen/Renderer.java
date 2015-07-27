@@ -133,7 +133,6 @@ public class Renderer extends Data
 				MiningBar.setVisible( false );
 				MiningBarFill.setVisible( false );
 			}
-			
 			inventoryActor.setVisible( false );
 		}
 		else

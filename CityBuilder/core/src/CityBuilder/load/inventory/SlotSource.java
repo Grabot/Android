@@ -33,10 +33,8 @@ public class SlotSource extends Source {
         sourceSlot.take(sourceSlot.getAmount());
         payload.setObject(payloadSlot);
 
-        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Inventory.atlas"));
         TextureRegion icon = icons.findRegion(payloadSlot.getItem().getTextureRegion());
-
-        System.out.println("width: " + icon.getRegionWidth());
 
         //icon.setRegionX(2);
         //icon.setRegionY(2);

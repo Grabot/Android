@@ -25,7 +25,7 @@ public class SlotActor extends ImageButton implements SlotListener {
         // ignore this for now, it will be explained in part IV
         SlotTooltip tooltip = new SlotTooltip(slot, skin);
         Main.stage.addActor(tooltip);
-        addListener(new TooltipListener(tooltip, true));
+        addListener(new TooltipListener(tooltip));
         
         slot.addListener(this);
     }
@@ -34,14 +34,14 @@ public class SlotActor extends ImageButton implements SlotListener {
      * This will create a new style for our image button, with the correct image for the item type.
      */
     private static ImageButtonStyle createStyle(Skin skin, Slot slot) {
-    	TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
+    	TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Inventory.atlas"));
         //TextureAtlas icons = Main.assets.get("icons/icons.atlas", TextureAtlas.class);
         TextureRegion image;
         if (slot.getItem() != null) {
             image = icons.findRegion(slot.getItem().getTextureRegion());
         } else {
             // we have a special "empty" region in our atlas file, which is just black
-            image = icons.findRegion("nothing");
+            image = icons.findRegion("Empty");
         }
         ImageButtonStyle style = new ImageButtonStyle(skin.get(ButtonStyle.class));
         style.imageUp = new TextureRegionDrawable(image);

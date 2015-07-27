@@ -37,11 +37,12 @@ public class SlotTooltip extends Window implements SlotListener
 	    @Override
 	    public void setVisible(boolean visible) {
 	        super.setVisible(visible);
-	        // the listener sets this to true in case the slot is hovered
-	        // however, we don't want that in case the slot is empty
+	        //the listener sets this to true in case the slot is hovered
+	        //however, we don't want that in case the slot is empty
 	        if (slot.isEmpty()) {
 	            super.setVisible(false);
 	        }
 	    }
+	    
 
 	}
