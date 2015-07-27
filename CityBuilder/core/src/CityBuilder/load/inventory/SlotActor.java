@@ -14,6 +14,7 @@ public class SlotActor extends ImageButton implements SlotListener {
     private Slot slot;
 
     private Skin skin;
+    private SlotTooltip tooltip;
 
     public SlotActor(Skin skin, Slot slot) {
         super(createStyle(skin, slot));
@@ -23,7 +24,7 @@ public class SlotActor extends ImageButton implements SlotListener {
         // this actor has to be notified when the slot itself changes
 
         // ignore this for now, it will be explained in part IV
-        SlotTooltip tooltip = new SlotTooltip(slot, skin);
+        tooltip = new SlotTooltip(slot, skin);
         Main.stage.addActor(tooltip);
         addListener(new TooltipListener(tooltip));
         
@@ -58,6 +59,12 @@ public class SlotActor extends ImageButton implements SlotListener {
 
     public Slot getSlot() {
         return slot;
+    }
+
+	@Override
+    public void clearLabels()
+    {
+    	tooltip.clearLabels();
     }
 
 }

@@ -11,7 +11,7 @@ public class TooltipListener extends InputListener
 
     private Vector2 position = new Vector2();
     private Vector2 tmp = new Vector2();
-    private Vector2 offset = new Vector2(10, 10);
+    private Vector2 offset = new Vector2(0, 50);
 
     public TooltipListener(Actor tooltip) {
         this.tooltip = tooltip;
@@ -23,16 +23,19 @@ public class TooltipListener extends InputListener
         tooltip.setVisible(true);
         tmp.set(x, y);
         event.getListenerActor().localToStageCoordinates(tmp);
-        tooltip.setPosition(tmp.x + position.x + offset.x, tmp.y + position.y + offset.y);
+        if(tmp.x + offset.x + tooltip.getWidth() >= 640)
+        {
+        	tmp.x = (640-tooltip.getWidth() );
+        }
+        if( tmp.y > 600 )
+        {
+        	offset.y = -100;
+        }
+        tooltip.setPosition(tmp.x, tmp.y + offset.y);
         tooltip.toFront();
         return false;
  	}
-
-    @Override
-    public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-        tooltip.setVisible(false);
-    }
-
+    
     /**
      * The offset of the tooltip from the touch position. It should not be
      * positive as the tooltip will flicker otherwise.

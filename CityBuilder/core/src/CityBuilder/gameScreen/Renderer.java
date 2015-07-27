@@ -31,6 +31,8 @@ public class Renderer extends Data
 	
 	public static final String LOG = Renderer.class.getSimpleName();
 
+	private boolean initialClose = false;
+	
 	private DisplayInfoBox infoBoxDisplay;
 	private TouchInput inputHandler;
 	private DrawTiles drawTiles;
@@ -134,9 +136,16 @@ public class Renderer extends Data
 				MiningBarFill.setVisible( false );
 			}
 			inventoryActor.setVisible( false );
+			
+			if( initialClose )
+			{
+				initialClose = false;
+				inventoryActor.clearLabels();
+			}
 		}
 		else
 		{
+			initialClose = true;
 			UserInterface.setVisible( false );
 			tileInfo.setVisible( false );
 			resourceInfo.setVisible( false );

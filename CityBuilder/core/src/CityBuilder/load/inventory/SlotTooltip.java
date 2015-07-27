@@ -44,5 +44,10 @@ public class SlotTooltip extends Window implements SlotListener
 	        }
 	    }
 	    
-
+	    @Override
+	    public void clearLabels()
+	    {
+	    	super.setVisible(false);
+	    }
+	    
 	}

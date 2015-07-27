@@ -70,4 +70,11 @@ public class Slot {
     public String toString() {
         return "Slot[" + item + ":" + amount + "]";
     }
+    
+    public void clearLabels()
+    {
+    	for (SlotListener slotListener : slotListeners) {
+            slotListener.clearLabels();
+        }
+    }
 }

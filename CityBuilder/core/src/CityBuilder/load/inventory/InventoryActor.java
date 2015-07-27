@@ -1,11 +1,19 @@
 package CityBuilder.load.inventory;
 
+import java.util.ArrayList;
+
+import CityBuilder.objects.Citizen;
+
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
 public class InventoryActor extends Window {
 
+	//make a list with the actors, 
+	//the only way I could remove the labels after closing the inventory
+	private ArrayList<SlotActor> slotActors = new ArrayList<SlotActor>();
+	
     public InventoryActor(Inventory inventory, DragAndDrop dragAndDrop, Skin skin) {
         super("Inventory", skin);
 
@@ -16,7 +24,7 @@ public class InventoryActor extends Window {
         // basic layout
         row().fill().expandX();
 
-        // run through all slots and create SlotActors for each
+        //run through all slots and create SlotActors for each
         int i = 0;
         for (Slot slot : inventory.getSlots()) 
         {
@@ -27,7 +35,8 @@ public class InventoryActor extends Window {
             dragAndDrop.addTarget(new SlotTarget(slotActor));
             
             add(slotActor);
-
+            slotActors.add(slotActor);
+            
             i++;
             // every 8 cells, we are going to jump to a new row
             if (i % 8 == 0) 
@@ -40,5 +49,16 @@ public class InventoryActor extends Window {
 
         // it is hidden by default
         setVisible(false);
+    }
+    
+    /**
+     * clear out all the labels with the actor list
+     */
+    public void clearLabels()
+    {
+    	for( int i = 0; i < slotActors.size(); i++ )
+    	{
+        	slotActors.get(i).clearLabels();
+    	}
     }
 }
