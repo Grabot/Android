@@ -1,19 +1,22 @@
 package CityBuilder.load.inventory;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 public class Slot {
 
     private Item item;
-
     private int amount;
+    
+    Vector2 pos;
 
     private Array<SlotListener> slotListeners = new Array<SlotListener>();
 
-    public Slot(Item item, int amount) 
+    public Slot(Item item, int amount, Vector2 pos) 
     {
         this.item = item;
         this.amount = amount;
+        this.pos = pos;
     }
 
     public boolean isEmpty() {
@@ -64,6 +67,11 @@ public class Slot {
 
     public int getAmount() {
         return amount;
+    }
+    
+    public Vector2 getPosition()
+    {
+    	return pos;
     }
 
     @Override

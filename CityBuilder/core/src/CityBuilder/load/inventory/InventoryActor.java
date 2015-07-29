@@ -17,7 +17,7 @@ public class InventoryActor extends Window {
     public InventoryActor(Inventory inventory, DragAndDrop dragAndDrop, Skin skin) {
         super("Inventory", skin);
 
-        // add an "X" button to the top right of the window, and make it hide the inventory
+        //add an "X" button to the top right of the window, and make it hide the inventory
         //TextButton closeButton = new TextButton("X", skin);
         //getButtonTable().add(closeButton).height(getPadTop());
 
@@ -28,13 +28,14 @@ public class InventoryActor extends Window {
         int i = 0;
         for (Slot slot : inventory.getSlots()) 
         {
-            SlotActor slotActor = new SlotActor(skin, slot);
+            SlotActor slotActor = new SlotActor(skin, slot, this);
 
             // this can be ignored for now and will be explained in part III
             dragAndDrop.addSource(new SlotSource(slotActor));
             dragAndDrop.addTarget(new SlotTarget(slotActor));
             
             add(slotActor);
+            //create a dummy slotActor list purely for removing labels afterwards
             slotActors.add(slotActor);
             
             i++;
@@ -44,13 +45,12 @@ public class InventoryActor extends Window {
                 row();
             }
         }
-
+        
         pack();
 
         // it is hidden by default
         setVisible(false);
     }
-    
     /**
      * clear out all the labels with the actor list
      */
@@ -61,4 +61,14 @@ public class InventoryActor extends Window {
         	slotActors.get(i).clearLabels();
     	}
     }
+    
+    
+    public void addAmountLabels()
+    {
+    	for( int i = 0; i < slotActors.size(); i++ )
+    	{
+        	slotActors.get(i).addAmounts();
+    	}
+    }
+    
 }

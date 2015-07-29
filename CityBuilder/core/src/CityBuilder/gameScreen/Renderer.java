@@ -32,6 +32,7 @@ public class Renderer extends Data
 	public static final String LOG = Renderer.class.getSimpleName();
 
 	private boolean initialClose = false;
+	private boolean initialOpen = true;
 	
 	private DisplayInfoBox infoBoxDisplay;
 	private TouchInput inputHandler;
@@ -135,28 +136,34 @@ public class Renderer extends Data
 				MiningBar.setVisible( false );
 				MiningBarFill.setVisible( false );
 			}
-			inventoryActor.setVisible( false );
 			
 			if( initialClose )
 			{
 				initialClose = false;
 				inventoryActor.clearLabels();
+				inventoryActor.setVisible( false );
+				initialOpen = true;
 			}
 		}
 		else
 		{
-			initialClose = true;
-			UserInterface.setVisible( false );
-			tileInfo.setVisible( false );
-			resourceInfo.setVisible( false );
-			inventoryActor.setVisible( true );
+			if( initialOpen )
+			{
+				initialOpen = false;
+				initialClose = true;
+				UserInterface.setVisible( false );
+				tileInfo.setVisible( false );
+				resourceInfo.setVisible( false );
+				inventoryActor.setVisible( true );
+				inventoryActor.addAmountLabels();
+			}
 		}
 	}
 	
 
 	private void drawStage()
 	{
-		Skin inventorySkin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+		Skin inventorySkin = new Skin(Gdx.files.internal("skins/inventoryTest/uiskin.json"));
 		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
 		UserInterface = new Image(region);
@@ -188,11 +195,8 @@ public class Renderer extends Data
 		
 		DragAndDrop dragAndDrop = new DragAndDrop();
 		inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, inventorySkin);
-		//inventoryActor.setSize(800, 600);
 		inventoryActor.setPosition(10, 10);
 		inventoryActor.setMovable( false );
-		
-		//System.out.println("size inventory width: " + inventoryActor.getWidth() + " height: " + inventoryActor.getHeight() );
 		
 		stage.addActor( UserInterface);
 		stage.addActor( MiningBar );

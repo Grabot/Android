@@ -8,18 +8,21 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class TooltipListener extends InputListener
 {
     private Actor tooltip;
+    private InventoryActor actor;
 
     private Vector2 position = new Vector2();
     private Vector2 tmp = new Vector2();
     private Vector2 offset = new Vector2(0, 50);
 
-    public TooltipListener(Actor tooltip) {
+    public TooltipListener(Actor tooltip, InventoryActor actor) {
         this.tooltip = tooltip;
+        this.actor = actor;
     }
 
     @Override
     public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
  		//see when the button is pressed
+    	actor.addAmountLabels();
         tooltip.setVisible(true);
         tmp.set(x, y);
         event.getListenerActor().localToStageCoordinates(tmp);
@@ -27,7 +30,7 @@ public class TooltipListener extends InputListener
         {
         	tmp.x = (640-tooltip.getWidth() );
         }
-        if( tmp.y > 600 )
+        if( tmp.y > 500 )
         {
         	offset.y = -100;
         }

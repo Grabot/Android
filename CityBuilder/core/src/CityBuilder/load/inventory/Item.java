@@ -2,8 +2,8 @@ package CityBuilder.load.inventory;
 
 public enum Item {
 	
-	CRYSTAL_RED("purple"), 
-	CRYSTAL_BLUE("woodSlot");
+	WoodWithPurple("purple"), 
+	NormalWood("woodSlot");
 
     private String textureRegion;
 

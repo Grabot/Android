@@ -15,18 +15,21 @@ public class SlotActor extends ImageButton implements SlotListener {
 
     private Skin skin;
     private SlotTooltip tooltip;
+    private SlotToolamount toolamount;
 
-    public SlotActor(Skin skin, Slot slot) {
+    public SlotActor(Skin skin, Slot slot, InventoryActor actor) {
         super(createStyle(skin, slot));
         this.slot = slot;
         this.skin = skin;
 
         // this actor has to be notified when the slot itself changes
-
         // ignore this for now, it will be explained in part IV
         tooltip = new SlotTooltip(slot, skin);
+        toolamount = new SlotToolamount(slot, skin);
         Main.stage.addActor(tooltip);
-        addListener(new TooltipListener(tooltip));
+        Main.stage.addActor(toolamount);
+        addListener(new TooltipListener(tooltip, actor));
+        addListener(new ToolamountListener(toolamount));
         
         slot.addListener(this);
     }
@@ -60,11 +63,17 @@ public class SlotActor extends ImageButton implements SlotListener {
     public Slot getSlot() {
         return slot;
     }
-
+    
 	@Override
     public void clearLabels()
     {
     	tooltip.clearLabels();
+    	toolamount.clearLabels();
     }
+	
+	public void addAmounts()
+	{
+		toolamount.addSlotAmounts();
+	}
 
 }

@@ -8,6 +8,5 @@ public interface SlotListener {
     void hasChanged(Slot slot);
 
 	void clearLabels();
-    
 
 }    
