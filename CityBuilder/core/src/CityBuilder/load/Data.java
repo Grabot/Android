@@ -1,10 +1,12 @@
 package CityBuilder.load;
 
+import com.badlogic.gdx.Gdx;
+
 public abstract class Data 
 {
 	
-	protected int ScreenWidth = 1280;
-	protected int ScreenHeight = 720;
+	protected int ScreenWidth = Gdx.graphics.getWidth();
+	protected int ScreenHeight = Gdx.graphics.getHeight();
 	
 	protected int tileWidth = 64;
 	protected int tileHeight = 64;

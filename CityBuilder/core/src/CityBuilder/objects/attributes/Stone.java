@@ -12,20 +12,9 @@ public class Stone
 {
 	private Tile tile;
 	
-	private Texture SquareTileStone;
-	private TextureRegion SquareTileRegionStone;
-	
-	private Texture SquareTileGrass;
-	private TextureRegion SquareTileRegionGrass;
-
 	public Stone( Tile tile )
 	{
 		this.tile = tile;
-		SquareTileStone = new Texture( Gdx.files.internal( "images/Rock3.png" ));
-		SquareTileRegionStone = new TextureRegion( SquareTileStone, 0, 0, SquareTileStone.getWidth(), SquareTileStone.getHeight() );		
-		SquareTileGrass = new Texture( Gdx.files.internal( "images/Grass.png" ));
-		SquareTileRegionGrass = new TextureRegion( SquareTileGrass, 0, 0, SquareTileGrass.getWidth(), SquareTileGrass.getHeight() );		
-	
 	}
 	
 	public void draw( Batch batch, TextureAtlas atlas )

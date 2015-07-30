@@ -46,9 +46,6 @@ public class Renderer extends Data
 	
 	private boolean inventoryOn = false;
 	
-	private float scaling_x = 0;
-	private float scaling_y = 0;
-	
 	private TextButton inventoryButton;
 	private Texture InfoBox;
 	private Texture progressBar;
@@ -80,9 +77,6 @@ public class Renderer extends Data
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
-		scaling_x = width/ScreenHeight;
-		scaling_y = height/ScreenWidth;
-		
 		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/InitialPack.pack"));
 
 		InfoBox = new Texture( Gdx.files.internal( "images/UITest.png" ));
@@ -185,7 +179,7 @@ public class Renderer extends Data
 		
 		inventoryButton = new TextButton( "inventory", inventorySkin );
 		inventoryButton.setDisabled( false );
-		inventoryButton.setBounds(1150, 30, 100, 100);
+		inventoryButton.setBounds( 1150, 30, 100, 100);
 		inventoryButton.setVisible( true );
 		
 		resourceInfo = new TextField( "", skin );

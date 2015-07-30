@@ -34,8 +34,8 @@ public class InventoryActor extends Window {
             dragAndDrop.addSource(new SlotSource(slotActor));
             dragAndDrop.addTarget(new SlotTarget(slotActor));
             
-            this.setScaleX(1.0f);
-            this.setScaleY(1.0f);
+            //this.setScaleX(scalingX);
+            //this.setScaleY(scalingY);
             
             add(slotActor);
             //create a dummy slotActor list purely for removing labels afterwards

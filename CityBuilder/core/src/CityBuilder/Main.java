@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import CityBuilder.gameScreen.GameScreen;
 import CityBuilder.load.Screen;
 import CityBuilder.load.Vector;
-import CityBuilder.load.inventory.Inventory;
-import CityBuilder.load.inventory.InventoryActor;
 import CityBuilder.objects.Citizen;
 
 import com.badlogic.gdx.Application;
@@ -15,18 +13,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 public class Main implements ApplicationListener, InputProcessor
 {
 	
@@ -49,7 +44,6 @@ public class Main implements ApplicationListener, InputProcessor
 	
 	private float width = 0;
 	private float height = 0;
-	
 	private float just_touched = 0;
 	
 	private boolean fast_press = false;
@@ -69,6 +63,7 @@ public class Main implements ApplicationListener, InputProcessor
 
 	private Citizen[] citizen = new Citizen[100];
 	
+	Viewport viewport;
 	
 	@Override
 	public void create()
@@ -86,11 +81,11 @@ public class Main implements ApplicationListener, InputProcessor
 		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, width, height);
-		camera.position.set( camera.viewportWidth / 2f, ((camera.viewportHeight / 2f)+(5*64)), 0.5f );
+		camera.position.set( camera.viewportWidth/2f, ((camera.viewportHeight / 2f)+(5*64)), 0.5f );
 		
 	    batch = new SpriteBatch();
 	    
-	    stage = new Stage(new ScreenViewport());
+	    stage = new Stage(new StretchViewport(1280, 720));
 
 	    inputMultiplexer.addProcessor( this );
 	    inputMultiplexer.addProcessor( stage );
@@ -104,6 +99,13 @@ public class Main implements ApplicationListener, InputProcessor
 		Gdx.app.log( Main.LOG, "Creating game" );
 	}
 
+	@Override
+	public void resize(int width, int height) 
+	{
+		this.width = width;
+		this.height = height;
+	}
+	
 	@Override
 	public void dispose()
 	{
@@ -119,7 +121,7 @@ public class Main implements ApplicationListener, InputProcessor
 		//of the color to be used to clear the screen.
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		Gdx.gl.glViewport( 0, 0, 1280, 720);
+		Gdx.gl.glViewport( 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		//tell the camera to update its matrices.
 		camera.update();
@@ -160,13 +162,6 @@ public class Main implements ApplicationListener, InputProcessor
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		//stage.setCamera( camera );
-	}
-
-	@Override
-	public void resize(int width, int height) 
-	{
-		this.width = width;
-		this.height = height;
 	}
 	
 	private void touch_update()
