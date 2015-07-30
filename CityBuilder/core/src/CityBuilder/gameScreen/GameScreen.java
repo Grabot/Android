@@ -2,18 +2,16 @@ package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
-import CityBuilder.enums.TileType;
 import CityBuilder.load.Screen;
 import CityBuilder.load.TilesLoad;
+import CityBuilder.load.inventory.Inventory;
 import CityBuilder.objects.Citizen;
 import CityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class GameScreen implements Screen
@@ -38,19 +36,20 @@ public class GameScreen implements Screen
 	public int Gold = 0;
 	
 	private TilesLoad tileLoad;
-	
+	private Inventory inventory;
 	
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		Gdx.app.log( LOG, "Creating opening screen" );
 
+		inventory = new Inventory();
 		//map layout
 		tileLoad = new TilesLoad();
 		tiles = tileLoad.getTiles();
 		
-		simulation = new Simulation( this, citizens, tiles );
-		renderer = new Renderer( this, camera, stage, batch, citizens );
+		simulation = new Simulation( this, inventory, citizens, tiles );
+		renderer = new Renderer( this, camera, stage, batch, inventory, citizens );
 	}
 
 	@Override

@@ -3,8 +3,7 @@ package CityBuilder.gameScreen;
 import java.util.ArrayList;
 
 import CityBuilder.load.Data;
-import CityBuilder.load.TilesLoad;
-import CityBuilder.load.Vector;
+import CityBuilder.load.inventory.Inventory;
 import CityBuilder.objects.Citizen;
 import CityBuilder.objects.Tile;
 
@@ -54,11 +53,14 @@ public class Simulation extends Data {
 	public static final String LOG = Simulation.class.getSimpleName();
 
 	private GameScreen game;
+	
+	private Inventory inventory;
 
-	public Simulation(GameScreen game, ArrayList<Citizen> citizens, ArrayList<Tile> tiles ) {
+	public Simulation(GameScreen game, Inventory inventory, ArrayList<Citizen> citizens, ArrayList<Tile> tiles ) {
 		this.tiles = tiles;
 		this.game = game;
 		this.citizens = citizens;
+		this.inventory = inventory;
 
 		populate();
 	}
@@ -128,6 +130,10 @@ public class Simulation extends Data {
 					if (miningProgress >= 585) 
 					{
 						tiles.get(selectedTile).setResources(tiles.get(selectedTile).getResources() - 1);
+						if( tiles.get(selectedTile).getType().toString() == "wood" )
+						{
+							inventory.addItem(0, 1);
+						}
 						miningProgress = 0;
 					}
 				}

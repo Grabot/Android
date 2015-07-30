@@ -1,6 +1,5 @@
 package CityBuilder.load.inventory;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
@@ -9,17 +8,19 @@ public class Inventory {
     private Array<Slot> slots;
 
     public Inventory() {
-        slots = new Array<Slot>(72);
-    	for( int j = 0; j < 9; j++ )
+        slots = new Array<Slot>(20);
+    	for( int j = 0; j < 5; j++ )
     	{
-    		for (int i = 0; i < 8; i++) 
+    		for (int i = 0; i < 4; i++) 
     		{
             	//10 is the starting pos, 70 is the slot width, and 7 is the padding
-            	Slot slot = new Slot(null, 0, new Vector2((58+(i*(70+7))), (592 - (j*72))));
+            	Slot slot = new Slot(null, 0, new Vector2((130+(i*(150))), (585 - (j*138f))));
                 slots.add(slot);
         	}
         }
 
+    	/*
+    	//here you can add random item for testing purposes
         // create some random items
  		for (Slot slot : slots) {
  			slot.add(Item.values()[MathUtils.random(0,1)], 1);
@@ -30,15 +31,12 @@ public class Inventory {
             Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
             randomSlot.take(randomSlot.getAmount());
         }
-        
+        */
     }
     
     public void addItem( int slotNumber, int item )
     {
-    	if( item == 0 )
-    	{
-    		slots.get(slotNumber).add(Item.values()[0], 1 );
-    	}
+    	slots.get(slotNumber).add(Item.values()[item], 1 );
     }
 
     public int checkInventory(Item item) {

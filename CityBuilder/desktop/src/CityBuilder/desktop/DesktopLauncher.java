@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		
 		config.title = "City Builder";
 		config.width = 1280;
-		config.height = 768;
+		config.height = 720;
 
 		new LwjglApplication(new Main(), config);
 	}

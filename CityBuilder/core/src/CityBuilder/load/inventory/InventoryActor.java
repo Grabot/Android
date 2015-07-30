@@ -34,8 +34,8 @@ public class InventoryActor extends Window {
             dragAndDrop.addSource(new SlotSource(slotActor));
             dragAndDrop.addTarget(new SlotTarget(slotActor));
             
-            //this.setScaleX(scalingX);
-            //this.setScaleY(scalingY);
+            this.setScaleX(2.25f);
+            this.setScaleY(2.25f);
             
             add(slotActor);
             //create a dummy slotActor list purely for removing labels afterwards
@@ -43,7 +43,7 @@ public class InventoryActor extends Window {
             
             i++;
             // every 8 cells, we are going to jump to a new row
-            if (i % 8 == 0) 
+            if (i % 4 == 0) 
             {
                 row();
             }
