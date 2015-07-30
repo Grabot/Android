@@ -7,11 +7,13 @@ public enum Item {
 
     private String textureRegion;
 
-    private Item(String textureRegion) {
+    private Item(String textureRegion) 
+    {
         this.textureRegion = textureRegion;
     }
 
-    public String getTextureRegion() {
+    public String getTextureRegion() 
+    {
         return textureRegion;
     }
 }

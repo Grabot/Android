@@ -15,7 +15,7 @@ public class InventoryActor extends Window {
 	private ArrayList<SlotActor> slotActors = new ArrayList<SlotActor>();
 	
     public InventoryActor(Inventory inventory, DragAndDrop dragAndDrop, Skin skin) {
-        super("Inventory", skin);
+        super("", skin);
 
         //add an "X" button to the top right of the window, and make it hide the inventory
         //TextButton closeButton = new TextButton("X", skin);
@@ -34,6 +34,9 @@ public class InventoryActor extends Window {
             dragAndDrop.addSource(new SlotSource(slotActor));
             dragAndDrop.addTarget(new SlotTarget(slotActor));
             
+            this.setScaleX(1.0f);
+            this.setScaleY(1.0f);
+            
             add(slotActor);
             //create a dummy slotActor list purely for removing labels afterwards
             slotActors.add(slotActor);
@@ -51,6 +54,7 @@ public class InventoryActor extends Window {
         // it is hidden by default
         setVisible(false);
     }
+    
     /**
      * clear out all the labels with the actor list
      */
