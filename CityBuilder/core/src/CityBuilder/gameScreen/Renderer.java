@@ -113,7 +113,7 @@ public class Renderer extends Data
 			
 			this.selectedTile = simulation.TileTouch();
 			
-			if( selectedTile >= 0 )
+			if( selectedTile >= 0 && selectedTile < numberOfTiles )
 			{
 				infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, selectedTile);
 				drawTiles.drawSelected( simulation, batch, atlas, selectedTile );

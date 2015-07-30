@@ -39,8 +39,6 @@ public class GameScreen implements Screen
 	
 	private TilesLoad tileLoad;
 	
-	private Texture SquareTileGrass;
-	private TextureRegion SquareTileRegionGrass;
 	
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
@@ -50,9 +48,6 @@ public class GameScreen implements Screen
 		//map layout
 		tileLoad = new TilesLoad();
 		tiles = tileLoad.getTiles();
-		
-		SquareTileGrass = new Texture( Gdx.files.internal( "images/Grass.png" ));
-		SquareTileRegionGrass = new TextureRegion( SquareTileGrass, 0, 0, SquareTileGrass.getWidth(), SquareTileGrass.getHeight() );		
 		
 		simulation = new Simulation( this, citizens, tiles );
 		renderer = new Renderer( this, camera, stage, batch, citizens );
