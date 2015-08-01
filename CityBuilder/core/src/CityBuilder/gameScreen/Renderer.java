@@ -47,7 +47,6 @@ public class Renderer extends Data
 	private boolean inventoryOn = false;
 	
 	private TextButton inventoryButton;
-	private TextButton testButton;
 	private Texture InfoBox;
 	private Texture progressBar;
 	private Texture progressBarFill;
@@ -71,11 +70,12 @@ public class Renderer extends Data
 	private TextureAtlas atlas;
 	private Inventory inventory;
 	
-	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, Inventory inventory, ArrayList<Citizen> citizens )
+	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, Inventory inventory, InventoryActor inventoryActor, ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		this.game = game;
 		this.inventory = inventory;
+		this.inventoryActor = inventoryActor;
 		
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
@@ -127,10 +127,6 @@ public class Renderer extends Data
 				MiningBar.setVisible( true );
 				MiningBarFill.setVisible( true );
 				MiningBarFill.setBounds(305, 205, (0 + simulation.getMiningProgress()), 20 );
-				if( simulation.getMiningProgress() == 0 )
-				{
-					inventoryActor.clearLabels();
-				}
 			}
 			else
 			{
@@ -141,9 +137,9 @@ public class Renderer extends Data
 			if( initialClose )
 			{
 				initialClose = false;
+				initialOpen = true;
 				inventoryActor.clearLabels();
 				inventoryActor.setVisible( false );
-				initialOpen = true;
 			}
 		}
 		else
@@ -164,7 +160,7 @@ public class Renderer extends Data
 
 	private void drawStage()
 	{
-		Skin inventorySkin = new Skin(Gdx.files.internal("skins/inventoryTest/uiskin.json"));
+		
 		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
 		UserInterface = new Image(region);
@@ -184,24 +180,15 @@ public class Renderer extends Data
 		tileInfo.setBounds( 1000, 530, 160, 20 );
 		tileInfo.setVisible( false );
 		
-		inventoryButton = new TextButton( "inventory", inventorySkin );
+		inventoryButton = new TextButton( "inventory", skin );
 		inventoryButton.setDisabled( false );
 		inventoryButton.setBounds( 1150, 30, 100, 100);
 		inventoryButton.setVisible( true );
-		
-		testButton = new TextButton( "test Button", inventorySkin );
-		testButton.setBounds( 1150,  200, 100, 100);
-		testButton.setVisible( true );
 		
 		resourceInfo = new TextField( "", skin );
 		resourceInfo.setDisabled( true );
 		resourceInfo.setBounds( 1000, 430, 160, 20 );
 		resourceInfo.setVisible( false );
-		
-		DragAndDrop dragAndDrop = new DragAndDrop();
-		inventoryActor = new InventoryActor(inventory, dragAndDrop, inventorySkin);
-		inventoryActor.setPosition(10, 10);
-		inventoryActor.setMovable( false );
 		
 		stage.addActor( UserInterface);
 		stage.addActor( MiningBar );
@@ -210,10 +197,8 @@ public class Renderer extends Data
 		stage.addActor( resourceInfo );
 		stage.addActor( inventoryButton );
 		stage.addActor( inventoryActor );
-		stage.addActor( testButton );
 
 		inventoryButton.addListener( InventoryListener );
-		testButton.addListener( testButtonListener );
 	}
 	
 	public ClickListener InventoryListener = new ClickListener() 
@@ -221,20 +206,7 @@ public class Renderer extends Data
 		@Override
 		public void clicked (InputEvent event, float x, float y) 
 		{
-			inventoryOn = ! inventoryOn;
-		}
-	};
-	
-	public ClickListener testButtonListener = new ClickListener() 
-	{
-		@Override
-		public void clicked (InputEvent event, float x, float y) 
-		{
-			inventory.addItem(1, 0);
-			if( !inventoryOn )
-			{
-				inventoryActor.clearLabels();
-			}
+			inventoryOn = !inventoryOn;
 		}
 	};
 	

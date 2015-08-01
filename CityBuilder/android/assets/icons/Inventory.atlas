@@ -3,24 +3,52 @@ Inventory.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Empty
+brickResource
   rotate: false
-  xy: 1, 1
-  size: 70, 70
-  orig: 70, 70
+  xy: 0, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
-purple
+empty
   rotate: false
-  xy: 73, 1
-  size: 70, 70
-  orig: 70, 70
+  xy: 64, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
-woodSlot
+ironIngotResource
   rotate: false
-  xy: 145, 1
-  size: 70, 70
-  orig: 70, 70
+  xy: 128, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+ironOreResource
+  rotate: false
+  xy: 192, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+logsResource
+  rotate: false
+  xy: 256, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+planksResource
+  rotate: false
+  xy: 320, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stoneResource
+  rotate: false
+  xy: 384, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import CityBuilder.load.Screen;
 import CityBuilder.load.TilesLoad;
 import CityBuilder.load.inventory.Inventory;
+import CityBuilder.load.inventory.InventoryActor;
 import CityBuilder.objects.Citizen;
 import CityBuilder.objects.Tile;
 
@@ -13,6 +14,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
 public class GameScreen implements Screen
 {
@@ -37,19 +40,26 @@ public class GameScreen implements Screen
 	
 	private TilesLoad tileLoad;
 	private Inventory inventory;
+	private InventoryActor inventoryActor;
 	
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		Gdx.app.log( LOG, "Creating opening screen" );
 
+		Skin inventorySkin = new Skin(Gdx.files.internal("skins/inventoryTest/uiskin.json"));
+		
 		inventory = new Inventory();
+		DragAndDrop dragAndDrop = new DragAndDrop();
+		inventoryActor = new InventoryActor(inventory, dragAndDrop, inventorySkin);
+		inventoryActor.setPosition(10, 10);
+		inventoryActor.setMovable( false );
 		//map layout
 		tileLoad = new TilesLoad();
 		tiles = tileLoad.getTiles();
 		
-		simulation = new Simulation( this, inventory, citizens, tiles );
-		renderer = new Renderer( this, camera, stage, batch, inventory, citizens );
+		simulation = new Simulation( this, inventory, inventoryActor, citizens, tiles );
+		renderer = new Renderer( this, camera, stage, batch, inventory, inventoryActor, citizens );
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import CityBuilder.load.Data;
 import CityBuilder.load.inventory.Inventory;
+import CityBuilder.load.inventory.InventoryActor;
 import CityBuilder.objects.Citizen;
 import CityBuilder.objects.Tile;
 
@@ -55,12 +56,14 @@ public class Simulation extends Data {
 	private GameScreen game;
 	
 	private Inventory inventory;
+	private InventoryActor inventoryActor;
 
-	public Simulation(GameScreen game, Inventory inventory, ArrayList<Citizen> citizens, ArrayList<Tile> tiles ) {
+	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor, ArrayList<Citizen> citizens, ArrayList<Tile> tiles ) {
 		this.tiles = tiles;
 		this.game = game;
 		this.citizens = citizens;
 		this.inventory = inventory;
+		this.inventoryActor = inventoryActor;
 
 		populate();
 	}
@@ -132,8 +135,17 @@ public class Simulation extends Data {
 						tiles.get(selectedTile).setResources(tiles.get(selectedTile).getResources() - 1);
 						if( tiles.get(selectedTile).getType().toString() == "wood" )
 						{
-							inventory.addItem(0, 1);
+							inventory.addItem(0, 0);
 						}
+						else if( tiles.get(selectedTile).getType().toString() == "stone" )
+						{
+							inventory.addItem(1, 2);
+						}
+						else if( tiles.get(selectedTile).getType().toString() == "iron" )
+						{
+							inventory.addItem(2, 4);
+						}
+						inventoryActor.clearLabels();
 						miningProgress = 0;
 					}
 				}
