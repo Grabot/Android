@@ -2,12 +2,12 @@ package CityBuilder.load.inventory;
 
 public enum Item {
 	
-	LogResource("logsResource"), 
-	planksResource("planksResource"),
-	stoneResource("stoneResource"),
-	brickResource("brickResource"),
-	ironOreResource("ironOreResource"),
-	ironIngotResource("ironIngotResource");
+	wood("logsResource"), 
+	planks("planksResource"),
+	stone("stoneResource"),
+	brick("brickResource"),
+	iron("ironOreResource"),
+	ironIngot("ironIngotResource");
 
     private String textureRegion;
 

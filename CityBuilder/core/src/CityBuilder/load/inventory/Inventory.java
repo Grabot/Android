@@ -39,6 +39,49 @@ public class Inventory {
     {
     	slots.get(slotNumber).add(Item.values()[item], 1 );
     }
+    
+    public int checkInventoryTest( String item )
+    {
+    	for( int i = 0; i < slots.size; i++ )
+    	{
+    		if( slots.get(i).getAmount() > 0 )
+    		{
+    			if( slots.get(i).getItem().toString() == item )
+    			{
+    				System.out.println("type: " + slots.get(i).getItem().toString() + " amount: " + slots.get(i).getAmount() );
+    				return i;	
+    			}
+    		}
+    	}
+    	return -1;
+    }
+    
+    public int firstEmtpySlot() 
+    {
+    	for( int i = 0; i < slots.size; i++ )
+    	{
+    		if( slots.get(i).getAmount() == 0 )
+    		{
+    			return i;
+    		}
+    	}
+    	return -1;
+    }
+    
+    public int findResourceSlot(String item) 
+    {
+    	for( int i = 0; i < slots.size; i++ )
+    	{
+    		if( slots.get(i).getAmount() > 0 )
+    		{
+    			if( slots.get(i).getItem().toString() == item )
+    			{
+    				return i;
+    			}
+    		}
+    	}
+    	return -1;
+    }
 
     public int checkInventory(Item item) {
         int amount = 0;

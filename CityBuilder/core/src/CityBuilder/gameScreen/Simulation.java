@@ -132,20 +132,7 @@ public class Simulation extends Data {
 
 					if (miningProgress >= 585) 
 					{
-						tiles.get(selectedTile).setResources(tiles.get(selectedTile).getResources() - 1);
-						if( tiles.get(selectedTile).getType().toString() == "wood" )
-						{
-							inventory.addItem(0, 0);
-						}
-						else if( tiles.get(selectedTile).getType().toString() == "stone" )
-						{
-							inventory.addItem(1, 2);
-						}
-						else if( tiles.get(selectedTile).getType().toString() == "iron" )
-						{
-							inventory.addItem(2, 4);
-						}
-						inventoryActor.clearLabels();
+						addResources();
 						miningProgress = 0;
 					}
 				}
@@ -171,6 +158,43 @@ public class Simulation extends Data {
 		return selectedTile;
 	}
 
+	private void addResources()
+	{
+		tiles.get(selectedTile).setResources(tiles.get(selectedTile).getResources() - 1);
+		if (inventory.checkInventoryTest(tiles.get(selectedTile).getType().toString()) == -1 )
+		{
+			if( tiles.get(selectedTile).getType().toString() == "wood" )
+			{
+				inventory.addItem(inventory.firstEmtpySlot(), 0);
+			}
+			else if( tiles.get(selectedTile).getType().toString() == "stone" )
+			{
+				inventory.addItem(inventory.firstEmtpySlot(), 2);
+			}
+			else if( tiles.get(selectedTile).getType().toString() == "iron" )
+			{
+				inventory.addItem(inventory.firstEmtpySlot(), 4);
+			}
+		}
+		else
+		{
+			if( tiles.get(selectedTile).getType().toString() == "wood" )
+			{
+				inventory.addItem(inventory.findResourceSlot("wood"), 0);
+			}
+			else if( tiles.get(selectedTile).getType().toString() == "stone" )
+			{
+				inventory.addItem(inventory.findResourceSlot("stone"), 2);
+			}
+			else if( tiles.get(selectedTile).getType().toString() == "iron" )
+			{
+				inventory.addItem(inventory.findResourceSlot("iron"), 4);
+			}
+		}
+		
+		inventoryActor.clearLabels();
+	}
+	
 	public boolean getTouchedDown() {
 		return touched_down;
 	}
