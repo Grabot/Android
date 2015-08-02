@@ -9,4 +9,4 @@ public interface SlotListener {
 
 	void clearLabels();
 
-}    
+}

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import CityBuilder.load.Screen;
 import CityBuilder.load.TilesLoad;
+import CityBuilder.load.build.buildActor;
+import CityBuilder.load.build.buildInventory;
 import CityBuilder.load.inventory.Inventory;
 import CityBuilder.load.inventory.InventoryActor;
 import CityBuilder.objects.Citizen;
@@ -41,6 +43,7 @@ public class GameScreen implements Screen
 	private TilesLoad tileLoad;
 	private Inventory inventory;
 	private InventoryActor inventoryActor;
+	private buildActor builder;
 	
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
@@ -54,12 +57,19 @@ public class GameScreen implements Screen
 		inventoryActor = new InventoryActor(inventory, dragAndDrop, inventorySkin);
 		inventoryActor.setPosition(10, 10);
 		inventoryActor.setMovable( false );
+		
+		buildInventory buildInv = new buildInventory();
+		builder = new buildActor(buildInv, "build", inventorySkin);
+		builder.setPosition(700, 10);
+		builder.setMovable( false );
+		builder.setVisible( true );
+		
 		//map layout
 		tileLoad = new TilesLoad();
 		tiles = tileLoad.getTiles();
 		
-		simulation = new Simulation( this, inventory, inventoryActor, citizens, tiles );
-		renderer = new Renderer( this, camera, stage, batch, inventory, inventoryActor, citizens );
+		simulation = new Simulation( this, inventory, inventoryActor, buildInv, builder, citizens, tiles );
+		renderer = new Renderer( this, camera, stage, batch, inventory, inventoryActor, buildInv, builder, citizens );
 	}
 
 	@Override

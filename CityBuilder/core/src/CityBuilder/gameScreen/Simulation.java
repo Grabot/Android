@@ -3,6 +3,8 @@ package CityBuilder.gameScreen;
 import java.util.ArrayList;
 
 import CityBuilder.load.Data;
+import CityBuilder.load.build.buildActor;
+import CityBuilder.load.build.buildInventory;
 import CityBuilder.load.inventory.Inventory;
 import CityBuilder.load.inventory.InventoryActor;
 import CityBuilder.objects.Citizen;
@@ -58,7 +60,7 @@ public class Simulation extends Data {
 	private Inventory inventory;
 	private InventoryActor inventoryActor;
 
-	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor, ArrayList<Citizen> citizens, ArrayList<Tile> tiles ) {
+	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor, buildInventory builder, buildActor actor, ArrayList<Citizen> citizens, ArrayList<Tile> tiles ) {
 		this.tiles = tiles;
 		this.game = game;
 		this.citizens = citizens;
