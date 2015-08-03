@@ -148,7 +148,9 @@ public class Renderer extends Data
 				initialClose = false;
 				initialOpen = true;
 				inventoryActor.clearLabels();
+				builder.clearLabels();
 				inventoryActor.setVisible( false );
+				builder.setVisible(false);
 			}
 		}
 		else
@@ -161,6 +163,7 @@ public class Renderer extends Data
 				tileInfo.setVisible( false );
 				resourceInfo.setVisible( false );
 				inventoryActor.setVisible( true );
+				builder.setVisible( true );
 				inventoryActor.addAmountLabels();
 			}
 		}

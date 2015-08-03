@@ -1,4 +1,4 @@
-package CityBuilder.load.inventory;
+package CityBuilder.load;
 
 public enum Item {
 	
@@ -7,7 +7,10 @@ public enum Item {
 	stone("stoneResource"),
 	brick("brickResource"),
 	iron("ironOreResource"),
-	ironIngot("ironIngotResource");
+	ironIngot("ironIngotResource"),
+	farm("farmResource"),
+	woodIcon("log_icon2"),
+	stonIcon("stone");
 
     private String textureRegion;
 

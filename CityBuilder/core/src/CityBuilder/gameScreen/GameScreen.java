@@ -62,7 +62,7 @@ public class GameScreen implements Screen
 		builder = new buildActor(buildInv, "build", inventorySkin);
 		builder.setPosition(700, 10);
 		builder.setMovable( false );
-		builder.setVisible( true );
+		builder.setVisible( false );
 		
 		//map layout
 		tileLoad = new TilesLoad();

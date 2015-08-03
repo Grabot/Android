@@ -17,37 +17,58 @@ empty
   orig: 64, 64
   offset: 0, 0
   index: -1
-ironIngotResource
+farmResource
   rotate: false
   xy: 128, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-ironOreResource
+ironIngotResource
   rotate: false
   xy: 192, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-logsResource
+ironOreResource
   rotate: false
   xy: 256, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-planksResource
+logsResource
   rotate: false
   xy: 320, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-stoneResource
+log_icon2
   rotate: false
   xy: 384, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+planksResource
+  rotate: false
+  xy: 448, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stone
+  rotate: false
+  xy: 512, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stoneResource
+  rotate: false
+  xy: 576, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

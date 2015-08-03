@@ -1,5 +1,7 @@
 package CityBuilder.load.inventory;
 
+import CityBuilder.load.Item;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
