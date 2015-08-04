@@ -43,8 +43,7 @@ public class Simulation extends Data {
 
 	private boolean[] tileSelected = new boolean[626];
 	private boolean[] firstTouchTile = new boolean[626];
-	private boolean tileTouched = false;
-	private boolean touchedBox = true;
+	private boolean BuildingFarm = false;
 	
 	private int selectedTile = -1;
 
@@ -95,6 +94,12 @@ public class Simulation extends Data {
 
 	public void update(float delta) {
 		checkTouch();
+		BuildingPlacement();
+	}
+	
+	public void BuildFarm()
+	{
+		BuildingFarm = true;
 	}
 
 	public void updateScroll(float cameraX, float cameraY, float cameraZ) {
@@ -159,7 +164,15 @@ public class Simulation extends Data {
 		
 		return selectedTile;
 	}
-
+	
+	private void BuildingPlacement()
+	{
+		if( BuildingFarm )
+		{
+			
+		}
+	}
+	
 	private void addResources()
 	{
 		tiles.get(selectedTile).setResources(tiles.get(selectedTile).getResources() - 1);
@@ -231,5 +244,10 @@ public class Simulation extends Data {
 
 	public int getMiningProgress() {
 		return miningProgress;
+	}
+	
+	public boolean getBuildingFarm()
+	{
+		return BuildingFarm;
 	}
 }

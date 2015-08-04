@@ -2,6 +2,7 @@ package CityBuilder.load.inventory;
 
 import java.util.ArrayList;
 
+import CityBuilder.gameScreen.GameScreen;
 import CityBuilder.load.build.buildInventory;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -14,7 +15,7 @@ public class InventoryActor extends Window {
 	//the only way I could remove the labels after closing the inventory
 	private ArrayList<SlotActor> slotActors = new ArrayList<SlotActor>();
 	
-    public InventoryActor(Inventory inventory, buildInventory buildInv, DragAndDrop dragAndDrop, Skin skin) {
+    public InventoryActor(GameScreen game, Inventory inventory, buildInventory buildInv, DragAndDrop dragAndDrop, Skin skin) {
         super("", skin);
 
         //add an "X" button to the top right of the window, and make it hide the inventory
@@ -28,7 +29,7 @@ public class InventoryActor extends Window {
         int i = 0;
         for (Slot slot : inventory.getSlots()) 
         {
-            SlotActor slotActor = new SlotActor(skin, slot, this);
+            SlotActor slotActor = new SlotActor(game, skin, slot, this);
 
             // this can be ignored for now and will be explained in part III
             dragAndDrop.addSource(new SlotSource(slotActor));

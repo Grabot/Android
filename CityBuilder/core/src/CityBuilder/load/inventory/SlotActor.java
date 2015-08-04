@@ -1,6 +1,7 @@
 package CityBuilder.load.inventory;
 
 import CityBuilder.Main;
+import CityBuilder.gameScreen.GameScreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,14 +18,14 @@ public class SlotActor extends ImageButton implements SlotListener {
     private SlotTooltip tooltip;
     private SlotToolamount toolamount;
 
-    public SlotActor(Skin skin, Slot slot, InventoryActor actor) {
+    public SlotActor(GameScreen game, Skin skin, Slot slot, InventoryActor actor) {
         super(createStyle(skin, slot));
         this.slot = slot;
         this.skin = skin;
 
         // this actor has to be notified when the slot itself changes
         // ignore this for now, it will be explained in part IV
-        tooltip = new SlotTooltip(slot, skin);
+        tooltip = new SlotTooltip(game, slot, skin);
         toolamount = new SlotToolamount(slot, skin);
         Main.stage.addActor(tooltip);
         Main.stage.addActor(toolamount);

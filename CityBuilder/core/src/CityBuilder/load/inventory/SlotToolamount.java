@@ -31,9 +31,7 @@ public class SlotToolamount extends Window implements SlotListener{
             setVisible(false);
             return;
         }
-
         // title displays the amount
-        setTitle("");
         clear();
         Label label = new Label("" + slot.getAmount(), skin);
         add(label);

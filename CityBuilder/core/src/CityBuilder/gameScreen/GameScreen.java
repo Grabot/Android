@@ -55,7 +55,7 @@ public class GameScreen implements Screen
 		buildInventory buildInv = new buildInventory();
 		DragAndDrop dragAndDrop = new DragAndDrop();
 		
-		inventoryActor = new InventoryActor(inventory, buildInv, dragAndDrop, inventorySkin);
+		inventoryActor = new InventoryActor(this, inventory, buildInv, dragAndDrop, inventorySkin);
 		inventoryActor.setPosition(10, 10);
 		inventoryActor.setMovable( false );
 		inventoryActor.setVisible( false );
@@ -86,6 +86,11 @@ public class GameScreen implements Screen
 		renderer.dispose();
 	}
 
+	public void BuildFarm()
+	{
+		simulation.BuildFarm();
+	}
+	
 	public void Game_Finished( int level, ArrayList<Citizen> citizens )
 	{
 		game_finished = true;

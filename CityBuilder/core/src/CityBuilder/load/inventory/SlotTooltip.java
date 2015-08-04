@@ -1,5 +1,7 @@
 package CityBuilder.load.inventory;
 
+import CityBuilder.gameScreen.GameScreen;
+
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -11,11 +13,13 @@ public class SlotTooltip extends Window implements SlotListener
 {
 	private Skin skin;
     private Slot slot;
+    private GameScreen game;
     
-    public SlotTooltip(Slot slot, Skin skin) {
+    public SlotTooltip(GameScreen game, Slot slot, Skin skin) {
         super("", skin);
         this.slot = slot;
         this.skin = skin;
+        this.game = game;
         hasChanged(slot);
         slot.addListener(this);
         setVisible(false);
@@ -29,7 +33,6 @@ public class SlotTooltip extends Window implements SlotListener
         }
 
         // title displays the amount
-        setTitle("");
         clear();
         Label label;
         if( slot.getItem().toString() == "farm" )
@@ -55,7 +58,7 @@ public class SlotTooltip extends Window implements SlotListener
 		@Override
 		public void clicked (InputEvent event, float x, float y) 
 		{
-			//the user selected to place a building.
+			game.BuildFarm();
 		}
 	};
 	

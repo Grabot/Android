@@ -7,8 +7,8 @@ gwt {
     minHeapSize="1G"
 
     src = files(file("src/")) // Needs to be in front of "modules" below.
-    modules 'onzichtbaar.net.Android.CityBuilder.GdxDefinition'
-    devModules 'onzichtbaar.net.Android.CityBuilder.GdxDefinitionSuperdev'
+    modules 'CityBuilder.GdxDefinition'
+    devModules 'CityBuilder.GdxDefinitionSuperdev'
     project.webAppDirName = 'webapp'
 
     compiler {
@@ -27,10 +27,12 @@ task draftRun(type: JettyRunWar) {
 
 task superDev(type: de.richsource.gradle.plugins.gwt.GwtSuperDev) {
     dependsOn draftRun
-    gwt.modules = gwt.devModules
+    doFirst {
+    	gwt.modules = gwt.devModules
+    }
 }
 
-task dist(dependsOn: compileGwt) {
+task dist(dependsOn: [clean, compileGwt]) {
     doLast {
         file("build/dist").mkdirs()
         copy {
@@ -52,9 +54,15 @@ draftWar {
    from "war"
 }
 
+task addSource << {
+	sourceSets.main.compileClasspath += files(project(':core').sourceSets.main.allJava.srcDirs)
+}
+
+tasks.compileGwt.dependsOn(addSource)
+tasks.draftCompileGwt.dependsOn(addSource)
+
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/" ]
-sourceSets.main.compileClasspath += files(project(':core').sourceSets.main.allJava.srcDirs)
 
 
 eclipse.project {

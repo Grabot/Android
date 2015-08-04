@@ -155,16 +155,22 @@ public class Renderer extends Data
 		}
 		else
 		{
-			if( initialOpen )
+			if( simulation.getBuildingFarm() ){
+				
+			}
+			else
 			{
-				initialOpen = false;
-				initialClose = true;
-				UserInterface.setVisible( false );
-				tileInfo.setVisible( false );
-				resourceInfo.setVisible( false );
-				inventoryActor.setVisible( true );
-				builder.setVisible( true );
-				inventoryActor.addAmountLabels();
+				if( initialOpen )
+				{
+					initialOpen = false;
+					initialClose = true;
+					UserInterface.setVisible( false );
+					tileInfo.setVisible( false );
+					resourceInfo.setVisible( false );
+					inventoryActor.setVisible( true );
+					builder.setVisible( true );
+					inventoryActor.addAmountLabels();
+				}
 			}
 		}
 	}

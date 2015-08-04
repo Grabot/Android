@@ -1,13 +1,13 @@
 buildscript {
     repositories {
         mavenCentral()
-        mavenLocal()
-        maven { url 'https://github.com/steffenschaefer/gwt-gradle-plugin/raw/maven-repo/' }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        jcenter()
     }
     dependencies {
-        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.3'
-        classpath 'com.android.tools.build:gradle:0.9+'
-        classpath 'com.github.jtakakura:gradle-robovm-plugin:0.0.7'
+        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'org.robovm:robovm-gradle-plugin:1.5.0'
     }
 }
 
@@ -18,14 +18,17 @@ allprojects {
     version = '1.0'
     ext {
         appName = 'CityBuilder'
-        gdxVersion = '1.0.0'
-        roboVMVersion = '0.0.11'
+        gdxVersion = '1.6.4'
+        roboVMVersion = '1.5.0'
+        box2DLightsVersion = '1.4'
+        ashleyVersion = '1.4.0'
+        aiVersion = '1.5.0'
     }
 
     repositories {
-        mavenLocal()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
 }
 
@@ -63,15 +66,14 @@ project(":ios") {
     apply plugin: "java"
     apply plugin: "robovm"
 
-    configurations { natives }
 
     dependencies {
         compile project(":core")
-        compile "org.robovm:robovm-rt:${roboVMVersion}"
-        compile "org.robovm:robovm-cocoatouch:${roboVMVersion}"
+        compile "org.robovm:robovm-rt:$roboVMVersion"
+        compile "org.robovm:robovm-cocoatouch:$roboVMVersion"
         compile "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
-        natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-ios"
+        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
+        compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-ios"
     }
 }
 
