@@ -41,7 +41,6 @@ public class GameScreen implements Screen
 	public int Gold = 0;
 	
 	private TilesLoad tileLoad;
-	private Inventory inventory;
 	private InventoryActor inventoryActor;
 	private buildActor builder;
 	
@@ -52,15 +51,17 @@ public class GameScreen implements Screen
 
 		Skin inventorySkin = new Skin(Gdx.files.internal("skins/inventoryTest/uiskin.json"));
 		
-		inventory = new Inventory();
+		Inventory inventory = new Inventory();
+		buildInventory buildInv = new buildInventory();
 		DragAndDrop dragAndDrop = new DragAndDrop();
-		inventoryActor = new InventoryActor(inventory, dragAndDrop, inventorySkin);
+		
+		inventoryActor = new InventoryActor(inventory, buildInv, dragAndDrop, inventorySkin);
 		inventoryActor.setPosition(10, 10);
 		inventoryActor.setMovable( false );
+		inventoryActor.setVisible( false );
 		
-		buildInventory buildInv = new buildInventory();
-		builder = new buildActor(buildInv, "build", inventorySkin);
-		builder.setPosition(700, 10);
+		builder = new buildActor(inventory, buildInv, "build", inventorySkin);
+		builder.setPosition(680, 150);
 		builder.setMovable( false );
 		builder.setVisible( false );
 		

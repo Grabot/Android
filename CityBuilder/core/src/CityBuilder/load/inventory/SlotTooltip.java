@@ -1,8 +1,11 @@
 package CityBuilder.load.inventory;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class SlotTooltip extends Window implements SlotListener
 {
@@ -28,12 +31,34 @@ public class SlotTooltip extends Window implements SlotListener
         // title displays the amount
         setTitle("");
         clear();
-        Label label = new Label("This is \n" + slot.getItem(), skin);
-        add(label);
+        Label label;
+        if( slot.getItem().toString() == "farm" )
+        {
+            label = new Label("This is a motherfucking \n" + slot.getItem(), skin);
+            add(label);
+            row();
+            TextButton buildFarm = new TextButton("Build", skin );
+            buildFarm.addListener(buildListener);
+            add(buildFarm);
+        }
+        else
+        {
+            label = new Label("This is \n" + slot.getItem(), skin);
+            add(label);
+        }
         pack();
        
     }
 
+    public ClickListener buildListener = new ClickListener() 
+	{
+		@Override
+		public void clicked (InputEvent event, float x, float y) 
+		{
+			//the user selected to place a building.
+		}
+	};
+	
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);
