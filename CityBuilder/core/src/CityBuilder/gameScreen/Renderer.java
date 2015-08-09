@@ -89,7 +89,7 @@ public class Renderer extends Data
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
-		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/SecondPack.pack"));
+		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/FourthPack.atlas"));
 
 		InfoBox = new Texture( Gdx.files.internal( "images/UITest.png" ));
 		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
@@ -118,30 +118,45 @@ public class Renderer extends Data
 		drawTiles.fillTiles( simulation, batch, atlas );
 		
 		if( !inventoryOn )
-		{			
+		{		
 			UserInterface.setVisible(true);
-			inputHandler.MapScroll();
-			inputHandler.MapZoom();
-			
-			this.selectedTile = simulation.TileTouch();
-			
-			if( selectedTile >= 0 && selectedTile < numberOfTiles )
+			if( simulation.getBuildingFarm() )
 			{
-				infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, selectedTile);
-				drawTiles.drawSelected( simulation, batch, atlas, selectedTile );
-			}
-			
-			if( simulation.getMining() )
-			{
-				MiningBar.setVisible( true );
-				MiningBarFill.setVisible( true );
-				MiningBarFill.setBounds(305, 205, (0 + simulation.getMiningProgress()), 20 );
+				this.selectedTile = simulation.TileTouch();
+				
+				if( selectedTile >= 0 && selectedTile < numberOfTiles )
+				{
+					infoBoxDisplay.displayBuildFarm(tileInfo, resourceInfo, simulation, selectedTile);
+					drawTiles.drawFarm( simulation, batch, atlas, selectedTile );
+				}
 			}
 			else
 			{
-				MiningBar.setVisible( false );
-				MiningBarFill.setVisible( false );
+				this.selectedTile = simulation.TileTouch();
+				
+				if( selectedTile >= 0 && selectedTile < numberOfTiles )
+				{
+					infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, selectedTile);
+					drawTiles.drawSelected( simulation, batch, atlas, selectedTile );
+				}
+				
+				if( simulation.getMining() )
+				{
+					MiningBar.setVisible( true );
+					MiningBarFill.setVisible( true );
+					MiningBarFill.setBounds(305, 205, (0 + simulation.getMiningProgress()), 20 );
+				}
+				else
+				{
+					MiningBar.setVisible( false );
+					MiningBarFill.setVisible( false );
+				}
 			}
+			
+			inputHandler.MapScroll();
+			inputHandler.MapZoom();
+			
+			
 			
 			if( initialClose )
 			{
@@ -155,22 +170,23 @@ public class Renderer extends Data
 		}
 		else
 		{
-			if( simulation.getBuildingFarm() ){
-				
-			}
-			else
+
+			
+			if( simulation.getBuildingFarm() )
 			{
-				if( initialOpen )
-				{
-					initialOpen = false;
-					initialClose = true;
-					UserInterface.setVisible( false );
-					tileInfo.setVisible( false );
-					resourceInfo.setVisible( false );
-					inventoryActor.setVisible( true );
-					builder.setVisible( true );
-					inventoryActor.addAmountLabels();
-				}
+				inventoryOn = false;
+			}
+			
+			if( initialOpen )
+			{
+				initialOpen = false;
+				initialClose = true;
+				UserInterface.setVisible( false );
+				tileInfo.setVisible( false );
+				resourceInfo.setVisible( false );
+				inventoryActor.setVisible( true );
+				builder.setVisible( true );
+				inventoryActor.addAmountLabels();
 			}
 		}
 	}

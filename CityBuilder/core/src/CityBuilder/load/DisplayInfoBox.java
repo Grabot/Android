@@ -64,5 +64,13 @@ public class DisplayInfoBox extends Data
 		resourceInfo.setText( "resources: " + simulation.tiles.get(type).getResources() );
 		resourceInfo.setVisible( true );
 	}
+	
+	public void displayBuildFarm( TextField tileInfo, TextField resourceInfo, Simulation simulation, int type )
+	{
+		tileInfo.setText( "plx build farm" );
+		tileInfo.setVisible( true );
+		resourceInfo.setText( "Build Farm" );
+		resourceInfo.setVisible( true );
+	}
 
 }
