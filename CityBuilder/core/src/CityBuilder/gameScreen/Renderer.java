@@ -51,6 +51,7 @@ public class Renderer extends Data
 	private boolean inventoryOn = false;
 	
 	private TextButton inventoryButton;
+	private TextButton BuildFarmButton;
 	
 	private Texture InfoBox;
 	private Texture progressBar;
@@ -122,6 +123,8 @@ public class Renderer extends Data
 			UserInterface.setVisible(true);
 			if( simulation.getBuildingFarm() )
 			{
+				inventoryButton.setVisible(false);
+				BuildFarmButton.setVisible( true );
 				this.selectedTile = simulation.TileTouch();
 				
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
@@ -132,6 +135,8 @@ public class Renderer extends Data
 			}
 			else
 			{
+				inventoryButton.setVisible(true);
+				BuildFarmButton.setVisible( false );
 				this.selectedTile = simulation.TileTouch();
 				
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
@@ -218,6 +223,11 @@ public class Renderer extends Data
 		inventoryButton.setBounds( 1150, 30, 100, 100);
 		inventoryButton.setVisible( true );
 		
+		BuildFarmButton = new TextButton( "Build Farm", skin );
+		BuildFarmButton.setDisabled( false );
+		BuildFarmButton.setBounds( 1000,  300, 100, 30 );
+		BuildFarmButton.setVisible( false );
+		
 		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Inventory.atlas"));
 		TextureRegion image;
 		image = icons.findRegion("empty");
@@ -237,9 +247,11 @@ public class Renderer extends Data
 		stage.addActor( resourceInfo );
 		stage.addActor( inventoryButton );
 		stage.addActor( inventoryActor );
+		stage.addActor( BuildFarmButton );
 		stage.addActor( builder );
 
 		inventoryButton.addListener( InventoryListener );
+		BuildFarmButton.addListener( buildFarmListener );
 	}
 	
 	public ClickListener InventoryListener = new ClickListener() 
@@ -248,6 +260,15 @@ public class Renderer extends Data
 		public void clicked (InputEvent event, float x, float y) 
 		{
 			inventoryOn = !inventoryOn;
+		}
+	};
+	
+	public ClickListener buildFarmListener = new ClickListener() 
+	{
+		@Override
+		public void clicked (InputEvent event, float x, float y) 
+		{
+			
 		}
 	};
 	
