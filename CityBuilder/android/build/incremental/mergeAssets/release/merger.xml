@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="D:\Documents\GitHub\Android\CityBuilder\android\assets" >
+            <file
+                name="data/default.fnt"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\data\default.fnt" />
+            <file
+                name="data/default.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\data\default.png" />
+            <file
+                name="data/uiskin.atlas"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\data\uiskin.atlas" />
+            <file
+                name="data/uiskin.json"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\data\uiskin.json" />
+            <file
+                name="data/uiskin.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\data\uiskin.png" />
+            <file
+                name="images/background.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\background.png" />
+            <file
+                name="images/Boom-top-down.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Boom-top-down.png" />
+            <file
+                name="images/Boom-top-downBig.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Boom-top-downBig.png" />
+            <file
+                name="images/Boom-top-downBigGrass.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Boom-top-downBigGrass.png" />
+            <file
+                name="images/boom-zijkant.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\boom-zijkant.png" />
+            <file
+                name="images/BoomSmall.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\BoomSmall.png" />
+            <file
+                name="images/dirt.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\dirt.png" />
+            <file
+                name="images/Dwayne.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Dwayne.png" />
+            <file
+                name="images/Grass.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Grass.png" />
+            <file
+                name="images/HouseBrown.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\HouseBrown.png" />
+            <file
+                name="images/medievalScroll.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\medievalScroll.png" />
+            <file
+                name="images/Muur-corner.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Muur-corner.png" />
+            <file
+                name="images/muur-hoek-linksboven.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\muur-hoek-linksboven.png" />
+            <file
+                name="images/muur-hoek-linksonder.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\muur-hoek-linksonder.png" />
+            <file
+                name="images/muur-hoek-rechtsboven.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\muur-hoek-rechtsboven.png" />
+            <file
+                name="images/muur-hoek-rechtsonder.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\muur-hoek-rechtsonder.png" />
+            <file
+                name="images/muur-noord2.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\muur-noord2.png" />
+            <file
+                name="images/muur-oost2.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\muur-oost2.png" />
+            <file
+                name="images/muur-sides.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\muur-sides.png" />
+            <file
+                name="images/Muur-single.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Muur-single.png" />
+            <file
+                name="images/Muur-west2.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Muur-west2.png" />
+            <file
+                name="images/muur-zuid2.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\muur-zuid2.png" />
+            <file
+                name="images/pinetree.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\pinetree.png" />
+            <file
+                name="images/pinetree2.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\pinetree2.png" />
+            <file
+                name="images/Rock2.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Rock2.png" />
+            <file
+                name="images/Rock3.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Rock3.png" />
+            <file
+                name="images/SquareDesert.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareDesert.png" />
+            <file
+                name="images/SquareForest.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareForest.png" />
+            <file
+                name="images/SquareGrass.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareGrass.png" />
+            <file
+                name="images/SquareGreen.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareGreen.png" />
+            <file
+                name="images/SquareGreenSmall.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareGreenSmall.png" />
+            <file
+                name="images/SquareGreySmall.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareGreySmall.png" />
+            <file
+                name="images/SquareSelected.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareSelected.png" />
+            <file
+                name="images/SquareSelectedSmall.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareSelectedSmall.png" />
+            <file
+                name="images/SquareSheep.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareSheep.png" />
+            <file
+                name="images/SquareTown.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareTown.png" />
+            <file
+                name="images/SquareTownSmall.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\SquareTownSmall.png" />
+            <file
+                name="images/UITest.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\UITest.png" />
+            <file
+                name="images/Village-wall1.png"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\assets\images\Village-wall1.png" />
+        </source>
+    </dataSet>
+    <dataSet config="release" >
+        <source path="D:\Documents\GitHub\Android\CityBuilder\android\src\release\assets" />
+    </dataSet>
+
+</merger>

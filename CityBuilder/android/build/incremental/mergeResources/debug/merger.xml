@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="D:\Documents\GitHub\Android\CityBuilder\android\res" >
+            <file
+                name="ic_launcher"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\res\drawable-xhdpi\ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\Documents\GitHub\Android\CityBuilder\android\res\drawable-xxhdpi\ic_launcher.png"
+                qualifiers="xxhdpi"
+                type="drawable" />
+            <file
+                path="D:\Documents\GitHub\Android\CityBuilder\android\res\values\strings.xml"
+                qualifiers="" >
+                <string name="app_name" >CityBuilder
+                </string>
+            </file>
+            <file
+                path="D:\Documents\GitHub\Android\CityBuilder\android\res\values\styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="GdxTheme"
+                    parent="android:Theme" >
+                    <item name="android:windowBackground">
+@android:color/transparent
+                    </item>
+                    <item name="android:colorBackgroundCacheHint">
+@null
+                    </item>
+                    <item name="android:windowAnimationStyle">
+@android:style/Animation
+                    </item>
+                    <item name="android:windowNoTitle">
+true
+                    </item>
+                    <item name="android:windowContentOverlay">
+@null
+                    </item>
+                    <item name="android:windowFullscreen">
+true
+                    </item>
+                </style>
+            </file>
+        </source>
+        <source path="D:\Documents\GitHub\Android\CityBuilder\android\build\res\rs\debug" />
+        <source path="D:\Documents\GitHub\Android\CityBuilder\android\build\res\generated\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="D:\Documents\GitHub\Android\CityBuilder\android\src\debug\res" />
+    </dataSet>
+
+</merger>

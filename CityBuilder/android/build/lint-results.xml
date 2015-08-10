@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="4" by="lint 22.6.1">
+
+    <issue
+        id="MissingRegistered"
+        severity="Error"
+        message="Class referenced in the manifest, onzichtbaar.net.Android.CityBuilder.android.AndroidLauncher, was not found in the project or the libraries"
+        category="Correctness"
+        priority="8"
+        summary="Ensures that classes referenced in the manifest are present in the project or libraries"
+        explanation="If a class is referenced in the manifest, it must also exist in the project (or in one of the libraries included by the project. This check helps uncover typos in registration names, or attempts to rename or move classes without updating the manifest file properly."
+        url="http://developer.android.com/guide/topics/manifest/manifest-intro.html"
+        urls="http://developer.android.com/guide/topics/manifest/manifest-intro.html"
+        errorLine1="        &lt;activity"
+        errorLine2="        ^">
+        <location
+            file="D:\Documents\GitHub\Android\CityBuilder\android\AndroidManifest.xml"
+            line="14"
+            column="9"/>
+    </issue>
+
+</issues>
