@@ -26,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -130,7 +131,7 @@ public class Renderer extends Data
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
 				{
 					infoBoxDisplay.displayBuildFarm(tileInfo, resourceInfo, simulation, selectedTile);
-					drawTiles.drawFarm( simulation, batch, atlas, selectedTile );
+					drawTiles.drawFarmBuild( simulation, batch, atlas, selectedTile );
 				}
 			}
 			else
@@ -268,7 +269,7 @@ public class Renderer extends Data
 		@Override
 		public void clicked (InputEvent event, float x, float y) 
 		{
-			
+			simulation.FarmBuildingConfirmation(selectedTile);
 		}
 	};
 	

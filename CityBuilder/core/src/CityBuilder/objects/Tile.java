@@ -2,6 +2,7 @@ package CityBuilder.objects;
 
 import CityBuilder.enums.TileType;
 import CityBuilder.load.Vector;
+import CityBuilder.objects.attributes.Farm;
 import CityBuilder.objects.attributes.Grass;
 import CityBuilder.objects.attributes.Iron;
 import CityBuilder.objects.attributes.Stone;
@@ -18,7 +19,7 @@ public class Tile
 	private int colour;
 	private int resources;
 	private final Vector position = new Vector( );
-	private boolean wall = false;
+	private int occupied = 0;
 	
 	private Grass grass;
 	private Water water;
@@ -26,17 +27,18 @@ public class Tile
 	private Stone stone;
 	private Wood wood;
 	private Town town;
+	private Farm farm;
 	
 	public Tile( Vector position )
     {
             this.position.set( position );
     }
 	
-	public void setAttributes( TileType type, int colour, boolean wall, int resources )
+	public void setAttributes( TileType type, int colour, int occupied, int resources )
 	{
 		this.type = type;
 		this.colour = colour;
-		this.wall = wall;
+		this.occupied = occupied;
 		this.resources = resources;
 		
 		if( type.toString().equals("grass") )
@@ -92,6 +94,11 @@ public class Tile
 			town.draw( batch, atlas );
 		}
 	}
+	
+	public void drawFarm( Batch batch, TextureAtlas atlas, int corner )
+	{
+		farm.draw( batch, atlas, corner );
+	}
 
 	public TileType getType() {
 		return type;
@@ -117,12 +124,16 @@ public class Tile
 		this.resources = resources;
 	}
 
-	public boolean isWall() {
-		return wall;
+	public int getOccupied() {
+		return occupied;
 	}
 
-	public void setWall(boolean wall) {
-		this.wall = wall;
+	public void setOccupied(int occupied) {
+		this.occupied = occupied;
+		if( occupied == 1 )
+		{
+			farm = new Farm( this );
+		}
 	}
 
 	public Vector getPosition() {

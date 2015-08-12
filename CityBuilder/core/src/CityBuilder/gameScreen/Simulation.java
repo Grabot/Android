@@ -41,8 +41,7 @@ public class Simulation extends Data {
 	private boolean up_pressed = false;
 	private boolean scrolling = false;
 
-	private boolean[] tileSelected = new boolean[626];
-	private boolean[] firstTouchTile = new boolean[626];
+	private boolean[] farmTiles = new boolean[626];
 	private boolean BuildingFarm = false;
 	
 	private int selectedTile = -1;
@@ -70,10 +69,10 @@ public class Simulation extends Data {
 	}
 
 	public void populate() {
-		for (int m = 0; m < tiles.size(); m++) {
-			firstTouchTile[m] = true;
+		for( int i = 0; i < farmTiles.length; i++ )
+		{
+			farmTiles[i] = false;
 		}
-
 		Gdx.app.log(Simulation.LOG, "Game Screen populated");
 	}
 
@@ -94,12 +93,22 @@ public class Simulation extends Data {
 
 	public void update(float delta) {
 		checkTouch();
-		BuildingPlacement();
 	}
 	
 	public void BuildFarm()
 	{
 		BuildingFarm = true;
+	}
+	
+	public void FarmBuildingConfirmation( int selectedTile )
+	{
+		System.out.println("Build Farm on tile: " + selectedTile );
+		tiles.get(selectedTile).setOccupied(1);
+		tiles.get(selectedTile+1).setOccupied(1);
+		tiles.get(selectedTile-gridSizeWidth).setOccupied(1);
+		tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1);
+		
+		BuildingFarm = false;
 	}
 
 	public void updateScroll(float cameraX, float cameraY, float cameraZ) {
@@ -116,9 +125,14 @@ public class Simulation extends Data {
 		game.Game_Finished(i, citizens);
 	}
 
-	private void checkTouch() {
-		touch_distance_x = ((touchX - (ScreenWidth / 2)) * cameraZ + cameraX);
-		touch_distance_y = (((touchY - (ScreenHeight / 2)) * cameraZ - cameraY) * -1);
+	private void checkTouch() 
+	{
+		//no touch detection in the panel sections
+		if( !(touchX > 950 ))
+		{
+			touch_distance_x = ((touchX - (ScreenWidth / 2)) * cameraZ + cameraX);
+			touch_distance_y = (((touchY - (ScreenHeight / 2)) * cameraZ - cameraY) * -1);
+		}
 	}
 
 	public int TileTouch()
@@ -163,14 +177,6 @@ public class Simulation extends Data {
 		}
 		
 		return selectedTile;
-	}
-	
-	private void BuildingPlacement()
-	{
-		if( BuildingFarm )
-		{
-			
-		}
 	}
 	
 	private void addResources()
@@ -232,10 +238,6 @@ public class Simulation extends Data {
 
 	public float getDistance() {
 		return distance;
-	}
-
-	public boolean[] getTileTouch() {
-		return tileSelected;
 	}
 
 	public boolean getMining() {
