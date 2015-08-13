@@ -22,34 +22,14 @@ public class DrawTiles extends Data
 			
 			if( simulation.tiles.get(i).getOccupied() != 0 )
 			{
+				//find out what is on the tile
 				if( simulation.tiles.get(i).getOccupied() == 1 )
 				{
-					//it has a farm placed on it. Find out where the corner is.
-					if((simulation.tiles.get(i-1).getOccupied() != 1) && (simulation.tiles.get(i+gridSizeWidth).getOccupied() != 1 ))
-					{
-						//it's bottom left
-						simulation.tiles.get(i).drawFarm( batch, atlas, 0 );
-					}
-					if((simulation.tiles.get(i-1).getOccupied() != 1) && (simulation.tiles.get(i-gridSizeWidth).getOccupied() != 1 ))
-					{
-						//it's top right
-						simulation.tiles.get(i).drawFarm( batch, atlas, 1 );
-					}
-					if((simulation.tiles.get(i+1).getOccupied() != 1) && (simulation.tiles.get(i-gridSizeWidth).getOccupied() != 1 ))
-					{
-						//it's bottom right
-						simulation.tiles.get(i).drawFarm( batch, atlas, 2 );
-					}
-					if((simulation.tiles.get(i+1).getOccupied() != 1) && (simulation.tiles.get(i+gridSizeWidth).getOccupied() != 1 ))
-					{
-						//it's top left
-						simulation.tiles.get(i).drawFarm( batch, atlas, 3 );
-					}
+					//it is a farm
+					simulation.tiles.get(i).drawFarm( batch, atlas );
 				}
 			}
 		}
-		
-		
 	}
 	
 	public void drawSelected( Simulation simulation, Batch batch, TextureAtlas atlas, int tileNumber )

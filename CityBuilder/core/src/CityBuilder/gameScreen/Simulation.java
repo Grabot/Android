@@ -102,12 +102,12 @@ public class Simulation extends Data {
 	
 	public void FarmBuildingConfirmation( int selectedTile )
 	{
-		System.out.println("Build Farm on tile: " + selectedTile );
-		tiles.get(selectedTile).setOccupied(1);
-		tiles.get(selectedTile+1).setOccupied(1);
-		tiles.get(selectedTile-gridSizeWidth).setOccupied(1);
-		tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1);
-		
+		//set all tiles that occupy the farm
+		tiles.get(selectedTile).setOccupied(1, 0);
+		tiles.get(selectedTile-gridSizeWidth).setOccupied(1, 1);
+		tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1, 2);
+		tiles.get(selectedTile+1).setOccupied(1, 3);
+		inventory.takeItem( "farm" );
 		BuildingFarm = false;
 	}
 

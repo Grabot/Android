@@ -9,31 +9,33 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Farm 
 {
 	private Tile tile;
+	private int position = 0;
 	
-	public Farm( Tile tile )
+	public Farm( Tile tile, int position )
 	{
 		this.tile = tile;
+		this.position = position;
 	}
 	
-	public void draw( Batch batch, TextureAtlas atlas, int corner )
+	public void draw( Batch batch, TextureAtlas atlas )
 	{
 		TextureRegion SquareTileRegionFarm = atlas.findRegion("farmbuilding1"); 
-		if( corner == 0 )
+		if( position == 0 )
 		{
 			//bottom left
 			SquareTileRegionFarm = atlas.findRegion("farmbuilding1");
 		}
-		else if( corner == 1 )
+		else if( position == 1 )
 		{
 			//top left
 			SquareTileRegionFarm = atlas.findRegion("farmbuilding2");
 		}
-		else if( corner == 2 )
+		else if( position == 2 )
 		{
 			//top right
 			SquareTileRegionFarm = atlas.findRegion("farmbuilding3");
 		}
-		else if( corner == 3 )
+		else if( position == 3 )
 		{
 			//bottom right
 			SquareTileRegionFarm = atlas.findRegion("farmbuilding4");

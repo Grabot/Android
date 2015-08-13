@@ -2,6 +2,7 @@ package CityBuilder.load.inventory;
 
 import CityBuilder.load.Item;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
@@ -34,6 +35,11 @@ public class Inventory {
             randomSlot.take(randomSlot.getAmount());
         }
         */
+    }
+    
+    public void takeItem( String item )
+    {
+    	slots.get(findResourceSlot( item )).take(1);
     }
     
     public void addItem( int slotNumber, int item )
@@ -69,7 +75,7 @@ public class Inventory {
     	return -1;
     }
     
-    public int findResourceSlot(String item) 
+    public int findResourceSlot(String item)
     {
     	for( int i = 0; i < slots.size; i++ )
     	{

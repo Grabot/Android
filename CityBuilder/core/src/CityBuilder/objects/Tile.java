@@ -20,6 +20,7 @@ public class Tile
 	private int resources;
 	private final Vector position = new Vector( );
 	private int occupied = 0;
+	private int buildingPosition = 0;
 	
 	private Grass grass;
 	private Water water;
@@ -95,9 +96,9 @@ public class Tile
 		}
 	}
 	
-	public void drawFarm( Batch batch, TextureAtlas atlas, int corner )
+	public void drawFarm( Batch batch, TextureAtlas atlas )
 	{
-		farm.draw( batch, atlas, corner );
+		farm.draw( batch, atlas );
 	}
 
 	public TileType getType() {
@@ -128,11 +129,12 @@ public class Tile
 		return occupied;
 	}
 
-	public void setOccupied(int occupied) {
+	public void setOccupied(int occupied, int buildingPosition) {
 		this.occupied = occupied;
+		this.buildingPosition = buildingPosition;
 		if( occupied == 1 )
 		{
-			farm = new Farm( this );
+			farm = new Farm( this, buildingPosition );
 		}
 	}
 
