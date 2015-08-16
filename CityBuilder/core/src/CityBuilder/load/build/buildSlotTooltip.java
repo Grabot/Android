@@ -1,5 +1,6 @@
 package CityBuilder.load.build;
 
+import CityBuilder.load.Item;
 import CityBuilder.load.inventory.Inventory;
 import CityBuilder.load.inventory.InventoryActor;
 
@@ -49,45 +50,74 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 		}
         // title displays the amount
         // basic layout
-        row().fill().expandX();
-        clear();
-        Label label = new Label("Farm \nResources required: \n", skin);
-        
-        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Inventory.atlas"));
-        //TextureAtlas icons = Main.assets.get("icons/icons.atlas", TextureAtlas.class);
-        final TextureRegion image = icons.findRegion("log_icon2");
-        final Actor testImage = new Actor(){
+
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output6.pack"));
+        final TextureRegion logImage = icons.findRegion("log_icon2");
+        final TextureRegion stoneImage = icons.findRegion("stone");
+        final Actor logIcon = new Actor(){
             public void draw(Batch batch, float alpha){
-                batch.draw(image, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+                batch.draw(logImage, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
             }
         };
-        testImage.setBounds(testImage.getX(), testImage.getY(), image.getRegionWidth(), image.getRegionHeight());
-        final TextureRegion image2 = icons.findRegion("stone");
-        final Actor testImage2 = new Actor(){
+        final Actor stoneIcon = new Actor(){
             public void draw(Batch batch, float alpha){
-                batch.draw(image2, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+                batch.draw(stoneImage, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
             }
         };
-        testImage2.setBounds(testImage2.getX(), testImage2.getY(), image2.getRegionWidth(), image2.getRegionHeight());
         
-        add(label);
-        row();
-        add(testImage);
-        Label amountWood = new Label("x100", skin);
-        add(amountWood);
-        row();
-        add(testImage2);
-        Label amountStone = new Label("x50", skin);
-        add( amountStone );
-        row();
-        
-        TextButton buildButton = new TextButton( "Create", skin );
-        buildButton.addListener(createListener);
+		TextButton buildButton = null;
+		Label label = null;
+		if( slot.getItem() == Item.values()[6] )
+		{
+			//farm
+			row().fill().expandX();
+	        clear();
+	        label = new Label("Farm \nResources required: \n", skin);
+
+	        logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
+	        stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
+	        add(label);
+	        row();
+	        add(logIcon);
+	        Label amountWood = new Label("x100", skin);
+	        add(amountWood);
+	        row();
+	        add(stoneIcon);
+	        Label amountStone = new Label("x50", skin);
+	        add( amountStone );
+	        row();
+	        buildButton = new TextButton( "Create", skin );
+	        buildButton.addListener(createListenerFarm);
+		}
+		else if( slot.getItem() == Item.values()[9] )
+		{
+			//fisher
+			row().fill().expandX();
+	        clear();
+	        label = new Label("fisherman's hut \nResources required: \n", skin);
+	        
+	        logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
+	        stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
+	       
+	        add(label);
+	        row();
+	        add(logIcon);
+	        Label amountWood = new Label("x100", skin);
+	        add(amountWood);
+	        row();
+	        add(stoneIcon);
+	        Label amountStone = new Label("x50", skin);
+	        add( amountStone );
+	        row();
+	       
+	        buildButton = new TextButton( "Create", skin );
+	        buildButton.addListener(createListenerFisher);
+		}
         add(buildButton);
         pack();
 	}
 
-	public ClickListener createListener = new ClickListener() 
+	public ClickListener createListenerFarm = new ClickListener() 
 	{
 		@Override
 		public void clicked (InputEvent event, float x, float y) 
@@ -99,6 +129,22 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			else
 			{
 				inventory.addItem(inventory.findResourceSlot("farm"), 6);
+			}
+		}
+	};
+	
+	public ClickListener createListenerFisher = new ClickListener() 
+	{
+		@Override
+		public void clicked (InputEvent event, float x, float y) 
+		{
+			if (inventory.checkInventoryTest("fishershut") == -1 )
+			{
+				inventory.addItem(inventory.firstEmtpySlot(), 9);
+			}
+			else
+			{
+				inventory.addItem(inventory.findResourceSlot("fishershut"), 9);
 			}
 		}
 	};

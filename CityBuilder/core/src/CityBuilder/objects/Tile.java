@@ -6,7 +6,6 @@ import CityBuilder.objects.attributes.FarmTex;
 import CityBuilder.objects.attributes.Grass;
 import CityBuilder.objects.attributes.Iron;
 import CityBuilder.objects.attributes.Stone;
-import CityBuilder.objects.attributes.Town;
 import CityBuilder.objects.attributes.Water;
 import CityBuilder.objects.attributes.Wood;
 
@@ -27,7 +26,6 @@ public class Tile
 	private Iron iron;
 	private Stone stone;
 	private Wood wood;
-	private Town town;
 	private FarmTex farmtex;
 	
 	public Tile( Vector position )
@@ -62,10 +60,6 @@ public class Tile
 		{
 			wood = new Wood( this );
 		}
-		else if( type.toString().equals("town") )
-		{
-			town = new Town( this );
-		}
 	}
 	
 	public void drawTile( Batch batch, TextureAtlas atlas )
@@ -89,10 +83,6 @@ public class Tile
 		else if( type.toString().equals("wood") )
 		{
 			wood.draw( batch, atlas );
-		}
-		else if( type.toString().equals("town") )
-		{
-			town.draw( batch, atlas );
 		}
 	}
 	

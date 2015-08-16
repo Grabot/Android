@@ -74,17 +74,13 @@ public class Renderer extends Data
 	
 	private InventoryActor inventoryActor;
 	private TextureAtlas atlas;
-	private Inventory inventory;
-	private buildInventory buildInv;
 	private buildActor builder;
 	
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, Inventory inventory, InventoryActor inventoryActor, buildInventory buildInv, buildActor builder,  ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		this.game = game;
-		this.inventory = inventory;
 		this.inventoryActor = inventoryActor;
-		this.buildInv = buildInv;
 		this.builder = builder;
 		
 		float width = Gdx.graphics.getWidth();

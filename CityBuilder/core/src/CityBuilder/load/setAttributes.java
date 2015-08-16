@@ -354,7 +354,7 @@ public class setAttributes extends Data
 		tile[12][9].setAttributes( TileType.water, available, 0, 2000 );
 		tile[12][10].setAttributes( TileType.grass, available, 0, 2000 );
 		tile[12][11].setAttributes( TileType.grass, available, 0, 2000 );
-		tile[12][12].setAttributes( TileType.town, available, 0, 2000 );
+		tile[12][12].setAttributes( TileType.grass, available, 0, 2000 );
 		tile[12][13].setAttributes( TileType.grass, available, 0, 2000 );
 		tile[12][14].setAttributes( TileType.grass, available, 0, 2000 );
 		tile[12][15].setAttributes( TileType.grass, available, 0, 2000 );

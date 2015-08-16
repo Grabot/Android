@@ -1,6 +1,7 @@
 package CityBuilder.load.build;
 
 import CityBuilder.Main;
+import CityBuilder.load.Item;
 import CityBuilder.load.inventory.Inventory;
 import CityBuilder.load.inventory.InventoryActor;
 
@@ -30,7 +31,7 @@ public class buildSlotActor extends ImageButton implements buildSlotListener
      * This will create a new style for our image button, with the correct image for the item type.
      */
     private static ImageButtonStyle createStyle(Skin skin, buildSlot slot) {
-    	TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Inventory.atlas"));
+    	TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output6.pack"));
         //TextureAtlas icons = Main.assets.get("icons/icons.atlas", TextureAtlas.class);
         TextureRegion image;
         if (slot.getItem() != null) {

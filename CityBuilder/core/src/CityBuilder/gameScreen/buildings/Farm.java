@@ -18,7 +18,7 @@ public class Farm extends Data
 	
 	public void update()
 	{
-		//get the farm foods
+		//get the farm foods, think it's wrong
 		tiles.get(TileNumber).setResources(tiles.get(TileNumber).getResources() - 1);
 		tiles.get(TileNumber+1).setResources(tiles.get(TileNumber+1).getResources() - 1);
 		tiles.get(TileNumber-gridSizeWidth).setResources(tiles.get(TileNumber-gridSizeWidth).getResources() - 1);

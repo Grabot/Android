@@ -2,15 +2,16 @@ package CityBuilder.load;
 
 public enum Item {
 	
-	wood("logsResource"), 
-	planks("planksResource"),
-	stone("stoneResource"),
-	brick("brickResource"),
-	iron("ironOreResource"),
-	ironIngot("ironIngotResource"),
-	farm("farmResource"),
-	woodIcon("log_icon2"),
-	stonIcon("stone");
+	wood("logsResource"), //0
+	planks("planksResource"), //1
+	stone("stoneResource"), //2
+	brick("brickResource"), //3
+	iron("ironOreResource"), //4
+	ironIngot("ironIngotResource"), //5
+	farm("farmResource"), //6
+	woodIcon("log_icon2"), //7
+	stonIcon("stone"), //8
+	fishershut("fishermanResource"); //9
 
     private String textureRegion;
 

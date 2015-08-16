@@ -26,7 +26,6 @@ public class DisplayInfoBox extends Data
 			displayTileInfo(tileInfo, resourceInfo, simulation, type);
 		}
 		tileInfo.setVisible( true );
-		
 		resourceInfo.setVisible( true );
 	}
 	
@@ -39,10 +38,6 @@ public class DisplayInfoBox extends Data
 		else if( simulation.tiles.get(type).getType() == TileType.wood )
 		{
 			tileInfo.setText( type + " wood" );
-		}
-		else if( simulation.tiles.get(type).getType() == TileType.town )
-		{
-			tileInfo.setText( type + " town" );
 		}
 		else if( simulation.tiles.get(type).getType() == TileType.sheep )
 		{

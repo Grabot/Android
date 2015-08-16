@@ -95,6 +95,8 @@ public class Simulation extends Data {
 
 	public void update(float delta) {
 		checkTouch();
+		
+		//every second updates
 		sec = (sec + delta);
 		if( sec >= 1.00000f )
 		{
