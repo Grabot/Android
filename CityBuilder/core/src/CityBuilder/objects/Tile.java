@@ -2,7 +2,7 @@ package CityBuilder.objects;
 
 import CityBuilder.enums.TileType;
 import CityBuilder.load.Vector;
-import CityBuilder.objects.attributes.Farm;
+import CityBuilder.objects.attributes.FarmTex;
 import CityBuilder.objects.attributes.Grass;
 import CityBuilder.objects.attributes.Iron;
 import CityBuilder.objects.attributes.Stone;
@@ -20,7 +20,7 @@ public class Tile
 	private int resources;
 	private final Vector position = new Vector( );
 	private int occupied = 0;
-	private int buildingPosition = 0;
+	private int buildingPosition = -1;
 	
 	private Grass grass;
 	private Water water;
@@ -28,7 +28,7 @@ public class Tile
 	private Stone stone;
 	private Wood wood;
 	private Town town;
-	private Farm farm;
+	private FarmTex farmtex;
 	
 	public Tile( Vector position )
     {
@@ -98,7 +98,7 @@ public class Tile
 	
 	public void drawFarm( Batch batch, TextureAtlas atlas )
 	{
-		farm.draw( batch, atlas );
+		farmtex.draw( batch, atlas );
 	}
 
 	public TileType getType() {
@@ -134,12 +134,17 @@ public class Tile
 		this.buildingPosition = buildingPosition;
 		if( occupied == 1 )
 		{
-			farm = new Farm( this, buildingPosition );
+			farmtex = new FarmTex( this, buildingPosition );
 		}
 	}
 
 	public Vector getPosition() {
 		return position;
+	}
+	
+	public int getBuildingPosition()
+	{
+		return buildingPosition;
 	}
 
 	

@@ -54,7 +54,6 @@ public class Renderer extends Data
 	private TextButton inventoryButton;
 	private TextButton BuildFarmButton;
 	
-	private Texture InfoBox;
 	private Texture progressBar;
 	private Texture progressBarFill;
 	
@@ -93,11 +92,10 @@ public class Renderer extends Data
 
 		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/FourthPack.atlas"));
 
-		InfoBox = new Texture( Gdx.files.internal( "images/UITest.png" ));
 		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
 		progressBarFill = new Texture( Gdx.files.internal( "data/progressBarFill.png" ));
 		
-		region = new TextureRegion(InfoBox, 0, 0, InfoBox.getWidth(), InfoBox.getHeight());
+		region = atlas.findRegion("scroll");
 		progressRegion = new TextureRegion( progressBar, 0, 0, progressBar.getWidth(), progressBar.getHeight() );
 		progressFillRegion = new TextureRegion( progressBarFill, 0, 0, progressBarFill.getWidth(), progressBarFill.getHeight() );
 
@@ -176,8 +174,6 @@ public class Renderer extends Data
 		}
 		else
 		{
-
-			
 			if( simulation.getBuildingFarm() )
 			{
 				inventoryOn = false;

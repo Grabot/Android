@@ -12,14 +12,9 @@ public class Water
 {
 	private Tile tile;
 	
-	private Texture SquareTileWater;
-	private TextureRegion SquareTileRegionWater;
-
 	public Water( Tile tile )
 	{
 		this.tile = tile;
-		SquareTileWater = new Texture( Gdx.files.internal( "images/resources/water.png" ));
-		SquareTileRegionWater = new TextureRegion( SquareTileWater, 0, 0, SquareTileWater.getWidth(), SquareTileWater.getHeight() );		
 	}
 	
 	public void draw( Batch batch, TextureAtlas atlas )

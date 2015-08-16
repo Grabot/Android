@@ -2,6 +2,7 @@ package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
+import CityBuilder.gameScreen.buildings.Farm;
 import CityBuilder.load.Data;
 import CityBuilder.load.build.buildActor;
 import CityBuilder.load.build.buildInventory;
@@ -18,6 +19,7 @@ public class Simulation extends Data {
 	public ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
+	private ArrayList<Farm> farms = new ArrayList<Farm>();
 
 	private float width = 0;
 	private float height = 0;
@@ -48,7 +50,7 @@ public class Simulation extends Data {
 
 	float touch_distance_x = 999;
 	float touch_distance_y = 999;
-
+	float sec = 0.0f;
 	private boolean MiningSequence = false;
 
 	public static final String LOG = Simulation.class.getSimpleName();
@@ -93,6 +95,20 @@ public class Simulation extends Data {
 
 	public void update(float delta) {
 		checkTouch();
+		sec = (sec + delta);
+		if( sec >= 1.00000f )
+		{
+			updateBuildings();
+			sec = (sec - 1.00000f);
+		}
+	}
+	
+	private void updateBuildings()
+	{
+		for( int i = 0; i < farms.size(); i++ )
+		{
+			farms.get(i).update();
+		}
 	}
 	
 	public void BuildFarm()
@@ -103,11 +119,28 @@ public class Simulation extends Data {
 	public void FarmBuildingConfirmation( int selectedTile )
 	{
 		//set all tiles that occupy the farm
+
+		if( selectedTile == (gridSizeWidth-1) )
+		{
+			selectedTile = (selectedTile+(gridSizeWidth-1));
+		}
+		if(selectedTile < gridSizeWidth )
+		{
+			selectedTile = (selectedTile + gridSizeWidth );
+		}
+		else if( (selectedTile+1) % gridSizeWidth == 0)
+		{
+			selectedTile = (selectedTile-1);
+		}
+		
 		tiles.get(selectedTile).setOccupied(1, 0);
 		tiles.get(selectedTile-gridSizeWidth).setOccupied(1, 1);
 		tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1, 2);
 		tiles.get(selectedTile+1).setOccupied(1, 3);
 		inventory.takeItem( "farm" );
+		
+		Farm farm = new Farm(selectedTile, tiles);
+		farms.add(farm);
 		BuildingFarm = false;
 	}
 

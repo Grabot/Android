@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Farm 
+public class FarmTex
 {
 	private Tile tile;
 	private int position = 0;
 	
-	public Farm( Tile tile, int position )
+	public FarmTex( Tile tile, int position )
 	{
 		this.tile = tile;
 		this.position = position;
