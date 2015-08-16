@@ -11,7 +11,8 @@ public enum Item {
 	farm("farmResource"), //6
 	woodIcon("log_icon2"), //7
 	stonIcon("stone"), //8
-	fishershut("fishermanResource"); //9
+	fishershut("fishermanResource"), //9
+	woodcutter("woodcutterResource"); //10
 
     private String textureRegion;
 

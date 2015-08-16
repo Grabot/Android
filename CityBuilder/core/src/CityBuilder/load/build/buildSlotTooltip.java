@@ -51,7 +51,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
         // title displays the amount
         // basic layout
 
-        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output6.pack"));
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output7.pack"));
         final TextureRegion logImage = icons.findRegion("log_icon2");
         final TextureRegion stoneImage = icons.findRegion("stone");
         final Actor logIcon = new Actor(){
@@ -113,6 +113,30 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 	        buildButton = new TextButton( "Create", skin );
 	        buildButton.addListener(createListenerFisher);
 		}
+		else if( slot.getItem() == Item.values()[10] )
+		{
+			//woodcutter
+			row().fill().expandX();
+	        clear();
+	        label = new Label("woodcutter \nResources required: \n", skin);
+	        
+	        logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
+	        stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
+	       
+	        add(label);
+	        row();
+	        add(logIcon);
+	        Label amountWood = new Label("x100", skin);
+	        add(amountWood);
+	        row();
+	        add(stoneIcon);
+	        Label amountStone = new Label("x50", skin);
+	        add( amountStone );
+	        row();
+	       
+	        buildButton = new TextButton( "Create", skin );
+	        buildButton.addListener(createListenerWoodcutter);
+		}
         add(buildButton);
         pack();
 	}
@@ -145,6 +169,22 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			else
 			{
 				inventory.addItem(inventory.findResourceSlot("fishershut"), 9);
+			}
+		}
+	};
+	
+	public ClickListener createListenerWoodcutter = new ClickListener() 
+	{
+		@Override
+		public void clicked (InputEvent event, float x, float y) 
+		{
+			if (inventory.checkInventoryTest("woodcutter") == -1 )
+			{
+				inventory.addItem(inventory.firstEmtpySlot(), 10);
+			}
+			else
+			{
+				inventory.addItem(inventory.findResourceSlot("woodcutter"), 10);
 			}
 		}
 	};
