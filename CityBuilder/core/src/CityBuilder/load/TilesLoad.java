@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class TilesLoad extends Data
 {
-	private Tile[][] tile = new Tile[25][25];
+	private Tile[][] tile = new Tile[gridSizeWidth][gridSizeHeight];
 	
 	public ArrayList<Tile> tiles = new ArrayList<Tile>();
 	

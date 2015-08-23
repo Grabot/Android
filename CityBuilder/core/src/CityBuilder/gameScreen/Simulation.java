@@ -178,7 +178,7 @@ public class Simulation extends Data {
 		
 		if (touched_down) 
 		{
-			selectedTile = ((tileY*25)+tileX);
+			selectedTile = ((tileY*gridSizeHeight)+tileX);
 			if (pressed >= 20) 
 			{
 				if (!scrolling) 

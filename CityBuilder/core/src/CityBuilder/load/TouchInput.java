@@ -50,8 +50,8 @@ public class TouchInput
 	private int mapSizeWidth = (25*64);
 	private int mapSizeHeight = (25*64);
 	
-	private int overShootX = 480;
-	private int overShootY = 320;
+	private int overShootX = 2000;
+	private int overShootY = 500;
 	
 	public TouchInput( OrthographicCamera camera, float width, float height )
 	{
@@ -159,14 +159,14 @@ public class TouchInput
 
 			Gdx.app.log( "Zoomtest", "zoomSpeed: " + zoomSpeed );
 
-			if( camera.zoom <= 0.2 && zoomSpeed <= 0 )
+			if( camera.zoom <= 0.1 && zoomSpeed <= 0 )
 			{
-				currentZoom = 0.2f;
+				currentZoom = 0.1f;
 				zoomSpeed = 0;
 			}
-			else if( camera.zoom >= 1 && zoomSpeed > 0)
+			else if( camera.zoom >= 4 && zoomSpeed > 0)
 			{
-				currentZoom = 1f;
+				currentZoom = 4f;
 				zoomSpeed = 0;
 			}
 			else
@@ -192,7 +192,7 @@ public class TouchInput
 		}
 
 		
-		currentZoom = MathUtils.clamp( currentZoom, 0.1f, 2f );
+		currentZoom = MathUtils.clamp( currentZoom, 0.1f, 4f );
 		camera.zoom = currentZoom;
 		//camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, 1.2f);
 		
