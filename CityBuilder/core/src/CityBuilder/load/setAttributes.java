@@ -27,7 +27,7 @@ public class setAttributes extends Data
 	public void attributes()
 	{
 		
-		layout = Gdx.files.internal("mapLayout/layoutTiles.csv");
+		layout = Gdx.files.internal("mapLayout/layoutTiles2.csv");
 		br = new BufferedReader(layout.reader());
 		
 		Iterator<String> mapLines = br.lines().iterator();
@@ -41,11 +41,19 @@ public class setAttributes extends Data
 			{
 				if( Integer.parseInt(items[width]) == 15 )
 				{
-					tile[height][width].setAttributes( TileType.grass, available, 0, 2000 );
+					tile[height][width].setAttributes( TileType.grass, available, 0, 2000, 0 );
 				}
 				else if( Integer.parseInt(items[width]) == 20 )
 				{
-					tile[height][width].setAttributes( TileType.water, available, 0, 2000 );
+					tile[height][width].setAttributes( TileType.water, available, 0, 2000, 0 );
+				}
+				else if( Integer.parseInt(items[width]) >= 23 && Integer.parseInt(items[width]) <= 34 )
+				{
+					tile[height][width].setAttributes( TileType.shore, available, 0, 2000, Integer.parseInt(items[width]) );
+				}
+				else
+				{
+					tile[height][width].setAttributes( TileType.shore, available, 0, 2000, 12 );
 				}
 			}
 			height++;

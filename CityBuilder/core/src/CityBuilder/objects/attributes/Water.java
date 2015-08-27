@@ -11,10 +11,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Water 
 {
 	private Tile tile;
+	private int tilePosition;
 	
-	public Water( Tile tile )
+	public Water( Tile tile, int tilePosition )
 	{
 		this.tile = tile;
+		this.tilePosition = tilePosition;
 	}
 	
 	public void draw( Batch batch, TextureAtlas atlas )

@@ -5,6 +5,7 @@ import CityBuilder.load.Vector;
 import CityBuilder.objects.attributes.FarmTex;
 import CityBuilder.objects.attributes.Grass;
 import CityBuilder.objects.attributes.Iron;
+import CityBuilder.objects.attributes.Shore;
 import CityBuilder.objects.attributes.Stone;
 import CityBuilder.objects.attributes.Water;
 import CityBuilder.objects.attributes.Wood;
@@ -19,10 +20,12 @@ public class Tile
 	private int resources;
 	private final Vector position = new Vector( );
 	private int occupied = 0;
+	private int tilePosition = 0;
 	private int buildingPosition = -1;
 	
 	private Grass grass;
 	private Water water;
+	private Shore shore;
 	private Iron iron;
 	private Stone stone;
 	private Wood wood;
@@ -33,12 +36,13 @@ public class Tile
             this.position.set( position );
     }
 	
-	public void setAttributes( TileType type, int colour, int occupied, int resources )
+	public void setAttributes( TileType type, int colour, int occupied, int resources, int tilePosition )
 	{
 		this.type = type;
 		this.colour = colour;
 		this.occupied = occupied;
 		this.resources = resources;
+		this.tilePosition = tilePosition;
 		
 		if( type.toString().equals("grass") )
 		{
@@ -46,7 +50,7 @@ public class Tile
 		}
 		else if( type.toString().equals("water") )
 		{
-			water = new Water( this );
+			water = new Water( this, tilePosition );
 		}
 		else if( type.toString().equals("iron") )
 		{
@@ -59,6 +63,10 @@ public class Tile
 		else if( type.toString().equals("wood") )
 		{
 			wood = new Wood( this );
+		}
+		else if( type.toString().equals("shore") )
+		{
+			shore = new Shore( this, tilePosition );
 		}
 	}
 	
@@ -83,6 +91,10 @@ public class Tile
 		else if( type.toString().equals("wood") )
 		{
 			wood.draw( batch, atlas );
+		}
+		else if( type.toString().equals("shore") )
+		{
+			shore.draw( batch, atlas );
 		}
 	}
 	

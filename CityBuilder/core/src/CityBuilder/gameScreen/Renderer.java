@@ -86,7 +86,7 @@ public class Renderer extends Data
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
-		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/FourthPack.atlas"));
+		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/FifthPack.atlas"));
 
 		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
 		progressBarFill = new Texture( Gdx.files.internal( "data/progressBarFill.png" ));
