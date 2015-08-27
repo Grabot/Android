@@ -3,6 +3,7 @@ package CityBuilder.gameScreen;
 import java.util.ArrayList;
 
 import CityBuilder.gameScreen.buildings.Farm;
+import CityBuilder.gameScreen.buildings.WoodCutter;
 import CityBuilder.load.Data;
 import CityBuilder.load.build.buildActor;
 import CityBuilder.load.build.buildInventory;
@@ -20,6 +21,7 @@ public class Simulation extends Data {
 
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
 	private ArrayList<Farm> farms = new ArrayList<Farm>();
+	private ArrayList<WoodCutter> woodcutters = new ArrayList<WoodCutter>();
 
 	private float width = 0;
 	private float height = 0;
@@ -45,6 +47,7 @@ public class Simulation extends Data {
 
 	private boolean[] farmTiles = new boolean[626];
 	private boolean BuildingFarm = false;
+	private boolean BuildingWoodCutter = false;
 	
 	private int selectedTile = -1;
 
@@ -111,14 +114,23 @@ public class Simulation extends Data {
 		{
 			farms.get(i).update();
 		}
+		
+		for( int i = 0; i < woodcutters.size(); i++ )
+		{
+			woodcutters.get(i).update();
+		}
 	}
 	
 	public void BuildFarm()
 	{
 		BuildingFarm = true;
 	}
+	public void BuildWoodCutter()
+	{
+		BuildingWoodCutter = true;
+	}
 	
-	public void FarmBuildingConfirmation( int selectedTile )
+	public void BuildingConfirmation( int building, int selectedTile )
 	{
 		//set all tiles that occupy the farm
 
@@ -135,15 +147,32 @@ public class Simulation extends Data {
 			selectedTile = (selectedTile-1);
 		}
 		
-		tiles.get(selectedTile).setOccupied(1, 0);
-		tiles.get(selectedTile-gridSizeWidth).setOccupied(1, 1);
-		tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1, 2);
-		tiles.get(selectedTile+1).setOccupied(1, 3);
-		inventory.takeItem( "farm" );
+		if( building == 0 )
+		{
+			tiles.get(selectedTile).setOccupied(1, 0);
+			tiles.get(selectedTile-gridSizeWidth).setOccupied(1, 1);
+			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1, 2);
+			tiles.get(selectedTile+1).setOccupied(1, 3);
 		
-		Farm farm = new Farm(selectedTile, tiles);
-		farms.add(farm);
-		BuildingFarm = false;
+			inventory.takeItem( "farm" );
+			
+			Farm farm = new Farm(selectedTile, tiles);
+			farms.add(farm);
+			BuildingFarm = false;
+		}
+		else if( building == 1 )
+		{
+			tiles.get(selectedTile).setOccupied(2, 0);
+			tiles.get(selectedTile-gridSizeWidth).setOccupied(2, 1);
+			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(2, 2);
+			tiles.get(selectedTile+1).setOccupied(2, 3);
+			
+			inventory.takeItem( "woodcutter" );
+			
+			WoodCutter woodcutter = new WoodCutter(selectedTile, tiles);
+			woodcutters.add(woodcutter);
+			BuildingWoodCutter = false;
+		}
 	}
 
 	public void updateScroll(float cameraX, float cameraY, float cameraZ) {
@@ -286,5 +315,9 @@ public class Simulation extends Data {
 	public boolean getBuildingFarm()
 	{
 		return BuildingFarm;
+	}
+	public boolean getBuildingWoodCutter()
+	{
+		return BuildingWoodCutter;
 	}
 }

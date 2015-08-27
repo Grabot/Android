@@ -41,19 +41,32 @@ public class SlotTooltip extends Window implements SlotListener
             add(label);
             row();
             TextButton buildFarm = new TextButton("Build", skin );
-            buildFarm.addListener(buildListener);
+            buildFarm.addListener(buildFarmListener);
             add(buildFarm);
         }
-        else
+        else if( slot.getItem().toString() == "woodcutter" )
         {
-            label = new Label("This is \n" + slot.getItem(), skin);
+        	label = new Label("This is a motherfucking \n" + slot.getItem(), skin);
             add(label);
+            row();
+            TextButton buildWoodCutter = new TextButton("Build", skin );
+            buildWoodCutter.addListener(buildWoodCutterListener);
+            add(buildWoodCutter);
         }
         pack();
        
     }
 
-    public ClickListener buildListener = new ClickListener() 
+    public ClickListener buildWoodCutterListener = new ClickListener() 
+	{
+		@Override
+		public void clicked (InputEvent event, float x, float y) 
+		{
+			game.BuildWoodCutter();
+		}
+	};
+	
+	 public ClickListener buildFarmListener = new ClickListener() 
 	{
 		@Override
 		public void clicked (InputEvent event, float x, float y) 

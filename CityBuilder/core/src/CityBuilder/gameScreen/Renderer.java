@@ -52,7 +52,7 @@ public class Renderer extends Data
 	private boolean inventoryOn = false;
 	
 	private TextButton inventoryButton;
-	private TextButton BuildFarmButton;
+	private TextButton BuildBuildingButton;
 	
 	private Texture progressBar;
 	private Texture progressBarFill;
@@ -86,7 +86,7 @@ public class Renderer extends Data
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
-		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/FifthPack.atlas"));
+		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/Pack10.atlas"));
 
 		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
 		progressBarFill = new Texture( Gdx.files.internal( "data/progressBarFill.png" ));
@@ -119,7 +119,8 @@ public class Renderer extends Data
 			if( simulation.getBuildingFarm() )
 			{
 				inventoryButton.setVisible(false);
-				BuildFarmButton.setVisible( true );
+				BuildBuildingButton.setVisible( true );
+				BuildBuildingButton.setText("Build Farm");
 				this.selectedTile = simulation.TileTouch();
 				
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
@@ -128,10 +129,23 @@ public class Renderer extends Data
 					drawTiles.drawFarmBuild( simulation, batch, atlas, selectedTile );
 				}
 			}
+			else if( simulation.getBuildingWoodCutter() )
+			{
+				inventoryButton.setVisible(false);
+				BuildBuildingButton.setVisible( true );
+				BuildBuildingButton.setText("Build WoodCutter");
+				this.selectedTile = simulation.TileTouch();
+				
+				if( selectedTile >= 0 && selectedTile < numberOfTiles )
+				{
+					infoBoxDisplay.displayBuildWoodCutter(tileInfo, resourceInfo, simulation, selectedTile);
+					drawTiles.drawWoodCutterBuild( simulation, batch, atlas, selectedTile );
+				}
+			}
 			else
 			{
 				inventoryButton.setVisible(true);
-				BuildFarmButton.setVisible( false );
+				BuildBuildingButton.setVisible( false );
 				this.selectedTile = simulation.TileTouch();
 				
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
@@ -171,6 +185,10 @@ public class Renderer extends Data
 		else
 		{
 			if( simulation.getBuildingFarm() )
+			{
+				inventoryOn = false;
+			}
+			else if( simulation.getBuildingWoodCutter() )
 			{
 				inventoryOn = false;
 			}
@@ -216,10 +234,10 @@ public class Renderer extends Data
 		inventoryButton.setBounds( 1150, 30, 100, 100);
 		inventoryButton.setVisible( true );
 		
-		BuildFarmButton = new TextButton( "Build Farm", skin );
-		BuildFarmButton.setDisabled( false );
-		BuildFarmButton.setBounds( 1000,  300, 100, 30 );
-		BuildFarmButton.setVisible( false );
+		BuildBuildingButton = new TextButton( "Build Farm", skin );
+		BuildBuildingButton.setDisabled( false );
+		BuildBuildingButton.setBounds( 1000,  300, 200, 30 );
+		BuildBuildingButton.setVisible( false );
 		
 		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Inventory.atlas"));
 		TextureRegion image;
@@ -240,11 +258,11 @@ public class Renderer extends Data
 		stage.addActor( resourceInfo );
 		stage.addActor( inventoryButton );
 		stage.addActor( inventoryActor );
-		stage.addActor( BuildFarmButton );
+		stage.addActor( BuildBuildingButton );
 		stage.addActor( builder );
 
 		inventoryButton.addListener( InventoryListener );
-		BuildFarmButton.addListener( buildFarmListener );
+		BuildBuildingButton.addListener( buildBuildingListener );
 	}
 	
 	public ClickListener InventoryListener = new ClickListener() 
@@ -256,12 +274,19 @@ public class Renderer extends Data
 		}
 	};
 	
-	public ClickListener buildFarmListener = new ClickListener() 
+	public ClickListener buildBuildingListener = new ClickListener() 
 	{
 		@Override
 		public void clicked (InputEvent event, float x, float y) 
 		{
-			simulation.FarmBuildingConfirmation(selectedTile);
+			if( simulation.getBuildingFarm() )
+			{
+				simulation.BuildingConfirmation(0, selectedTile);
+			}
+			else if( simulation.getBuildingWoodCutter() )
+			{
+				simulation.BuildingConfirmation(1, selectedTile);
+			}
 		}
 	};
 	

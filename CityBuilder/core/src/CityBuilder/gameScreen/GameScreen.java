@@ -90,6 +90,10 @@ public class GameScreen implements Screen
 	{
 		simulation.BuildFarm();
 	}
+	public void BuildWoodCutter()
+	{
+		simulation.BuildWoodCutter();
+	}
 	
 	public void Game_Finished( int level, ArrayList<Citizen> citizens )
 	{

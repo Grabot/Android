@@ -20,6 +20,10 @@ public class DisplayInfoBox extends Data
 			{
 				displayFarmText(tileInfo, resourceInfo, simulation, type);
 			}
+			else if ( simulation.tiles.get(type).getOccupied() == 2 )
+			{
+				displayWoodCutterText(tileInfo, resourceInfo, simulation, type);
+			}
 		}
 		else
 		{
@@ -72,6 +76,12 @@ public class DisplayInfoBox extends Data
 			tileInfo.setText( "nothing selected" );
 		}
 		resourceInfo.setText( "resources: " + simulation.tiles.get(type).getResources() );
+	}
+	
+	private void displayWoodCutterText(TextField tileInfo, TextField resourceInfo, Simulation simulation, int type)
+	{
+		tileInfo.setText("woodcutter!" );
+		resourceInfo.setText( "this is a woodcutter" );
 	}
 	
 	private void displayFarmText(TextField tileInfo, TextField resourceInfo, Simulation simulation, int type)
@@ -150,6 +160,14 @@ public class DisplayInfoBox extends Data
 		tileInfo.setText( "plx build farm" );
 		tileInfo.setVisible( true );
 		resourceInfo.setText( "Build Farm" );
+		resourceInfo.setVisible( true );
+	}
+	
+	public void displayBuildWoodCutter( TextField tileInfo, TextField resourceInfo, Simulation simulation, int type )
+	{
+		tileInfo.setText( "plx build woodcutter" );
+		tileInfo.setVisible( true );
+		resourceInfo.setText( "Build WoodCutter" );
 		resourceInfo.setVisible( true );
 	}
 

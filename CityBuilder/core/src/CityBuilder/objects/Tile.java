@@ -9,6 +9,7 @@ import CityBuilder.objects.attributes.Shore;
 import CityBuilder.objects.attributes.Stone;
 import CityBuilder.objects.attributes.Water;
 import CityBuilder.objects.attributes.Wood;
+import CityBuilder.objects.attributes.WoodCutterTex;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -30,6 +31,7 @@ public class Tile
 	private Stone stone;
 	private Wood wood;
 	private FarmTex farmtex;
+	private WoodCutterTex woodcuttertex;
 	
 	public Tile( Vector position )
     {
@@ -102,6 +104,11 @@ public class Tile
 	{
 		farmtex.draw( batch, atlas );
 	}
+	
+	public void drawWoodCutter( Batch batch, TextureAtlas atlas )
+	{
+		woodcuttertex.draw( batch, atlas );
+	}
 
 	public TileType getType() {
 		return type;
@@ -137,6 +144,10 @@ public class Tile
 		if( occupied == 1 )
 		{
 			farmtex = new FarmTex( this, buildingPosition );
+		}
+		else if( occupied == 2 )
+		{
+			woodcuttertex = new WoodCutterTex( this, buildingPosition );
 		}
 	}
 

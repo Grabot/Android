@@ -28,50 +28,104 @@ public class DrawTiles extends Data
 					//it is a farm
 					simulation.tiles.get(i).drawFarm( batch, atlas );
 				}
+				else if( simulation.tiles.get(i).getOccupied() == 2 )
+				{
+					//it is a farm
+					simulation.tiles.get(i).drawWoodCutter(batch, atlas);
+				}
 			}
 		}
 	}
 	
 	public void drawSelected( Simulation simulation, Batch batch, TextureAtlas atlas, int tileNumber )
 	{
-		TextureRegion SquareTileRegionSelected;
-		SquareTileRegionSelected = atlas.findRegion("SquareGreySmall");
+		TextureRegion SquareTileRegionSelected = atlas.findRegion("SquareGreySmall");
+		
 		if( simulation.tiles.get(tileNumber).getOccupied() == 0 )
 		{
 			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 		}
 		else
 		{
-			if( simulation.tiles.get(tileNumber).getOccupied() == 1 )
+			if(( simulation.tiles.get(tileNumber).getOccupied() == 1 ) || ( simulation.tiles.get(tileNumber).getOccupied() == 2 ))
 			{
 				//farm, select all farm tiles of the farm. Check the tiles next to it.
 				batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 				if( simulation.tiles.get(tileNumber).getBuildingPosition() == 0 )
 				{
+					drawOutline( simulation, batch, atlas, tileNumber );
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (-32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber-gridSizeWidth).getPosition().x), (-32 + simulation.tiles.get(tileNumber-gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber-(gridSizeWidth-1)).getPosition().x), (-32 + simulation.tiles.get(tileNumber-(gridSizeWidth-1)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 				}
 				else if( simulation.tiles.get(tileNumber).getBuildingPosition() == 1 )
 				{
+					drawOutline( simulation, batch, atlas, (tileNumber+gridSizeWidth) );
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (-32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+gridSizeWidth).getPosition().x), (-32 + simulation.tiles.get(tileNumber+gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth+1)).getPosition().x), (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth+1)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 				}
 				else if( simulation.tiles.get(tileNumber).getBuildingPosition() == 2 )
 				{
+					drawOutline( simulation, batch, atlas, (tileNumber+(gridSizeWidth-1)) );
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber-1).getPosition().x), (-32 + simulation.tiles.get(tileNumber-1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+gridSizeWidth).getPosition().x), (-32 + simulation.tiles.get(tileNumber+gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth-1)).getPosition().x), (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth-1)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 				}
 				else if( simulation.tiles.get(tileNumber).getBuildingPosition() == 3 )
 				{
+					drawOutline( simulation, batch, atlas, (tileNumber-1) );
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber-1).getPosition().x), (-32 + simulation.tiles.get(tileNumber-1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber-gridSizeWidth).getPosition().x), (-32 + simulation.tiles.get(tileNumber-gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 					batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber-(gridSizeWidth+1)).getPosition().x), (-32 + simulation.tiles.get(tileNumber-(gridSizeWidth+1)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 				}
+				
+				
 			}
 		}
+	}
+	
+	private void drawOutline(Simulation simulation, Batch batch, TextureAtlas atlas, int tileNumber)
+	{
+		//draw outline region for woodcutter
+		TextureRegion SquareTileRegionSelected = atlas.findRegion("outlineFull2");
+		//left side
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber-3).getPosition().x), (32 + simulation.tiles.get(tileNumber-3).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-3)-gridSizeWidth).getPosition().x), (32 + simulation.tiles.get((tileNumber-3)-gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		
+		//top side
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get(tileNumber-(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get(tileNumber-(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get(tileNumber-(gridSizeWidth*4)+1).getPosition().x), (32 + simulation.tiles.get(tileNumber-(gridSizeWidth*4)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		
+		//bottom side
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get(tileNumber+(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth*4)+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+(gridSizeWidth*4)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		
+		//right side
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+5).getPosition().x), (32 + simulation.tiles.get(tileNumber+5).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber+5)+gridSizeWidth).getPosition().x), (32 + simulation.tiles.get((tileNumber+5)+gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+
+		SquareTileRegionSelected = atlas.findRegion("outlineEdge2");
+		//top left
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-3)-(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber-3)-(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-2)-(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber-2)-(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-1)-(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber-1)-(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		
+		//top right
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+2)-(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber+2)-(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+3)-(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber+3)-(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+4)-(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber+4)-(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		
+		//bottom right
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+4)+(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber+4)+(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+3)+(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber+3)+(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+2)+(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber+2)+(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+		
+		//bottom left
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber-2)+(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber-2)+(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber-3)+(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber-3)+(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber-4)+(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber-4)+(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		
 	}
 		
 	
@@ -91,43 +145,166 @@ public class DrawTiles extends Data
 			tileNumber = (tileNumber - 1);
 		}
 		
-		if( simulation.tiles.get(tileNumber-gridSizeWidth).getType().toString() == "water" )
-		{
-			SquareTileRegionSelected = atlas.findRegion("farmbuilding3preFault");
-		}
-		else
-		{
-			SquareTileRegionSelected = atlas.findRegion("farmbuilding3pre");
-		}
-		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if( simulation.tiles.get((tileNumber-gridSizeWidth)+1).getType().toString() == "water" )
-		{
-			SquareTileRegionSelected = atlas.findRegion("farmbuilding4preFault");
-		}
-		else
-		{
-			SquareTileRegionSelected = atlas.findRegion("farmbuilding4pre");
-		}
-		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if( simulation.tiles.get(tileNumber+1).getType().toString() == "water" )
-		{
-			SquareTileRegionSelected = atlas.findRegion("farmbuilding1preFault");
-		}
-		else
-		{
-			SquareTileRegionSelected = atlas.findRegion("farmbuilding1pre");
-		}
-		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (-32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		SquareTileRegionSelected = atlas.findRegion("farmbuilding2");
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 		if( simulation.tiles.get(tileNumber).getType().toString() == "water" )
 		{
-			SquareTileRegionSelected = atlas.findRegion("farmbuilding2preFault");
+			SquareTileRegionSelected = atlas.findRegion("SquareRedSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 		}
 		else
 		{
-			SquareTileRegionSelected = atlas.findRegion("farmbuilding2pre");
+			SquareTileRegionSelected = atlas.findRegion("SquareGreenSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 		}
-		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		
+		SquareTileRegionSelected = atlas.findRegion("farmbuilding1");
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (-32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		if( simulation.tiles.get(tileNumber+1).getType().toString() == "water" )
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareRedSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		else
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareGreenSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		
+		SquareTileRegionSelected = atlas.findRegion("farmbuilding3");
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		if( simulation.tiles.get((tileNumber-gridSizeWidth)).getType().toString() == "water" )
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareRedSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		else
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareGreenSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		
+		SquareTileRegionSelected = atlas.findRegion("farmbuilding4");
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		if( simulation.tiles.get((tileNumber-gridSizeWidth)+1).getType().toString() == "water" )
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareRedSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		else
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareGreenSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+	}
 	
+	public void drawWoodCutterBuild( Simulation simulation, Batch batch, TextureAtlas atlas, int tileNumber )
+	{
+		TextureRegion SquareTileRegionSelected;
+		if( tileNumber < (gridSizeWidth-1) )
+		{
+			tileNumber = (tileNumber + gridSizeWidth);
+		}
+		else if( tileNumber == (gridSizeWidth-1) )
+		{
+			tileNumber = (tileNumber + gridSizeWidth -1 );
+		}
+		else if( (tileNumber+1) % gridSizeWidth == 0 )
+		{
+			tileNumber = (tileNumber - 1);
+		}
+		
+		SquareTileRegionSelected = atlas.findRegion("WoodCutterBuilding2");
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		if( simulation.tiles.get(tileNumber).getType().toString() == "water" )
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareRedSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		}
+		else
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareGreenSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		}
+		
+		SquareTileRegionSelected = atlas.findRegion("WoodCutterBuilding1");
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (-32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		if( simulation.tiles.get(tileNumber+1).getType().toString() == "water" )
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareRedSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		else
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareGreenSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		
+		SquareTileRegionSelected = atlas.findRegion("WoodCutterBuilding3");
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		if( simulation.tiles.get((tileNumber-gridSizeWidth)).getType().toString() == "water" )
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareRedSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		else
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareGreenSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		
+		SquareTileRegionSelected = atlas.findRegion("WoodCutterBuilding4");
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		if( simulation.tiles.get((tileNumber-gridSizeWidth)+1).getType().toString() == "water" )
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareRedSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		else
+		{
+			SquareTileRegionSelected = atlas.findRegion("SquareGreenSmall");
+			batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		}
+		
+		//draw outline region for woodcutter
+		SquareTileRegionSelected = atlas.findRegion("outlineFull2");
+		//left side
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber-3).getPosition().x), (32 + simulation.tiles.get(tileNumber-3).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-3)-gridSizeWidth).getPosition().x), (32 + simulation.tiles.get((tileNumber-3)-gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		
+		//top side
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get(tileNumber-(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get(tileNumber-(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get(tileNumber-(gridSizeWidth*4)+1).getPosition().x), (32 + simulation.tiles.get(tileNumber-(gridSizeWidth*4)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		
+		//bottom side
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get(tileNumber+(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth*4)+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+(gridSizeWidth*4)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		
+		//right side
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber+5).getPosition().x), (32 + simulation.tiles.get(tileNumber+5).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber+5)+gridSizeWidth).getPosition().x), (32 + simulation.tiles.get((tileNumber+5)+gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+
+		SquareTileRegionSelected = atlas.findRegion("outlineEdge2");
+		//top left
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-3)-(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber-3)-(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-2)-(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber-2)-(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get((tileNumber-1)-(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber-1)-(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
+		
+		//top right
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+2)-(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber+2)-(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+3)-(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber+3)-(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+4)-(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber+4)-(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
+		
+		//bottom right
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+4)+(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber+4)+(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+3)+(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber+3)+(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber+2)+(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber+2)+(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
+		
+		//bottom left
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber-2)+(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber-2)+(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber-3)+(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber-3)+(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		batch.draw( SquareTileRegionSelected, (32 + simulation.tiles.get((tileNumber-4)+(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber-4)+(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		
 	}
 	
 }
