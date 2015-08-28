@@ -1,0 +1,152 @@
+
+Pack8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+scroll
+  rotate: false
+  xy: 0, 27
+  size: 150, 229
+  orig: 150, 229
+  offset: 0, 0
+  index: -1
+coalOreSmall
+  rotate: false
+  xy: 150, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+dirt
+  rotate: false
+  xy: 150, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+edgeToWaterEdge
+  rotate: false
+  xy: 214, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+edgeToWaterEdgeSmall
+  rotate: false
+  xy: 150, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+edgeToWaterFull
+  rotate: false
+  xy: 150, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+farmbuilding1
+  rotate: false
+  xy: 214, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+farmbuilding1pre
+  rotate: false
+  xy: 278, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+farmbuilding1preFault
+  rotate: false
+  xy: 214, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+goldOreSmall
+  rotate: false
+  xy: 214, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grass
+  rotate: false
+  xy: 278, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+HouseBrown
+  rotate: false
+  xy: 342, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+ironOreSmall
+  rotate: false
+  xy: 278, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+outlineEdge
+  rotate: false
+  xy: 278, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+outlineFull
+  rotate: false
+  xy: 342, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+pinetree
+  rotate: false
+  xy: 406, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+SquareGreySmall
+  rotate: false
+  xy: 342, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+water
+  rotate: false
+  xy: 342, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+WoodCutterBuilding1
+  rotate: false
+  xy: 406, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+WoodCutterBuilding1pre
+  rotate: false
+  xy: 406, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+WoodCutterBuilding1preFault
+  rotate: false
+  xy: 406, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
