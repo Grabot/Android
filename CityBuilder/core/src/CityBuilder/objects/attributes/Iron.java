@@ -11,15 +11,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Iron 
 {
 	private Tile tile;
-
-	public Iron( Tile tile )
+	private TextureRegion SquareTileRegionIron;
+	public Iron( Tile tile, TextureAtlas atlas )
 	{
 		this.tile = tile;
+		SquareTileRegionIron = atlas.findRegion("ironOreSmall");
 	}
 	
-	public void draw( Batch batch, TextureAtlas atlas )
+	public void draw( Batch batch )
 	{
-		TextureRegion SquareTileRegionIron = atlas.findRegion("ironOreSmall");
 		batch.draw( SquareTileRegionIron, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	}
 }

@@ -10,75 +10,68 @@ public class Shore
 {
 	private Tile tile;
 	private int tilePosition;
+	private TextureRegion SquareTileRegionShoreEdge;
+	private TextureRegion SquareTileRegionShoreEdgeSmall;
+	private TextureRegion SquareTileRegionShoreFull;
 	
-	public Shore( Tile tile, int tilePosition )
+	public Shore( Tile tile, int tilePosition, TextureAtlas atlas )
 	{
 		this.tile = tile;
 		this.tilePosition = tilePosition;
+		SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdge");
+		SquareTileRegionShoreEdgeSmall = atlas.findRegion("edgeToWaterEdgeSmall");
+		SquareTileRegionShoreFull = atlas.findRegion("edgeToWaterFull");
 	}
 	
-	public void draw( Batch batch, TextureAtlas atlas )
+	public void draw( Batch batch )
 	{
-		TextureRegion SquareTileRegionShoreEdge;
 		if( tilePosition == 23 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdge");
 			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 		else if( tilePosition == 26 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdge");
 			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
 		}
 		else if( tilePosition == 25 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdge");
 			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 90, false);
 		}
 		else if( tilePosition == 24 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdge");
 			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 180, false);
 		}
 		else if( tilePosition == 28 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdgeSmall");
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
 		}
 		else if( tilePosition == 27 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdgeSmall");
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 90, false);
+			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 90, false);
 		}
 		else if( tilePosition == 30 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdgeSmall");
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 180, false);
+			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 180, false);
 		}
 		else if( tilePosition == 29 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterEdgeSmall");
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 		else if( tilePosition == 34 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterFull");
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
 		}
 		else if( tilePosition == 33 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterFull");
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 90, false);
+			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 90, false);
 		}
 		else if( tilePosition == 32 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterFull");
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 180, false);
+			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 180, false);
 		}
 		else if( tilePosition == 31 )
 		{
-			SquareTileRegionShoreEdge = atlas.findRegion("edgeToWaterFull");
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 	}
 }

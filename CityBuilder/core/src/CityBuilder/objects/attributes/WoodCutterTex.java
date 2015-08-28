@@ -10,39 +10,42 @@ public class WoodCutterTex
 {
 	private Tile tile;
 	private int position = 0;
+	private TextureRegion SquareTileRegionWoodCutterBottomLeft;
+	private TextureRegion SquareTileRegionWoodCutterBottomRight;
+	private TextureRegion SquareTileRegionWoodCutterTopLeft;
+	private TextureRegion SquareTileRegionWoodCutterTopRight;
 	
-	public WoodCutterTex( Tile tile, int position )
+	public WoodCutterTex( Tile tile, int position, TextureAtlas atlas )
 	{
 		this.tile = tile;
 		this.position = position;
+		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("WoodCutterBuilding1"); 
+		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("WoodCutterBuilding2"); 
+		SquareTileRegionWoodCutterTopRight = atlas.findRegion("WoodCutterBuilding3"); 
+		SquareTileRegionWoodCutterBottomRight = atlas.findRegion("WoodCutterBuilding4"); 
 	}
 	
-	public void draw( Batch batch, TextureAtlas atlas )
+	public void draw( Batch batch )
 	{
-		TextureRegion SquareTileRegionWoodCutter = atlas.findRegion("farmbuilding1"); 
 		if( position == 0 )
 		{
 			//bottom left
-			SquareTileRegionWoodCutter = atlas.findRegion("farmbuilding1");
+			batch.draw( SquareTileRegionWoodCutterBottomLeft, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 		else if( position == 1 )
 		{
-			//top left
-			SquareTileRegionWoodCutter = atlas.findRegion("farmbuilding2");
+			//top left	
+			batch.draw( SquareTileRegionWoodCutterTopLeft, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 		else if( position == 2 )
 		{
-			//top right
-			SquareTileRegionWoodCutter = atlas.findRegion("farmbuilding3");
+			//top right	
+			batch.draw( SquareTileRegionWoodCutterTopRight, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 		else if( position == 3 )
 		{
-			//bottom right
-			SquareTileRegionWoodCutter = atlas.findRegion("farmbuilding4");
+			//bottom right	
+			batch.draw( SquareTileRegionWoodCutterBottomRight, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
-		batch.draw( SquareTileRegionWoodCutter, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
-		
-		
-	
 	}
 }

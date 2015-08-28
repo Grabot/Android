@@ -2,6 +2,7 @@ package CityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
+import CityBuilder.load.ButtonControl;
 import CityBuilder.load.Data;
 import CityBuilder.load.DisplayInfoBox;
 import CityBuilder.load.DrawTiles;
@@ -26,7 +27,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -42,6 +42,7 @@ public class Renderer extends Data
 	private DisplayInfoBox infoBoxDisplay;
 	private TouchInput inputHandler;
 	private DrawTiles drawTiles;
+	private ButtonControl buttoncontrol;
 	
 	private Stage stage;
 	private OrthographicCamera camera;
@@ -76,7 +77,7 @@ public class Renderer extends Data
 	private TextureAtlas atlas;
 	private buildActor builder;
 	
-	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, Inventory inventory, InventoryActor inventoryActor, buildInventory buildInv, buildActor builder,  ArrayList<Citizen> citizens )
+	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, TextureAtlas atlas, Inventory inventory, InventoryActor inventoryActor, buildInventory buildInv, buildActor builder,  ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		this.game = game;
@@ -86,7 +87,7 @@ public class Renderer extends Data
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
-		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/Pack10.atlas"));
+		this.atlas = atlas;
 
 		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
 		progressBarFill = new Texture( Gdx.files.internal( "data/progressBarFill.png" ));
@@ -97,7 +98,8 @@ public class Renderer extends Data
 
 		infoBoxDisplay = new DisplayInfoBox();
 		inputHandler = new TouchInput( camera, width, height );
-		drawTiles = new DrawTiles();
+		drawTiles = new DrawTiles(atlas);
+		buttoncontrol = new ButtonControl();
 		
 		this.stage = stage;
 		this.camera = camera;
@@ -111,7 +113,7 @@ public class Renderer extends Data
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
 		
-		drawTiles.fillTiles( simulation, batch, atlas );
+		drawTiles.fillTiles( simulation, batch );
 		
 		if( !inventoryOn )
 		{		
@@ -119,25 +121,21 @@ public class Renderer extends Data
 			if( simulation.getBuildingFarm() )
 			{
 				inventoryButton.setVisible(false);
-				BuildBuildingButton.setVisible( true );
-				BuildBuildingButton.setText("Build Farm");
 				this.selectedTile = simulation.TileTouch();
-				
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
 				{
+					buttoncontrol.controlButtonFarm(simulation, BuildBuildingButton, selectedTile);
 					infoBoxDisplay.displayBuildFarm(tileInfo, resourceInfo, simulation, selectedTile);
-					drawTiles.drawFarmBuild( simulation, batch, atlas, selectedTile );
+					drawTiles.drawFarmBuild( simulation, batch, selectedTile );
 				}
 			}
 			else if( simulation.getBuildingWoodCutter() )
 			{
 				inventoryButton.setVisible(false);
-				BuildBuildingButton.setVisible( true );
-				BuildBuildingButton.setText("Build WoodCutter");
 				this.selectedTile = simulation.TileTouch();
-				
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
 				{
+					buttoncontrol.controlButtonWoodCutter(simulation, BuildBuildingButton, selectedTile);
 					infoBoxDisplay.displayBuildWoodCutter(tileInfo, resourceInfo, simulation, selectedTile);
 					drawTiles.drawWoodCutterBuild( simulation, batch, atlas, selectedTile );
 				}

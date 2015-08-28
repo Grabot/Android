@@ -12,16 +12,17 @@ public class Water
 {
 	private Tile tile;
 	private int tilePosition;
+	private TextureRegion SquareTileRegionWater;
 	
-	public Water( Tile tile, int tilePosition )
+	public Water( Tile tile, int tilePosition, TextureAtlas atlas  )
 	{
 		this.tile = tile;
 		this.tilePosition = tilePosition;
+		SquareTileRegionWater = atlas.findRegion("water");
 	}
 	
-	public void draw( Batch batch, TextureAtlas atlas )
+	public void draw( Batch batch )
 	{
-		TextureRegion SquareTileRegionWater = atlas.findRegion("water");
 		batch.draw( SquareTileRegionWater, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	}
 }

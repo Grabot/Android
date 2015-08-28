@@ -15,6 +15,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
@@ -40,12 +41,17 @@ public class GameScreen implements Screen
 	public int Food = 0;
 	public int Gold = 0;
 	
+	private TextureAtlas atlas;
+	
 	private TilesLoad tileLoad;
 	private InventoryActor inventoryActor;
 	private buildActor builder;
 	
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
+
+		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/Pack10.atlas"));
+		
 		this.citizens = citizens;
 		Gdx.app.log( LOG, "Creating opening screen" );
 
@@ -66,11 +72,11 @@ public class GameScreen implements Screen
 		builder.setVisible( false );
 		
 		//map layout
-		tileLoad = new TilesLoad();
+		tileLoad = new TilesLoad(atlas);
 		tiles = tileLoad.getTiles();
 		
 		simulation = new Simulation( this, inventory, inventoryActor, buildInv, builder, citizens, tiles );
-		renderer = new Renderer( this, camera, stage, batch, inventory, inventoryActor, buildInv, builder, citizens );
+		renderer = new Renderer( this, camera, stage, batch, atlas, inventory, inventoryActor, buildInv, builder, citizens );
 	}
 
 	@Override

@@ -33,9 +33,12 @@ public class Tile
 	private FarmTex farmtex;
 	private WoodCutterTex woodcuttertex;
 	
-	public Tile( Vector position )
+	private TextureAtlas atlas;
+	
+	public Tile( Vector position, TextureAtlas atlas )
     {
             this.position.set( position );
+            this.atlas = atlas;
     }
 	
 	public void setAttributes( TileType type, int colour, int occupied, int resources, int tilePosition )
@@ -48,66 +51,66 @@ public class Tile
 		
 		if( type.toString().equals("grass") )
 		{
-			grass = new Grass( this );
+			grass = new Grass( this, atlas );
 		}
 		else if( type.toString().equals("water") )
 		{
-			water = new Water( this, tilePosition );
+			water = new Water( this, tilePosition, atlas );
 		}
 		else if( type.toString().equals("iron") )
 		{
-			iron = new Iron( this );
+			iron = new Iron( this, atlas );
 		}
 		else if( type.toString().equals("stone") )
 		{
-			stone = new Stone( this );
+			stone = new Stone( this, atlas );
 		}
 		else if( type.toString().equals("wood") )
 		{
-			wood = new Wood( this );
+			wood = new Wood( this, atlas );
 		}
 		else if( type.toString().equals("shore") )
 		{
-			shore = new Shore( this, tilePosition );
+			shore = new Shore( this, tilePosition, atlas );
 		}
 	}
 	
-	public void drawTile( Batch batch, TextureAtlas atlas )
+	public void drawTile( Batch batch )
 	{
 		if( type.toString().equals("grass") )
 		{
-			grass.draw( batch, atlas );
+			grass.draw( batch );
 		}
 		else if( type.toString().equals("water") )
 		{
-			water.draw( batch, atlas );
+			water.draw( batch );
 		}
 		else if( type.toString().equals("iron") )
 		{
-			iron.draw( batch, atlas );
+			iron.draw( batch );
 		}
 		else if( type.toString().equals("stone") )
 		{
-			stone.draw( batch, atlas );
+			stone.draw( batch );
 		}
 		else if( type.toString().equals("wood") )
 		{
-			wood.draw( batch, atlas );
+			wood.draw( batch );
 		}
 		else if( type.toString().equals("shore") )
 		{
-			shore.draw( batch, atlas );
+			shore.draw( batch );
 		}
 	}
 	
-	public void drawFarm( Batch batch, TextureAtlas atlas )
+	public void drawFarm( Batch batch )
 	{
-		farmtex.draw( batch, atlas );
+		farmtex.draw( batch );
 	}
 	
-	public void drawWoodCutter( Batch batch, TextureAtlas atlas )
+	public void drawWoodCutter( Batch batch )
 	{
-		woodcuttertex.draw( batch, atlas );
+		woodcuttertex.draw( batch );
 	}
 
 	public TileType getType() {
@@ -143,11 +146,11 @@ public class Tile
 		this.buildingPosition = buildingPosition;
 		if( occupied == 1 )
 		{
-			farmtex = new FarmTex( this, buildingPosition );
+			farmtex = new FarmTex( this, buildingPosition, atlas );
 		}
 		else if( occupied == 2 )
 		{
-			woodcuttertex = new WoodCutterTex( this, buildingPosition );
+			woodcuttertex = new WoodCutterTex( this, buildingPosition, atlas );
 		}
 	}
 

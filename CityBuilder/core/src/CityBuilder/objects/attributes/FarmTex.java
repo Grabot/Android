@@ -10,36 +10,42 @@ public class FarmTex
 {
 	private Tile tile;
 	private int position = 0;
+	private TextureRegion SquareTileRegionFarmBottomLeft;
+	private TextureRegion SquareTileRegionFarmBottomRight;
+	private TextureRegion SquareTileRegionFarmTopLeft;
+	private TextureRegion SquareTileRegionFarmTopRight;
 	
-	public FarmTex( Tile tile, int position )
+	public FarmTex( Tile tile, int position, TextureAtlas atlas )
 	{
 		this.tile = tile;
 		this.position = position;
+		SquareTileRegionFarmBottomLeft = atlas.findRegion("farmbuilding1"); 
+		SquareTileRegionFarmTopLeft = atlas.findRegion("farmbuilding2"); 
+		SquareTileRegionFarmTopRight = atlas.findRegion("farmbuilding3"); 
+		SquareTileRegionFarmBottomRight = atlas.findRegion("farmbuilding4"); 
 	}
 	
-	public void draw( Batch batch, TextureAtlas atlas )
+	public void draw( Batch batch )
 	{
-		TextureRegion SquareTileRegionFarm = atlas.findRegion("farmbuilding1"); 
 		if( position == 0 )
 		{
 			//bottom left
-			SquareTileRegionFarm = atlas.findRegion("farmbuilding1");
+			batch.draw( SquareTileRegionFarmBottomLeft, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 		else if( position == 1 )
 		{
-			//top left
-			SquareTileRegionFarm = atlas.findRegion("farmbuilding2");
+			//top left	
+			batch.draw( SquareTileRegionFarmTopLeft, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 		else if( position == 2 )
 		{
-			//top right
-			SquareTileRegionFarm = atlas.findRegion("farmbuilding3");
+			//top right	
+			batch.draw( SquareTileRegionFarmTopRight, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 		else if( position == 3 )
 		{
-			//bottom right
-			SquareTileRegionFarm = atlas.findRegion("farmbuilding4");
+			//bottom right	
+			batch.draw( SquareTileRegionFarmBottomRight, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
-		batch.draw( SquareTileRegionFarm, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	}
 }
