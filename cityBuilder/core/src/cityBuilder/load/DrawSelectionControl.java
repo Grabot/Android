@@ -190,4 +190,9 @@ public class DrawSelectionControl extends Data
 			}
 		}
 	}
+	
+	public void drawWoodSelected(Simulation simulation, Batch batch, int tileNumber)
+	{
+		batch.draw( SquareTileRegionSelected, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+	}
 }

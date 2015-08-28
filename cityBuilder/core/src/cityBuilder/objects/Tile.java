@@ -57,18 +57,6 @@ public class Tile
 		{
 			water = new Water( this, tilePosition, atlas );
 		}
-		else if( type.toString().equals("iron") )
-		{
-			iron = new Iron( this, atlas );
-		}
-		else if( type.toString().equals("stone") )
-		{
-			stone = new Stone( this, atlas );
-		}
-		else if( type.toString().equals("wood") )
-		{
-			wood = new Wood( this, atlas );
-		}
 		else if( type.toString().equals("shore") )
 		{
 			shore = new Shore( this, tilePosition, atlas );
@@ -85,18 +73,6 @@ public class Tile
 		{
 			water.draw( batch );
 		}
-		else if( type.toString().equals("iron") )
-		{
-			iron.draw( batch );
-		}
-		else if( type.toString().equals("stone") )
-		{
-			stone.draw( batch );
-		}
-		else if( type.toString().equals("wood") )
-		{
-			wood.draw( batch );
-		}
 		else if( type.toString().equals("shore") )
 		{
 			shore.draw( batch );
@@ -111,6 +87,11 @@ public class Tile
 	public void drawWoodCutter( Batch batch )
 	{
 		woodcuttertex.draw( batch );
+	}
+	
+	public void drawWoods( Batch batch )
+	{
+		wood.draw( batch );
 	}
 
 	public TileType getType() {
@@ -146,12 +127,20 @@ public class Tile
 		this.buildingPosition = buildingPosition;
 		if( occupied == 1 )
 		{
+			//farm
 			farmtex = new FarmTex( this, buildingPosition, atlas );
 		}
 		else if( occupied == 2 )
 		{
+			//wood cutter
 			woodcuttertex = new WoodCutterTex( this, buildingPosition, atlas );
 		}
+		else if( occupied == 3 )
+		{
+			//woods
+			wood = new Wood( this, buildingPosition, atlas );
+		}
+		
 	}
 
 	public Vector getPosition() {

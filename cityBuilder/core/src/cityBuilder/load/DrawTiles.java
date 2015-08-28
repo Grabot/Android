@@ -36,6 +36,10 @@ public class DrawTiles extends Data
 					//it is a farm
 					simulation.tiles.get(i).drawWoodCutter( batch );
 				}
+				else if( simulation.tiles.get(i).getOccupied() == 3 )
+				{
+					simulation.tiles.get(i).drawWoods( batch );
+				}
 			}
 		}
 	}
@@ -57,6 +61,10 @@ public class DrawTiles extends Data
 			else if( simulation.tiles.get(tileNumber).getOccupied() == 2 )
 			{
 				drawselection.drawWoodCutterSelected(simulation, batch, tileNumber);
+			}
+			else if( simulation.tiles.get(tileNumber).getOccupied() == 3 )
+			{
+				drawselection.drawWoodSelected(simulation, batch, tileNumber);
 			}
 		}
 	}

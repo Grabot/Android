@@ -67,7 +67,8 @@ public class setAttributes extends Data
 				}
 				else
 				{
-					tile[height][width].setAttributes( TileType.shore, available, 0, 2000, 12 );
+					tile[height][width].setAttributes( TileType.grass, available, 0, 2000, 12 );
+					tile[height][width].setOccupied(3, 0);
 				}
 			}
 			
@@ -82,39 +83,6 @@ public class setAttributes extends Data
 			height++;
 		}
 		
-		/*
-		layout = Gdx.files.internal("mapLayout/layoutTiles2.csv");
-		br = new BufferedReader(layout.reader());
-		
-		Iterator<String> mapLines = br.lines().iterator();
-		
-		int height = 0;
-		while( mapLines.hasNext() )
-		{
-			String line = mapLines.next().toString();
-			String [] items = line.split(",");
-			for( int width = 0; width < items.length; width++ )
-			{
-				if( Integer.parseInt(items[width]) == 15 )
-				{
-					tile[height][width].setAttributes( TileType.grass, available, 0, 2000, 0 );
-				}
-				else if( Integer.parseInt(items[width]) == 20 )
-				{
-					tile[height][width].setAttributes( TileType.water, available, 0, 2000, 0 );
-				}
-				else if( Integer.parseInt(items[width]) >= 23 && Integer.parseInt(items[width]) <= 34 )
-				{
-					tile[height][width].setAttributes( TileType.shore, available, 0, 2000, Integer.parseInt(items[width]) );
-				}
-				else
-				{
-					tile[height][width].setAttributes( TileType.shore, available, 0, 2000, 12 );
-				}
-			}
-			height++;
-		}
-		*/
 	}
 	
 	public Tile getTile( int i, int j )

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import cityBuilder.load.ButtonControl;
 import cityBuilder.load.Data;
-import cityBuilder.load.DisplayInfoBox;
 import cityBuilder.load.DrawTiles;
 import cityBuilder.load.TouchInput;
 import cityBuilder.load.build.buildActor;
@@ -26,7 +25,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -39,7 +37,6 @@ public class Renderer extends Data
 	private boolean initialClose = false;
 	private boolean initialOpen = true;
 	
-	private DisplayInfoBox infoBoxDisplay;
 	private TouchInput inputHandler;
 	private DrawTiles drawTiles;
 	private ButtonControl buttoncontrol;
@@ -58,18 +55,13 @@ public class Renderer extends Data
 	private Texture progressBar;
 	private Texture progressBarFill;
 	
-	private TextField tileInfo;
-	private TextField resourceInfo;
-	
 	private GameScreen game;
 	
-	private Image UserInterface;
 	private Image MiningBar;
 	private Image MiningBarFill;
 	
 	private Simulation simulation;
 	
-	private TextureRegion region;
 	private TextureRegion progressRegion;
 	private TextureRegion progressFillRegion;
 	
@@ -92,11 +84,9 @@ public class Renderer extends Data
 		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
 		progressBarFill = new Texture( Gdx.files.internal( "data/progressBarFill.png" ));
 		
-		region = atlas.findRegion("scroll");
 		progressRegion = new TextureRegion( progressBar, 0, 0, progressBar.getWidth(), progressBar.getHeight() );
 		progressFillRegion = new TextureRegion( progressBarFill, 0, 0, progressBarFill.getWidth(), progressBarFill.getHeight() );
 
-		infoBoxDisplay = new DisplayInfoBox();
 		inputHandler = new TouchInput( camera, width, height );
 		drawTiles = new DrawTiles(atlas);
 		buttoncontrol = new ButtonControl();
@@ -117,7 +107,6 @@ public class Renderer extends Data
 		
 		if( !inventoryOn )
 		{		
-			UserInterface.setVisible(true);
 			if( simulation.getBuildingFarm() )
 			{
 				inventoryButton.setVisible(false);
@@ -125,7 +114,6 @@ public class Renderer extends Data
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
 				{
 					buttoncontrol.controlButtonFarm(simulation, BuildBuildingButton, selectedTile);
-					infoBoxDisplay.displayBuildFarm(tileInfo, resourceInfo, simulation, selectedTile);
 					drawTiles.drawFarmBuild( simulation, batch, selectedTile );
 				}
 			}
@@ -136,7 +124,6 @@ public class Renderer extends Data
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
 				{
 					buttoncontrol.controlButtonWoodCutter(simulation, BuildBuildingButton, selectedTile);
-					infoBoxDisplay.displayBuildWoodCutter(tileInfo, resourceInfo, simulation, selectedTile);
 					drawTiles.drawWoodCutterBuild( simulation, batch, atlas, selectedTile );
 				}
 			}
@@ -148,7 +135,6 @@ public class Renderer extends Data
 				
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )
 				{
-					infoBoxDisplay.displayInfoBox(tileInfo, resourceInfo, simulation, selectedTile);
 					drawTiles.drawSelected( simulation, batch, atlas, selectedTile );
 				}
 				
@@ -195,9 +181,6 @@ public class Renderer extends Data
 			{
 				initialOpen = false;
 				initialClose = true;
-				UserInterface.setVisible( false );
-				tileInfo.setVisible( false );
-				resourceInfo.setVisible( false );
 				inventoryActor.setVisible( true );
 				builder.setVisible( true );
 				inventoryActor.addAmountLabels();
@@ -210,10 +193,6 @@ public class Renderer extends Data
 	{
 		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
-		UserInterface = new Image(region);
-		UserInterface.setBounds(880, 80, 400, 600);
-		UserInterface.setVisible( true );
-		
 		MiningBar = new Image(progressRegion);
 		MiningBar.setBounds(300, 200, 600, 30 );
 		MiningBar.setVisible( false );
@@ -221,11 +200,6 @@ public class Renderer extends Data
 		MiningBarFill = new Image( progressFillRegion );
 		MiningBarFill.setBounds(305, 205, 5, 20 );
 		MiningBarFill.setVisible( false );
-		
-		tileInfo = new TextField( "", skin );
-		tileInfo.setDisabled(true);
-		tileInfo.setBounds( 1000, 530, 160, 20 );
-		tileInfo.setVisible( false );
 		
 		inventoryButton = new TextButton( "inventory", skin );
 		inventoryButton.setDisabled( false );
@@ -244,16 +218,8 @@ public class Renderer extends Data
         style.imageUp = new TextureRegionDrawable(image);
         style.imageDown = new TextureRegionDrawable(image);
         
-		resourceInfo = new TextField( "", skin );
-		resourceInfo.setDisabled( true );
-		resourceInfo.setBounds( 1000, 430, 160, 20 );
-		resourceInfo.setVisible( false );
-		
-		stage.addActor( UserInterface);
 		stage.addActor( MiningBar );
 		stage.addActor( MiningBarFill );
-		stage.addActor( tileInfo );
-		stage.addActor( resourceInfo );
 		stage.addActor( inventoryButton );
 		stage.addActor( inventoryActor );
 		stage.addActor( BuildBuildingButton );
