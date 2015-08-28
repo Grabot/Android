@@ -60,6 +60,7 @@ public class TouchInput
 		
 		currentX = camera.position.x;
 		currentY = camera.position.y;
+		camera.zoom = 4.0f;
 		currentZoom = camera.zoom;
 	}
 	
