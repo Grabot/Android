@@ -10,6 +10,7 @@ import cityBuilder.load.build.buildActor;
 import cityBuilder.load.build.buildInventory;
 import cityBuilder.load.inventory.Inventory;
 import cityBuilder.load.inventory.InventoryActor;
+import cityBuilder.load.tileInfo.tileInfo;
 import cityBuilder.objects.Citizen;
 
 import com.badlogic.gdx.Gdx;
@@ -57,10 +58,8 @@ public class Renderer extends Data
 	
 	private GameScreen game;
 	
-	private Image MiningBar;
-	private Image MiningBarFill;
-	
 	private Simulation simulation;
+	private tileInfo tileinfo;
 	
 	private TextureRegion progressRegion;
 	private TextureRegion progressFillRegion;
@@ -69,12 +68,15 @@ public class Renderer extends Data
 	private TextureAtlas atlas;
 	private buildActor builder;
 	
-	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, TextureAtlas atlas, Inventory inventory, InventoryActor inventoryActor, buildInventory buildInv, buildActor builder,  ArrayList<Citizen> citizens )
+	private boolean touchedBox = false;
+	
+	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, TextureAtlas atlas, Inventory inventory, InventoryActor inventoryActor, buildInventory buildInv, buildActor builder, tileInfo tileinfo,  ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		this.game = game;
 		this.inventoryActor = inventoryActor;
 		this.builder = builder;
+		this.tileinfo = tileinfo;
 		
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
@@ -131,30 +133,27 @@ public class Renderer extends Data
 			{
 				inventoryButton.setVisible(true);
 				BuildBuildingButton.setVisible( false );
+				touchedBox = simulation.touchedInfobox(tileinfo.getX(), tileinfo.getY(), tileinfo.getWidth(), tileinfo.getHeight());
 				this.selectedTile = simulation.TileTouch();
 				
-				if( selectedTile >= 0 && selectedTile < numberOfTiles )
+				if( (selectedTile >= 0) && (selectedTile < numberOfTiles) )
 				{
-					drawTiles.drawSelected( simulation, batch, atlas, selectedTile );
-				}
-				
-				if( simulation.getMining() )
-				{
-					MiningBar.setVisible( true );
-					MiningBarFill.setVisible( true );
-					MiningBarFill.setBounds(305, 205, (0 + simulation.getMiningProgress()), 20 );
+					if(!touchedBox)
+					{
+						tileinfo.setText(selectedTile, simulation);
+						tileinfo.setPosition( (simulation.getTouchX() + 100), (720 - simulation.getTouchY()) );
+						tileinfo.setVisible( true );
+						drawTiles.drawSelected( simulation, batch, atlas, selectedTile );
+					}
 				}
 				else
 				{
-					MiningBar.setVisible( false );
-					MiningBarFill.setVisible( false );
+					tileinfo.setVisible( false );
 				}
+				
 			}
-			
 			inputHandler.MapScroll();
 			inputHandler.MapZoom();
-			
-			
 			
 			if( initialClose )
 			{
@@ -168,6 +167,8 @@ public class Renderer extends Data
 		}
 		else
 		{
+			tileinfo.setVisible( false );
+			
 			if( simulation.getBuildingFarm() )
 			{
 				inventoryOn = false;
@@ -193,14 +194,6 @@ public class Renderer extends Data
 	{
 		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
-		MiningBar = new Image(progressRegion);
-		MiningBar.setBounds(300, 200, 600, 30 );
-		MiningBar.setVisible( false );
-		
-		MiningBarFill = new Image( progressFillRegion );
-		MiningBarFill.setBounds(305, 205, 5, 20 );
-		MiningBarFill.setVisible( false );
-		
 		inventoryButton = new TextButton( "inventory", skin );
 		inventoryButton.setDisabled( false );
 		inventoryButton.setBounds( 1150, 30, 100, 100);
@@ -217,13 +210,12 @@ public class Renderer extends Data
 		ImageButtonStyle style = new ImageButtonStyle(skin.get(ButtonStyle.class));
         style.imageUp = new TextureRegionDrawable(image);
         style.imageDown = new TextureRegionDrawable(image);
-        
-		stage.addActor( MiningBar );
-		stage.addActor( MiningBarFill );
+		
 		stage.addActor( inventoryButton );
 		stage.addActor( inventoryActor );
 		stage.addActor( BuildBuildingButton );
 		stage.addActor( builder );
+		stage.addActor( tileinfo );
 
 		inventoryButton.addListener( InventoryListener );
 		BuildBuildingButton.addListener( buildBuildingListener );

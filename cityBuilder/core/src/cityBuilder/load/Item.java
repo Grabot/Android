@@ -16,7 +16,7 @@ public enum Item {
 
     private String textureRegion;
 
-    private Item(String textureRegion) 
+    Item(String textureRegion)
     {
         this.textureRegion = textureRegion;
     }

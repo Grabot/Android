@@ -38,6 +38,7 @@ public class Simulation extends Data {
 	private int pressed = 0;
 	private int miningProgress = 0;
 
+	private boolean infoboxTouch = false;
 	private boolean touched_down = false;
 	private boolean back_pressed = false;
 	private boolean fast_press = false;
@@ -198,6 +199,11 @@ public class Simulation extends Data {
 			touch_distance_y = (((touchY - (ScreenHeight / 2)) * cameraZ - cameraY) * -1);
 		}
 	}
+	
+	public boolean touchedInfobox( float tileX, float tileY, float tileWidth, float tileHeight )
+	{
+		return ((touchX >= tileX) && (touchX <= (tileX + tileWidth))) && (((720 - touchY) > tileY) && ((720 - touchY) <= (tileY + tileHeight)));
+	}
 
 	public int TileTouch()
 	{
@@ -208,20 +214,6 @@ public class Simulation extends Data {
 		if (touched_down) 
 		{
 			selectedTile = ((tileY*gridSizeHeight)+tileX);
-			if (pressed >= 20) 
-			{
-				if (!scrolling) 
-				{
-					MiningSequence = true;
-					miningProgress += 5;
-
-					if (miningProgress >= 585) 
-					{
-						addResources();
-						miningProgress = 0;
-					}
-				}
-			}
 			
 			if( scrolling )
 			{
@@ -241,43 +233,6 @@ public class Simulation extends Data {
 		}
 		
 		return selectedTile;
-	}
-	
-	private void addResources()
-	{
-		tiles.get(selectedTile).setResources(tiles.get(selectedTile).getResources() - 1);
-		if (inventory.checkInventoryTest(tiles.get(selectedTile).getType().toString()) == -1 )
-		{
-			if( tiles.get(selectedTile).getType().toString() == "wood" )
-			{
-				inventory.addItem(inventory.firstEmtpySlot(), 0);
-			}
-			else if( tiles.get(selectedTile).getType().toString() == "stone" )
-			{
-				inventory.addItem(inventory.firstEmtpySlot(), 2);
-			}
-			else if( tiles.get(selectedTile).getType().toString() == "iron" )
-			{
-				inventory.addItem(inventory.firstEmtpySlot(), 4);
-			}
-		}
-		else
-		{
-			if( tiles.get(selectedTile).getType().toString() == "wood" )
-			{
-				inventory.addItem(inventory.findResourceSlot("wood"), 0);
-			}
-			else if( tiles.get(selectedTile).getType().toString() == "stone" )
-			{
-				inventory.addItem(inventory.findResourceSlot("stone"), 2);
-			}
-			else if( tiles.get(selectedTile).getType().toString() == "iron" )
-			{
-				inventory.addItem(inventory.findResourceSlot("iron"), 4);
-			}
-		}
-		
-		inventoryActor.clearLabels();
 	}
 	
 	public boolean getTouchedDown() {

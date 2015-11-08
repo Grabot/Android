@@ -8,6 +8,7 @@ import cityBuilder.load.build.buildActor;
 import cityBuilder.load.build.buildInventory;
 import cityBuilder.load.inventory.Inventory;
 import cityBuilder.load.inventory.InventoryActor;
+import cityBuilder.load.tileInfo.tileInfo;
 import cityBuilder.objects.Citizen;
 import cityBuilder.objects.Tile;
 
@@ -42,6 +43,7 @@ public class GameScreen implements Screen
 	public int Gold = 0;
 	
 	private TextureAtlas atlas;
+	private tileInfo tileinfo;
 	
 	private TilesLoad tileLoad;
 	private InventoryActor inventoryActor;
@@ -61,6 +63,9 @@ public class GameScreen implements Screen
 		buildInventory buildInv = new buildInventory();
 		DragAndDrop dragAndDrop = new DragAndDrop();
 		
+		tileinfo = new tileInfo( "", inventorySkin );
+		tileinfo.setVisible(false);
+		
 		inventoryActor = new InventoryActor(this, inventory, buildInv, dragAndDrop, inventorySkin);
 		inventoryActor.setPosition(10, 10);
 		inventoryActor.setMovable( false );
@@ -76,7 +81,7 @@ public class GameScreen implements Screen
 		tiles = tileLoad.getTiles();
 		
 		simulation = new Simulation( this, inventory, inventoryActor, buildInv, builder, citizens, tiles );
-		renderer = new Renderer( this, camera, stage, batch, atlas, inventory, inventoryActor, buildInv, builder, citizens );
+		renderer = new Renderer( this, camera, stage, batch, atlas, inventory, inventoryActor, buildInv, builder, tileinfo, citizens );
 	}
 
 	@Override
