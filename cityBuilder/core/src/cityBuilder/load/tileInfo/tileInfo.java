@@ -12,13 +12,13 @@ public class tileInfo extends Window {
 	private Skin skin;
 	private boolean create = false;
 	private int compareTile = -1;
-	
-	public tileInfo(String title, Skin skin) 
+
+	public tileInfo(String title, Skin skin)
 	{
 		super(title, skin);
 		this.skin = skin;
 	}
-	
+
 	public void setText(int selectedTile, Simulation simulation)
 	{
 		if( create && (selectedTile != compareTile ))
@@ -26,7 +26,7 @@ public class tileInfo extends Window {
 			create = false;
 			this.clear();
 		}
-		
+
 		if( !create )
 		{
 			compareTile = selectedTile;
@@ -53,11 +53,14 @@ public class tileInfo extends Window {
 				label = new Label( "dit is een bos", skin );
 				TextButton button = new TextButton("text", skin );
 				add(button);
+			} else if( building == 4 ) {
+				// warehouse
+				label = new Label( "dit is de warehouse", skin );
 			}
 			add(label);
 			create = true;
 		}
-		
-		
+
+
 	}
 }

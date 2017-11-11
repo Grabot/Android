@@ -7,6 +7,7 @@ import cityBuilder.objects.attributes.Grass;
 import cityBuilder.objects.attributes.Iron;
 import cityBuilder.objects.attributes.Shore;
 import cityBuilder.objects.attributes.Stone;
+import cityBuilder.objects.attributes.WarehouseTex;
 import cityBuilder.objects.attributes.Water;
 import cityBuilder.objects.attributes.Wood;
 import cityBuilder.objects.attributes.WoodCutterTex;
@@ -14,7 +15,7 @@ import cityBuilder.objects.attributes.WoodCutterTex;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-public class Tile 
+public class Tile
 {
 	private TileType type;
 	private int colour;
@@ -23,7 +24,7 @@ public class Tile
 	private int occupied = 0;
 	private int tilePosition = 0;
 	private int buildingPosition = -1;
-	
+
 	private Grass grass;
 	private Water water;
 	private Shore shore;
@@ -32,15 +33,16 @@ public class Tile
 	private Wood wood;
 	private FarmTex farmtex;
 	private WoodCutterTex woodcuttertex;
-	
+	private WarehouseTex warehouseTex;
+
 	private TextureAtlas atlas;
-	
+
 	public Tile( Vector position, TextureAtlas atlas )
-    {
-            this.position.set( position );
-            this.atlas = atlas;
-    }
-	
+	{
+		this.position.set( position );
+		this.atlas = atlas;
+	}
+
 	public void setAttributes( TileType type, int colour, int occupied, int resources, int tilePosition )
 	{
 		this.type = type;
@@ -48,7 +50,7 @@ public class Tile
 		this.occupied = occupied;
 		this.resources = resources;
 		this.tilePosition = tilePosition;
-		
+
 		if( type.toString().equals("grass") )
 		{
 			grass = new Grass( this, atlas );
@@ -62,7 +64,7 @@ public class Tile
 			shore = new Shore( this, tilePosition, atlas );
 		}
 	}
-	
+
 	public void drawTile( Batch batch )
 	{
 		if( type.toString().equals("grass") )
@@ -78,17 +80,21 @@ public class Tile
 			shore.draw( batch );
 		}
 	}
-	
+
 	public void drawFarm( Batch batch )
 	{
 		farmtex.draw( batch );
 	}
-	
+
 	public void drawWoodCutter( Batch batch )
 	{
 		woodcuttertex.draw( batch );
 	}
-	
+
+	public void drawWarehouse( Batch batch ) {
+		warehouseTex.draw( batch );
+	}
+
 	public void drawWoods( Batch batch )
 	{
 		wood.draw( batch );
@@ -123,34 +129,34 @@ public class Tile
 	}
 
 	public void setOccupied(int occupied, int buildingPosition) {
+
 		this.occupied = occupied;
 		this.buildingPosition = buildingPosition;
-		if( occupied == 1 )
-		{
-			//farm
+
+		if( occupied == 1 ) {
+			// farm
 			farmtex = new FarmTex( this, buildingPosition, atlas );
-		}
-		else if( occupied == 2 )
-		{
-			//wood cutter
+		} else if( occupied == 2 ) {
+			// wood cutter
 			woodcuttertex = new WoodCutterTex( this, buildingPosition, atlas );
+		} else if( occupied == 3 ) {
+			// woods
+			wood = new Wood(this, buildingPosition, atlas);
+		} else if ( occupied == 4 ) {
+			// warehouse
+			warehouseTex = new WarehouseTex(this, buildingPosition, atlas);
 		}
-		else if( occupied == 3 )
-		{
-			//woods
-			wood = new Wood( this, buildingPosition, atlas );
-		}
-		
+
 	}
 
 	public Vector getPosition() {
 		return position;
 	}
-	
+
 	public int getBuildingPosition()
 	{
 		return buildingPosition;
 	}
 
-	
+
 }

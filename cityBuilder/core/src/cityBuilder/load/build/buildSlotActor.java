@@ -12,24 +12,24 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class buildSlotActor extends ImageButton implements buildSlotListener
 {
-	
-	private buildSlotTooltip tooltip;
-	
-	public buildSlotActor(Inventory inventory, Skin skin, buildSlot slot, buildActor actor) 
-	{
+
+    private buildSlotTooltip tooltip;
+
+    public buildSlotActor(Inventory inventory, Skin skin, buildSlot slot, buildActor actor)
+    {
         super(createStyle(skin, slot));
-        
+
         tooltip = new buildSlotTooltip(inventory, slot, skin);
         Main.stage.addActor(tooltip);
         addListener(new buildTooltipListener(tooltip, actor));
         slot.addListener(this);
-	}
-	
-	/**
+    }
+
+    /**
      * This will create a new style for our image button, with the correct image for the item type.
      */
     private static ImageButtonStyle createStyle(Skin skin, buildSlot slot) {
-    	TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output7.pack"));
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output7.pack"));
         //TextureAtlas icons = Main.assets.get("icons/icons.atlas", TextureAtlas.class);
         TextureRegion image;
         if (slot.getItem() != null) {
@@ -42,18 +42,18 @@ public class buildSlotActor extends ImageButton implements buildSlotListener
         ImageButtonStyle style = new ImageButtonStyle(skin.get(ButtonStyle.class));
         style.imageUp = new TextureRegionDrawable(image);
         style.imageDown = new TextureRegionDrawable(image);
-        
+
         return style;
     }
 
-	@Override
-	public void hasChanged(buildSlot slot) {		
-	}
+    @Override
+    public void hasChanged(buildSlot slot) {
+    }
 
-	@Override
-	public void clearLabels() 
-	{
-		tooltip.clearLabels();
-	}
-    
+    @Override
+    public void clearLabels()
+    {
+        tooltip.clearLabels();
+    }
+
 }

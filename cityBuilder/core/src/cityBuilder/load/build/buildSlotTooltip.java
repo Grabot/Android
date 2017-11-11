@@ -18,132 +18,132 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class buildSlotTooltip extends Window implements buildSlotListener
 {
 	private Skin skin;
-    private buildSlot slot;
-    private Inventory inventory;
-    
-    public buildSlotTooltip(Inventory inventory, buildSlot slot, Skin skin) {
-        super("", skin);
-        this.slot = slot;
-        this.skin = skin;
-        this.inventory = inventory;
-        hasChanged(slot);
-        slot.addListener(this);
-        setVisible(false);
-    }
+	private buildSlot slot;
+	private Inventory inventory;
 
-    @Override
-    public void setVisible(boolean visible) {
-        super.setVisible(visible);
-        
-        if (slot.isEmpty()) {
-            super.setVisible(false);
-        }
-        
-    }
-    
+	public buildSlotTooltip(Inventory inventory, buildSlot slot, Skin skin) {
+		super("", skin);
+		this.slot = slot;
+		this.skin = skin;
+		this.inventory = inventory;
+		hasChanged(slot);
+		slot.addListener(this);
+		setVisible(false);
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+
+		if (slot.isEmpty()) {
+			super.setVisible(false);
+		}
+
+	}
+
 	@Override
 	public void hasChanged(buildSlot slot) {
 		if (slot.isEmpty()) {
-            setVisible(false);
-            return;
+			setVisible(false);
+			return;
 		}
-        // title displays the amount
-        // basic layout
+		// title displays the amount
+		// basic layout
 
-        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output7.pack"));
-        final TextureRegion logImage = icons.findRegion("log_icon2");
-        final TextureRegion stoneImage = icons.findRegion("stone");
-        final Actor logIcon = new Actor(){
-            public void draw(Batch batch, float alpha){
-                batch.draw(logImage, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-            }
-        };
-        final Actor stoneIcon = new Actor(){
-            public void draw(Batch batch, float alpha){
-                batch.draw(stoneImage, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-            }
-        };
-        
+		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output7.pack"));
+		final TextureRegion logImage = icons.findRegion("log_icon2");
+		final TextureRegion stoneImage = icons.findRegion("stone");
+		final Actor logIcon = new Actor(){
+			public void draw(Batch batch, float alpha){
+				batch.draw(logImage, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+			}
+		};
+		final Actor stoneIcon = new Actor(){
+			public void draw(Batch batch, float alpha){
+				batch.draw(stoneImage, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+			}
+		};
+
 		TextButton buildButton = null;
 		Label label = null;
 		if( slot.getItem() == Item.values()[6] )
 		{
 			//farm
 			row().fill().expandX();
-	        clear();
-	        label = new Label("Farm \nResources required: \n", skin);
+			clear();
+			label = new Label("Farm \nResources required: \n", skin);
 
-	        logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
-	        stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
-	        add(label);
-	        row();
-	        add(logIcon);
-	        Label amountWood = new Label("x100", skin);
-	        add(amountWood);
-	        row();
-	        add(stoneIcon);
-	        Label amountStone = new Label("x50", skin);
-	        add( amountStone );
-	        row();
-	        buildButton = new TextButton( "Create", skin );
-	        buildButton.addListener(createListenerFarm);
+			logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
+			stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
+			add(label);
+			row();
+			add(logIcon);
+			Label amountWood = new Label("x100", skin);
+			add(amountWood);
+			row();
+			add(stoneIcon);
+			Label amountStone = new Label("x50", skin);
+			add( amountStone );
+			row();
+			buildButton = new TextButton( "Create", skin );
+			buildButton.addListener(createListenerFarm);
 		}
 		else if( slot.getItem() == Item.values()[9] )
 		{
 			//fisher
 			row().fill().expandX();
-	        clear();
-	        label = new Label("fisherman's hut \nResources required: \n", skin);
-	        
-	        logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
-	        stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
-	       
-	        add(label);
-	        row();
-	        add(logIcon);
-	        Label amountWood = new Label("x100", skin);
-	        add(amountWood);
-	        row();
-	        add(stoneIcon);
-	        Label amountStone = new Label("x50", skin);
-	        add( amountStone );
-	        row();
-	       
-	        buildButton = new TextButton( "Create", skin );
-	        buildButton.addListener(createListenerFisher);
+			clear();
+			label = new Label("fisherman's hut \nResources required: \n", skin);
+
+			logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
+			stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
+
+			add(label);
+			row();
+			add(logIcon);
+			Label amountWood = new Label("x100", skin);
+			add(amountWood);
+			row();
+			add(stoneIcon);
+			Label amountStone = new Label("x50", skin);
+			add( amountStone );
+			row();
+
+			buildButton = new TextButton( "Create", skin );
+			buildButton.addListener(createListenerFisher);
 		}
 		else if( slot.getItem() == Item.values()[10] )
 		{
 			//woodcutter
 			row().fill().expandX();
-	        clear();
-	        label = new Label("woodcutter \nResources required: \n", skin);
-	        
-	        logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
-	        stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
-	       
-	        add(label);
-	        row();
-	        add(logIcon);
-	        Label amountWood = new Label("x100", skin);
-	        add(amountWood);
-	        row();
-	        add(stoneIcon);
-	        Label amountStone = new Label("x50", skin);
-	        add( amountStone );
-	        row();
-	       
-	        buildButton = new TextButton( "Create", skin );
-	        buildButton.addListener(createListenerWoodcutter);
+			clear();
+			label = new Label("woodcutter \nResources required: \n", skin);
+
+			logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
+			stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
+
+			add(label);
+			row();
+			add(logIcon);
+			Label amountWood = new Label("x100", skin);
+			add(amountWood);
+			row();
+			add(stoneIcon);
+			Label amountStone = new Label("x50", skin);
+			add( amountStone );
+			row();
+
+			buildButton = new TextButton( "Create", skin );
+			buildButton.addListener(createListenerWoodcutter);
 		}
-        add(buildButton);
-        pack();
+		add(buildButton);
+		pack();
 	}
 
-	public ClickListener createListenerFarm = new ClickListener() 
+	public ClickListener createListenerFarm = new ClickListener()
 	{
 		@Override
-		public void clicked (InputEvent event, float x, float y) 
+		public void clicked (InputEvent event, float x, float y)
 		{
 			if (inventory.checkInventoryTest("farm") == -1 )
 			{
@@ -155,11 +155,11 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			}
 		}
 	};
-	
-	public ClickListener createListenerFisher = new ClickListener() 
+
+	public ClickListener createListenerFisher = new ClickListener()
 	{
 		@Override
-		public void clicked (InputEvent event, float x, float y) 
+		public void clicked (InputEvent event, float x, float y)
 		{
 			if (inventory.checkInventoryTest("fishershut") == -1 )
 			{
@@ -171,11 +171,11 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			}
 		}
 	};
-	
-	public ClickListener createListenerWoodcutter = new ClickListener() 
+
+	public ClickListener createListenerWoodcutter = new ClickListener()
 	{
 		@Override
-		public void clicked (InputEvent event, float x, float y) 
+		public void clicked (InputEvent event, float x, float y)
 		{
 			if (inventory.checkInventoryTest("woodcutter") == -1 )
 			{
@@ -187,11 +187,11 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			}
 		}
 	};
-	
+
 	@Override
-	public void clearLabels() 
+	public void clearLabels()
 	{
 		super.setVisible(false);
 	}
-    
+
 }

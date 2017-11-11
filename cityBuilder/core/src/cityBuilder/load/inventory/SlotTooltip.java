@@ -11,10 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class SlotTooltip extends Window implements SlotListener
 {
-	private Skin skin;
+    private Skin skin;
     private Slot slot;
     private GameScreen game;
-    
+
     public SlotTooltip(GameScreen game, Slot slot, Skin skin) {
         super("", skin);
         this.slot = slot;
@@ -46,35 +46,51 @@ public class SlotTooltip extends Window implements SlotListener
         }
         else if( slot.getItem().toString() == "woodcutter" )
         {
-        	label = new Label("This is a motherfucking \n" + slot.getItem(), skin);
+            label = new Label("This is a motherfucking \n" + slot.getItem(), skin);
             add(label);
             row();
             TextButton buildWoodCutter = new TextButton("Build", skin );
             buildWoodCutter.addListener(buildWoodCutterListener);
             add(buildWoodCutter);
+        } else if( slot.getItem().toString() == "fishershut" ) {
+            label = new Label("This is THE motherfucking \n" + slot.getItem(), skin);
+            add(label);
+            row();
+            TextButton buildWarehouse = new TextButton("Build", skin );
+            buildWarehouse.addListener(buildWarehouseListener);
+            add(buildWarehouse);
         }
         pack();
-       
+
     }
 
-    public ClickListener buildWoodCutterListener = new ClickListener() 
-	{
-		@Override
-		public void clicked (InputEvent event, float x, float y) 
-		{
-			game.BuildWoodCutter();
-		}
-	};
-	
-	 public ClickListener buildFarmListener = new ClickListener() 
-	{
-		@Override
-		public void clicked (InputEvent event, float x, float y) 
-		{
-			game.BuildFarm();
-		}
-	};
-	
+    public ClickListener buildWoodCutterListener = new ClickListener()
+    {
+        @Override
+        public void clicked (InputEvent event, float x, float y)
+        {
+            game.BuildWoodCutter();
+        }
+    };
+
+    public ClickListener buildFarmListener = new ClickListener()
+    {
+        @Override
+        public void clicked (InputEvent event, float x, float y)
+        {
+            game.BuildFarm();
+        }
+    };
+
+    public ClickListener buildWarehouseListener = new ClickListener()
+    {
+        @Override
+        public void clicked (InputEvent event, float x, float y)
+        {
+            game.BuildWarehouse();
+        }
+    };
+
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);
@@ -84,11 +100,11 @@ public class SlotTooltip extends Window implements SlotListener
             super.setVisible(false);
         }
     }
-    
+
     @Override
     public void clearLabels()
     {
-    	super.setVisible(false);
+        super.setVisible(false);
     }
-    
+
 }

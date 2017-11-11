@@ -14,17 +14,17 @@ public class WoodCutterTex
 	private TextureRegion SquareTileRegionWoodCutterBottomRight;
 	private TextureRegion SquareTileRegionWoodCutterTopLeft;
 	private TextureRegion SquareTileRegionWoodCutterTopRight;
-	
+
 	public WoodCutterTex( Tile tile, int position, TextureAtlas atlas )
 	{
 		this.tile = tile;
 		this.position = position;
-		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("WoodCutterBuilding1"); 
-		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("WoodCutterBuilding2"); 
-		SquareTileRegionWoodCutterTopRight = atlas.findRegion("WoodCutterBuilding3"); 
-		SquareTileRegionWoodCutterBottomRight = atlas.findRegion("WoodCutterBuilding4"); 
+		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("WoodCutterBuilding1");
+		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("WoodCutterBuilding2");
+		SquareTileRegionWoodCutterTopRight = atlas.findRegion("WoodCutterBuilding3");
+		SquareTileRegionWoodCutterBottomRight = atlas.findRegion("WoodCutterBuilding4");
 	}
-	
+
 	public void draw( Batch batch )
 	{
 		if( position == 0 )

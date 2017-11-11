@@ -17,15 +17,15 @@ public class setAttributes extends Data
 	private Tile[][] tile = new Tile[24][24];
 	FileHandle layout;
 	BufferedReader br;
-	
+
 	public setAttributes(Tile[][] tile)
 	{
 		this.tile = tile;
 	}
-	
+
 	public void attributes()
 	{
-		
+
 		for( int i = 0; i < gridSizeWidth; i++ )
 		{
 			for( int j = 0; j < gridSizeHeight; j++ )
@@ -36,19 +36,19 @@ public class setAttributes extends Data
 
 		layout = Gdx.files.internal("mapLayout/layoutTiles2.csv");
 		br = new BufferedReader(layout.reader());
-		
+
 		String line = null;
-		try 
+		try
 		{
 			line = br.readLine();
-		} 
-		catch (IOException e) 
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		
+
 		int height = 0;
-		while( line != null ) 
+		while( line != null )
 		{
 			String [] items = line.split(",");
 			for( int width = 0; width < items.length; width++ )
@@ -71,20 +71,20 @@ public class setAttributes extends Data
 					tile[height][width].setOccupied(3, 0);
 				}
 			}
-			
-			try 
+
+			try
 			{
 				line = br.readLine();
-			} 
-			catch (IOException e) 
+			}
+			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
 			height++;
 		}
-		
+
 	}
-	
+
 	public Tile getTile( int i, int j )
 	{
 		return tile[i][j];

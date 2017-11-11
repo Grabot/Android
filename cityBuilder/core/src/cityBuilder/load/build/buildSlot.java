@@ -11,7 +11,7 @@ public class buildSlot {
 
     private Array<buildSlotListener> slotListeners = new Array<buildSlotListener>();
 
-    public buildSlot(Item item, int amount) 
+    public buildSlot(Item item, int amount)
     {
         this.item = item;
         this.amount = amount;
@@ -71,5 +71,5 @@ public class buildSlot {
     public String toString() {
         return "Slot[" + item + ":" + amount + "]";
     }
-    
+
 }

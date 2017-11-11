@@ -9,12 +9,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class TilesLoad extends Data
 {
 	private Tile[][] tile = new Tile[gridSizeWidth][gridSizeHeight];
-	
+
 	public ArrayList<Tile> tiles = new ArrayList<Tile>();
-	
+
 	public TilesLoad(TextureAtlas atlas)
 	{
-		
+
 		for( int x = 0; x < gridSizeWidth; x++ )
 		{
 			for( int y = 0; y < gridSizeHeight; y++ )
@@ -25,7 +25,7 @@ public class TilesLoad extends Data
 
 		setAttributes attributes = new setAttributes(tile);
 		attributes.attributes();
-		
+
 		for( int i = 0; i < gridSizeWidth; i++ )
 		{
 			for( int j = 0; j < gridSizeHeight; j++ )

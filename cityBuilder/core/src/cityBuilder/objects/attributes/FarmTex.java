@@ -14,17 +14,17 @@ public class FarmTex
 	private TextureRegion SquareTileRegionFarmBottomRight;
 	private TextureRegion SquareTileRegionFarmTopLeft;
 	private TextureRegion SquareTileRegionFarmTopRight;
-	
+
 	public FarmTex( Tile tile, int position, TextureAtlas atlas )
 	{
 		this.tile = tile;
 		this.position = position;
-		SquareTileRegionFarmBottomLeft = atlas.findRegion("farmbuilding1"); 
-		SquareTileRegionFarmTopLeft = atlas.findRegion("farmbuilding2"); 
-		SquareTileRegionFarmTopRight = atlas.findRegion("farmbuilding3"); 
-		SquareTileRegionFarmBottomRight = atlas.findRegion("farmbuilding4"); 
+		SquareTileRegionFarmBottomLeft = atlas.findRegion("farmbuilding1");
+		SquareTileRegionFarmTopLeft = atlas.findRegion("farmbuilding2");
+		SquareTileRegionFarmTopRight = atlas.findRegion("farmbuilding3");
+		SquareTileRegionFarmBottomRight = atlas.findRegion("farmbuilding4");
 	}
-	
+
 	public void draw( Batch batch )
 	{
 		if( position == 0 )

@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 
 public class SlotTarget extends Target
 {
-	private Slot targetSlot;
+    private Slot targetSlot;
 
     public SlotTarget(SlotActor actor) {
         super(actor);

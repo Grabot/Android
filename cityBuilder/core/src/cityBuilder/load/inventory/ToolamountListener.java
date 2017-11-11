@@ -7,10 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public class ToolamountListener extends InputListener
 {
-	private Actor toolamount;
+    private Actor toolamount;
 
-	public ToolamountListener(Actor toolamount) {
+    public ToolamountListener(Actor toolamount) {
         this.toolamount = toolamount;
     }
-	
+
 }

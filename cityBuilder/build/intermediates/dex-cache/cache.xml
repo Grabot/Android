@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-android\1.6.5\47d6744474ff276a8f92e92d22d7c956f5c832f0\gdx-backend-android-1.6.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="47d6744474ff276a8f92e92d22d7c956f5c832f0">
+        <dex dex="C:\Users\User\Documents\Github\Android\Android\cityBuilder\android\build\intermediates\pre-dexed\debug\gdx-backend-android-1.6.5_fb1653cf9a14004de9d0fb6a1e7f193c68721c7c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.6.5\d81b49d6bc9aa29518fcaa7db9474fe7405fa324\gdx-box2d-1.6.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d81b49d6bc9aa29518fcaa7db9474fe7405fa324">
+        <dex dex="C:\Users\User\Documents\Github\Android\Android\cityBuilder\android\build\intermediates\pre-dexed\debug\gdx-box2d-1.6.5_ca4e54bf57908a5694a1a33f3fcebbabb44bc118.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.6.5\b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d\gdx-1.6.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d">
+        <dex dex="C:\Users\User\Documents\Github\Android\Android\cityBuilder\android\build\intermediates\pre-dexed\debug\gdx-1.6.5_512f6b0fed96abf7de2d168e49ac8161b024ecc4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\Documents\Github\Android\Android\cityBuilder\core\build\libs\core-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0a5179999b1c977d27bbef333e5c8dec0f466fe3">
+        <dex dex="C:\Users\User\Documents\Github\Android\Android\cityBuilder\android\build\intermediates\pre-dexed\debug\core-1.0_de49db18b18c2b14b97fcaa117631f6a8fdebb98.jar" />
+    </item>
+
+</items>

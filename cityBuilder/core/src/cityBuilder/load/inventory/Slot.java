@@ -9,12 +9,12 @@ public class Slot {
 
     private Item item;
     private int amount;
-    
+
     Vector2 pos;
 
     private Array<SlotListener> slotListeners = new Array<SlotListener>();
 
-    public Slot(Item item, int amount, Vector2 pos) 
+    public Slot(Item item, int amount, Vector2 pos)
     {
         this.item = item;
         this.amount = amount;
@@ -70,20 +70,20 @@ public class Slot {
     public int getAmount() {
         return amount;
     }
-    
+
     public Vector2 getPosition()
     {
-    	return pos;
+        return pos;
     }
 
     @Override
     public String toString() {
         return "Slot[" + item + ":" + amount + "]";
     }
-    
+
     public void clearLabels()
     {
-    	for (SlotListener slotListener : slotListeners) {
+        for (SlotListener slotListener : slotListeners) {
             slotListener.clearLabels();
         }
     }

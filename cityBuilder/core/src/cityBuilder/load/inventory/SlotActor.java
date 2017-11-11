@@ -31,7 +31,7 @@ public class SlotActor extends ImageButton implements SlotListener {
         Main.stage.addActor(toolamount);
         addListener(new TooltipListener(tooltip, actor));
         addListener(new ToolamountListener(toolamount));
-        
+
         slot.addListener(this);
     }
 
@@ -39,7 +39,7 @@ public class SlotActor extends ImageButton implements SlotListener {
      * This will create a new style for our image button, with the correct image for the item type.
      */
     private static ImageButtonStyle createStyle(Skin skin, Slot slot) {
-    	TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output7.pack"));
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output7.pack"));
         //TextureAtlas icons = Main.assets.get("icons/icons.atlas", TextureAtlas.class);
         TextureRegion image;
         if (slot.getItem() != null) {
@@ -51,7 +51,7 @@ public class SlotActor extends ImageButton implements SlotListener {
         ImageButtonStyle style = new ImageButtonStyle(skin.get(ButtonStyle.class));
         style.imageUp = new TextureRegionDrawable(image);
         style.imageDown = new TextureRegionDrawable(image);
-        
+
         return style;
     }
 
@@ -64,17 +64,17 @@ public class SlotActor extends ImageButton implements SlotListener {
     public Slot getSlot() {
         return slot;
     }
-    
-	@Override
+
+    @Override
     public void clearLabels()
     {
-    	tooltip.clearLabels();
-    	toolamount.clearLabels();
+        tooltip.clearLabels();
+        toolamount.clearLabels();
     }
-	
-	public void addAmounts()
-	{
-		toolamount.addSlotAmounts();
-	}
+
+    public void addAmounts()
+    {
+        toolamount.addSlotAmounts();
+    }
 
 }

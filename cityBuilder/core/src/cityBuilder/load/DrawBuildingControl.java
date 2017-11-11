@@ -1,6 +1,7 @@
 package cityBuilder.load;
 
 import cityBuilder.gameScreen.Simulation;
+import cityBuilder.objects.Tile;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -8,40 +9,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class DrawBuildingControl extends Data
 {
-	private TextureRegion SquareTileRegionFault;
-	private TextureRegion SquareTileRegionAllowed;
-	private TextureRegion SquareFarmBottomLeft;
-	private TextureRegion SquareFarmBottomRight;
-	private TextureRegion SquareFarmTopLeft;
-	private TextureRegion SquareFarmTopRight;
-	private TextureRegion SquareWoodCutterBottomLeft;
-	private TextureRegion SquareWoodCutterBottomRight;
-	private TextureRegion SquareWoodCutterTopLeft;
-	private TextureRegion SquareWoodCutterTopRight;
 	private TextureRegion SquareOutlineFull;
 	private TextureRegion SquareOutlineEdge;
-	
+
 	public DrawBuildingControl(TextureAtlas atlas)
 	{
-		SquareTileRegionFault = atlas.findRegion("SquareRedSmall");
-		SquareTileRegionAllowed = atlas.findRegion("SquareGreenSmall");
-		
-		SquareFarmBottomLeft = atlas.findRegion("farmbuilding2");
-		SquareFarmBottomRight = atlas.findRegion("farmbuilding1");
-		SquareFarmTopLeft = atlas.findRegion("farmbuilding3");
-		SquareFarmTopRight = atlas.findRegion("farmbuilding4");
-		
-		SquareWoodCutterBottomLeft = atlas.findRegion("WoodCutterBuilding2");
-		SquareWoodCutterBottomRight = atlas.findRegion("WoodCutterBuilding1");
-		SquareWoodCutterTopLeft = atlas.findRegion("WoodCutterBuilding3");
-		SquareWoodCutterTopRight = atlas.findRegion("WoodCutterBuilding4");
-		
 		SquareOutlineFull = atlas.findRegion("outlineFull2");
 		SquareOutlineEdge = atlas.findRegion("outlineEdge2");
 	}
-	
-	public void drawFarmBuild(Simulation simulation, Batch batch, int tileNumber)
-	{
+
+	public void drawWarehouseBuild(BuildingAvailabilityControl buildingAvailabilityControlSimulation, Simulation simulation, Batch batch, int tileNumber) {
 		if( tileNumber < (gridSizeWidth-1) )
 		{
 			tileNumber = (tileNumber + gridSizeWidth);
@@ -54,54 +31,36 @@ public class DrawBuildingControl extends Data
 		{
 			tileNumber = (tileNumber - 1);
 		}
-		
-		String type1 = simulation.tiles.get(tileNumber).getType().toString();
-		String type2 = simulation.tiles.get(tileNumber+1).getType().toString();
-		String type3 = simulation.tiles.get((tileNumber-gridSizeWidth)).getType().toString();
-		String type4 = simulation.tiles.get((tileNumber-gridSizeWidth)+1).getType().toString();
-		
-		batch.draw( SquareFarmBottomLeft, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if((type1 == "water") || (type1 == "shore"))
-		{
-			batch.draw( SquareTileRegionFault, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		}
-		else
-		{
-			batch.draw( SquareTileRegionAllowed, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		}
-		
-		batch.draw( SquareFarmBottomRight, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (-32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if((type2 == "water") || (type2 == "shore"))
-		{
-			batch.draw( SquareTileRegionFault, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		else
-		{
-			batch.draw( SquareTileRegionAllowed, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		
-		batch.draw( SquareFarmTopLeft, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if((type3 == "water") || (type3 == "shore"))
-		{
-			batch.draw( SquareTileRegionFault, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		else
-		{
-			batch.draw( SquareTileRegionAllowed, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		
-		batch.draw( SquareFarmTopRight, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if((type4 == "water") || (type4 == "shore"))
-		{
-			batch.draw( SquareTileRegionFault, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		else
-		{
-			batch.draw( SquareTileRegionAllowed, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
+
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get(tileNumber), 1, 0);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get(tileNumber+1), 1, 1);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get((tileNumber-gridSizeWidth)+1), 1, 2);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get(tileNumber-gridSizeWidth), 1, 3);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get((tileNumber-gridSizeWidth)-1), 1, 4);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get(tileNumber-1), 1, 5);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get((tileNumber+gridSizeWidth)-1), 1, 6);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get((tileNumber+gridSizeWidth)), 1, 7);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get((tileNumber+gridSizeWidth)+1), 1, 8);
 	}
-	
-	public void drawWoodCutterBuild( Simulation simulation, Batch batch, int tileNumber )
+
+
+	public void drawFarmBuild(BuildingAvailabilityControl buildingAvailabilityControlSimulation, Simulation simulation, Batch batch, int tileNumber)
+	{
+		if( tileNumber < (gridSizeWidth-1) ) {
+			tileNumber = (tileNumber + gridSizeWidth);
+		} else if( tileNumber == (gridSizeWidth-1) ) {
+			tileNumber = (tileNumber + gridSizeWidth -1 );
+		} else if( (tileNumber+1) % gridSizeWidth == 0 ) {
+			tileNumber = (tileNumber - 1);
+		}
+
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get(tileNumber), 0, 0);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get(tileNumber+1), 0, 1);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch,  simulation.tiles.get((tileNumber-gridSizeWidth)+1), 0, 2);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch,  simulation.tiles.get(tileNumber-gridSizeWidth), 0, 3);
+	}
+
+	public void drawWoodCutterBuild( BuildingAvailabilityControl buildingAvailabilityControlSimulation, Simulation simulation, Batch batch, int tileNumber )
 	{
 		if( tileNumber < (gridSizeWidth-1) )
 		{
@@ -115,54 +74,15 @@ public class DrawBuildingControl extends Data
 		{
 			tileNumber = (tileNumber - 1);
 		}
-		
-		String type1 = simulation.tiles.get(tileNumber).getType().toString();
-		String type2 = simulation.tiles.get(tileNumber+1).getType().toString();
-		String type3 = simulation.tiles.get((tileNumber-gridSizeWidth)).getType().toString();
-		String type4 = simulation.tiles.get((tileNumber-gridSizeWidth)+1).getType().toString();
-		
-		batch.draw( SquareWoodCutterBottomLeft, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if((type1 == "water") || (type1 == "shore"))
-		{
-			batch.draw( SquareTileRegionFault, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		}
-		else
-		{
-			batch.draw( SquareTileRegionAllowed, (-32 + simulation.tiles.get(tileNumber).getPosition().x), (-32 + simulation.tiles.get(tileNumber).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		}
-		
-		batch.draw( SquareWoodCutterBottomRight, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (-32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if((type2 == "water") || (type2 == "shore"))
-		{
-			batch.draw( SquareTileRegionFault, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		else
-		{
-			batch.draw( SquareTileRegionAllowed, (-32 + simulation.tiles.get(tileNumber+1).getPosition().x), (32 + simulation.tiles.get(tileNumber+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		
-		batch.draw( SquareWoodCutterTopLeft, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if((type3 == "water") || (type3 == "shore"))
-		{
-			batch.draw( SquareTileRegionFault, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		else
-		{
-			batch.draw( SquareTileRegionAllowed, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		
-		batch.draw( SquareWoodCutterTopRight, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-		if((type4 == "water") || (type4 == "shore"))
-		{
-			batch.draw( SquareTileRegionFault, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
-		else
-		{
-			batch.draw( SquareTileRegionAllowed, (-32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().x), (32 + simulation.tiles.get((tileNumber-gridSizeWidth)+1).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
-		}
+
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get(tileNumber), 2, 0);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch, simulation.tiles.get(tileNumber+1), 2, 1);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch,  simulation.tiles.get((tileNumber-gridSizeWidth)+1), 2, 2);
+		buildingAvailabilityControlSimulation.buildingAvailability(batch,  simulation.tiles.get(tileNumber-gridSizeWidth), 2, 3);
+
 		WoodCutterOutline(simulation, batch, tileNumber );
 	}
-	
+
 	private void WoodCutterOutline(Simulation simulation, Batch batch, int tileNumber )
 	{
 
@@ -179,7 +99,7 @@ public class DrawBuildingControl extends Data
 			batch.draw( SquareOutlineFull, (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth*3)).getPosition().x), (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 			batch.draw( SquareOutlineFull, (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth*3)+1).getPosition().x), (-32 + simulation.tiles.get(tileNumber+(gridSizeWidth*3)+1).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 		}
-		
+
 		if(!(((((tileNumber)%gridSizeWidth) == 0)) || ((((tileNumber-1)%gridSizeWidth) == 0)) || ((((tileNumber-2)%gridSizeWidth) == 0))))
 		{
 			batch.draw( SquareOutlineFull, (-32 + simulation.tiles.get(tileNumber-3).getPosition().x), (32 + simulation.tiles.get(tileNumber-3).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
@@ -187,13 +107,13 @@ public class DrawBuildingControl extends Data
 		}
 
 		if(!((((tileNumber+4)%(gridSizeWidth)) == 0) || (((tileNumber+3)%(gridSizeWidth)) == 0) || (((tileNumber+2)%(gridSizeWidth)) == 0)))
-		{	
+		{
 			//right side
 			batch.draw( SquareOutlineFull, (32 + simulation.tiles.get(tileNumber+4).getPosition().x), (-32 + simulation.tiles.get(tileNumber+4).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
 			batch.draw( SquareOutlineFull, (32 + simulation.tiles.get((tileNumber+4)-gridSizeWidth).getPosition().x), (-32 + simulation.tiles.get((tileNumber+4)-gridSizeWidth).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
 		}
-				
-		
+
+
 		if(!(tileNumber <= (gridSizeWidth*4)))
 		{
 			//top left and top right
@@ -203,10 +123,10 @@ public class DrawBuildingControl extends Data
 			}
 
 			if(!(((tileNumber+2)%(gridSizeWidth)) == 0))
-			{	
+			{
 				batch.draw( SquareOutlineEdge, (32 + simulation.tiles.get((tileNumber+2)-(gridSizeWidth*4)).getPosition().x), (32 + simulation.tiles.get((tileNumber+2)-(gridSizeWidth*4)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
 			}
-			
+
 		}
 		if(!(tileNumber <= (gridSizeWidth*3)))
 		{
@@ -215,9 +135,9 @@ public class DrawBuildingControl extends Data
 			{
 				batch.draw( SquareOutlineEdge, (-32 + simulation.tiles.get((tileNumber-2)-(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber-2)-(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
 			}
-			
+
 			if(!((((tileNumber+3)%(gridSizeWidth)) == 0) || (((tileNumber+2)%(gridSizeWidth)) == 0)))
-			{	
+			{
 				batch.draw( SquareOutlineEdge, (32 + simulation.tiles.get((tileNumber+3)-(gridSizeWidth*3)).getPosition().x), (32 + simulation.tiles.get((tileNumber+3)-(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
 			}
 		}
@@ -229,11 +149,11 @@ public class DrawBuildingControl extends Data
 				batch.draw( SquareOutlineEdge, (-32 + simulation.tiles.get((tileNumber-3)-(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber-3)-(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, -90, false);
 			}
 			if(!((((tileNumber+4)%(gridSizeWidth)) == 0) || (((tileNumber+3)%(gridSizeWidth)) == 0) || (((tileNumber+2)%(gridSizeWidth)) == 0)))
-			{	
+			{
 				batch.draw( SquareOutlineEdge, (32 + simulation.tiles.get((tileNumber+4)-(gridSizeWidth*2)).getPosition().x), (32 + simulation.tiles.get((tileNumber+4)-(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 180, false);
 			}
 		}
-		
+
 		if(!(tileNumber >= (gridSizeWidth*(gridSizeHeight-3))))
 		{
 			//bottom left and right
@@ -242,7 +162,7 @@ public class DrawBuildingControl extends Data
 				batch.draw( SquareOutlineEdge, (-32 + simulation.tiles.get((tileNumber-1)+(gridSizeWidth*3)).getPosition().x), (-32 + simulation.tiles.get((tileNumber-1)+(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 			}
 			if(!(((tileNumber+2)%(gridSizeWidth)) == 0))
-			{	
+			{
 				batch.draw( SquareOutlineEdge, (32 + simulation.tiles.get((tileNumber+2)+(gridSizeWidth*3)).getPosition().x), (-32 + simulation.tiles.get((tileNumber+2)+(gridSizeWidth*3)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
 			}
 		}
@@ -254,7 +174,7 @@ public class DrawBuildingControl extends Data
 				batch.draw( SquareOutlineEdge, (-32 + simulation.tiles.get((tileNumber-2)+(gridSizeWidth*2)).getPosition().x), (-32 + simulation.tiles.get((tileNumber-2)+(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 			}
 			if(!((((tileNumber+3)%(gridSizeWidth)) == 0) || (((tileNumber+2)%(gridSizeWidth)) == 0)))
-			{	
+			{
 				batch.draw( SquareOutlineEdge, (32 + simulation.tiles.get((tileNumber+3)+(gridSizeWidth*2)).getPosition().x), (-32 + simulation.tiles.get((tileNumber+3)+(gridSizeWidth*2)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
 			}
 		}
@@ -266,7 +186,7 @@ public class DrawBuildingControl extends Data
 				batch.draw( SquareOutlineEdge, (-32 + simulation.tiles.get((tileNumber-3)+(gridSizeWidth*1)).getPosition().x), (-32 + simulation.tiles.get((tileNumber-3)+(gridSizeWidth*1)).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 			}
 			if(!((((tileNumber+4)%(gridSizeWidth)) == 0) || (((tileNumber+3)%(gridSizeWidth)) == 0) || (((tileNumber+2)%(gridSizeWidth)) == 0)))
-			{	
+			{
 				batch.draw( SquareOutlineEdge, (32 + simulation.tiles.get((tileNumber+4)+(gridSizeWidth*1)).getPosition().x), (-32 + simulation.tiles.get((tileNumber+4)+(gridSizeWidth*1)).getPosition().y), 0, 0, 64, 64, 1, 1, 90, false);
 			}
 		}

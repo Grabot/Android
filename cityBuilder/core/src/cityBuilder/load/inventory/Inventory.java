@@ -11,14 +11,14 @@ public class Inventory {
 
     public Inventory() {
         slots = new Array<Slot>(42);
-    	for( int j = 0; j < 7; j++ )
-    	{
-    		for (int i = 0; i < 6; i++) 
-    		{
-            	//10 is the starting pos, 70 is the slot width, and 7 is the padding
-            	Slot slot = new Slot(null, 0, new Vector2((82+(i*(108))), (617 - (j*99))));
+        for( int j = 0; j < 7; j++ )
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                //10 is the starting pos, 70 is the slot width, and 7 is the padding
+                Slot slot = new Slot(null, 0, new Vector2((82+(i*(108))), (617 - (j*99))));
                 slots.add(slot);
-        	}
+            }
         }
 
     	/*
@@ -35,58 +35,58 @@ public class Inventory {
         }
         */
     }
-    
+
     public void takeItem( String item )
     {
-    	slots.get(findResourceSlot( item )).take(1);
+        slots.get(findResourceSlot( item )).take(1);
     }
-    
+
     public void addItem( int slotNumber, int item )
     {
-    	slots.get(slotNumber).add(Item.values()[item], 1 );
+        slots.get(slotNumber).add(Item.values()[item], 1 );
     }
-    
+
     public int checkInventoryTest( String item )
     {
-    	for( int i = 0; i < slots.size; i++ )
-    	{
-    		if( slots.get(i).getAmount() > 0 )
-    		{
-    			if( slots.get(i).getItem().toString() == item )
-    			{
-    				System.out.println("type: " + slots.get(i).getItem().toString() + " amount: " + slots.get(i).getAmount() );
-    				return i;	
-    			}
-    		}
-    	}
-    	return -1;
+        for( int i = 0; i < slots.size; i++ )
+        {
+            if( slots.get(i).getAmount() > 0 )
+            {
+                if( slots.get(i).getItem().toString() == item )
+                {
+                    System.out.println("type: " + slots.get(i).getItem().toString() + " amount: " + slots.get(i).getAmount() );
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
-    
-    public int firstEmtpySlot() 
+
+    public int firstEmtpySlot()
     {
-    	for( int i = 0; i < slots.size; i++ )
-    	{
-    		if( slots.get(i).getAmount() == 0 )
-    		{
-    			return i;
-    		}
-    	}
-    	return -1;
+        for( int i = 0; i < slots.size; i++ )
+        {
+            if( slots.get(i).getAmount() == 0 )
+            {
+                return i;
+            }
+        }
+        return -1;
     }
-    
+
     public int findResourceSlot(String item)
     {
-    	for( int i = 0; i < slots.size; i++ )
-    	{
-    		if( slots.get(i).getAmount() > 0 )
-    		{
-    			if( slots.get(i).getItem().toString() == item )
-    			{
-    				return i;
-    			}
-    		}
-    	}
-    	return -1;
+        for( int i = 0; i < slots.size; i++ )
+        {
+            if( slots.get(i).getAmount() > 0 )
+            {
+                if( slots.get(i).getItem().toString() == item )
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     public int checkInventory(Item item) {
@@ -132,5 +132,5 @@ public class Inventory {
 
         return null;
     }
-    
+
 }

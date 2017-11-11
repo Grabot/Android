@@ -6,13 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Wood 
+public class Wood
 {
 	private Tile tile;
 	private int position;
 	//private TextureRegion SquareTileRegionGrass;
 	private TextureRegion SquareTileRegionTree;
-	
+
 	public Wood( Tile tile, int position, TextureAtlas atlas )
 	{
 		this.tile = tile;
@@ -20,9 +20,9 @@ public class Wood
 		//SquareTileRegionGrass = atlas.findRegion("Grass");
 		SquareTileRegionTree = atlas.findRegion("pinetree");
 	}
-	
+
 	public void draw( Batch batch )
-	{	
+	{
 		//batch.draw( SquareTileRegionGrass, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		batch.draw( SquareTileRegionTree, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 	}

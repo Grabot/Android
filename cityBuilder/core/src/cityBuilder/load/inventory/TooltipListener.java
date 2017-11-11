@@ -21,24 +21,24 @@ public class TooltipListener extends InputListener
 
     @Override
     public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
- 		//see when the button is pressed
-    	actor.addAmountLabels();
+        //see when the button is pressed
+        actor.addAmountLabels();
         tooltip.setVisible(true);
         tmp.set(x, y);
         event.getListenerActor().localToStageCoordinates(tmp);
         if(tmp.x + offset.x + tooltip.getWidth() >= 640)
         {
-        	tmp.x = (640-tooltip.getWidth() );
+            tmp.x = (640-tooltip.getWidth() );
         }
         if( tmp.y > 500 )
         {
-        	offset.y = -100;
+            offset.y = -100;
         }
         tooltip.setPosition(tmp.x, tmp.y + offset.y);
         tooltip.toFront();
         return false;
- 	}
-    
+    }
+
     /**
      * The offset of the tooltip from the touch position. It should not be
      * positive as the tooltip will flicker otherwise.

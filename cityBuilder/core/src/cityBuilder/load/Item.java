@@ -1,7 +1,7 @@
 package cityBuilder.load;
 
 public enum Item {
-	
+
 	wood("logsResource"), //0
 	planks("planksResource"), //1
 	stone("stoneResource"), //2
@@ -14,15 +14,15 @@ public enum Item {
 	fishershut("fishermanResource"), //9
 	woodcutter("woodcutterResource"); //10
 
-    private String textureRegion;
+	private String textureRegion;
 
-    Item(String textureRegion)
-    {
-        this.textureRegion = textureRegion;
-    }
+	Item(String textureRegion)
+	{
+		this.textureRegion = textureRegion;
+	}
 
-    public String getTextureRegion() 
-    {
-        return textureRegion;
-    }
+	public String getTextureRegion()
+	{
+		return textureRegion;
+	}
 }

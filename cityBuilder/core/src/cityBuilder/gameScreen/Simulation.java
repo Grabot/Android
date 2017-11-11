@@ -3,6 +3,7 @@ package cityBuilder.gameScreen;
 import java.util.ArrayList;
 
 import cityBuilder.gameScreen.buildings.Farm;
+import cityBuilder.gameScreen.buildings.Warehouse;
 import cityBuilder.gameScreen.buildings.WoodCutter;
 import cityBuilder.load.Data;
 import cityBuilder.load.build.buildActor;
@@ -22,6 +23,7 @@ public class Simulation extends Data {
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
 	private ArrayList<Farm> farms = new ArrayList<Farm>();
 	private ArrayList<WoodCutter> woodcutters = new ArrayList<WoodCutter>();
+	private ArrayList<Warehouse> warehouses = new ArrayList<Warehouse>();
 
 	private float width = 0;
 	private float height = 0;
@@ -49,7 +51,8 @@ public class Simulation extends Data {
 	private boolean[] farmTiles = new boolean[626];
 	private boolean BuildingFarm = false;
 	private boolean BuildingWoodCutter = false;
-	
+	private boolean buildingWareHouse = false;
+
 	private int selectedTile = -1;
 
 	float touch_distance_x = 999;
@@ -60,7 +63,7 @@ public class Simulation extends Data {
 	public static final String LOG = Simulation.class.getSimpleName();
 
 	private GameScreen game;
-	
+
 	private Inventory inventory;
 	private InventoryActor inventoryActor;
 
@@ -99,7 +102,7 @@ public class Simulation extends Data {
 
 	public void update(float delta) {
 		checkTouch();
-		
+
 		//every second updates
 		sec = (sec + delta);
 		if( sec >= 1.00000f )
@@ -108,29 +111,36 @@ public class Simulation extends Data {
 			sec = (sec - 1.00000f);
 		}
 	}
-	
+
 	private void updateBuildings()
 	{
-		for( int i = 0; i < farms.size(); i++ )
-		{
+		for( int i = 0; i < farms.size(); i++ ) {
 			farms.get(i).update();
 		}
-		
-		for( int i = 0; i < woodcutters.size(); i++ )
-		{
+
+		for( int i = 0; i < woodcutters.size(); i++ ) {
 			woodcutters.get(i).update();
 		}
+
+		for( int i = 0; i < warehouses.size(); i++ ) {
+			warehouses.get(i).update();
+		}
 	}
-	
+
 	public void BuildFarm()
 	{
 		BuildingFarm = true;
 	}
+
 	public void BuildWoodCutter()
 	{
 		BuildingWoodCutter = true;
 	}
-	
+
+	public void BuildWarehouse() {
+		buildingWareHouse = true;
+	}
+
 	public void BuildingConfirmation( int building, int selectedTile )
 	{
 		//set all tiles that occupy the farm
@@ -147,16 +157,16 @@ public class Simulation extends Data {
 		{
 			selectedTile = (selectedTile-1);
 		}
-		
+
 		if( building == 0 )
 		{
 			tiles.get(selectedTile).setOccupied(1, 0);
 			tiles.get(selectedTile-gridSizeWidth).setOccupied(1, 1);
 			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1, 2);
 			tiles.get(selectedTile+1).setOccupied(1, 3);
-		
+
 			inventory.takeItem( "farm" );
-			
+
 			Farm farm = new Farm(selectedTile, tiles);
 			farms.add(farm);
 			BuildingFarm = false;
@@ -167,12 +177,29 @@ public class Simulation extends Data {
 			tiles.get(selectedTile-gridSizeWidth).setOccupied(2, 1);
 			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(2, 2);
 			tiles.get(selectedTile+1).setOccupied(2, 3);
-			
+
 			inventory.takeItem( "woodcutter" );
-			
+
 			WoodCutter woodcutter = new WoodCutter(selectedTile, tiles);
 			woodcutters.add(woodcutter);
 			BuildingWoodCutter = false;
+		} else if( building == 2 ) {
+
+			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(4, 0);
+			tiles.get(selectedTile-(gridSizeWidth)).setOccupied(4, 1);
+			tiles.get(selectedTile-(gridSizeWidth+1)).setOccupied(4, 2);
+			tiles.get(selectedTile-1).setOccupied(4, 3);
+			tiles.get(selectedTile).setOccupied(4, 4);
+			tiles.get(selectedTile+1).setOccupied(4, 5);
+			tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(4, 6);
+			tiles.get(selectedTile+(gridSizeWidth)).setOccupied(4, 7);
+			tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(4, 8);
+
+			inventory.takeItem( "fishershut" );
+
+			Warehouse warehouse = new Warehouse(selectedTile, tiles);
+			warehouses.add(warehouse);
+			buildingWareHouse = false;
 		}
 	}
 
@@ -190,7 +217,7 @@ public class Simulation extends Data {
 		game.Game_Finished(i, citizens);
 	}
 
-	private void checkTouch() 
+	private void checkTouch()
 	{
 		//no touch detection in the panel sections
 		if( !(touchX > 950 ))
@@ -199,7 +226,7 @@ public class Simulation extends Data {
 			touch_distance_y = (((touchY - (ScreenHeight / 2)) * cameraZ - cameraY) * -1);
 		}
 	}
-	
+
 	public boolean touchedInfobox( float tileX, float tileY, float tileWidth, float tileHeight )
 	{
 		return ((touchX >= tileX) && (touchX <= (tileX + tileWidth))) && (((720 - touchY) > tileY) && ((720 - touchY) <= (tileY + tileHeight)));
@@ -210,11 +237,11 @@ public class Simulation extends Data {
 		int tileX = Math.round((touch_distance_x)/64);
 		int tileY = Math.round((touch_distance_y)/64);
 		tileY = ((tileY-24)*-1);
-		
-		if (touched_down) 
+
+		if (touched_down)
 		{
 			selectedTile = ((tileY*gridSizeHeight)+tileX);
-			
+
 			if( scrolling )
 			{
 				pressed = 0;
@@ -231,10 +258,10 @@ public class Simulation extends Data {
 			MiningSequence = false;
 			pressed = 0;
 		}
-		
+
 		return selectedTile;
 	}
-	
+
 	public boolean getTouchedDown() {
 		return touched_down;
 	}
@@ -266,13 +293,18 @@ public class Simulation extends Data {
 	public int getMiningProgress() {
 		return miningProgress;
 	}
-	
+
 	public boolean getBuildingFarm()
 	{
 		return BuildingFarm;
 	}
+
 	public boolean getBuildingWoodCutter()
 	{
 		return BuildingWoodCutter;
+	}
+
+	public boolean getBuildingWarehouse() {
+		return buildingWareHouse;
 	}
 }

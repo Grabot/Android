@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Shore 
+public class Shore
 {
 	private Tile tile;
 	private int tilePosition;
 	private TextureRegion SquareTileRegionShoreEdge;
 	private TextureRegion SquareTileRegionShoreEdgeSmall;
 	private TextureRegion SquareTileRegionShoreFull;
-	
+
 	public Shore( Tile tile, int tilePosition, TextureAtlas atlas )
 	{
 		this.tile = tile;
@@ -22,7 +22,7 @@ public class Shore
 		SquareTileRegionShoreEdgeSmall = atlas.findRegion("edgeToWaterEdgeSmall");
 		SquareTileRegionShoreFull = atlas.findRegion("edgeToWaterFull");
 	}
-	
+
 	public void draw( Batch batch )
 	{
 		if( tilePosition == 23 )
