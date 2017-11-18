@@ -14,7 +14,7 @@ public class Grass
 	public Grass( Tile tile, TextureAtlas atlas )
 	{
 		this.tile = tile;
-		SquareTileRegionGrass = atlas.findRegion("Grass");
+		SquareTileRegionGrass = atlas.findRegion("grass");
 	}
 
 	public void draw( Batch batch )

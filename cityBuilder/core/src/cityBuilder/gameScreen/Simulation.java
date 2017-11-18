@@ -170,9 +170,24 @@ public class Simulation extends Data {
 			Farm farm = new Farm(selectedTile, tiles);
 			farms.add(farm);
 			BuildingFarm = false;
-		}
-		else if( building == 1 )
-		{
+		} else if( building == 1 ) {
+
+			tiles.get(selectedTile).setOccupied(4, 0);
+			tiles.get(selectedTile+1).setOccupied(4, 1);
+			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(4, 2);
+			tiles.get(selectedTile-(gridSizeWidth)).setOccupied(4, 3);
+			tiles.get(selectedTile-(gridSizeWidth+1)).setOccupied(4, 4);
+			tiles.get(selectedTile-1).setOccupied(4, 5);
+			tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(4, 6);
+			tiles.get(selectedTile+(gridSizeWidth)).setOccupied(4, 7);
+			tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(4, 8);
+
+			inventory.takeItem( "fishershut" );
+
+			Warehouse warehouse = new Warehouse(selectedTile, tiles);
+			warehouses.add(warehouse);
+			buildingWareHouse = false;
+		} else if( building == 2 ) {
 			tiles.get(selectedTile).setOccupied(2, 0);
 			tiles.get(selectedTile-gridSizeWidth).setOccupied(2, 1);
 			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(2, 2);
@@ -183,23 +198,6 @@ public class Simulation extends Data {
 			WoodCutter woodcutter = new WoodCutter(selectedTile, tiles);
 			woodcutters.add(woodcutter);
 			BuildingWoodCutter = false;
-		} else if( building == 2 ) {
-
-			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(4, 0);
-			tiles.get(selectedTile-(gridSizeWidth)).setOccupied(4, 1);
-			tiles.get(selectedTile-(gridSizeWidth+1)).setOccupied(4, 2);
-			tiles.get(selectedTile-1).setOccupied(4, 3);
-			tiles.get(selectedTile).setOccupied(4, 4);
-			tiles.get(selectedTile+1).setOccupied(4, 5);
-			tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(4, 6);
-			tiles.get(selectedTile+(gridSizeWidth)).setOccupied(4, 7);
-			tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(4, 8);
-
-			inventory.takeItem( "fishershut" );
-
-			Warehouse warehouse = new Warehouse(selectedTile, tiles);
-			warehouses.add(warehouse);
-			buildingWareHouse = false;
 		}
 	}
 

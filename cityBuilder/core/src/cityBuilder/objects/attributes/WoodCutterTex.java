@@ -19,10 +19,10 @@ public class WoodCutterTex
 	{
 		this.tile = tile;
 		this.position = position;
-		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("WoodCutterBuilding1");
-		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("WoodCutterBuilding2");
-		SquareTileRegionWoodCutterTopRight = atlas.findRegion("WoodCutterBuilding3");
-		SquareTileRegionWoodCutterBottomRight = atlas.findRegion("WoodCutterBuilding4");
+		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("cubeDark");
+		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("cubeDark");
+		SquareTileRegionWoodCutterTopRight = atlas.findRegion("cubeDark");
+		SquareTileRegionWoodCutterBottomRight = atlas.findRegion("cubeDark");
 	}
 
 	public void draw( Batch batch )
@@ -30,22 +30,22 @@ public class WoodCutterTex
 		if( position == 0 )
 		{
 			//bottom left
-			batch.draw( SquareTileRegionWoodCutterBottomLeft, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+			batch.draw( SquareTileRegionWoodCutterBottomLeft, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
 		}
 		else if( position == 1 )
 		{
 			//top left	
-			batch.draw( SquareTileRegionWoodCutterTopLeft, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+			batch.draw( SquareTileRegionWoodCutterTopLeft, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
 		}
 		else if( position == 2 )
 		{
 			//top right	
-			batch.draw( SquareTileRegionWoodCutterTopRight, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+			batch.draw( SquareTileRegionWoodCutterTopRight, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
 		}
 		else if( position == 3 )
 		{
 			//bottom right	
-			batch.draw( SquareTileRegionWoodCutterBottomRight, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+			batch.draw( SquareTileRegionWoodCutterBottomRight, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
 		}
 	}
 }

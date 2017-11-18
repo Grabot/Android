@@ -2,7 +2,7 @@ package cityBuilder.gameScreen;
 
 import java.util.ArrayList;
 
-import cityBuilder.load.ButtonControl;
+import cityBuilder.load.BuildingAvailabilityControl;
 import cityBuilder.load.Data;
 import cityBuilder.load.DrawTiles;
 import cityBuilder.load.TouchInput;
@@ -39,7 +39,6 @@ public class Renderer extends Data
 
 	private TouchInput inputHandler;
 	private DrawTiles drawTiles;
-	private ButtonControl buttoncontrol;
 
 	private Stage stage;
 	private OrthographicCamera camera;
@@ -69,6 +68,8 @@ public class Renderer extends Data
 
 	private boolean touchedBox = false;
 
+	private BuildingAvailabilityControl buildingAvailabilityControl;
+
 	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, TextureAtlas atlas, Inventory inventory, InventoryActor inventoryActor, buildInventory buildInv, buildActor builder, tileInfo tileinfo,  ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
@@ -90,7 +91,8 @@ public class Renderer extends Data
 
 		inputHandler = new TouchInput( camera, width, height );
 		drawTiles = new DrawTiles(atlas);
-		buttoncontrol = new ButtonControl();
+
+		buildingAvailabilityControl = new BuildingAvailabilityControl(atlas);
 
 		this.stage = stage;
 		this.camera = camera;
@@ -104,29 +106,69 @@ public class Renderer extends Data
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
 
-		drawTiles.fillTiles( simulation, batch );
+		drawTiles.fillTiles( buildingAvailabilityControl, simulation, batch );
 
 		if( !inventoryOn ) {
 			if( simulation.getBuildingFarm() ) {
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
 				if( selectedTile >= 0 && selectedTile < numberOfTiles ) {
-					buttoncontrol.controlButtonFarm(simulation, BuildBuildingButton, selectedTile);
-					drawTiles.drawFarmBuild( simulation, batch, selectedTile );
+					// drawing control for the farm
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile), 0, 0);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile+1), 0, 1);
+					buildingAvailabilityControl.buildingAvailability(batch,  simulation.tiles.get((selectedTile-gridSizeWidth)+1), 0, 2);
+					buildingAvailabilityControl.buildingAvailability(batch,  simulation.tiles.get(selectedTile-gridSizeWidth), 0, 3);
+
+					// button control for the farm, it's size is 4.
+					BuildBuildingButton.setVisible(true);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile), 0, 0);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile+1), 0, 1);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile-gridSizeWidth)+1), 0, 2);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile-gridSizeWidth), 0, 3);
 				}
 			} else if( simulation.getBuildingWoodCutter() ) {
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )	{
-					buttoncontrol.controlButtonWoodCutter(simulation, BuildBuildingButton, selectedTile);
-					drawTiles.drawWoodCutterBuild( simulation, batch, atlas, selectedTile );
+					buildingAvailabilityControl.OutlineAvailability( simulation, batch, selectedTile, 2, 0, 3 );
+
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile), 2, 0);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile+1), 2, 1);
+					buildingAvailabilityControl.buildingAvailability(batch,  simulation.tiles.get((selectedTile-gridSizeWidth)+1), 2, 2);
+					buildingAvailabilityControl.buildingAvailability(batch,  simulation.tiles.get(selectedTile-gridSizeWidth), 2, 3);
+
+					BuildBuildingButton.setVisible(true);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile), 2, 0);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile+1), 2, 1);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile-gridSizeWidth)+1), 2, 2);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile-gridSizeWidth), 2, 3);
 				}
 			} else if( simulation.getBuildingWarehouse() ) {
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )	{
-					buttoncontrol.controlButtonWarehouse(simulation, BuildBuildingButton, selectedTile);
-					drawTiles.drawWarehouseBuild( simulation, batch, atlas, selectedTile );
+					buildingAvailabilityControl.OutlineAvailability( simulation, batch, selectedTile, 1, 0, 16  );
+
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile), 1, 0);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile+1), 1, 1);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get((selectedTile-gridSizeWidth)-1), 1, 2);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile-gridSizeWidth), 1, 3);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get((selectedTile-gridSizeWidth)+1), 1, 4);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile-1), 1, 5);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get((selectedTile+gridSizeWidth)-1), 1, 6);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get((selectedTile+gridSizeWidth)), 1, 7);
+					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get((selectedTile+gridSizeWidth)+1), 1, 8);
+
+					BuildBuildingButton.setVisible(true);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile), 1, 0);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile+1), 1, 1);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile-gridSizeWidth)+1), 1, 2);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile-gridSizeWidth), 1, 3);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile-gridSizeWidth)-1), 1, 4);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile-1), 1, 5);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile+gridSizeWidth)-1), 1, 6);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile+gridSizeWidth)), 1, 7);
+					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile+gridSizeWidth)+1), 1, 8);
 				}
 			} else {
 				inventoryButton.setVisible(true);
@@ -139,7 +181,7 @@ public class Renderer extends Data
 						tileinfo.setText(selectedTile, simulation);
 						tileinfo.setPosition( (simulation.getTouchX() + 100), (720 - simulation.getTouchY()) );
 						tileinfo.setVisible( true );
-						drawTiles.drawSelected( simulation, batch, atlas, selectedTile );
+						drawTiles.drawSelected( buildingAvailabilityControl, simulation, batch, atlas, selectedTile );
 					}
 				} else {
 					tileinfo.setVisible( false );
@@ -223,10 +265,10 @@ public class Renderer extends Data
 			if( simulation.getBuildingFarm() ) {
 				simulation.BuildingConfirmation(0, selectedTile);
 				inventoryActor.clearLabels();
-			} else if( simulation.getBuildingWoodCutter() ) {
+			} else if( simulation.getBuildingWarehouse() ) {
 				simulation.BuildingConfirmation(1, selectedTile);
 				inventoryActor.clearLabels();
-			} else if( simulation.getBuildingWarehouse() ) {
+			} else if( simulation.getBuildingWoodCutter() ) {
 				simulation.BuildingConfirmation(2, selectedTile);
 				inventoryActor.clearLabels();
 			}
