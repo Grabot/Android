@@ -10,14 +10,10 @@ public class DrawSelectionControl extends Data
 {
 
 	private TextureRegion SquareTileRegionSelected;
-	private TextureRegion SquareOutlineFull;
-	private TextureRegion SquareOutlineEdge;
 
 	public DrawSelectionControl(TextureAtlas atlas)
 	{
 		SquareTileRegionSelected = atlas.findRegion("SquareGreySmall");
-		SquareOutlineFull = atlas.findRegion("outlineFull2");
-		SquareOutlineEdge = atlas.findRegion("outlineEdge2");
 	}
 
 	public void drawWarehouseSelected(BuildingAvailabilityControl buildingAvailabilityControl, Simulation simulation, Batch batch, int tileNumber) {

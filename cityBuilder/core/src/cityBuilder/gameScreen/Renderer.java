@@ -51,6 +51,8 @@ public class Renderer extends Data
 	private TextButton inventoryButton;
 	private TextButton BuildBuildingButton;
 
+	private TextButton buildingRotationButton;
+
 	private Texture progressBar;
 	private Texture progressBarFill;
 
@@ -110,6 +112,7 @@ public class Renderer extends Data
 
 		if( !inventoryOn ) {
 			if( simulation.getBuildingFarm() ) {
+				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
 				if( selectedTile >= 0 && selectedTile < numberOfTiles ) {
@@ -126,7 +129,8 @@ public class Renderer extends Data
 					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile-gridSizeWidth)+1), 0, 2);
 					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile-gridSizeWidth), 0, 3);
 				}
-			} else if( simulation.getBuildingWoodCutter() ) {
+			} else if( simulation.getBuildingWoodCutter()) {
+				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )	{
@@ -144,6 +148,7 @@ public class Renderer extends Data
 					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get(selectedTile-gridSizeWidth), 2, 3);
 				}
 			} else if( simulation.getBuildingWarehouse() ) {
+				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )	{
@@ -171,6 +176,7 @@ public class Renderer extends Data
 					buildingAvailabilityControl.buttonAvailability(BuildBuildingButton, simulation.tiles.get((selectedTile+gridSizeWidth)+1), 1, 8);
 				}
 			} else {
+				buildingRotationButton.setVisible( false );
 				inventoryButton.setVisible(true);
 				BuildBuildingButton.setVisible( false );
 				touchedBox = simulation.touchedInfobox(tileinfo.getX(), tileinfo.getY(), tileinfo.getWidth(), tileinfo.getHeight());
@@ -235,6 +241,11 @@ public class Renderer extends Data
 		BuildBuildingButton.setBounds( 1000,  300, 200, 30 );
 		BuildBuildingButton.setVisible( false );
 
+		buildingRotationButton = new TextButton("Rotate" , skin );
+		buildingRotationButton.setDisabled( false );
+		buildingRotationButton.setBounds(1150, 500, 100, 100);
+		buildingRotationButton.setVisible( false );
+
 		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Inventory.atlas"));
 		TextureRegion image;
 		image = icons.findRegion("empty");
@@ -245,11 +256,13 @@ public class Renderer extends Data
 		stage.addActor( inventoryButton );
 		stage.addActor( inventoryActor );
 		stage.addActor( BuildBuildingButton );
+		stage.addActor( buildingRotationButton );
 		stage.addActor( builder );
 		stage.addActor( tileinfo );
 
 		inventoryButton.addListener( InventoryListener );
 		BuildBuildingButton.addListener( buildBuildingListener );
+		buildingRotationButton.addListener( buildingRotationListener );
 	}
 
 	public ClickListener InventoryListener = new ClickListener() {
@@ -272,6 +285,14 @@ public class Renderer extends Data
 				simulation.BuildingConfirmation(2, selectedTile);
 				inventoryActor.clearLabels();
 			}
+		}
+	};
+
+	public ClickListener buildingRotationListener = new ClickListener() {
+		@Override
+		public void clicked (InputEvent event, float x, float y) {
+			buildingAvailabilityControl.rotationControl();
+			System.out.println("test boi");
 		}
 	};
 

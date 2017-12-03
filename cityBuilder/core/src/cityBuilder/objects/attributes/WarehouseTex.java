@@ -15,40 +15,33 @@ public class WarehouseTex {
     private int position = 0;
     private TextureRegion SquareTileRegionFarmBottomLeft;
     private TextureRegion SquareTileRegionFarmBottomRight;
-    private TextureRegion SquareTileRegionFarmTopLeft;
-    private TextureRegion SquareTileRegionFarmTopRight;
 
     public WarehouseTex(Tile tile, int position, TextureAtlas atlas ) {
         this.tile = tile;
         this.position = position;
         SquareTileRegionFarmBottomLeft = atlas.findRegion("cubeLight");
-        SquareTileRegionFarmTopLeft = atlas.findRegion("cubeLight");
-        SquareTileRegionFarmTopRight = atlas.findRegion("cubeLight");
-        SquareTileRegionFarmBottomRight = atlas.findRegion("cubeLight");
+        SquareTileRegionFarmBottomRight = atlas.findRegion("cubeDark");
     }
 
     public void draw( Batch batch ) {
         if (position == 0) {
             // top left
-            batch.draw(SquareTileRegionFarmTopLeft, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+            batch.draw(SquareTileRegionFarmBottomLeft, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
         } else if (position == 1) {
             // top
-            batch.draw(SquareTileRegionFarmTopLeft, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+            batch.draw(SquareTileRegionFarmBottomLeft, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
         } else if (position == 2) {
             // top right
-            batch.draw(SquareTileRegionFarmTopRight, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+            batch.draw(SquareTileRegionFarmBottomLeft, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
         } else if (position == 3) {
             // bottom left
             batch.draw(SquareTileRegionFarmBottomLeft, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
         } else if (position == 4) {
             // bottom
-            batch.draw(SquareTileRegionFarmBottomRight, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+            batch.draw(SquareTileRegionFarmBottomLeft, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
         } else if (position == 5) {
             // bottom right
-            batch.draw(SquareTileRegionFarmBottomRight, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
-        } else if (position == 5) {
-            // bottom right
-            batch.draw(SquareTileRegionFarmBottomRight, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+            batch.draw(SquareTileRegionFarmBottomLeft, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
         } else if (position == 6) {
             // shore
             batch.draw(SquareTileRegionFarmBottomRight, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);

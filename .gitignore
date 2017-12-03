@@ -1,3 +1,5 @@
 /overig/test/.nb-gradle/private/
 /CityBuilder/.nb-gradle/private/
 .metadata/*
+*.rawproto
+*.jar
