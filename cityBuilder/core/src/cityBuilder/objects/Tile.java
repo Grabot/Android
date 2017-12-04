@@ -7,6 +7,7 @@ import cityBuilder.objects.attributes.Grass;
 import cityBuilder.objects.attributes.Iron;
 import cityBuilder.objects.attributes.Shore;
 import cityBuilder.objects.attributes.Stone;
+import cityBuilder.objects.attributes.Warehouse2Tex;
 import cityBuilder.objects.attributes.WarehouseTex;
 import cityBuilder.objects.attributes.Water;
 import cityBuilder.objects.attributes.Wood;
@@ -34,6 +35,7 @@ public class Tile
 	private FarmTex farmtex;
 	private WoodCutterTex woodcuttertex;
 	private WarehouseTex warehouseTex;
+	private Warehouse2Tex warehouse2Tex;
 
 	private TextureAtlas atlas;
 
@@ -95,6 +97,10 @@ public class Tile
 		warehouseTex.draw( batch );
 	}
 
+	public void drawWarehouse2( Batch batch ) {
+		warehouse2Tex.draw( batch );
+	}
+
 	public void drawWoods( Batch batch )
 	{
 		wood.draw( batch );
@@ -128,23 +134,25 @@ public class Tile
 		return occupied;
 	}
 
-	public void setOccupied(int occupied, int buildingPosition) {
+	public void setOccupied(int occupied, int buildingPosition, int rotation) {
 
 		this.occupied = occupied;
 		this.buildingPosition = buildingPosition;
 
 		if( occupied == 1 ) {
 			// farm
-			farmtex = new FarmTex( this, buildingPosition, atlas );
+			farmtex = new FarmTex( this, buildingPosition, rotation, atlas );
 		} else if( occupied == 2 ) {
 			// wood cutter
-			woodcuttertex = new WoodCutterTex( this, buildingPosition, atlas );
+			woodcuttertex = new WoodCutterTex( this, buildingPosition, rotation, atlas );
 		} else if( occupied == 3 ) {
 			// woods
-			wood = new Wood(this, buildingPosition, atlas);
+			wood = new Wood(this, buildingPosition, rotation, atlas);
 		} else if ( occupied == 4 ) {
 			// warehouse
-			warehouseTex = new WarehouseTex(this, buildingPosition, atlas);
+			warehouseTex = new WarehouseTex(this, buildingPosition, rotation, atlas);
+		} else if ( occupied == 5 ) {
+			warehouse2Tex = new Warehouse2Tex(this, buildingPosition, rotation, atlas);
 		}
 
 	}

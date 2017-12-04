@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cityBuilder.gameScreen.buildings.Farm;
 import cityBuilder.gameScreen.buildings.Warehouse;
+import cityBuilder.gameScreen.buildings.Warehouse2;
 import cityBuilder.gameScreen.buildings.WoodCutter;
 import cityBuilder.load.Data;
 import cityBuilder.load.build.buildActor;
@@ -24,6 +25,7 @@ public class Simulation extends Data {
 	private ArrayList<Farm> farms = new ArrayList<Farm>();
 	private ArrayList<WoodCutter> woodcutters = new ArrayList<WoodCutter>();
 	private ArrayList<Warehouse> warehouses = new ArrayList<Warehouse>();
+	private ArrayList<Warehouse2> warehouses2 = new ArrayList<Warehouse2>();
 
 	private float width = 0;
 	private float height = 0;
@@ -52,6 +54,7 @@ public class Simulation extends Data {
 	private boolean BuildingFarm = false;
 	private boolean BuildingWoodCutter = false;
 	private boolean buildingWareHouse = false;
+	private boolean buildingWarehouse2 = false;
 
 	private int selectedTile = -1;
 
@@ -141,7 +144,11 @@ public class Simulation extends Data {
 		buildingWareHouse = true;
 	}
 
-	public void BuildingConfirmation( int building, int selectedTile )
+	public void buildWarehouse2() {
+		buildingWarehouse2 = true;
+	}
+
+	public void BuildingConfirmation( int building, int rotation, int selectedTile )
 	{
 		//set all tiles that occupy the farm
 
@@ -160,10 +167,10 @@ public class Simulation extends Data {
 
 		if( building == 0 )
 		{
-			tiles.get(selectedTile).setOccupied(1, 0);
-			tiles.get(selectedTile-gridSizeWidth).setOccupied(1, 1);
-			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1, 2);
-			tiles.get(selectedTile+1).setOccupied(1, 3);
+			tiles.get(selectedTile).setOccupied(1, 0, rotation);
+			tiles.get(selectedTile-gridSizeWidth).setOccupied(1, 1, rotation);
+			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1, 2, rotation);
+			tiles.get(selectedTile+1).setOccupied(1, 3, rotation);
 
 			inventory.takeItem( "farm" );
 
@@ -172,15 +179,15 @@ public class Simulation extends Data {
 			BuildingFarm = false;
 		} else if( building == 1 ) {
 
-			tiles.get(selectedTile).setOccupied(4, 0);
-			tiles.get(selectedTile+1).setOccupied(4, 1);
-			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(4, 2);
-			tiles.get(selectedTile-(gridSizeWidth)).setOccupied(4, 3);
-			tiles.get(selectedTile-(gridSizeWidth+1)).setOccupied(4, 4);
-			tiles.get(selectedTile-1).setOccupied(4, 5);
-			tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(4, 6);
-			tiles.get(selectedTile+(gridSizeWidth)).setOccupied(4, 7);
-			tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(4, 8);
+			tiles.get(selectedTile).setOccupied(4, 0, rotation);
+			tiles.get(selectedTile+1).setOccupied(4, 1, rotation);
+			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(4, 2, rotation);
+			tiles.get(selectedTile-(gridSizeWidth)).setOccupied(4, 3, rotation);
+			tiles.get(selectedTile-(gridSizeWidth+1)).setOccupied(4, 4, rotation);
+			tiles.get(selectedTile-1).setOccupied(4, 5, rotation);
+			tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(4, 6, rotation);
+			tiles.get(selectedTile+(gridSizeWidth)).setOccupied(4, 7, rotation);
+			tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(4, 8, rotation);
 
 			inventory.takeItem( "fishershut" );
 
@@ -188,16 +195,56 @@ public class Simulation extends Data {
 			warehouses.add(warehouse);
 			buildingWareHouse = false;
 		} else if( building == 2 ) {
-			tiles.get(selectedTile).setOccupied(2, 0);
-			tiles.get(selectedTile-gridSizeWidth).setOccupied(2, 1);
-			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(2, 2);
-			tiles.get(selectedTile+1).setOccupied(2, 3);
+			tiles.get(selectedTile).setOccupied(2, 0, rotation);
+			tiles.get(selectedTile-gridSizeWidth).setOccupied(2, 1, rotation);
+			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(2, 2, rotation);
+			tiles.get(selectedTile+1).setOccupied(2, 3, rotation);
 
 			inventory.takeItem( "woodcutter" );
 
 			WoodCutter woodcutter = new WoodCutter(selectedTile, tiles);
 			woodcutters.add(woodcutter);
 			BuildingWoodCutter = false;
+		} else if( building == 3) {
+			// this is a tree.
+		} else if( building == 4) {
+
+			// Easy way to only set the correct tiles with the ratation
+			if (rotation == 0) {
+				tiles.get(selectedTile).setOccupied(5, 0, rotation);
+				tiles.get(selectedTile + 1).setOccupied(5, 1, rotation);
+				tiles.get(selectedTile - (gridSizeWidth - 1)).setOccupied(5, 2, rotation);
+				tiles.get(selectedTile - (gridSizeWidth)).setOccupied(5, 3, rotation);
+				tiles.get(selectedTile - (gridSizeWidth + 1)).setOccupied(5, 4, rotation);
+				tiles.get(selectedTile - 1).setOccupied(5, 5, rotation);
+			} else if (rotation == 1) {
+				tiles.get(selectedTile).setOccupied(5, 0, rotation);
+				tiles.get(selectedTile + 1).setOccupied(5, 1, rotation);
+				tiles.get(selectedTile - (gridSizeWidth - 1)).setOccupied(5, 2, rotation);
+				tiles.get(selectedTile - (gridSizeWidth)).setOccupied(5, 3, rotation);
+				tiles.get(selectedTile+(gridSizeWidth)).setOccupied(5, 7, rotation);
+				tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(5, 8, rotation);
+			} else if (rotation == 2) {
+				tiles.get(selectedTile).setOccupied(5, 0, rotation);
+				tiles.get(selectedTile + 1).setOccupied(5, 1, rotation);
+				tiles.get(selectedTile - 1).setOccupied(5, 5, rotation);
+				tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(5, 6, rotation);
+				tiles.get(selectedTile+(gridSizeWidth)).setOccupied(5, 7, rotation);
+				tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(5, 8, rotation);
+			} else if (rotation == 3) {
+				tiles.get(selectedTile).setOccupied(5, 0, rotation);
+				tiles.get(selectedTile - (gridSizeWidth)).setOccupied(5, 3, rotation);
+				tiles.get(selectedTile - (gridSizeWidth + 1)).setOccupied(5, 4, rotation);
+				tiles.get(selectedTile - 1).setOccupied(5, 5, rotation);
+				tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(5, 6, rotation);
+				tiles.get(selectedTile+(gridSizeWidth)).setOccupied(5, 7, rotation);
+			}
+			inventory.takeItem( "brick" );
+
+			Warehouse2 warehouse2 = new Warehouse2(selectedTile, tiles);
+			warehouses2.add(warehouse2);
+
+			buildingWarehouse2 = false;
 		}
 	}
 
@@ -305,4 +352,6 @@ public class Simulation extends Data {
 	public boolean getBuildingWarehouse() {
 		return buildingWareHouse;
 	}
+
+	public boolean getBuildingWarehouse2() { return buildingWarehouse2; }
 }

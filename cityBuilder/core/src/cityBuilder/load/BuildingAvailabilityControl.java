@@ -28,7 +28,7 @@ public class BuildingAvailabilityControl extends Data
     private TextureRegion SquareOutlineAvailable;
 
     private String[][][][] buildingAvailability;
-    private TextureRegion[][][] buildingRegionRotate;
+    private TextureRegion[][][] buildingRegion;
 
     public BuildingAvailabilityControl(TextureAtlas atlas) {
         SquareTileRegionFault = atlas.findRegion("SquareRedSmall");
@@ -40,17 +40,6 @@ public class BuildingAvailabilityControl extends Data
         BufferedReader br = new BufferedReader(buildingRestrictions.reader());
 
         buildingAvailability = new String[5][25][5][4];
-        for(int i = 0; i < buildingAvailability.length; i++ )
-        {
-            for(int j = 0; j < buildingAvailability[i].length; j++ ) {
-                for(int k = 0; k < buildingAvailability[i][j].length; k++ ) {
-                    for (int l = 0; l < buildingAvailability[i][j][k].length; l++ ) {
-                        buildingAvailability[i][j][k][l] = "";
-                    }
-                }
-            }
-        }
-
         String line = "";
         int index = 0;
         try {
@@ -58,8 +47,7 @@ public class BuildingAvailabilityControl extends Data
         } catch (IOException e) {
             e.printStackTrace();
         }
-        while( line != null )
-        {
+        while( line != null ) {
             String[] buildings = line.split(",");
             try {
                 line = br.readLine();
@@ -80,21 +68,11 @@ public class BuildingAvailabilityControl extends Data
             index++;
         }
 
-
-        buildingRegionRotate = new TextureRegion[5][10][4];
-
+        // Read the texture data from a file, similar to the availability done above here.
         FileHandle buildingTextureRotate = Gdx.files.internal("buildingData/buildingTexture.csv");
         br = new BufferedReader(buildingTextureRotate.reader());
 
-        for( int i = 0; i < buildingRegionRotate.length; i++ )
-        {
-            for( int j = 0; j < buildingRegionRotate[i].length; j++ ) {
-                for( int k = 0; k < buildingRegionRotate[i][j].length; k++ ) {
-                    buildingRegionRotate[i][j][k] = null;
-                }
-            }
-        }
-
+        buildingRegion = new TextureRegion[5][10][4];
         // Re-use previous made variables
         line = "";
         index = 0;
@@ -103,8 +81,7 @@ public class BuildingAvailabilityControl extends Data
         } catch (IOException e) {
             e.printStackTrace();
         }
-        while( line != null )
-        {
+        while( line != null ) {
             String[] textures = line.split(",");
             try {
                 line = br.readLine();
@@ -116,7 +93,11 @@ public class BuildingAvailabilityControl extends Data
                 String tileTexture = textures[i];
                 String[] singleTile = tileTexture.split("; ");
                 for (int j = 0; j < singleTile.length; j++ ) {
-                    buildingRegionRotate[i][index][j] =  atlas.findRegion(singleTile[j]);
+                    if (singleTile.equals("")) {
+                        buildingRegion[i][index][j] = null;
+                    } else {
+                        buildingRegion[i][index][j] = atlas.findRegion(singleTile[j]);
+                    }
                 }
             }
             index++;
@@ -124,27 +105,32 @@ public class BuildingAvailabilityControl extends Data
     }
 
     public void buildingAvailability(Batch batch, Tile buildingTile, int building, int buildingPosition) {
-        batch.draw( buildingRegionRotate[building][buildingPosition][rotation], ((32*rotationX) + buildingTile.getPosition().x), ((32*rotationY) + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, -(90*rotation), false);
+        if (buildingRegion[building][buildingPosition][rotation] != null ) {
+            batch.draw(buildingRegion[building][buildingPosition][rotation], ((32 * rotationX) + buildingTile.getPosition().x), ((32 * rotationY) + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, -(90 * rotation), false);
 
-        if(buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][0])
-                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][0])
-                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][0])
-                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][0])
-                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][0])) {
-            batch.draw( SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-        } else {
-            batch.draw( SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+            if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][0])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][0])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][0])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][0])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][0])) {
+                batch.draw(SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+            } else {
+                batch.draw(SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+            }
         }
     }
 
     public void buttonAvailability(TextButton BuildBuildingButton, Tile buildingTile, int building, int buildingPosition) {
 
-        if(buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][0])
-                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][0])
-                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][0])
-                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][0])
-                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][0])) {
-            BuildBuildingButton.setVisible(false);
+        // We don't need the texture here, but if the texture is null then this tile should not be checked
+        if (buildingRegion[building][buildingPosition][rotation] != null ) {
+            if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][0])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][0])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][0])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][0])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][0])) {
+                BuildBuildingButton.setVisible(false);
+            }
         }
     }
 
@@ -257,14 +243,10 @@ public class BuildingAvailabilityControl extends Data
         }
     }
 
-    public void rotationControl() {
-        rotation++;
+    public void rotationControl(int rotation) {
+        this.rotation = rotation;
 
-        // We have 4 degrees of rotation 0, 1, 2 and 3 if it's 4 we want it to be 0
-        if (rotation == 4) {
-            rotation = 0;
-        }
-
+        // When a building is rotated we want to identify the correct begin point to draw.
         if (rotation == 0) {
             rotationX = -1;
             rotationY = -1;

@@ -52,7 +52,9 @@ public class Inventory {
         {
             if( slots.get(i).getAmount() > 0 )
             {
-                if( slots.get(i).getItem().toString() == item )
+                System.out.println("slots: " + slots.get(i).getItem().toString());
+                System.out.println("item: " + item);
+                if( slots.get(i).getItem().toString().equals(item))
                 {
                     System.out.println("type: " + slots.get(i).getItem().toString() + " amount: " + slots.get(i).getAmount() );
                     return i;

@@ -22,6 +22,7 @@ public class buildInventory {
         slots.get(0).add(Item.values()[6], 1);
         slots.get(1).add(Item.values()[10], 1);
         slots.get(2).add(Item.values()[9], 1);
+        slots.get(3).add(Item.values()[3], 1);
     }
 
     public Array<buildSlot> getSlots() {

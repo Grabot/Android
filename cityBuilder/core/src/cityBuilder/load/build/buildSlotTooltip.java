@@ -66,8 +66,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 
 		TextButton buildButton = null;
 		Label label = null;
-		if( slot.getItem() == Item.values()[6] )
-		{
+		if( slot.getItem() == Item.values()[6] ) {
 			//farm
 			row().fill().expandX();
 			clear();
@@ -87,9 +86,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			row();
 			buildButton = new TextButton( "Create", skin );
 			buildButton.addListener(createListenerFarm);
-		}
-		else if( slot.getItem() == Item.values()[9] )
-		{
+		} else if( slot.getItem() == Item.values()[9] ) {
 			//fisher
 			row().fill().expandX();
 			clear();
@@ -111,9 +108,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 
 			buildButton = new TextButton( "Create", skin );
 			buildButton.addListener(createListenerFisher);
-		}
-		else if( slot.getItem() == Item.values()[10] )
-		{
+		} else if( slot.getItem() == Item.values()[10] ) {
 			//woodcutter
 			row().fill().expandX();
 			clear();
@@ -135,6 +130,28 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 
 			buildButton = new TextButton( "Create", skin );
 			buildButton.addListener(createListenerWoodcutter);
+		} else if( slot.getItem() == Item.values()[3]) {
+			//new warehouse test
+			row().fill().expandX();
+			clear();
+			label = new Label("WareHouse \nResources required: \n", skin);
+
+			logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
+			stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
+
+			add(label);
+			row();
+			add(logIcon);
+			Label amountWood = new Label("x50", skin);
+			add(amountWood);
+			row();
+			add(stoneIcon);
+			Label amountStone = new Label("x20", skin);
+			add( amountStone );
+			row();
+
+			buildButton = new TextButton( "Create", skin );
+			buildButton.addListener(createListenerWareHouse);
 		}
 		add(buildButton);
 		pack();
@@ -184,6 +201,17 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			else
 			{
 				inventory.addItem(inventory.findResourceSlot("woodcutter"), 10);
+			}
+		}
+	};
+
+	public ClickListener createListenerWareHouse = new ClickListener() {
+		@Override
+		public void clicked (InputEvent event, float x, float y) {
+			if (inventory.checkInventoryTest("brick") == -1) {
+				inventory.addItem(inventory.firstEmtpySlot(), 3);
+			} else {
+				inventory.addItem(inventory.findResourceSlot("brick"), 3);
 			}
 		}
 	};

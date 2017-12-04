@@ -111,6 +111,10 @@ public class GameScreen implements Screen
 		simulation.BuildWarehouse();
 	}
 
+	public void buildWarehouse2() {
+		simulation.buildWarehouse2();
+	}
+
 	public void Game_Finished( int level, ArrayList<Citizen> citizens )
 	{
 		game_finished = true;

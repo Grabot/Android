@@ -3,14 +3,12 @@ package cityBuilder.load;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import cityBuilder.enums.TileType;
 import cityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 public class setAttributes extends Data
 {
@@ -68,7 +66,7 @@ public class setAttributes extends Data
 				else
 				{
 					tile[height][width].setAttributes( TileType.grass, available, 0, 2000, 12 );
-					tile[height][width].setOccupied(3, 0);
+					tile[height][width].setOccupied(3, 0, 0);
 				}
 			}
 
