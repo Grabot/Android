@@ -108,11 +108,11 @@ public class BuildingAvailabilityControl extends Data
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
             batch.draw(buildingRegion[building][buildingPosition][rotation], ((32 * rotationX) + buildingTile.getPosition().x), ((32 * rotationY) + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, -(90 * rotation), false);
 
-            if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][0])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][0])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][0])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][0])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][0])) {
+            if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][rotation])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][rotation])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][rotation])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][rotation])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][rotation])) {
                 batch.draw(SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
             } else {
                 batch.draw(SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
@@ -124,11 +124,11 @@ public class BuildingAvailabilityControl extends Data
 
         // We don't need the texture here, but if the texture is null then this tile should not be checked
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
-            if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][0])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][0])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][0])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][0])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][0])) {
+            if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][rotation])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][rotation])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][rotation])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][rotation])
+                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][rotation])) {
                 BuildBuildingButton.setVisible(false);
             }
         }

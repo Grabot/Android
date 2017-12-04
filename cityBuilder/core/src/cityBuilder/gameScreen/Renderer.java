@@ -182,7 +182,7 @@ public class Renderer extends Data
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
 				if( selectedTile >= 0 && selectedTile < numberOfTiles )	{
-					buildingAvailabilityControl.OutlineAvailability( simulation, batch, selectedTile, 3, 0, 16  );
+					buildingAvailabilityControl.OutlineAvailability( simulation, batch, selectedTile, 1, 0, 16  );
 
 					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile), 3, 0);
 					buildingAvailabilityControl.buildingAvailability(batch, simulation.tiles.get(selectedTile+1), 3, 1);
