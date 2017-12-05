@@ -35,24 +35,21 @@ public class SlotTooltip extends Window implements SlotListener
         // title displays the amount
         clear();
         Label label;
-        if( slot.getItem().toString() == "farm" )
-        {
+        if( slot.getItem().toString() == "farm" ) {
             label = new Label("This is a motherfucking \n" + slot.getItem(), skin);
             add(label);
             row();
             TextButton buildFarm = new TextButton("Build", skin );
             buildFarm.addListener(buildFarmListener);
             add(buildFarm);
-        }
-        else if( slot.getItem().toString() == "woodcutter" )
-        {
+        } else if( slot.getItem().toString() == "woodCutter" ) {
             label = new Label("This is a motherfucking \n" + slot.getItem(), skin);
             add(label);
             row();
             TextButton buildWoodCutter = new TextButton("Build", skin );
             buildWoodCutter.addListener(buildWoodCutterListener);
             add(buildWoodCutter);
-        } else if( slot.getItem().toString() == "fishershut" ) {
+        } else if( slot.getItem().toString() == "fisherMan" ) {
             label = new Label("This is THE motherfucking \n" + slot.getItem(), skin);
             add(label);
             row();
@@ -66,6 +63,13 @@ public class SlotTooltip extends Window implements SlotListener
             TextButton buildWarehouse2 = new TextButton("Build", skin );
             buildWarehouse2.addListener(buildWarehouse2Listener);
             add(buildWarehouse2);
+        } else if( slot.getItem().toString().equals("road")) {
+            label = new Label("This is ROOAADD! \n" + slot.getItem(), skin);
+            add(label);
+            row();
+            TextButton buildRoad = new TextButton("Build", skin );
+            buildRoad.addListener(buildRoadListener);
+            add(buildRoad);
         }
         pack();
 
@@ -102,6 +106,13 @@ public class SlotTooltip extends Window implements SlotListener
         @Override
         public void clicked (InputEvent event, float x, float y) {
             game.buildWarehouse2();
+        }
+    };
+
+    public ClickListener buildRoadListener = new ClickListener() {
+        @Override
+        public void clicked (InputEvent event, float x, float y){
+            game.buildRoad();
         }
     };
 

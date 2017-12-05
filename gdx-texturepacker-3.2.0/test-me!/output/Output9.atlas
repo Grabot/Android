@@ -1,9 +1,9 @@
 
-Output6.png
+Output9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-brickResource
+brick
   rotate: false
   xy: 0, 0
   size: 64, 64
@@ -17,65 +17,86 @@ empty
   orig: 64, 64
   offset: 0, 0
   index: -1
-farmResource
+farm
   rotate: false
   xy: 128, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-fishermanResource
+fisherMan
   rotate: false
   xy: 192, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-ironIngotResource
+iron
   rotate: false
   xy: 256, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-ironOreResource
+ironOre
   rotate: false
   xy: 320, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-logsResource
+road
   rotate: false
   xy: 384, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-log_icon2
+roadClear
   rotate: false
   xy: 448, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-planksResource
+stone
   rotate: false
   xy: 512, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-stone
+stoneClear
   rotate: false
   xy: 576, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-stoneResource
+wood
   rotate: false
   xy: 640, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+woodBoard
+  rotate: false
+  xy: 704, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+woodClear
+  rotate: false
+  xy: 768, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+woodCutter
+  rotate: false
+  xy: 832, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

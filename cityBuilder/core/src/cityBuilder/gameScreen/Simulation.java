@@ -3,6 +3,7 @@ package cityBuilder.gameScreen;
 import java.util.ArrayList;
 
 import cityBuilder.gameScreen.buildings.Farm;
+import cityBuilder.gameScreen.buildings.Road;
 import cityBuilder.gameScreen.buildings.Warehouse;
 import cityBuilder.gameScreen.buildings.Warehouse2;
 import cityBuilder.gameScreen.buildings.WoodCutter;
@@ -26,6 +27,7 @@ public class Simulation extends Data {
 	private ArrayList<WoodCutter> woodcutters = new ArrayList<WoodCutter>();
 	private ArrayList<Warehouse> warehouses = new ArrayList<Warehouse>();
 	private ArrayList<Warehouse2> warehouses2 = new ArrayList<Warehouse2>();
+	private ArrayList<Road> roads = new ArrayList<Road>();
 
 	private float width = 0;
 	private float height = 0;
@@ -55,6 +57,7 @@ public class Simulation extends Data {
 	private boolean BuildingWoodCutter = false;
 	private boolean buildingWareHouse = false;
 	private boolean buildingWarehouse2 = false;
+	private boolean buildingRoad = false;
 
 	private int selectedTile = -1;
 
@@ -146,6 +149,10 @@ public class Simulation extends Data {
 
 	public void buildWarehouse2() {
 		buildingWarehouse2 = true;
+	}
+
+	public void buildRoad() {
+		buildingRoad = true;
 	}
 
 	public void BuildingConfirmation( int building, int rotation, int selectedTile )
@@ -245,6 +252,14 @@ public class Simulation extends Data {
 			warehouses2.add(warehouse2);
 
 			buildingWarehouse2 = false;
+		}  else if( building == 5) {
+			// build road
+			inventory.takeItem( "road" );
+
+			Road road = new Road(selectedTile, tiles);
+			roads.add(road);
+
+			buildingRoad = false;
 		}
 	}
 
@@ -354,4 +369,8 @@ public class Simulation extends Data {
 	}
 
 	public boolean getBuildingWarehouse2() { return buildingWarehouse2; }
+
+	public boolean getBuildingRoad() {
+		return buildingRoad;
+	}
 }

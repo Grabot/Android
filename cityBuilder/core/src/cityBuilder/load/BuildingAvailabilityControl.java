@@ -261,4 +261,9 @@ public class BuildingAvailabilityControl extends Data
             rotationY = -1;
         }
     }
+
+    public void buildingControl(TextButton BuildBuildingButton, Batch batch, Tile buildingTile, int building, int buildingPosition) {
+        buildingAvailability(batch, buildingTile, building, buildingPosition);
+        buttonAvailability(BuildBuildingButton, buildingTile, building, buildingPosition);
+    }
 }

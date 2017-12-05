@@ -50,9 +50,9 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 		// title displays the amount
 		// basic layout
 
-		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output7.pack"));
-		final TextureRegion logImage = icons.findRegion("log_icon2");
-		final TextureRegion stoneImage = icons.findRegion("stone");
+		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output9.pack"));
+		final TextureRegion logImage = icons.findRegion("woodClear");
+		final TextureRegion stoneImage = icons.findRegion("stoneClear");
 		final Actor logIcon = new Actor(){
 			public void draw(Batch batch, float alpha){
 				batch.draw(logImage, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
@@ -66,7 +66,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 
 		TextButton buildButton = null;
 		Label label = null;
-		if( slot.getItem() == Item.values()[6] ) {
+		if( slot.getItem() == Item.values()[2] ) {
 			//farm
 			row().fill().expandX();
 			clear();
@@ -86,7 +86,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			row();
 			buildButton = new TextButton( "Create", skin );
 			buildButton.addListener(createListenerFarm);
-		} else if( slot.getItem() == Item.values()[9] ) {
+		} else if( slot.getItem() == Item.values()[3] ) {
 			//fisher
 			row().fill().expandX();
 			clear();
@@ -108,7 +108,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 
 			buildButton = new TextButton( "Create", skin );
 			buildButton.addListener(createListenerFisher);
-		} else if( slot.getItem() == Item.values()[10] ) {
+		} else if( slot.getItem() == Item.values()[13] ) {
 			//woodcutter
 			row().fill().expandX();
 			clear();
@@ -130,7 +130,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 
 			buildButton = new TextButton( "Create", skin );
 			buildButton.addListener(createListenerWoodcutter);
-		} else if( slot.getItem() == Item.values()[3]) {
+		} else if( slot.getItem() == Item.values()[0]) {
 			//new warehouse test
 			row().fill().expandX();
 			clear();
@@ -152,6 +152,28 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 
 			buildButton = new TextButton( "Create", skin );
 			buildButton.addListener(createListenerWareHouse);
+		}  else if( slot.getItem() == Item.values()[6]) {
+			// road
+			row().fill().expandX();
+			clear();
+			label = new Label("ROAD! \nResources required: \n", skin);
+
+			logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
+			stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
+
+			add(label);
+			row();
+			add(logIcon);
+			Label amountWood = new Label("x50", skin);
+			add(amountWood);
+			row();
+			add(stoneIcon);
+			Label amountStone = new Label("x20", skin);
+			add( amountStone );
+			row();
+
+			buildButton = new TextButton( "Create", skin );
+			buildButton.addListener(createListenerRoad);
 		}
 		add(buildButton);
 		pack();
@@ -164,11 +186,11 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 		{
 			if (inventory.checkInventoryTest("farm") == -1 )
 			{
-				inventory.addItem(inventory.firstEmtpySlot(), 6);
+				inventory.addItem(inventory.firstEmtpySlot(), 2);
 			}
 			else
 			{
-				inventory.addItem(inventory.findResourceSlot("farm"), 6);
+				inventory.addItem(inventory.findResourceSlot("farm"), 2);
 			}
 		}
 	};
@@ -178,13 +200,13 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 		@Override
 		public void clicked (InputEvent event, float x, float y)
 		{
-			if (inventory.checkInventoryTest("fishershut") == -1 )
+			if (inventory.checkInventoryTest("fisherMan") == -1 )
 			{
-				inventory.addItem(inventory.firstEmtpySlot(), 9);
+				inventory.addItem(inventory.firstEmtpySlot(), 3);
 			}
 			else
 			{
-				inventory.addItem(inventory.findResourceSlot("fishershut"), 9);
+				inventory.addItem(inventory.findResourceSlot("fisherMan"), 3);
 			}
 		}
 	};
@@ -194,13 +216,13 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 		@Override
 		public void clicked (InputEvent event, float x, float y)
 		{
-			if (inventory.checkInventoryTest("woodcutter") == -1 )
+			if (inventory.checkInventoryTest("woodCutter") == -1 )
 			{
-				inventory.addItem(inventory.firstEmtpySlot(), 10);
+				inventory.addItem(inventory.firstEmtpySlot(), 13);
 			}
 			else
 			{
-				inventory.addItem(inventory.findResourceSlot("woodcutter"), 10);
+				inventory.addItem(inventory.findResourceSlot("woodCutter"), 13);
 			}
 		}
 	};
@@ -209,9 +231,20 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 		@Override
 		public void clicked (InputEvent event, float x, float y) {
 			if (inventory.checkInventoryTest("brick") == -1) {
-				inventory.addItem(inventory.firstEmtpySlot(), 3);
+				inventory.addItem(inventory.firstEmtpySlot(), 0);
 			} else {
-				inventory.addItem(inventory.findResourceSlot("brick"), 3);
+				inventory.addItem(inventory.findResourceSlot("brick"), 0);
+			}
+		}
+	};
+
+	public ClickListener createListenerRoad = new ClickListener() {
+		@Override
+		public void clicked (InputEvent event, float x, float y) {
+			if (inventory.checkInventoryTest("road") == -1) {
+				inventory.addItem(inventory.firstEmtpySlot(), 6);
+			} else {
+				inventory.addItem(inventory.findResourceSlot("road"), 6);
 			}
 		}
 	};
