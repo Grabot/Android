@@ -56,6 +56,12 @@ public class tileInfo extends Window {
 			} else if( building == 4 ) {
 				// warehouse
 				label = new Label( "dit is de warehouse", skin );
+			} else if( building == 5 ) {
+				// warehouse 2!
+				label = new Label("dit is ook een warehouse" , skin );
+			} else if( building == 6 ) {
+				// de weg
+				label = new Label( "dit is een weg", skin );
 			}
 			add(label);
 			create = true;

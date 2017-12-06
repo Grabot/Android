@@ -253,6 +253,8 @@ public class Simulation extends Data {
 
 			buildingWarehouse2 = false;
 		}  else if( building == 5) {
+
+			tiles.get(selectedTile).setOccupied(6, 0, rotation);
 			// build road
 			inventory.takeItem( "road" );
 

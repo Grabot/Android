@@ -38,6 +38,8 @@ public class DrawTiles extends Data
 				} else if (simulation.tiles.get(i).getOccupied() == 5) {
 					// it is another warehouse test
 					simulation.tiles.get(i).drawWarehouse2( batch );
+				} else if (simulation.tiles.get(i).getOccupied() == 6 ) {
+					simulation.tiles.get(i).drawRoads( batch );
 				}
 			}
 		}

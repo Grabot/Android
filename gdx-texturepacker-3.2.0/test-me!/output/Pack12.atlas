@@ -1,123 +1,165 @@
 
-Pack11.png
+Pack12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 coalOreSmall
   rotate: false
-  xy: 1, 133
+  xy: 0, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 cubeDark
   rotate: false
-  xy: 1, 67
+  xy: 0, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 cubeLight
   rotate: false
-  xy: 67, 133
+  xy: 64, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 dirt
   rotate: false
-  xy: 1, 1
+  xy: 64, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 edgeToWaterEdge
   rotate: false
-  xy: 67, 67
+  xy: 128, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 edgeToWaterEdgeSmall
   rotate: false
-  xy: 133, 133
+  xy: 128, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 edgeToWaterFull
   rotate: false
-  xy: 67, 1
+  xy: 192, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 farmHouse
   rotate: false
-  xy: 133, 67
+  xy: 192, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 goldOreSmall
   rotate: false
-  xy: 199, 133
+  xy: 256, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 grass
   rotate: false
-  xy: 133, 1
+  xy: 256, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 ironOreSmall
   rotate: false
-  xy: 199, 67
+  xy: 320, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 pinetree
   rotate: false
-  xy: 265, 133
+  xy: 320, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+roadDouble
+  rotate: false
+  xy: 384, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+roadDoubleForward
+  rotate: false
+  xy: 384, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+roadNo
+  rotate: false
+  xy: 448, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+roadQuadruppel
+  rotate: false
+  xy: 448, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+roadSingle
+  rotate: false
+  xy: 512, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+roadTriple
+  rotate: false
+  xy: 512, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 SquareBlueSmall
   rotate: false
-  xy: 199, 1
+  xy: 576, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 SquareGreenSmall
   rotate: false
-  xy: 265, 67
+  xy: 576, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 SquareGreySmall
   rotate: false
-  xy: 331, 133
+  xy: 640, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 SquareRedSmall
   rotate: false
-  xy: 265, 1
+  xy: 640, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 water
   rotate: false
-  xy: 331, 67
+  xy: 704, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

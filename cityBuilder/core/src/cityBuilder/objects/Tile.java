@@ -5,6 +5,7 @@ import cityBuilder.load.Vector;
 import cityBuilder.objects.attributes.FarmTex;
 import cityBuilder.objects.attributes.Grass;
 import cityBuilder.objects.attributes.Iron;
+import cityBuilder.objects.attributes.RoadTex;
 import cityBuilder.objects.attributes.Shore;
 import cityBuilder.objects.attributes.Stone;
 import cityBuilder.objects.attributes.Warehouse2Tex;
@@ -36,6 +37,7 @@ public class Tile
 	private WoodCutterTex woodcuttertex;
 	private WarehouseTex warehouseTex;
 	private Warehouse2Tex warehouse2Tex;
+	private RoadTex roadTex;
 
 	private TextureAtlas atlas;
 
@@ -101,6 +103,9 @@ public class Tile
 		warehouse2Tex.draw( batch );
 	}
 
+	public void drawRoads( Batch batch ) {
+		roadTex.draw( batch );
+	}
 	public void drawWoods( Batch batch )
 	{
 		wood.draw( batch );
@@ -153,6 +158,8 @@ public class Tile
 			warehouseTex = new WarehouseTex(this, buildingPosition, rotation, atlas);
 		} else if ( occupied == 5 ) {
 			warehouse2Tex = new Warehouse2Tex(this, buildingPosition, rotation, atlas);
+		} else if ( occupied == 6 ) {
+			roadTex = new RoadTex(this, buildingPosition, rotation,atlas);
 		}
 
 	}
