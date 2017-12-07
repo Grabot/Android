@@ -257,11 +257,15 @@ public class Simulation extends Data {
 			tiles.get(selectedTile).setOccupied(6, 0, rotation);
 			// build road
 			inventory.takeItem( "road" );
+			if (inventory.checkInventoryTest("road") == -1) {
+				buildingRoad = false;
+			} else {
+				buildingRoad = true;
+			}
 
 			Road road = new Road(selectedTile, tiles);
 			roads.add(road);
 
-			buildingRoad = false;
 		}
 	}
 
