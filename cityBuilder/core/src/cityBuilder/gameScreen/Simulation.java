@@ -174,87 +174,35 @@ public class Simulation extends Data {
 
 		if( building == 0 )
 		{
-			tiles.get(selectedTile).setOccupied(1, 0, rotation);
-			tiles.get(selectedTile-gridSizeWidth).setOccupied(1, 1, rotation);
-			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(1, 2, rotation);
-			tiles.get(selectedTile+1).setOccupied(1, 3, rotation);
-
-			inventory.takeItem( "farm" );
-
-			Farm farm = new Farm(selectedTile, tiles);
+			Farm farm = new Farm(selectedTile);
+			farm.buildFarm(tiles, selectedTile, rotation);
 			farms.add(farm);
+			inventory.takeItem( "farm" );
 			BuildingFarm = false;
 		} else if( building == 1 ) {
-
-			tiles.get(selectedTile).setOccupied(4, 0, rotation);
-			tiles.get(selectedTile+1).setOccupied(4, 1, rotation);
-			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(4, 2, rotation);
-			tiles.get(selectedTile-(gridSizeWidth)).setOccupied(4, 3, rotation);
-			tiles.get(selectedTile-(gridSizeWidth+1)).setOccupied(4, 4, rotation);
-			tiles.get(selectedTile-1).setOccupied(4, 5, rotation);
-			tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(4, 6, rotation);
-			tiles.get(selectedTile+(gridSizeWidth)).setOccupied(4, 7, rotation);
-			tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(4, 8, rotation);
-
+			Warehouse warehouse = new Warehouse(selectedTile);
+			warehouse.buildWarehouse(tiles, selectedTile, rotation);
 			inventory.takeItem( "fishershut" );
-
-			Warehouse warehouse = new Warehouse(selectedTile, tiles);
 			warehouses.add(warehouse);
 			buildingWareHouse = false;
 		} else if( building == 2 ) {
-			tiles.get(selectedTile).setOccupied(2, 0, rotation);
-			tiles.get(selectedTile-gridSizeWidth).setOccupied(2, 1, rotation);
-			tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(2, 2, rotation);
-			tiles.get(selectedTile+1).setOccupied(2, 3, rotation);
-
+			WoodCutter woodcutter = new WoodCutter(selectedTile);
+			woodcutter.buildWoodcutter(tiles, selectedTile, rotation);
 			inventory.takeItem( "woodcutter" );
-
-			WoodCutter woodcutter = new WoodCutter(selectedTile, tiles);
 			woodcutters.add(woodcutter);
 			BuildingWoodCutter = false;
 		} else if( building == 3) {
 			// this is a tree.
 		} else if( building == 4) {
-
-			// Easy way to only set the correct tiles with the ratation
-			if (rotation == 0) {
-				tiles.get(selectedTile).setOccupied(5, 0, rotation);
-				tiles.get(selectedTile + 1).setOccupied(5, 1, rotation);
-				tiles.get(selectedTile - (gridSizeWidth - 1)).setOccupied(5, 2, rotation);
-				tiles.get(selectedTile - (gridSizeWidth)).setOccupied(5, 3, rotation);
-				tiles.get(selectedTile - (gridSizeWidth + 1)).setOccupied(5, 4, rotation);
-				tiles.get(selectedTile - 1).setOccupied(5, 5, rotation);
-			} else if (rotation == 1) {
-				tiles.get(selectedTile).setOccupied(5, 0, rotation);
-				tiles.get(selectedTile + 1).setOccupied(5, 1, rotation);
-				tiles.get(selectedTile - (gridSizeWidth - 1)).setOccupied(5, 2, rotation);
-				tiles.get(selectedTile - (gridSizeWidth)).setOccupied(5, 3, rotation);
-				tiles.get(selectedTile+(gridSizeWidth)).setOccupied(5, 7, rotation);
-				tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(5, 8, rotation);
-			} else if (rotation == 2) {
-				tiles.get(selectedTile).setOccupied(5, 0, rotation);
-				tiles.get(selectedTile + 1).setOccupied(5, 1, rotation);
-				tiles.get(selectedTile - 1).setOccupied(5, 5, rotation);
-				tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(5, 6, rotation);
-				tiles.get(selectedTile+(gridSizeWidth)).setOccupied(5, 7, rotation);
-				tiles.get(selectedTile+(gridSizeWidth+1)).setOccupied(5, 8, rotation);
-			} else if (rotation == 3) {
-				tiles.get(selectedTile).setOccupied(5, 0, rotation);
-				tiles.get(selectedTile - (gridSizeWidth)).setOccupied(5, 3, rotation);
-				tiles.get(selectedTile - (gridSizeWidth + 1)).setOccupied(5, 4, rotation);
-				tiles.get(selectedTile - 1).setOccupied(5, 5, rotation);
-				tiles.get(selectedTile+(gridSizeWidth-1)).setOccupied(5, 6, rotation);
-				tiles.get(selectedTile+(gridSizeWidth)).setOccupied(5, 7, rotation);
-			}
+			Warehouse2 warehouse2 = new Warehouse2(selectedTile);
+			warehouse2.buildWarehouse2(tiles, selectedTile, rotation);
 			inventory.takeItem( "brick" );
-
-			Warehouse2 warehouse2 = new Warehouse2(selectedTile, tiles);
 			warehouses2.add(warehouse2);
-
 			buildingWarehouse2 = false;
 		}  else if( building == 5) {
 
 			tiles.get(selectedTile).setOccupied(6, 0, rotation);
+			checkRoads();
 			// build road
 			inventory.takeItem( "road" );
 			if (inventory.checkInventoryTest("road") == -1) {
@@ -263,8 +211,16 @@ public class Simulation extends Data {
 				buildingRoad = true;
 			}
 
-			Road road = new Road(selectedTile, tiles);
+			Road road = new Road(selectedTile);
 			roads.add(road);
+
+		}
+	}
+
+	private void checkRoads() {
+		// this is called after a road is placed, it will check all roads and if there are adjacent
+		// road than they will be given an indication using the buildingposition variable
+		for (Road road : roads) {
 
 		}
 	}

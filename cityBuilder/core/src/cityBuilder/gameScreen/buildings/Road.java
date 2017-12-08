@@ -9,12 +9,11 @@ import cityBuilder.objects.Tile;
  */
 
 public class Road {
-    public ArrayList<Tile> tiles = new ArrayList<Tile>();
+
     private int TileNumber = 0;
 
-    public Road( int TileNumber, ArrayList<Tile> tiles )
+    public Road( int TileNumber )
     {
-        this.tiles = tiles;
         this.TileNumber = TileNumber;
     }
 
