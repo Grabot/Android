@@ -12,6 +12,7 @@ import cityBuilder.load.inventory.Inventory;
 import cityBuilder.load.inventory.InventoryActor;
 import cityBuilder.load.tileInfo.tileInfo;
 import cityBuilder.objects.Citizen;
+import cityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -30,8 +31,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Renderer extends Data
 {
-	private  ArrayList<Citizen> citizens = new ArrayList<Citizen>();
-
+	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
+	private ArrayList<Tile> roadSelected = new ArrayList<Tile>();
 	public static final String LOG = Renderer.class.getSimpleName();
 
 	private boolean initialClose = false;
@@ -45,6 +46,7 @@ public class Renderer extends Data
 	private SpriteBatch batch;
 
 	private int selectedTile = -1;
+	private int previousRoadSelected = -1;
 
 	private boolean inventoryOn = false;
 
@@ -175,14 +177,29 @@ public class Renderer extends Data
 					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get((selectedTile + gridSizeWidth) + 1), 3, 8);
 				}
 			}  else if( simulation.getBuildingRoad()) {
+				boolean remove = false;
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
+				if (selectedTile != previousRoadSelected) {
+					previousRoadSelected = selectedTile;
+					for (Tile tile : roadSelected) {
+						if (tile == simulation.tiles.get(selectedTile)) {
+							remove = true;
+						}
+					}
+					if (remove) {
+						roadSelected.remove(simulation.tiles.get(selectedTile));
+					} else {
+						roadSelected.add(simulation.tiles.get(selectedTile));
+					}
+				}
 				if( selectedTile >= 0 && selectedTile < numberOfTiles ) {
 
 					BuildBuildingButton.setVisible(true);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile), 4, 0);
-
+					for (Tile tile : roadSelected) {
+						buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, tile, 4, 0);
+					}
 				}
 			} else {
 				buildingRotationButton.setVisible( false );
@@ -203,7 +220,7 @@ public class Renderer extends Data
 				}
 
 			}
-			inputHandler.MapScroll();
+			inputHandler.MapScroll(simulation.getBuildingRoad());
 			inputHandler.MapZoom();
 
 			if( initialClose ) {
@@ -297,7 +314,7 @@ public class Renderer extends Data
 			} else if( simulation.getBuildingWarehouse2()) {
 				simulation.BuildingConfirmation(4, rotation, selectedTile);
 			} else if( simulation.getBuildingRoad()) {
-				simulation.BuildingConfirmation(5, rotation, selectedTile);
+				simulation.BuildingConfirmationRoad(5, rotation, roadSelected);
 			}
 			inventoryActor.clearLabels();
 		}

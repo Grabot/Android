@@ -52,6 +52,8 @@ public class TouchInput
 	private int overShootX = 2000;
 	private int overShootY = 500;
 
+	private boolean roadTouched = false;
+
 	public TouchInput( OrthographicCamera camera, float width, float height )
 	{
 		this.width = width;
@@ -76,7 +78,7 @@ public class TouchInput
 		this.distance = simulation.getDistance();
 	}
 
-	public void MapScroll()
+	public void MapScroll(boolean buildingRoad)
 	{
 
 		if( touchedDown && firstPress )
@@ -87,18 +89,17 @@ public class TouchInput
 		}
 		else if( touchedDown && !firstPress )
 		{
+			if (!buildingRoad) {
+				offsetX = ((firstX - touchX) * currentZoom);
+				offsetX = MathUtils.clamp(offsetX, (((((width / 2) * currentZoom) - 32) - currentX) - (overShootX * currentZoom)), (((((640 * currentZoom) - 32) - currentX) + mapSizeWidth - (width * currentZoom))) + (overShootX * currentZoom));
 
-			offsetX = ((firstX - touchX)*currentZoom);
-			offsetX = MathUtils.clamp(offsetX, (((((width/2)*currentZoom) - 32 ) - currentX) - (overShootX*currentZoom)), (((((640*currentZoom) - 32 ) - currentX)+mapSizeWidth-(width*currentZoom) )) + (overShootX*currentZoom));
+				offsetY = ((firstY - touchY) * currentZoom);
+				offsetY = MathUtils.clamp(offsetY, -((((mapSizeHeight - ((height / 2) * currentZoom)) - currentY) - 32) + (overShootY * currentZoom)), (-(((((height / 2) * currentZoom) - 32) - currentY)) + (overShootY * currentZoom)));
 
-			offsetY = ((firstY - touchY)*currentZoom);
-			offsetY = MathUtils.clamp(offsetY, -((((mapSizeHeight - ((height/2)*currentZoom))-currentY)-32) + (overShootY*currentZoom)), (-(((((height/2)*currentZoom)-32) - currentY)) + (overShootY*currentZoom)) );
-
-			if( Math.sqrt((offsetX*offsetX + offsetY*offsetY)) >= 20 )
-			{
-				scrolling = true;
+				if (Math.sqrt((offsetX * offsetX + offsetY * offsetY)) >= 20) {
+					scrolling = true;
+				}
 			}
-
 		}
 
 		if( !touchedDown )

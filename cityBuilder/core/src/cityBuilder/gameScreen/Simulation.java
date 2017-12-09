@@ -199,21 +199,23 @@ public class Simulation extends Data {
 			inventory.takeItem( "brick" );
 			warehouses2.add(warehouse2);
 			buildingWarehouse2 = false;
-		}  else if( building == 5) {
+		}
+	}
 
-			tiles.get(selectedTile).setOccupied(6, 0, rotation);
-			checkRoads();
-			// build road
-			inventory.takeItem( "road" );
-			if (inventory.checkInventoryTest("road") == -1) {
-				buildingRoad = false;
-			} else {
-				buildingRoad = true;
+	public void BuildingConfirmationRoad( int building, int rotation,  ArrayList<Tile> roadSelected )
+	{
+  		if( building == 5) {
+
+  			for (Tile tile : roadSelected) {
+				tile.setOccupied(6, 0, rotation);
+				checkRoads();
+				// build road
+				inventory.takeItem("road");
+
+				Road road = new Road(selectedTile);
+				roads.add(road);
 			}
-
-			Road road = new Road(selectedTile);
-			roads.add(road);
-
+			buildingRoad = false;
 		}
 	}
 
