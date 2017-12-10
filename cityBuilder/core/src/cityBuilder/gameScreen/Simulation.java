@@ -8,6 +8,7 @@ import cityBuilder.gameScreen.buildings.Warehouse;
 import cityBuilder.gameScreen.buildings.Warehouse2;
 import cityBuilder.gameScreen.buildings.WoodCutter;
 import cityBuilder.load.Data;
+import cityBuilder.load.Item;
 import cityBuilder.load.build.buildActor;
 import cityBuilder.load.build.buildInventory;
 import cityBuilder.load.inventory.Inventory;
@@ -336,5 +337,9 @@ public class Simulation extends Data {
 
 	public boolean getBuildingRoad() {
 		return buildingRoad;
+	}
+
+	public int getRoadSize() {
+		return inventory.checkInventory(Item.road);
 	}
 }

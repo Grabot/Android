@@ -47,6 +47,7 @@ public class Renderer extends Data
 
 	private int selectedTile = -1;
 	private int previousRoadSelected = -1;
+	private boolean trueRoadSelectionPress = false;
 
 	private boolean inventoryOn = false;
 
@@ -181,19 +182,26 @@ public class Renderer extends Data
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
-				if (selectedTile != previousRoadSelected) {
-					previousRoadSelected = selectedTile;
-					for (Tile tile : roadSelected) {
-						if (tile == simulation.tiles.get(selectedTile)) {
-							remove = true;
+				// ugly way to ensure that the selected tile is selected by the user. It will
+				// give a single frame different tile selection. This will ignore that situation
+				if (trueRoadSelectionPress) {
+					if (selectedTile != previousRoadSelected) {
+						previousRoadSelected = selectedTile;
+						for (Tile tile : roadSelected) {
+							if (tile == simulation.tiles.get(selectedTile)) {
+								remove = true;
+							}
+						}
+						if (remove) {
+							roadSelected.remove(simulation.tiles.get(selectedTile));
+						} else {
+							if (roadSelected.size() < simulation.getRoadSize()) {
+								roadSelected.add(simulation.tiles.get(selectedTile));
+							}
 						}
 					}
-					if (remove) {
-						roadSelected.remove(simulation.tiles.get(selectedTile));
-					} else {
-						roadSelected.add(simulation.tiles.get(selectedTile));
-					}
 				}
+				trueRoadSelectionPress = true;
 				if( selectedTile >= 0 && selectedTile < numberOfTiles ) {
 
 					BuildBuildingButton.setVisible(true);
@@ -207,6 +215,7 @@ public class Renderer extends Data
 				BuildBuildingButton.setVisible( false );
 				touchedBox = simulation.touchedInfobox(tileinfo.getX(), tileinfo.getY(), tileinfo.getWidth(), tileinfo.getHeight());
 				this.selectedTile = simulation.TileTouch();
+
 
 				if( (selectedTile >= 0) && (selectedTile < numberOfTiles) ) {
 					if(!touchedBox) {
@@ -222,6 +231,10 @@ public class Renderer extends Data
 			}
 			inputHandler.MapScroll(simulation.getBuildingRoad());
 			inputHandler.MapZoom();
+
+			if (!simulation.getTouchedDown()) {
+				trueRoadSelectionPress = false;
+			}
 
 			if( initialClose ) {
 				initialClose = false;
