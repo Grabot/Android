@@ -1,11 +1,11 @@
 package cityBuilder.objects;
 
 import cityBuilder.enums.TileType;
+import cityBuilder.gameScreen.buildings.Road;
 import cityBuilder.load.Vector;
 import cityBuilder.objects.attributes.FarmTex;
 import cityBuilder.objects.attributes.Grass;
 import cityBuilder.objects.attributes.Iron;
-import cityBuilder.objects.attributes.RoadTex;
 import cityBuilder.objects.attributes.Shore;
 import cityBuilder.objects.attributes.Stone;
 import cityBuilder.objects.attributes.Warehouse2Tex;
@@ -37,7 +37,7 @@ public class Tile
 	private WoodCutterTex woodcuttertex;
 	private WarehouseTex warehouseTex;
 	private Warehouse2Tex warehouse2Tex;
-	private RoadTex roadTex;
+	private Road road;
 
 	private TextureAtlas atlas;
 
@@ -104,8 +104,9 @@ public class Tile
 	}
 
 	public void drawRoads( Batch batch ) {
-		roadTex.draw( batch );
+		road.render( batch );
 	}
+
 	public void drawWoods( Batch batch )
 	{
 		wood.draw( batch );
@@ -139,6 +140,12 @@ public class Tile
 		return occupied;
 	}
 
+	public void setOccupiedRoad(int occupied, int buildingPosition, Road road) {
+		this.occupied = occupied;
+		this.buildingPosition = buildingPosition;
+		this.road = road;
+	}
+
 	public void setOccupied(int occupied, int buildingPosition, int rotation) {
 
 		this.occupied = occupied;
@@ -158,8 +165,6 @@ public class Tile
 			warehouseTex = new WarehouseTex(this, buildingPosition, rotation, atlas);
 		} else if ( occupied == 5 ) {
 			warehouse2Tex = new Warehouse2Tex(this, buildingPosition, rotation, atlas);
-		} else if ( occupied == 6 ) {
-			roadTex = new RoadTex(this, buildingPosition, rotation,atlas);
 		}
 
 	}

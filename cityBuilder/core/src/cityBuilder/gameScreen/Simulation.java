@@ -17,6 +17,7 @@ import cityBuilder.objects.Citizen;
 import cityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Simulation extends Data {
 	private Citizen[] citizen = new Citizen[100];
@@ -73,14 +74,15 @@ public class Simulation extends Data {
 
 	private Inventory inventory;
 	private InventoryActor inventoryActor;
+	private TextureAtlas atlas;
 
-	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor, buildInventory builder, buildActor actor, ArrayList<Citizen> citizens, ArrayList<Tile> tiles ) {
+	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor, buildInventory builder, buildActor actor, ArrayList<Citizen> citizens, ArrayList<Tile> tiles, TextureAtlas atlas ) {
 		this.tiles = tiles;
 		this.game = game;
 		this.citizens = citizens;
 		this.inventory = inventory;
 		this.inventoryActor = inventoryActor;
-
+		this.atlas = atlas;
 		populate();
 	}
 
@@ -203,18 +205,23 @@ public class Simulation extends Data {
 		}
 	}
 
-	public void BuildingConfirmationRoad( int building, int rotation,  ArrayList<Tile> roadSelected )
+	public void BuildingConfirmationRoad( int building, int rotation, ArrayList<Tile> roadSelected )
 	{
   		if( building == 5) {
 
   			for (Tile tile : roadSelected) {
-				tile.setOccupied(6, 0, rotation);
+				Tile[] otherTiles = new Tile[4];
+				otherTiles[0] = tiles.get(selectedTile-1);
+				otherTiles[1] = tiles.get(selectedTile+1);
+				otherTiles[2] = tiles.get(selectedTile - gridSizeWidth);
+				otherTiles[3] = tiles.get(selectedTile + gridSizeWidth);
+
+				Road road = new Road(tile.getPosition().x, tile.getPosition().y, rotation, otherTiles, atlas);
+				tile.setOccupiedRoad(6, 0, road);
+				roads.add(road);
 				checkRoads();
 				// build road
 				inventory.takeItem("road");
-
-				Road road = new Road(selectedTile);
-				roads.add(road);
 			}
 			buildingRoad = false;
 		}

@@ -80,7 +80,7 @@ public class GameScreen implements Screen
 		tileLoad = new TilesLoad(atlas);
 		tiles = tileLoad.getTiles();
 
-		simulation = new Simulation( this, inventory, inventoryActor, buildInv, builder, citizens, tiles );
+		simulation = new Simulation( this, inventory, inventoryActor, buildInv, builder, citizens, tiles, atlas );
 		renderer = new Renderer( this, camera, stage, batch, atlas, inventory, inventoryActor, buildInv, builder, tileinfo, citizens );
 	}
 

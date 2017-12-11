@@ -328,6 +328,7 @@ public class Renderer extends Data
 				simulation.BuildingConfirmation(4, rotation, selectedTile);
 			} else if( simulation.getBuildingRoad()) {
 				simulation.BuildingConfirmationRoad(5, rotation, roadSelected);
+				roadSelected.clear();
 			}
 			inventoryActor.clearLabels();
 		}
