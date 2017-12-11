@@ -142,7 +142,7 @@ public class GameScreen implements Screen
 	@Override
 	public void render( Application app )
 	{
-		renderer.DrawImages( simulation );
+		renderer.render( simulation );
 	}
 
 	@Override

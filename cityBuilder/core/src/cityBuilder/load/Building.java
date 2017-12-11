@@ -9,7 +9,7 @@ import cityBuilder.objects.Tile;
 
 public interface Building {
 
-    void render( Batch batch );
+    void render( Batch batch, int buildingPosition, float x, float y );
 
     void update();
 

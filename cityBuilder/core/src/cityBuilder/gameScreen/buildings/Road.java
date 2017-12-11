@@ -13,14 +13,12 @@ import cityBuilder.objects.Tile;
 public class Road implements Building {
 
     private TextureRegion SquareTileRegionRoad;
-    private float x;
-    private float y;
     private int rotation;
+    private int TileNumber;
 
-    public Road(float x, float y, int rotation, Tile[] otherTiles, TextureAtlas atlas) {
-        this.x = x;
-        this.y = y;
+    public Road(int TileNumber, int rotation, Tile[] otherTiles, TextureAtlas atlas) {
         this.rotation = rotation;
+        this.TileNumber = TileNumber;
         if (otherTiles[0].getOccupied() == 6 ) {
             SquareTileRegionRoad = atlas.findRegion("roadSingle");
         } else {
@@ -29,7 +27,7 @@ public class Road implements Building {
     }
 
     @Override
-    public void render(Batch batch) {
+    public void render(Batch batch, int buildingPosition, float x, float y) {
         batch.draw( SquareTileRegionRoad, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90*rotation), false);
     }
 
@@ -40,6 +38,6 @@ public class Road implements Building {
 
     @Override
     public void buildBuilding(ArrayList<Tile> tiles, int selectedTile, int rotation) {
-
+        // not usefull for roads.
     }
 }

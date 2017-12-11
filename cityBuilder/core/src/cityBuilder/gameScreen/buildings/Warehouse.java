@@ -1,7 +1,10 @@
 package cityBuilder.gameScreen.buildings;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 import java.util.ArrayList;
 
+import cityBuilder.load.Building;
 import cityBuilder.load.Data;
 import cityBuilder.objects.Tile;
 
@@ -9,7 +12,7 @@ import cityBuilder.objects.Tile;
  * Created by User on 10/29/2017.
  */
 
-public class Warehouse extends Data {
+public class Warehouse extends Data implements Building {
 
     Tile[] warehouseTiles;
     private int TileNumber = 0;
@@ -20,12 +23,17 @@ public class Warehouse extends Data {
         this.TileNumber = TileNumber;
     }
 
+    @Override
+    public void render(Batch batch, int buildingPosition, float x, float y) {
+
+    }
+
     public void update()
     {
     }
 
-    public void buildWarehouse(ArrayList<Tile> tiles, int selectedTile, int rotation) {
-
+    @Override
+    public void buildBuilding(ArrayList<Tile> tiles, int selectedTile, int rotation) {
         tiles.get(selectedTile).setOccupied(4, 0, rotation);
         tiles.get(selectedTile+1).setOccupied(4, 1, rotation);
         tiles.get(selectedTile-(gridSizeWidth-1)).setOccupied(4, 2, rotation);
@@ -45,6 +53,9 @@ public class Warehouse extends Data {
         warehouseTiles[6] = tiles.get(selectedTile+(gridSizeWidth-1));
         warehouseTiles[7] = tiles.get(selectedTile+(gridSizeWidth));
         warehouseTiles[8] = tiles.get(selectedTile+(gridSizeWidth+1));
+    }
+
+    public void buildWarehouse(ArrayList<Tile> tiles, int selectedTile, int rotation) {
     }
 
 }

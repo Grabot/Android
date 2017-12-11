@@ -1,9 +1,10 @@
 package cityBuilder.objects;
 
 import cityBuilder.enums.TileType;
+import cityBuilder.gameScreen.buildings.Farm;
 import cityBuilder.gameScreen.buildings.Road;
+import cityBuilder.gameScreen.buildings.WoodCutter;
 import cityBuilder.load.Vector;
-import cityBuilder.objects.attributes.FarmTex;
 import cityBuilder.objects.attributes.Grass;
 import cityBuilder.objects.attributes.Iron;
 import cityBuilder.objects.attributes.Shore;
@@ -12,7 +13,6 @@ import cityBuilder.objects.attributes.Warehouse2Tex;
 import cityBuilder.objects.attributes.WarehouseTex;
 import cityBuilder.objects.attributes.Water;
 import cityBuilder.objects.attributes.Wood;
-import cityBuilder.objects.attributes.WoodCutterTex;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -33,8 +33,8 @@ public class Tile
 	private Iron iron;
 	private Stone stone;
 	private Wood wood;
-	private FarmTex farmtex;
-	private WoodCutterTex woodcuttertex;
+	private Farm farm;
+	private WoodCutter woodCutter;
 	private WarehouseTex warehouseTex;
 	private Warehouse2Tex warehouse2Tex;
 	private Road road;
@@ -85,14 +85,12 @@ public class Tile
 		}
 	}
 
-	public void drawFarm( Batch batch )
-	{
-		farmtex.draw( batch );
+	public void drawFarm( Batch batch ) {
+		farm.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y );
 	}
 
-	public void drawWoodCutter( Batch batch )
-	{
-		woodcuttertex.draw( batch );
+	public void drawWoodCutter( Batch batch ) {
+		woodCutter.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y );
 	}
 
 	public void drawWarehouse( Batch batch ) {
@@ -104,7 +102,7 @@ public class Tile
 	}
 
 	public void drawRoads( Batch batch ) {
-		road.render( batch );
+		road.render( batch, 0, this.getPosition().x, this.getPosition().y );
 	}
 
 	public void drawWoods( Batch batch )
@@ -146,18 +144,24 @@ public class Tile
 		this.road = road;
 	}
 
+	public void setOccupiedFarm(int buildingPosition, Farm farm) {
+		this.occupied = 1;
+		this.buildingPosition = buildingPosition;
+		this.farm = farm;
+	}
+
+	public void setOccupiedWoodCutter(int buildingPosition, WoodCutter woodCutter) {
+		this.occupied = 2;
+		this.buildingPosition = buildingPosition;
+		this.woodCutter = woodCutter;
+	}
+
 	public void setOccupied(int occupied, int buildingPosition, int rotation) {
 
 		this.occupied = occupied;
 		this.buildingPosition = buildingPosition;
 
-		if( occupied == 1 ) {
-			// farm
-			farmtex = new FarmTex( this, buildingPosition, rotation, atlas );
-		} else if( occupied == 2 ) {
-			// wood cutter
-			woodcuttertex = new WoodCutterTex( this, buildingPosition, rotation, atlas );
-		} else if( occupied == 3 ) {
+		if( occupied == 3 ) {
 			// woods
 			wood = new Wood(this, buildingPosition, rotation, atlas);
 		} else if ( occupied == 4 ) {

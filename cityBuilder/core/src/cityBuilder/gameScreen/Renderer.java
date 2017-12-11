@@ -108,7 +108,7 @@ public class Renderer extends Data
 		drawStage();
 	}
 
-	public void DrawImages( Simulation simulation )
+	public void render(Simulation simulation )
 	{
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );

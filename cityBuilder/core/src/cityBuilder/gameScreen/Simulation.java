@@ -177,21 +177,21 @@ public class Simulation extends Data {
 
 		if( building == 0 )
 		{
-			Farm farm = new Farm(selectedTile);
-			farm.buildFarm(tiles, selectedTile, rotation);
+			Farm farm = new Farm(selectedTile, rotation, atlas);
+			farm.buildBuilding(tiles, selectedTile, rotation);
 			farms.add(farm);
 			inventory.takeItem( "farm" );
 			BuildingFarm = false;
 		} else if( building == 1 ) {
 			Warehouse warehouse = new Warehouse(selectedTile);
-			warehouse.buildWarehouse(tiles, selectedTile, rotation);
+			warehouse.buildBuilding(tiles, selectedTile, rotation);
 			inventory.takeItem( "fishershut" );
 			warehouses.add(warehouse);
 			buildingWareHouse = false;
 		} else if( building == 2 ) {
-			WoodCutter woodcutter = new WoodCutter(selectedTile);
-			woodcutter.buildWoodcutter(tiles, selectedTile, rotation);
-			inventory.takeItem( "woodcutter" );
+			WoodCutter woodcutter = new WoodCutter(selectedTile, rotation, atlas);
+			woodcutter.buildBuilding(tiles, selectedTile, rotation);
+			inventory.takeItem( "woodCutter" );
 			woodcutters.add(woodcutter);
 			BuildingWoodCutter = false;
 		} else if( building == 3) {
@@ -208,7 +208,6 @@ public class Simulation extends Data {
 	public void BuildingConfirmationRoad( int building, int rotation, ArrayList<Tile> roadSelected )
 	{
   		if( building == 5) {
-
   			for (Tile tile : roadSelected) {
 				Tile[] otherTiles = new Tile[4];
 				otherTiles[0] = tiles.get(selectedTile-1);
@@ -216,7 +215,7 @@ public class Simulation extends Data {
 				otherTiles[2] = tiles.get(selectedTile - gridSizeWidth);
 				otherTiles[3] = tiles.get(selectedTile + gridSizeWidth);
 
-				Road road = new Road(tile.getPosition().x, tile.getPosition().y, rotation, otherTiles, atlas);
+				Road road = new Road(selectedTile, rotation, otherTiles, atlas);
 				tile.setOccupiedRoad(6, 0, road);
 				roads.add(road);
 				checkRoads();
