@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import cityBuilder.gameScreen.buildings.Farm;
 import cityBuilder.gameScreen.buildings.Road;
 import cityBuilder.gameScreen.buildings.Warehouse;
-import cityBuilder.gameScreen.buildings.Warehouse2;
 import cityBuilder.gameScreen.buildings.WoodCutter;
 import cityBuilder.load.Data;
 import cityBuilder.load.Item;
@@ -28,7 +27,6 @@ public class Simulation extends Data {
 	private ArrayList<Farm> farms = new ArrayList<Farm>();
 	private ArrayList<WoodCutter> woodcutters = new ArrayList<WoodCutter>();
 	private ArrayList<Warehouse> warehouses = new ArrayList<Warehouse>();
-	private ArrayList<Warehouse2> warehouses2 = new ArrayList<Warehouse2>();
 	private ArrayList<Road> roads = new ArrayList<Road>();
 
 	private float width = 0;
@@ -196,12 +194,6 @@ public class Simulation extends Data {
 			BuildingWoodCutter = false;
 		} else if( building == 3) {
 			// this is a tree.
-		} else if( building == 4) {
-			Warehouse2 warehouse2 = new Warehouse2(selectedTile);
-			warehouse2.buildWarehouse2(tiles, selectedTile, rotation);
-			inventory.takeItem( "brick" );
-			warehouses2.add(warehouse2);
-			buildingWarehouse2 = false;
 		}
 	}
 
