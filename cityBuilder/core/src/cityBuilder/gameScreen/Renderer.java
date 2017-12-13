@@ -47,6 +47,7 @@ public class Renderer extends Data
 
 	private int selectedTile = -1;
 	private int previousRoadSelected = -1;
+	private int previousWarehouseSelected = -1;
 	private boolean trueRoadSelectionPress = false;
 
 	private boolean inventoryOn = false;
@@ -145,6 +146,27 @@ public class Renderer extends Data
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
 				this.selectedTile = simulation.TileTouch();
+				if (previousWarehouseSelected != selectedTile) {
+					previousWarehouseSelected = selectedTile;
+					// check all possible rotations, so 4 different possibilities.
+					for (int i = 0; i < 4; i++ ) {
+						boolean available = true;
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile), 0, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile + 1), 1, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile - gridSizeWidth) + 1), 2, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile - gridSizeWidth), 3, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile - gridSizeWidth) - 1), 4, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile - 1), 5, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile + gridSizeWidth) - 1), 6, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile + gridSizeWidth)), 7, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile + gridSizeWidth) + 1), 8, 3);
+
+						if (available) {
+							break;
+						}
+						rotate();
+					}
+				}
 				if( selectedTile >= 0 && selectedTile < numberOfTiles ) {
 
 					buildingAvailabilityControl.OutlineAvailability(simulation, batch, selectedTile, 1, 0, 16);
@@ -305,7 +327,7 @@ public class Renderer extends Data
 			} else if( simulation.getBuildingWoodCutter() ) {
 				simulation.BuildingConfirmation(2, rotation, selectedTile);
 			}else if( simulation.getBuildingRoad()) {
-				simulation.BuildingConfirmationRoad(5, rotation, roadSelected);
+				simulation.BuildingConfirmationRoad(rotation, roadSelected);
 				roadSelected.clear();
 			}
 			inventoryActor.clearLabels();
@@ -315,16 +337,19 @@ public class Renderer extends Data
 	public ClickListener buildingRotationListener = new ClickListener() {
 		@Override
 		public void clicked (InputEvent event, float x, float y) {
-			rotation ++;
-			// We have 4 degrees of rotation 0, 1, 2 and 3 if it's 4 we want it to be 0
-			if (rotation == 4) {
-				rotation = 0;
-			}
-
-			buildingAvailabilityControl.rotationControl(rotation);
+			rotate();
 		}
 	};
 
+	private void rotate() {
+		rotation ++;
+		// We have 4 degrees of rotation 0, 1, 2 and 3 if it's 4 we want it to be 0
+		if (rotation == 4) {
+			rotation = 0;
+		}
+
+		buildingAvailabilityControl.rotationControl(rotation);
+	}
 	public void dispose()
 	{
 		stage.clear();

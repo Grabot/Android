@@ -108,11 +108,7 @@ public class BuildingAvailabilityControl extends Data
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
             batch.draw(buildingRegion[building][buildingPosition][rotation], ((32 * rotationX) + buildingTile.getPosition().x), ((32 * rotationY) + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, -(90 * rotation), false);
 
-            if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][rotation])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][rotation])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][rotation])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][rotation])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][rotation])) {
+            if (generalAvailability(buildingTile, building, buildingPosition)) {
                 batch.draw(SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
             } else {
                 batch.draw(SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
@@ -124,14 +120,22 @@ public class BuildingAvailabilityControl extends Data
 
         // We don't need the texture here, but if the texture is null then this tile should not be checked
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
-            if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][rotation])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][rotation])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][rotation])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][rotation])
-                    || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][rotation])) {
+            if (generalAvailability(buildingTile, building, buildingPosition)) {
                 BuildBuildingButton.setVisible(false);
             }
         }
+    }
+
+    private boolean generalAvailability(Tile buildingTile, int building, int buildingPosition) {
+
+        if (buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][0][rotation])
+                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][1][rotation])
+                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][2][rotation])
+                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][3][rotation])
+                || buildingTile.getType().toString().equals(buildingAvailability[building][buildingPosition][4][rotation])) {
+            return true;
+        }
+        return false;
     }
 
     private boolean[][] defineCircle(boolean[][] grid, int centerX, int centerY, int radius) {
@@ -265,5 +269,21 @@ public class BuildingAvailabilityControl extends Data
     public void buildingControl(TextButton BuildBuildingButton, Batch batch, Tile buildingTile, int building, int buildingPosition) {
         buildingAvailability(batch, buildingTile, building, buildingPosition);
         buttonAvailability(BuildBuildingButton, buildingTile, building, buildingPosition);
+    }
+
+    public boolean checkRotationPossibility(boolean available, int rotation, Tile buildingTile, int buildingPosition, int building) {
+        int testRotation = rotation;
+        // With this way, we can have rotation above 4, we will change it to be the correct rotation with the simple check.
+        if( rotation >= 4 ) {
+            testRotation = rotation%4;
+        }
+
+        // We don't need the texture here, but if the texture is null then this tile should not be checked
+        if (buildingRegion[building][buildingPosition][testRotation] != null ) {
+            if (generalAvailability(buildingTile, building, buildingPosition)) {
+                available = false;
+            }
+        }
+        return available;
     }
 }

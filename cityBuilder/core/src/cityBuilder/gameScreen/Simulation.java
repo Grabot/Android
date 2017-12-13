@@ -173,8 +173,7 @@ public class Simulation extends Data {
 			selectedTile = (selectedTile-1);
 		}
 
-		if( building == 0 )
-		{
+		if( building == 0 ) {
 			Farm farm = new Farm(selectedTile, rotation, atlas);
 			farm.buildBuilding(tiles, selectedTile, rotation);
 			farms.add(farm);
@@ -197,25 +196,23 @@ public class Simulation extends Data {
 		}
 	}
 
-	public void BuildingConfirmationRoad( int building, int rotation, ArrayList<Tile> roadSelected )
+	public void BuildingConfirmationRoad( int rotation, ArrayList<Tile> roadSelected )
 	{
-  		if( building == 5) {
-  			for (Tile tile : roadSelected) {
-				Tile[] otherTiles = new Tile[4];
-				otherTiles[0] = tiles.get(selectedTile-1);
-				otherTiles[1] = tiles.get(selectedTile+1);
-				otherTiles[2] = tiles.get(selectedTile - gridSizeWidth);
-				otherTiles[3] = tiles.get(selectedTile + gridSizeWidth);
+		for (Tile tile : roadSelected) {
+			Tile[] otherTiles = new Tile[4];
+			otherTiles[0] = tiles.get(selectedTile-1);
+			otherTiles[1] = tiles.get(selectedTile+1);
+			otherTiles[2] = tiles.get(selectedTile - gridSizeWidth);
+			otherTiles[3] = tiles.get(selectedTile + gridSizeWidth);
 
-				Road road = new Road(selectedTile, rotation, otherTiles, atlas);
-				tile.setOccupiedRoad(0, road);
-				roads.add(road);
-				checkRoads();
-				// build road
-				inventory.takeItem("road");
-			}
-			buildingRoad = false;
+			Road road = new Road(selectedTile, rotation, otherTiles, atlas);
+			tile.setOccupiedRoad(0, road);
+			roads.add(road);
+			checkRoads();
+			// build road
+			inventory.takeItem("road");
 		}
+		buildingRoad = false;
 	}
 
 	private void checkRoads() {
