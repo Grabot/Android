@@ -3,6 +3,7 @@ package cityBuilder.objects;
 import cityBuilder.enums.TileType;
 import cityBuilder.gameScreen.buildings.Farm;
 import cityBuilder.gameScreen.buildings.Road;
+import cityBuilder.gameScreen.buildings.Warehouse;
 import cityBuilder.gameScreen.buildings.WoodCutter;
 import cityBuilder.load.Vector;
 import cityBuilder.objects.attributes.Grass;
@@ -35,8 +36,7 @@ public class Tile
 	private Wood wood;
 	private Farm farm;
 	private WoodCutter woodCutter;
-	private WarehouseTex warehouseTex;
-	private Warehouse2Tex warehouse2Tex;
+	private Warehouse warehouse;
 	private Road road;
 
 	private TextureAtlas atlas;
@@ -94,11 +94,7 @@ public class Tile
 	}
 
 	public void drawWarehouse( Batch batch ) {
-		warehouseTex.draw( batch );
-	}
-
-	public void drawWarehouse2( Batch batch ) {
-		warehouse2Tex.draw( batch );
+		warehouse.render( batch, 0, this.getPosition().x, this.getPosition().y );
 	}
 
 	public void drawRoads( Batch batch ) {
@@ -138,8 +134,8 @@ public class Tile
 		return occupied;
 	}
 
-	public void setOccupiedRoad(int occupied, int buildingPosition, Road road) {
-		this.occupied = occupied;
+	public void setOccupiedRoad(int buildingPosition, Road road) {
+		this.occupied = 6;
 		this.buildingPosition = buildingPosition;
 		this.road = road;
 	}
@@ -156,6 +152,12 @@ public class Tile
 		this.woodCutter = woodCutter;
 	}
 
+	public void setOccupiedWarehouse(int buildingPosition, Warehouse warehouse) {
+		this.occupied = 5;
+		this.buildingPosition = buildingPosition;
+		this.warehouse = warehouse;
+	}
+
 	public void setOccupied(int occupied, int buildingPosition, int rotation) {
 
 		this.occupied = occupied;
@@ -164,11 +166,6 @@ public class Tile
 		if( occupied == 3 ) {
 			// woods
 			wood = new Wood(this, buildingPosition, rotation, atlas);
-		} else if ( occupied == 4 ) {
-			// warehouse
-			warehouseTex = new WarehouseTex(this, buildingPosition, rotation, atlas);
-		} else if ( occupied == 5 ) {
-			warehouse2Tex = new Warehouse2Tex(this, buildingPosition, rotation, atlas);
 		}
 
 	}

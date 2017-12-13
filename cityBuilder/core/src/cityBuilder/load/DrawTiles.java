@@ -32,13 +32,10 @@ public class DrawTiles extends Data
 				} else if( simulation.tiles.get(i).getOccupied() == 3 ) {
 					// it is woods
 					simulation.tiles.get(i).drawWoods( batch );
-				} else if (simulation.tiles.get(i).getOccupied() == 4 ) {
+				} else if (simulation.tiles.get(i).getOccupied() == 5 ) {
 					// it is warehouse
 					simulation.tiles.get(i).drawWarehouse( batch );
-				} else if (simulation.tiles.get(i).getOccupied() == 5) {
-					// it is another warehouse test
-					simulation.tiles.get(i).drawWarehouse2( batch );
-				} else if (simulation.tiles.get(i).getOccupied() == 6 ) {
+				}else if (simulation.tiles.get(i).getOccupied() == 6 ) {
 					simulation.tiles.get(i).drawRoads( batch );
 				}
 			}

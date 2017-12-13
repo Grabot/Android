@@ -181,9 +181,9 @@ public class Simulation extends Data {
 			inventory.takeItem( "farm" );
 			BuildingFarm = false;
 		} else if( building == 1 ) {
-			Warehouse warehouse = new Warehouse(selectedTile);
+			Warehouse warehouse = new Warehouse(selectedTile, rotation, atlas);
 			warehouse.buildBuilding(tiles, selectedTile, rotation);
-			inventory.takeItem( "fishershut" );
+			inventory.takeItem( "fisherMan" );
 			warehouses.add(warehouse);
 			buildingWareHouse = false;
 		} else if( building == 2 ) {
@@ -208,7 +208,7 @@ public class Simulation extends Data {
 				otherTiles[3] = tiles.get(selectedTile + gridSizeWidth);
 
 				Road road = new Road(selectedTile, rotation, otherTiles, atlas);
-				tile.setOccupiedRoad(6, 0, road);
+				tile.setOccupiedRoad(0, road);
 				roads.add(road);
 				checkRoads();
 				// build road
