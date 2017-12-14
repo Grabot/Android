@@ -150,8 +150,7 @@ public class Renderer extends Data
 					previousWarehouseSelected = selectedTile;
 					// check all possible rotations, so 4 different possibilities.
 					for (int i = 0; i < 4; i++ ) {
-						boolean available = true;
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile), 0, 3);
+						boolean available = buildingAvailabilityControl.checkRotationPossibility(true, rotation, simulation.tiles.get(selectedTile), 0, 3);
 						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile + 1), 1, 3);
 						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile - gridSizeWidth) + 1), 2, 3);
 						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile - gridSizeWidth), 3, 3);

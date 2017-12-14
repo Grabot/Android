@@ -21,21 +21,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\User\Documents\Github\Android\Android\cityBuilder\core\build\libs\core-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="76797248ed393ea1d1ab4e369fb5944f38112038">
+        <dex dex="C:\Users\User\Documents\Github\Android\Android\cityBuilder\android\build\intermediates\pre-dexed\debug\core-1.0_de49db18b18c2b14b97fcaa117631f6a8fdebb98.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\User\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.6.5\b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d\gdx-1.6.5.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d">
         <dex dex="C:\Users\User\Documents\Github\Android\Android\cityBuilder\android\build\intermediates\pre-dexed\debug\gdx-1.6.5_512f6b0fed96abf7de2d168e49ac8161b024ecc4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\User\Documents\Github\Android\Android\cityBuilder\core\build\libs\core-1.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0a5179999b1c977d27bbef333e5c8dec0f466fe3">
-        <dex dex="C:\Users\User\Documents\Github\Android\Android\cityBuilder\android\build\intermediates\pre-dexed\debug\core-1.0_de49db18b18c2b14b97fcaa117631f6a8fdebb98.jar" />
     </item>
 
 </items>
