@@ -41,8 +41,6 @@ public class Tile
 
 	private TextureAtlas atlas;
 
-	private String name = "";
-
 	public Tile( Vector position, TextureAtlas atlas )
 	{
 		this.position.set( position );
@@ -180,13 +178,4 @@ public class Tile
 	{
 		return buildingPosition;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 }

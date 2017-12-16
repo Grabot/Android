@@ -46,14 +46,18 @@ public class Renderer extends Data
 	private SpriteBatch batch;
 
 	private int selectedTile = -1;
-	private int previousRoadSelected = -1;
-	private int previousWarehouseSelected = -1;
+	private int x = -1;
+	private int y = -1;
+	private int previousRoadX = -1;
+	private int previousRoadY = -1;
+	private int previousWarehouseX = -1;
+	private int previousWarehouseY = -1;
 	private boolean trueRoadSelectionPress = false;
 
 	private boolean inventoryOn = false;
 
 	private TextButton inventoryButton;
-	private TextButton BuildBuildingButton;
+	private TextButton buildBuildingButton;
 
 	private TextButton buildingRotationButton;
 
@@ -78,7 +82,7 @@ public class Renderer extends Data
 
 	private BuildingAvailabilityControl buildingAvailabilityControl;
 
-	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, TextureAtlas atlas, Inventory inventory, InventoryActor inventoryActor, buildInventory buildInv, buildActor builder, tileInfo tileinfo,  ArrayList<Citizen> citizens )
+	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, TextureAtlas atlas, InventoryActor inventoryActor, buildActor builder, tileInfo tileinfo,  ArrayList<Citizen> citizens )
 	{
 		this.citizens = citizens;
 		this.game = game;
@@ -120,45 +124,47 @@ public class Renderer extends Data
 			if( simulation.getBuildingFarm() ) {
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
-				this.selectedTile = simulation.TileTouch();
-				if( selectedTile >= 0 && selectedTile < numberOfTiles ) {
-					// drawing control for the farm
-					BuildBuildingButton.setVisible(true);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile), 0, 0);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile+1), 0, 1);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch,  simulation.tiles.get((selectedTile-gridSizeWidth)+1), 0, 2);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch,  simulation.tiles.get(selectedTile-gridSizeWidth), 0, 3);
-				}
+				this.x = simulation.tileTouchX();
+				this.y = simulation.tileTouchY();
+				// drawing control for the farm
+				buildBuildingButton.setVisible(true);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x).get(y), 0, 0);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x).get(y - 1), 0, 1);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x + 1).get(y - 1), 0, 2);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x + 1).get(y), 0, 3);
+
 			} else if( simulation.getBuildingWoodCutter()) {
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
-				this.selectedTile = simulation.TileTouch();
-				if( selectedTile >= 0 && selectedTile < numberOfTiles )	{
+				this.x = simulation.tileTouchX();
+				this.y = simulation.tileTouchY();
 
-					buildingAvailabilityControl.OutlineAvailability( simulation, batch, selectedTile, 2, 0, 3 );
-					BuildBuildingButton.setVisible(true);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile), 2, 0);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile+1), 2, 1);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch,  simulation.tiles.get((selectedTile-gridSizeWidth)+1), 2, 2);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch,  simulation.tiles.get(selectedTile-gridSizeWidth), 2, 3);
-				}
+				buildingAvailabilityControl.OutlineAvailability( simulation, batch, x, y, 2, 0, 3 );
+				buildBuildingButton.setVisible(true);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x).get(y), 2, 0);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x).get(y - 1), 2, 1);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch,  simulation.tiles.get(x + 1).get(y - 1), 2, 2);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch,  simulation.tiles.get(x + 1).get(y), 2, 3);
+
 			} else if( simulation.getBuildingWarehouse() ) {
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
-				this.selectedTile = simulation.TileTouch();
-				if (previousWarehouseSelected != selectedTile) {
-					previousWarehouseSelected = selectedTile;
+				this.x = simulation.tileTouchX();
+				this.y = simulation.tileTouchY();
+				if (previousWarehouseX != x || previousWarehouseY != y) {
+					previousWarehouseX = x;
+					previousWarehouseY = y;
 					// check all possible rotations, so 4 different possibilities.
 					for (int i = 0; i < 4; i++ ) {
-						boolean available = buildingAvailabilityControl.checkRotationPossibility(true, rotation, simulation.tiles.get(selectedTile), 0, 3);
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile + 1), 1, 3);
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile - gridSizeWidth) + 1), 2, 3);
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile - gridSizeWidth), 3, 3);
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile - gridSizeWidth) - 1), 4, 3);
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(selectedTile - 1), 5, 3);
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile + gridSizeWidth) - 1), 6, 3);
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile + gridSizeWidth)), 7, 3);
-						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get((selectedTile + gridSizeWidth) + 1), 8, 3);
+						boolean available = buildingAvailabilityControl.checkRotationPossibility(true, rotation, simulation.tiles.get(x).get(y), 0, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(x).get(y - 1), 1, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(x + 1).get(y - 1), 2, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(x + 1).get(y), 3, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(x + 1).get(y + 1), 4, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(x).get(y + 1), 5, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(x - 1).get(y + 1), 6, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(x - 1).get(y), 7, 3);
+						available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, simulation.tiles.get(x - 1).get(y - 1), 8, 3);
 
 						if (available) {
 							break;
@@ -166,66 +172,67 @@ public class Renderer extends Data
 						rotate();
 					}
 				}
-				if( selectedTile >= 0 && selectedTile < numberOfTiles ) {
 
-					buildingAvailabilityControl.OutlineAvailability(simulation, batch, selectedTile, 1, 0, 16);
-					BuildBuildingButton.setVisible(true);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile), 3, 0);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile + 1), 3, 1);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get((selectedTile - gridSizeWidth) + 1), 3, 2);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile - gridSizeWidth), 3, 3);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get((selectedTile - gridSizeWidth) - 1), 3, 4);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get(selectedTile - 1), 3, 5);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get((selectedTile + gridSizeWidth) - 1), 3, 6);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get((selectedTile + gridSizeWidth)), 3, 7);
-					buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, simulation.tiles.get((selectedTile + gridSizeWidth) + 1), 3, 8);
-				}
+				buildingAvailabilityControl.OutlineAvailability(simulation, batch, x, y, 1, 0, 16);
+				buildBuildingButton.setVisible(true);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x).get(y), 3, 0);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x).get(y - 1), 3, 1);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x + 1).get(y - 1), 3, 2);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x + 1).get(y), 3, 3);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x + 1).get(y + 1), 3, 4);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x).get(y + 1), 3, 5);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x - 1).get(y + 1), 3, 6);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x - 1).get(y), 3, 7);
+				buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, simulation.tiles.get(x - 1).get(y - 1), 3, 8);
+
 			} else if( simulation.getBuildingRoad()) {
 				boolean remove = false;
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
-				this.selectedTile = simulation.TileTouch();
+				this.x = simulation.tileTouchX();
+				this.y = simulation.tileTouchY();
 				// ugly way to ensure that the selected tile is selected by the user. It will
 				// give a single frame different tile selection. This will ignore that situation
 				if (trueRoadSelectionPress) {
-					if (selectedTile != previousRoadSelected) {
-						previousRoadSelected = selectedTile;
+					if (previousRoadX != x || previousRoadY != y) {
+						previousRoadX = x;
+						previousRoadY = y;
 						for (Tile tile : roadSelected) {
-							if (tile == simulation.tiles.get(selectedTile)) {
+							if (tile == simulation.tiles.get(x).get(y)) {
 								remove = true;
 							}
 						}
 						if (remove) {
-							roadSelected.remove(simulation.tiles.get(selectedTile));
+							roadSelected.remove(simulation.tiles.get(x).get(y));
 						} else {
 							if (roadSelected.size() < simulation.getRoadSize()) {
-								roadSelected.add(simulation.tiles.get(selectedTile));
+								roadSelected.add(simulation.tiles.get(x).get(y));
 							}
 						}
 					}
 				}
 				trueRoadSelectionPress = true;
-				if( selectedTile >= 0 && selectedTile < numberOfTiles ) {
-
-					BuildBuildingButton.setVisible(true);
-					for (Tile tile : roadSelected) {
-						buildingAvailabilityControl.buildingControl(BuildBuildingButton, batch, tile, 4, 0);
-					}
+				buildBuildingButton.setVisible(true);
+				for (Tile tile : roadSelected) {
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tile, 4, 0);
 				}
+
 			} else {
 				buildingRotationButton.setVisible( false );
 				inventoryButton.setVisible(true);
-				BuildBuildingButton.setVisible( false );
+				buildBuildingButton.setVisible( false );
 				touchedBox = simulation.touchedInfobox(tileinfo.getX(), tileinfo.getY(), tileinfo.getWidth(), tileinfo.getHeight());
 				this.selectedTile = simulation.TileTouch();
+				this.x = simulation.tileTouchX();
+				this.y = simulation.tileTouchY();
 
 
-				if( (selectedTile >= 0) && (selectedTile < numberOfTiles) ) {
+				if(x >= 0 && y >= 0) {
 					if(!touchedBox) {
-						tileinfo.setText(selectedTile, simulation);
+						tileinfo.setText(x, y, simulation);
 						tileinfo.setPosition( (simulation.getTouchX() + 100), (720 - simulation.getTouchY()) );
 						tileinfo.setVisible( true );
-						drawTiles.drawSelected( buildingAvailabilityControl, simulation, batch, atlas, selectedTile );
+						drawTiles.drawSelected( buildingAvailabilityControl, simulation, batch, atlas, x, y );
 					}
 				} else {
 					tileinfo.setVisible( false );
@@ -280,10 +287,10 @@ public class Renderer extends Data
 		inventoryButton.setBounds( 1150, 30, 100, 100);
 		inventoryButton.setVisible( true );
 
-		BuildBuildingButton = new TextButton( "Build Farm", skin );
-		BuildBuildingButton.setDisabled( false );
-		BuildBuildingButton.setBounds( 1000,  300, 200, 30 );
-		BuildBuildingButton.setVisible( false );
+		buildBuildingButton = new TextButton( "Build Farm", skin );
+		buildBuildingButton.setDisabled( false );
+		buildBuildingButton.setBounds( 1000,  300, 200, 30 );
+		buildBuildingButton.setVisible( false );
 
 		buildingRotationButton = new TextButton("Rotate" , skin );
 		buildingRotationButton.setDisabled( false );
@@ -299,13 +306,13 @@ public class Renderer extends Data
 
 		stage.addActor( inventoryButton );
 		stage.addActor( inventoryActor );
-		stage.addActor( BuildBuildingButton );
+		stage.addActor(buildBuildingButton);
 		stage.addActor( buildingRotationButton );
 		stage.addActor( builder );
 		stage.addActor( tileinfo );
 
 		inventoryButton.addListener( InventoryListener );
-		BuildBuildingButton.addListener( buildBuildingListener );
+		buildBuildingButton.addListener( buildBuildingListener );
 		buildingRotationButton.addListener( buildingRotationListener );
 	}
 
@@ -318,13 +325,13 @@ public class Renderer extends Data
 
 	public ClickListener buildBuildingListener = new ClickListener() {
 		@Override
-		public void clicked (InputEvent event, float x, float y) {
+		public void clicked (InputEvent event, float xPress, float yPress) {
 			if( simulation.getBuildingFarm() ) {
-				simulation.BuildingConfirmation(0, rotation, selectedTile);
+				simulation.BuildingConfirmation(0, rotation, x, y);
 			} else if( simulation.getBuildingWarehouse() ) {
-				simulation.BuildingConfirmation(1, rotation, selectedTile);
+				simulation.BuildingConfirmation(1, rotation, x, y);
 			} else if( simulation.getBuildingWoodCutter() ) {
-				simulation.BuildingConfirmation(2, rotation, selectedTile);
+				simulation.BuildingConfirmation(2, rotation, x, y);
 			}else if( simulation.getBuildingRoad()) {
 				simulation.BuildingConfirmationRoad(rotation, roadSelected);
 				roadSelected.clear();

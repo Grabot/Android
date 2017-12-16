@@ -15,7 +15,7 @@ public class InventoryActor extends Window {
     //the only way I could remove the labels after closing the inventory
     private ArrayList<SlotActor> slotActors = new ArrayList<SlotActor>();
 
-    public InventoryActor(GameScreen game, Inventory inventory, buildInventory buildInv, DragAndDrop dragAndDrop, Skin skin) {
+    public InventoryActor(GameScreen game, Inventory inventory, DragAndDrop dragAndDrop, Skin skin) {
         super("", skin);
 
         //add an "X" button to the top right of the window, and make it hide the inventory

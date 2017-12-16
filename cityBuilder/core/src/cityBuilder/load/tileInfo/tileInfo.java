@@ -11,7 +11,8 @@ public class tileInfo extends Window {
 
 	private Skin skin;
 	private boolean create = false;
-	private int compareTile = -1;
+	private int compareX = -1;
+	private int compareY = -1;
 
 	public tileInfo(String title, Skin skin)
 	{
@@ -19,36 +20,28 @@ public class tileInfo extends Window {
 		this.skin = skin;
 	}
 
-	public void setText(int selectedTile, Simulation simulation)
+	public void setText(int x, int y, Simulation simulation)
 	{
-		if( create && (selectedTile != compareTile ))
-		{
+		if( create && ((x != compareX) || (y != compareY))) {
 			create = false;
 			this.clear();
 		}
 
-		if( !create )
-		{
-			compareTile = selectedTile;
-			int building = simulation.tiles.get(selectedTile).getOccupied();
-			String type = simulation.tiles.get(selectedTile).getType().toString();
+		if( !create ) {
+			compareX = x;
+			compareY = y;
+			int building = simulation.tiles.get(x).get(y).getOccupied();
+			String type = simulation.tiles.get(x).get(y).getType().toString();
 			Label label = null;
-			if( building == 0 )
-			{
+			if( building == 0 ) {
 				label = new Label( "dit is " + type, skin );
-			}
-			else if( building == 1 )
-			{
+			} else if( building == 1 ) {
 				//farm
 				label = new Label( "dit is een farm", skin );
-			}
-			else if( building == 2 )
-			{
+			} else if( building == 2 ) {
 				//woodcutter 
 				label = new Label( "dit is een woodcutter", skin );
-			}
-			else if( building == 3 )
-			{
+			} else if( building == 3 ) {
 				//wood
 				label = new Label( "dit is een bos", skin );
 				TextButton button = new TextButton("text", skin );

@@ -152,7 +152,7 @@ public class BuildingAvailabilityControl extends Data
         return grid;
     }
 
-    public void OutlineAvailability(Simulation simulation, Batch batch, int tileNumber, int building, int buildingPosition, int radius )
+    public void OutlineAvailability(Simulation simulation, Batch batch, int tileX, int tileY, int building, int buildingPosition, int radius )
     {
         boolean[][] grid = new boolean[radius*2 + 8][radius*2 + 8];
         for (int x = 0; x < grid.length; x++ ) {
@@ -233,13 +233,7 @@ public class BuildingAvailabilityControl extends Data
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {
                 if (grid[x][y] ) {
-                    int tilePosNumber = tileNumber + x + (y * gridSizeHeight) - (radius + 3) - ((radius + 4) * gridSizeHeight);
-                    if (tilePosNumber < 0) {
-                        tilePosNumber = 0;
-                    } else if (tilePosNumber >= 2500) {
-                        tilePosNumber = 2499;
-                    }
-                    Tile tile = simulation.tiles.get(tilePosNumber);
+                    Tile tile = simulation.tiles.get(x).get(y);
                     batch.draw(SquareOutlineAvailable, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 
                 }

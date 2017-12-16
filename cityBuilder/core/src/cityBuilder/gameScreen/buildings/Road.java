@@ -14,16 +14,9 @@ public class Road implements Building {
 
     private TextureRegion SquareTileRegionRoad;
     private int rotation;
-    private int TileNumber;
 
-    public Road(int TileNumber, int rotation, Tile[] otherTiles, TextureAtlas atlas) {
+    public Road(int rotation, TextureAtlas atlas) {
         this.rotation = rotation;
-        this.TileNumber = TileNumber;
-        if (otherTiles[0].getOccupied() == 6 ) {
-            SquareTileRegionRoad = atlas.findRegion("roadSingle");
-        } else {
-            SquareTileRegionRoad = atlas.findRegion("roadNo");
-        }
     }
 
     @Override
@@ -37,7 +30,7 @@ public class Road implements Building {
     }
 
     @Override
-    public void buildBuilding(ArrayList<Tile> tiles, int selectedTile, int rotation) {
+    public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
         // not usefull for roads.
     }
 }

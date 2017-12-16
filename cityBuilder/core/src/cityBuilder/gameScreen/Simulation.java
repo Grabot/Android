@@ -21,7 +21,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class Simulation extends Data {
 	private Citizen[] citizen = new Citizen[100];
 
-	public ArrayList<Tile> tiles = new ArrayList<Tile>();
+	public ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
 
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
 	private ArrayList<Farm> farms = new ArrayList<Farm>();
@@ -74,7 +74,7 @@ public class Simulation extends Data {
 	private InventoryActor inventoryActor;
 	private TextureAtlas atlas;
 
-	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor, buildInventory builder, buildActor actor, ArrayList<Citizen> citizens, ArrayList<Tile> tiles, TextureAtlas atlas ) {
+	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor, buildInventory builder, buildActor actor, ArrayList<Citizen> citizens, ArrayList<ArrayList<Tile>> tiles, TextureAtlas atlas ) {
 		this.tiles = tiles;
 		this.game = game;
 		this.citizens = citizens;
@@ -156,38 +156,25 @@ public class Simulation extends Data {
 		buildingRoad = true;
 	}
 
-	public void BuildingConfirmation( int building, int rotation, int selectedTile )
+	public void BuildingConfirmation( int building, int rotation, int x, int y )
 	{
 		//set all tiles that occupy the farm
 
-		if( selectedTile == (gridSizeWidth-1) )
-		{
-			selectedTile = (selectedTile+(gridSizeWidth-1));
-		}
-		if(selectedTile < gridSizeWidth )
-		{
-			selectedTile = (selectedTile + gridSizeWidth );
-		}
-		else if( (selectedTile+1) % gridSizeWidth == 0)
-		{
-			selectedTile = (selectedTile-1);
-		}
-
 		if( building == 0 ) {
-			Farm farm = new Farm(selectedTile, rotation, atlas);
-			farm.buildBuilding(tiles, selectedTile, rotation);
+			Farm farm = new Farm(rotation, atlas);
+			farm.buildBuilding(tiles, x, y, rotation);
 			farms.add(farm);
 			inventory.takeItem( "farm" );
 			BuildingFarm = false;
 		} else if( building == 1 ) {
 			Warehouse warehouse = new Warehouse(selectedTile, rotation, atlas);
-			warehouse.buildBuilding(tiles, selectedTile, rotation);
+			warehouse.buildBuilding(tiles, x, y, rotation);
 			inventory.takeItem( "fisherMan" );
 			warehouses.add(warehouse);
 			buildingWareHouse = false;
 		} else if( building == 2 ) {
 			WoodCutter woodcutter = new WoodCutter(selectedTile, rotation, atlas);
-			woodcutter.buildBuilding(tiles, selectedTile, rotation);
+			woodcutter.buildBuilding(tiles, x, y, rotation);
 			inventory.takeItem( "woodCutter" );
 			woodcutters.add(woodcutter);
 			BuildingWoodCutter = false;
@@ -199,13 +186,7 @@ public class Simulation extends Data {
 	public void BuildingConfirmationRoad( int rotation, ArrayList<Tile> roadSelected )
 	{
 		for (Tile tile : roadSelected) {
-			Tile[] otherTiles = new Tile[4];
-			otherTiles[0] = tiles.get(selectedTile-1);
-			otherTiles[1] = tiles.get(selectedTile+1);
-			otherTiles[2] = tiles.get(selectedTile - gridSizeWidth);
-			otherTiles[3] = tiles.get(selectedTile + gridSizeWidth);
-
-			Road road = new Road(selectedTile, rotation, otherTiles, atlas);
+			Road road = new Road(rotation, atlas);
 			tile.setOccupiedRoad(0, road);
 			roads.add(road);
 			checkRoads();
@@ -250,6 +231,15 @@ public class Simulation extends Data {
 	public boolean touchedInfobox( float tileX, float tileY, float tileWidth, float tileHeight )
 	{
 		return ((touchX >= tileX) && (touchX <= (tileX + tileWidth))) && (((720 - touchY) > tileY) && ((720 - touchY) <= (tileY + tileHeight)));
+	}
+
+	public int tileTouchX() {
+		return Math.round((touch_distance_x)/64);
+	}
+
+	public int tileTouchY() {
+		int tileY = Math.round((touch_distance_y)/64);
+		return ((tileY-24)*-1);
 	}
 
 	public int TileTouch()

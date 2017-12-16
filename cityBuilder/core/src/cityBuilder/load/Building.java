@@ -13,5 +13,5 @@ public interface Building {
 
     void update();
 
-    void buildBuilding(ArrayList<Tile> tiles, int selectedTile, int rotation);
+    void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation);
 }

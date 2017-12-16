@@ -13,17 +13,15 @@ import cityBuilder.objects.Tile;
 public class Farm extends Data implements Building {
 
 	private Tile[] farmTiles;
-	private int TileNumber;
 	private int rotation;
 	private TextureRegion SquareTileRegionFarmBottomLeft;
 	private TextureRegion SquareTileRegionFarmBottomRight;
 	private TextureRegion SquareTileRegionFarmTopLeft;
 	private TextureRegion SquareTileRegionFarmTopRight;
 
-	public Farm(int TileNumber, int rotation, TextureAtlas atlas)
+	public Farm(int rotation, TextureAtlas atlas)
 	{
 		farmTiles = new Tile[4];
-		this.TileNumber = TileNumber;
 		this.rotation = rotation;
 		SquareTileRegionFarmBottomLeft = atlas.findRegion("cubeLight");
 		SquareTileRegionFarmTopLeft = atlas.findRegion("cubeLight");
@@ -33,7 +31,6 @@ public class Farm extends Data implements Building {
 
 	@Override
 	public void render(Batch batch, int position, float x, float y) {
-		System.out.println("" + position);
 		if( position == 0 ) {
 			//bottom left
 			batch.draw( SquareTileRegionFarmBottomLeft, -32 + x, -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
@@ -59,16 +56,16 @@ public class Farm extends Data implements Building {
 	}
 
 	@Override
-	public void buildBuilding(ArrayList<Tile> tiles, int selectedTile, int rotation) {
+	public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
 		// set the correct tiles and save the farm tiles so that it can be used for update functionality
-		tiles.get(selectedTile).setOccupiedFarm(0, this);
-		tiles.get(selectedTile-gridSizeWidth).setOccupiedFarm(1, this);
-		tiles.get(selectedTile-(gridSizeWidth-1)).setOccupiedFarm(2, this);
-		tiles.get(selectedTile+1).setOccupiedFarm(3, this);
+		tiles.get(x).get(y).setOccupiedFarm(0, this);
+		tiles.get(x).get(y - 1).setOccupiedFarm(1, this);
+		tiles.get(x + 1).get(y - 1).setOccupiedFarm(2, this);
+		tiles.get(x + 1).get(y).setOccupiedFarm(3, this);
 
-		farmTiles[0] = tiles.get(selectedTile);
-		farmTiles[1] = tiles.get(selectedTile-gridSizeWidth);
-		farmTiles[2] = tiles.get(selectedTile-(gridSizeWidth-1));
-		farmTiles[3] = tiles.get(selectedTile+1);
+		farmTiles[0] = tiles.get(x).get(y);
+		farmTiles[1] = tiles.get(x).get(y - 1);
+		farmTiles[2] = tiles.get(x + 1).get(y - 1);
+		farmTiles[3] = tiles.get(x + 1).get(y);
 	}
 }
