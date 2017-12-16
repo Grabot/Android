@@ -1,6 +1,7 @@
 package cityBuilder.load.tileInfo;
 
 import cityBuilder.gameScreen.Simulation;
+import cityBuilder.objects.Tile;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -20,7 +21,7 @@ public class tileInfo extends Window {
 		this.skin = skin;
 	}
 
-	public void setText(int x, int y, Simulation simulation)
+	public void setText(int x, int y, Tile tile)
 	{
 		if( create && ((x != compareX) || (y != compareY))) {
 			create = false;
@@ -30,8 +31,8 @@ public class tileInfo extends Window {
 		if( !create ) {
 			compareX = x;
 			compareY = y;
-			int building = simulation.tiles.get(x).get(y).getOccupied();
-			String type = simulation.tiles.get(x).get(y).getType().toString();
+			int building = tile.getOccupied();
+			String type = tile.getType().toString();
 			Label label = null;
 			if( building == 0 ) {
 				label = new Label( "dit is " + type, skin );

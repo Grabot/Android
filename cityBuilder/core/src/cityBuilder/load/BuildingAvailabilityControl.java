@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import cityBuilder.gameScreen.Simulation;
 import cityBuilder.objects.Tile;
@@ -152,7 +153,7 @@ public class BuildingAvailabilityControl extends Data
         return grid;
     }
 
-    public void OutlineAvailability(Simulation simulation, Batch batch, int tileX, int tileY, int building, int buildingPosition, int radius )
+    public void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, Batch batch, int tileX, int tileY, int building, int buildingPosition, int radius )
     {
         boolean[][] grid = new boolean[radius*2 + 8][radius*2 + 8];
         for (int x = 0; x < grid.length; x++ ) {
@@ -233,9 +234,8 @@ public class BuildingAvailabilityControl extends Data
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {
                 if (grid[x][y] ) {
-                    Tile tile = simulation.tiles.get(x).get(y);
+                    Tile tile = tiles.get(x).get(y);
                     batch.draw(SquareOutlineAvailable, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
-
                 }
             }
         }

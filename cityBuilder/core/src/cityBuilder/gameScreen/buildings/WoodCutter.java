@@ -13,17 +13,15 @@ import cityBuilder.objects.Tile;
 public class WoodCutter extends Data implements Building {
 
 	Tile[] woodcutterTiles;
-	private int TileNumber;
 	private int rotation;
 	private TextureRegion SquareTileRegionWoodCutterBottomLeft;
 	private TextureRegion SquareTileRegionWoodCutterBottomRight;
 	private TextureRegion SquareTileRegionWoodCutterTopLeft;
 	private TextureRegion SquareTileRegionWoodCutterTopRight;
 
-	public WoodCutter(int TileNumber, int rotation, TextureAtlas atlas)
+	public WoodCutter(int rotation, TextureAtlas atlas)
 	{
 		woodcutterTiles = new Tile[4];
-		this.TileNumber = TileNumber;
 		this.rotation = rotation;
 		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("cubeDark");
 		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("cubeDark");

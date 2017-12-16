@@ -59,13 +59,13 @@ public class Farm extends Data implements Building {
 	public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
 		// set the correct tiles and save the farm tiles so that it can be used for update functionality
 		tiles.get(x).get(y).setOccupiedFarm(0, this);
-		tiles.get(x).get(y - 1).setOccupiedFarm(1, this);
-		tiles.get(x + 1).get(y - 1).setOccupiedFarm(2, this);
-		tiles.get(x + 1).get(y).setOccupiedFarm(3, this);
+		tiles.get(x + 1).get(y).setOccupiedFarm(1, this);
+		tiles.get(x + 1).get(y + 1).setOccupiedFarm(2, this);
+		tiles.get(x).get(y + 1).setOccupiedFarm(3, this);
 
 		farmTiles[0] = tiles.get(x).get(y);
-		farmTiles[1] = tiles.get(x).get(y - 1);
-		farmTiles[2] = tiles.get(x + 1).get(y - 1);
-		farmTiles[3] = tiles.get(x + 1).get(y);
+		farmTiles[1] = tiles.get(x - 1).get(y);
+		farmTiles[2] = tiles.get(x - 1).get(y - 1);
+		farmTiles[3] = tiles.get(x).get(y - 1);
 	}
 }

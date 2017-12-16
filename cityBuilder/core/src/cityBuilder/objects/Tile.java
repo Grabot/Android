@@ -38,7 +38,7 @@ public class Tile
 	private WoodCutter woodCutter;
 	private Warehouse warehouse;
 	private Road road;
-
+	private String name;
 	private TextureAtlas atlas;
 
 	public Tile( Vector position, TextureAtlas atlas )
@@ -177,5 +177,13 @@ public class Tile
 	public int getBuildingPosition()
 	{
 		return buildingPosition;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

@@ -59,8 +59,6 @@ public class Simulation extends Data {
 	private boolean buildingWarehouse2 = false;
 	private boolean buildingRoad = false;
 
-	private int selectedTile = -1;
-
 	float touch_distance_x = 999;
 	float touch_distance_y = 999;
 	float sec = 0.0f;
@@ -167,13 +165,13 @@ public class Simulation extends Data {
 			inventory.takeItem( "farm" );
 			BuildingFarm = false;
 		} else if( building == 1 ) {
-			Warehouse warehouse = new Warehouse(selectedTile, rotation, atlas);
+			Warehouse warehouse = new Warehouse(rotation, atlas);
 			warehouse.buildBuilding(tiles, x, y, rotation);
 			inventory.takeItem( "fisherMan" );
 			warehouses.add(warehouse);
 			buildingWareHouse = false;
 		} else if( building == 2 ) {
-			WoodCutter woodcutter = new WoodCutter(selectedTile, rotation, atlas);
+			WoodCutter woodcutter = new WoodCutter(rotation, atlas);
 			woodcutter.buildBuilding(tiles, x, y, rotation);
 			inventory.takeItem( "woodCutter" );
 			woodcutters.add(woodcutter);
@@ -228,8 +226,7 @@ public class Simulation extends Data {
 		}
 	}
 
-	public boolean touchedInfobox( float tileX, float tileY, float tileWidth, float tileHeight )
-	{
+	public boolean touchedInfobox( float tileX, float tileY, float tileWidth, float tileHeight ) {
 		return ((touchX >= tileX) && (touchX <= (tileX + tileWidth))) && (((720 - touchY) > tileY) && ((720 - touchY) <= (tileY + tileHeight)));
 	}
 
@@ -238,38 +235,7 @@ public class Simulation extends Data {
 	}
 
 	public int tileTouchY() {
-		int tileY = Math.round((touch_distance_y)/64);
-		return ((tileY-24)*-1);
-	}
-
-	public int TileTouch()
-	{
-		int tileX = Math.round((touch_distance_x)/64);
-		int tileY = Math.round((touch_distance_y)/64);
-		tileY = ((tileY-24)*-1);
-
-		if (touched_down)
-		{
-			selectedTile = ((tileY*gridSizeHeight)+tileX);
-
-			if( scrolling )
-			{
-				pressed = 0;
-				selectedTile = -1;
-				miningProgress = 0;
-				MiningSequence = false;
-			}
-
-			pressed++;
-		}
-		else
-		{
-			miningProgress = 0;
-			MiningSequence = false;
-			pressed = 0;
-		}
-
-		return selectedTile;
+		return Math.round((touch_distance_y)/64);
 	}
 
 	public boolean getTouchedDown() {

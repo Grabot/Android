@@ -14,19 +14,23 @@ public class TilesLoad extends Data {
 	public TilesLoad(TextureAtlas atlas) {
 
 		for (int x = 0; x < gridSizeWidth; x++) {
+			ArrayList<Tile> mapLine = new ArrayList<Tile>();
 			for (int y = 0; y < gridSizeHeight; y++) {
-				tile[x][y] = new Tile(new Vector((-tileStartWidth + (tileWidth * y)), (tileStartHeight - (tileHeight * x))), atlas);
+				tile[x][y] = new Tile(new Vector((tileHeight * x), (tileWidth * y)), atlas);
+				mapLine.add(tile[x][y]);
+				tile[x][y].setName("(" + x + ", " + y + ")");
 			}
+			tiles.add(mapLine);
 		}
 
-		setAttributes attributes = new setAttributes(tile);
-		attributes.attributes();
+		setAttributes attributes = new setAttributes();
+		attributes.attributes(tiles);
 
-		for (int y = 0; y < gridSizeWidth; y++) {
-			tiles.add(new ArrayList<Tile>());
-			for (int x = 0; x < gridSizeHeight; x++) {
-				tiles.get(y).add(attributes.getTile(x, y));
+		for (int x = 0; x < gridSizeWidth; x++ ) {
+			for (int y = 0; y < gridSizeHeight-1; y++ ) {
+				System.out.print(tiles.get(x).get(y).getName());
 			}
+			System.out.println("");
 		}
 	}
 

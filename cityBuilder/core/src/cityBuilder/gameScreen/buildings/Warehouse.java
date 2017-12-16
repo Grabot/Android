@@ -14,16 +14,14 @@ import cityBuilder.objects.Tile;
 public class Warehouse extends Data implements Building {
 
     Tile[] warehouseTiles;
-    private int TileNumber = 0;
     private int rotation = 0;
 
     private TextureRegion buildingRegionDark;
     private TextureRegion buildingRegionLight;
 
-    public Warehouse(int TileNumber, int rotation, TextureAtlas atlas)
+    public Warehouse(int rotation, TextureAtlas atlas)
     {
         warehouseTiles = new Tile[9];
-        this.TileNumber = TileNumber;
         this.rotation = rotation;
 
         buildingRegionDark = atlas.findRegion("cubeDark");
