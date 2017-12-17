@@ -25,7 +25,8 @@ public class Tile
 	private int resources;
 	private final Vector position = new Vector( );
 	private int occupied = 0;
-	private int tilePosition = 0;
+	private int x;
+	private int y;
 	private int buildingPosition = -1;
 
 	private Grass grass;
@@ -38,7 +39,6 @@ public class Tile
 	private WoodCutter woodCutter;
 	private Warehouse warehouse;
 	private Road road;
-	private String name;
 	private TextureAtlas atlas;
 
 	public Tile( Vector position, TextureAtlas atlas )
@@ -53,7 +53,6 @@ public class Tile
 		this.colour = colour;
 		this.occupied = occupied;
 		this.resources = resources;
-		this.tilePosition = tilePosition;
 
 		if( type.toString().equals("grass") )
 		{
@@ -61,7 +60,7 @@ public class Tile
 		}
 		else if( type.toString().equals("water") )
 		{
-			water = new Water( this, tilePosition, atlas );
+			water = new Water( this, atlas );
 		}
 		else if( type.toString().equals("shore") )
 		{
@@ -174,17 +173,13 @@ public class Tile
 		return position;
 	}
 
+	public void setBuildingPosition(int buildingPosition) {
+		this.buildingPosition = buildingPosition;
+	}
+
 	public int getBuildingPosition()
 	{
 		return buildingPosition;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Warehouse getWarehouse() {
@@ -197,5 +192,21 @@ public class Tile
 
 	public WoodCutter getWoodCutter() {
 		return woodCutter;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getY() {
+		return y;
 	}
 }

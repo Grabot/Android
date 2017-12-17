@@ -185,20 +185,26 @@ public class Simulation extends Data {
 	{
 		for (Tile tile : roadSelected) {
 			Road road = new Road(rotation, atlas);
-			tile.setOccupiedRoad(0, road);
+			road.buildBuilding(tiles, tile.getX(), tile.getY(), rotation);
 			roads.add(road);
-			checkRoads();
 			// build road
 			inventory.takeItem("road");
 		}
+		checkRoads();
 		buildingRoad = false;
 	}
 
 	private void checkRoads() {
 		// this is called after a road is placed, it will check all roads and if there are adjacent
-		// road than they will be given an indication using the buildingposition variable
 		for (Road road : roads) {
-
+			Tile[] adjacentRoads = road.getAdjacentRoads();
+			for (int i = 0; i < adjacentRoads.length; i++ ) {
+				if (adjacentRoads[i].getOccupied() == 5) {
+					road.setAdjacent(i, true);
+				} else {
+					road.setAdjacent(i, false);
+				}
+			}
 		}
 	}
 

@@ -188,30 +188,32 @@ public class Renderer extends Data
 				boolean remove = false;
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
-				// ugly way to ensure that the selected tile is selected by the user. It will
-				// give a single frame different tile selection. This will ignore that situation
-				if (trueRoadSelectionPress) {
-					if (previousRoadX != x || previousRoadY != y) {
-						previousRoadX = x;
-						previousRoadY = y;
-						for (Tile tile : roadSelected) {
-							if (tile == tiles.get(x).get(y)) {
-								remove = true;
+				if (validTile()) {
+					// ugly way to ensure that the selected tile is selected by the user. It will
+					// give a single frame different tile selection. This will ignore that situation
+					if (trueRoadSelectionPress) {
+						if (previousRoadX != x || previousRoadY != y) {
+							previousRoadX = x;
+							previousRoadY = y;
+							for (Tile tile : roadSelected) {
+								if (tile == tiles.get(x).get(y)) {
+									remove = true;
+								}
 							}
-						}
-						if (remove) {
-							roadSelected.remove(tiles.get(x).get(y));
-						} else {
-							if (roadSelected.size() < simulation.getRoadSize()) {
-								roadSelected.add(tiles.get(x).get(y));
+							if (remove) {
+								roadSelected.remove(tiles.get(x).get(y));
+							} else {
+								if (roadSelected.size() < simulation.getRoadSize()) {
+									roadSelected.add(tiles.get(x).get(y));
+								}
 							}
 						}
 					}
-				}
-				trueRoadSelectionPress = true;
-				buildBuildingButton.setVisible(true);
-				for (Tile tile : roadSelected) {
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tile, 4, 0);
+					trueRoadSelectionPress = true;
+					buildBuildingButton.setVisible(true);
+					for (Tile tile : roadSelected) {
+						buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tile, 4, 0);
+					}
 				}
 
 			} else {

@@ -18,7 +18,6 @@ public class TilesLoad extends Data {
 			for (int y = 0; y < gridSizeHeight; y++) {
 				tile[x][y] = new Tile(new Vector((tileHeight * x), (tileWidth * y)), atlas);
 				mapLine.add(tile[x][y]);
-				tile[x][y].setName("(" + x + ", " + y + ")");
 			}
 			tiles.add(mapLine);
 		}
@@ -28,9 +27,9 @@ public class TilesLoad extends Data {
 
 		for (int x = 0; x < gridSizeWidth; x++ ) {
 			for (int y = 0; y < gridSizeHeight-1; y++ ) {
-				System.out.print(tiles.get(x).get(y).getName());
+				tiles.get(x).get(y).setX(x);
+				tiles.get(x).get(y).setY(y);
 			}
-			System.out.println("");
 		}
 	}
 

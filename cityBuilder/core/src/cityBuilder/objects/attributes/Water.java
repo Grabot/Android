@@ -9,13 +9,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Water
 {
 	private Tile tile;
-	private int tilePosition;
 	private TextureRegion SquareTileRegionWater;
 
-	public Water( Tile tile, int tilePosition, TextureAtlas atlas  )
+	public Water( Tile tile, TextureAtlas atlas  )
 	{
 		this.tile = tile;
-		this.tilePosition = tilePosition;
 		SquareTileRegionWater = atlas.findRegion("water");
 	}
 
