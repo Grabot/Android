@@ -64,8 +64,12 @@ public class Farm extends Data implements Building {
 		tiles.get(x).get(y + 1).setOccupiedFarm(3, this);
 
 		farmTiles[0] = tiles.get(x).get(y);
-		farmTiles[1] = tiles.get(x - 1).get(y);
-		farmTiles[2] = tiles.get(x - 1).get(y - 1);
-		farmTiles[3] = tiles.get(x).get(y - 1);
+		farmTiles[1] = tiles.get(x + 1).get(y);
+		farmTiles[2] = tiles.get(x + 1).get(y + 1);
+		farmTiles[3] = tiles.get(x).get(y + 1);
+	}
+
+	public Tile[] getFarmTiles() {
+		return farmTiles;
 	}
 }

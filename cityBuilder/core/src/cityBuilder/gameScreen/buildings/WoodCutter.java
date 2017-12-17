@@ -46,20 +46,23 @@ public class WoodCutter extends Data implements Building {
 		}
 	}
 
-	public void update()
-	{
+	public void update() {
 	}
 
 	@Override
 	public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
 		tiles.get(x).get(y).setOccupiedWoodCutter(0, this);
-		tiles.get(x).get(y - 1).setOccupiedWoodCutter(1, this);
-		tiles.get(x + 1).get(y - 1).setOccupiedWoodCutter(2, this);
-		tiles.get(x + 1).get(y).setOccupiedWoodCutter(3, this);
+		tiles.get(x + 1).get(y).setOccupiedWoodCutter(1, this);
+		tiles.get(x + 1).get(y + 1).setOccupiedWoodCutter(2, this);
+		tiles.get(x).get(y + 1).setOccupiedWoodCutter(3, this);
 
 		woodcutterTiles[0] = tiles.get(x).get(y);
-		woodcutterTiles[1] = tiles.get(x).get(y - 1);
-		woodcutterTiles[2] = tiles.get(x + 1).get(y - 1);
-		woodcutterTiles[3] = tiles.get(x + 1).get(y);
+		woodcutterTiles[1] = tiles.get(x + 1).get(y);
+		woodcutterTiles[2] = tiles.get(x + 1).get(y + 1);
+		woodcutterTiles[3] = tiles.get(x).get(y + 1);
+	}
+
+	public Tile[] getWoodCutterTiles() {
+		return woodcutterTiles;
 	}
 }

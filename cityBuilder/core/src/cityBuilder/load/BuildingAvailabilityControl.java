@@ -153,89 +153,36 @@ public class BuildingAvailabilityControl extends Data
         return grid;
     }
 
-    public void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, Batch batch, int tileX, int tileY, int building, int buildingPosition, int radius )
+    public void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, Batch batch, int tileX, int tileY, int building, int radius )
     {
-        boolean[][] grid = new boolean[radius*2 + 8][radius*2 + 8];
+        boolean[][] grid = new boolean[gridSizeWidth][gridSizeHeight];
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {
                 grid[x][y] = false;
             }
         }
 
-        if (building == 1 && buildingPosition == 0) {
-            defineCircle(grid, radius + 2, radius + 3, radius);
-            defineCircle(grid, radius + 4, radius + 3, radius);
-            defineCircle(grid, radius + 2, radius + 5, radius);
-            defineCircle(grid, radius + 4, radius + 5, radius);
-        } else if (building == 1 && buildingPosition == 1) {
-            defineCircle(grid, radius + 1, radius + 3, radius);
-            defineCircle(grid, radius + 3, radius + 3, radius);
-            defineCircle(grid, radius + 1, radius + 5, radius);
-            defineCircle(grid, radius + 3, radius + 5, radius);
-        } else if (building == 1 && buildingPosition == 2) {
-            defineCircle(grid, radius + 1, radius + 4, radius);
-            defineCircle(grid, radius + 3, radius + 4, radius);
-            defineCircle(grid, radius + 1, radius + 6, radius);
-            defineCircle(grid, radius + 3, radius + 6, radius);
-        } else if (building == 1 && buildingPosition == 3) {
-            defineCircle(grid, radius + 2, radius + 4, radius);
-            defineCircle(grid, radius + 4, radius + 4, radius);
-            defineCircle(grid, radius + 2, radius + 6, radius);
-            defineCircle(grid, radius + 4, radius + 6, radius);
-        } else if (building == 1 && buildingPosition == 4) {
-            defineCircle(grid, radius + 3, radius + 4, radius);
-            defineCircle(grid, radius + 5, radius + 4, radius);
-            defineCircle(grid, radius + 3, radius + 6, radius);
-            defineCircle(grid, radius + 5, radius + 6, radius);
-        } else if (building == 1 && buildingPosition == 5) {
-            defineCircle(grid, radius + 3, radius + 3, radius);
-            defineCircle(grid, radius + 5, radius + 3, radius);
-            defineCircle(grid, radius + 3, radius + 5, radius);
-            defineCircle(grid, radius + 5, radius + 5, radius);
-        } else if (building == 1 && buildingPosition == 6) {
-            defineCircle(grid, radius + 3, radius + 2, radius);
-            defineCircle(grid, radius + 5, radius + 2, radius);
-            defineCircle(grid, radius + 3, radius + 4, radius);
-            defineCircle(grid, radius + 5, radius + 4, radius);
-        } else if (building == 1 && buildingPosition == 7) {
-            defineCircle(grid, radius + 2, radius + 2, radius);
-            defineCircle(grid, radius + 4, radius + 2, radius);
-            defineCircle(grid, radius + 2, radius + 4, radius);
-            defineCircle(grid, radius + 4, radius + 4, radius);
-        } else if (building == 1 && buildingPosition == 8) {
-            defineCircle(grid, radius + 1, radius + 2, radius);
-            defineCircle(grid, radius + 3, radius + 2, radius);
-            defineCircle(grid, radius + 1, radius + 4, radius);
-            defineCircle(grid, radius + 3, radius + 4, radius);
+        if (building == 1) {
+            defineCircle(grid, radius*2-1, radius*2-1, radius);
+            defineCircle(grid, radius*2-1, radius*2+1, radius);
+            defineCircle(grid, radius*2+1, radius*2+1, radius);
+            defineCircle(grid, radius*2+1, radius*2-1, radius);
         }
 
-        if (building == 2 && buildingPosition == 0) {
-            defineCircle(grid, radius + 3, radius + 3, radius);
-            defineCircle(grid, radius + 4, radius + 3, radius);
-            defineCircle(grid, radius + 3, radius + 4, radius);
-            defineCircle(grid, radius + 4, radius + 4, radius);
-        } else if (building == 2 && buildingPosition == 1) {
-            defineCircle(grid, radius + 3, radius + 5, radius);
-            defineCircle(grid, radius + 4, radius + 5, radius);
-            defineCircle(grid, radius + 3, radius + 4, radius);
-            defineCircle(grid, radius + 4, radius + 4, radius);
-        } else if (building == 2 && buildingPosition == 2) {
-            defineCircle(grid, radius + 2, radius + 4, radius);
-            defineCircle(grid, radius + 3, radius + 4, radius);
-            defineCircle(grid, radius + 2, radius + 5, radius);
-            defineCircle(grid, radius + 3, radius + 5, radius);
-        } else if (building == 2 && buildingPosition == 3) {
-            defineCircle(grid, radius + 2, radius + 3, radius);
-            defineCircle(grid, radius + 3, radius + 3, radius);
-            defineCircle(grid, radius + 2, radius + 4, radius);
-            defineCircle(grid, radius + 3, radius + 4, radius);
+        if (building == 2) {
+            defineCircle(grid, radius+3, radius+3, radius);
+            defineCircle(grid, radius+4, radius+3, radius);
+            defineCircle(grid, radius+3, radius+4, radius);
+            defineCircle(grid, radius+4, radius+4, radius);
         }
 
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {
                 if (grid[x][y] ) {
-                    Tile tile = tiles.get(x).get(y);
-                    batch.draw(SquareOutlineAvailable, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                    if ((((x+(tileX-(radius*2))) >= 0) && ((y+(tileY-(radius*2))) >= 0)) && (((x+(tileX-(radius*2))) < gridSizeWidth) && ((y+(tileY-(radius*2))) < gridSizeHeight))) {
+                        Tile tile = tiles.get(x + (tileX - (radius * 2))).get(y + (tileY - (radius * 2)));
+                        batch.draw(SquareOutlineAvailable, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                    }
                 }
             }
         }

@@ -135,7 +135,7 @@ public class Tile
 	}
 
 	public void setOccupiedRoad(int buildingPosition, Road road) {
-		this.occupied = 6;
+		this.occupied = 5;
 		this.buildingPosition = buildingPosition;
 		this.road = road;
 	}
@@ -153,7 +153,7 @@ public class Tile
 	}
 
 	public void setOccupiedWarehouse(int buildingPosition, Warehouse warehouse) {
-		this.occupied = 5;
+		this.occupied = 4;
 		this.buildingPosition = buildingPosition;
 		this.warehouse = warehouse;
 	}
@@ -185,5 +185,17 @@ public class Tile
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Warehouse getWarehouse() {
+		return warehouse;
+	}
+
+	public Farm getFarm() {
+		return farm;
+	}
+
+	public WoodCutter getWoodCutter() {
+		return woodCutter;
 	}
 }

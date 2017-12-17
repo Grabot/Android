@@ -32,11 +32,11 @@ public class DrawTiles extends Data
 					} else if (tiles.get(x).get(y).getOccupied() == 3) {
 						tiles.get(x).get(y).drawWoods(batch);
 					} else if (tiles.get(x).get(y).getOccupied() == 4) {
-						// nothing yet
-					} else if (tiles.get(x).get(y).getOccupied() == 5) {
 						tiles.get(x).get(y).drawWarehouse(batch);
-					} else if (tiles.get(x).get(y).getOccupied() == 6) {
+					} else if (tiles.get(x).get(y).getOccupied() == 5) {
 						tiles.get(x).get(y).drawRoads(batch);
+					} else if (tiles.get(x).get(y).getOccupied() == 6) {
+						// nothing yet
 					}
 				}
 			}
