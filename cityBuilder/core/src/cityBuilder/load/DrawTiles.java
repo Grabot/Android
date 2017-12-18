@@ -18,7 +18,7 @@ public class DrawTiles extends Data
 		drawselection = new DrawSelectionControl(atlas);
 	}
 
-	public void fillTiles(BuildingAvailabilityControl buildingAvailabilityControl, ArrayList<ArrayList<Tile>> tiles, Batch batch )
+	public void fillTiles( Batch batch, ArrayList<ArrayList<Tile>> tiles)
 	{
 		for (int x = 0; x < tiles.size(); x++ ) {
 			for (int y = 0; y < tiles.get(x).size(); y++ ) {
@@ -39,6 +39,14 @@ public class DrawTiles extends Data
 						// nothing yet
 					}
 				}
+			}
+		}
+	}
+
+	public void drawRegionOwned(Batch bitch, ArrayList<ArrayList<Tile>> tiles) {
+		for (int x = 0; x < tiles.size(); x++ ) {
+			for (int y = 0; y < tiles.get(x).size(); y++) {
+				tiles.get(x).get(y).drawRegionOwned(bitch);
 			}
 		}
 	}

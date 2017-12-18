@@ -17,6 +17,7 @@ import cityBuilder.objects.attributes.Wood;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Tile
 {
@@ -41,10 +42,17 @@ public class Tile
 	private Road road;
 	private TextureAtlas atlas;
 
+	private boolean regionOwned;
+
+	private TextureRegion SquareGreySmal2l;
+
 	public Tile( Vector position, TextureAtlas atlas )
 	{
 		this.position.set( position );
 		this.atlas = atlas;
+		regionOwned = false;
+
+		SquareGreySmal2l = atlas.findRegion("SquareGreySmal2l");
 	}
 
 	public void setAttributes( TileType type, int colour, int occupied, int resources, int tilePosition )
@@ -81,6 +89,12 @@ public class Tile
 		else if( type.toString().equals("shore") )
 		{
 			shore.draw( batch );
+		}
+	}
+
+	public void drawRegionOwned( Batch bitch ) {
+		if (!regionOwned) {
+			bitch.draw( SquareGreySmal2l, -32 + this.getPosition().x , -32 + this.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 	}
 
@@ -208,5 +222,13 @@ public class Tile
 
 	public int getY() {
 		return y;
+	}
+
+	public boolean getRegionOwned() {
+		return regionOwned;
+	}
+
+	public void setRegionOwned(boolean regionOwned) {
+		this.regionOwned = regionOwned;
 	}
 }

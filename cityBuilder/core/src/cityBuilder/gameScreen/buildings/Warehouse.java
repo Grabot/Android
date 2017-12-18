@@ -170,6 +170,47 @@ public class Warehouse extends Data implements Building {
             warehouseTiles[4] = tiles.get(x - 1).get(y - 1);
             warehouseTiles[5] = tiles.get(x).get(y - 1);
         }
+
+        OutlineAvailability(tiles, x, y, 16);
+    }
+
+    private boolean[][] defineCircle(boolean[][] grid, int centerX, int centerY, int radius) {
+        for (int x = 0; x < grid.length; x++ ) {
+            for (int y = 0; y < grid[x].length; y++ ) {
+                int a = x - centerX;
+                int b = y - centerY;
+
+                if (a*a+b*b <= radius*radius+1) {
+                    grid[x][y] = true;
+                }
+            }
+        }
+        return grid;
+    }
+
+    private void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, int tileX, int tileY, int radius )
+    {
+        boolean[][] grid = new boolean[gridSizeWidth][gridSizeHeight];
+        for (int x = 0; x < grid.length; x++ ) {
+            for (int y = 0; y < grid[x].length; y++) {
+                grid[x][y] = false;
+            }
+        }
+
+        defineCircle(grid, radius*2-1, radius*2-1, radius);
+        defineCircle(grid, radius*2-1, radius*2+1, radius);
+        defineCircle(grid, radius*2+1, radius*2+1, radius);
+        defineCircle(grid, radius*2+1, radius*2-1, radius);
+
+        for (int x = 0; x < grid.length; x++ ) {
+            for (int y = 0; y < grid[x].length; y++) {
+                if (grid[x][y] ) {
+                    if ((((x+(tileX-(radius*2))) >= 0) && ((y+(tileY-(radius*2))) >= 0)) && (((x+(tileX-(radius*2))) < gridSizeWidth) && ((y+(tileY-(radius*2))) < gridSizeHeight))) {
+                        tiles.get(x + (tileX - (radius * 2))).get(y + (tileY - (radius * 2))).setRegionOwned(true);
+                    }
+                }
+            }
+        }
     }
 
     public Tile[] getWarehouseTiles() {

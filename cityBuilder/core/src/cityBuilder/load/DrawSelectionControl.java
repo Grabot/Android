@@ -79,6 +79,6 @@ public class DrawSelectionControl extends Data {
 	}
 
 	private void drawSingleTile(Batch bitch, Tile tile) {
-		bitch.draw( SquareTileRegionSelected, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		// bitch.draw( SquareTileRegionSelected, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 	}
 }

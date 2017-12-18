@@ -1,5 +1,5 @@
 
-Pack12.png
+Pack13.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -143,23 +143,30 @@ SquareGreenSmall
   orig: 64, 64
   offset: 0, 0
   index: -1
-SquareGreySmall
+SquareGreySmal2l
   rotate: false
   xy: 640, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-SquareRedSmall
+SquareGreySmall
   rotate: false
   xy: 640, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-water
+SquareRedSmall
   rotate: false
   xy: 704, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+water
+  rotate: false
+  xy: 704, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

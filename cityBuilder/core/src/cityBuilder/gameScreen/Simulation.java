@@ -53,8 +53,8 @@ public class Simulation extends Data {
 	private boolean scrolling = false;
 
 	private boolean[] farmTiles = new boolean[626];
-	private boolean BuildingFarm = false;
-	private boolean BuildingWoodCutter = false;
+	private boolean buildingFarm = false;
+	private boolean buildingWoodCutter = false;
 	private boolean buildingWareHouse = false;
 	private boolean buildingWarehouse2 = false;
 	private boolean buildingRoad = false;
@@ -110,15 +110,13 @@ public class Simulation extends Data {
 
 		//every second updates
 		sec = (sec + delta);
-		if( sec >= 1.00000f )
-		{
+		if( sec >= 1.00000f ) {
 			updateBuildings();
 			sec = (sec - 1.00000f);
 		}
 	}
 
-	private void updateBuildings()
-	{
+	private void updateBuildings() {
 		for( int i = 0; i < farms.size(); i++ ) {
 			farms.get(i).update();
 		}
@@ -132,14 +130,13 @@ public class Simulation extends Data {
 		}
 	}
 
-	public void BuildFarm()
-	{
-		BuildingFarm = true;
+	public void BuildFarm() {
+		buildingFarm = true;
 	}
 
 	public void BuildWoodCutter()
 	{
-		BuildingWoodCutter = true;
+		buildingWoodCutter = true;
 	}
 
 	public void BuildWarehouse() {
@@ -163,7 +160,7 @@ public class Simulation extends Data {
 			farm.buildBuilding(tiles, x, y, rotation);
 			farms.add(farm);
 			inventory.takeItem( "farm" );
-			BuildingFarm = false;
+			buildingFarm = false;
 		} else if( building == 1 ) {
 			Warehouse warehouse = new Warehouse(rotation, atlas);
 			warehouse.buildBuilding(tiles, x, y, rotation);
@@ -175,14 +172,13 @@ public class Simulation extends Data {
 			woodcutter.buildBuilding(tiles, x, y, rotation);
 			inventory.takeItem( "woodCutter" );
 			woodcutters.add(woodcutter);
-			BuildingWoodCutter = false;
+			buildingWoodCutter = false;
 		} else if( building == 3) {
 			// this is a tree.
 		}
 	}
 
-	public void BuildingConfirmationRoad( int rotation, ArrayList<Tile> roadSelected )
-	{
+	public void BuildingConfirmationRoad( int rotation, ArrayList<Tile> roadSelected ) {
 		for (Tile tile : roadSelected) {
 			Road road = new Road(rotation, atlas);
 			road.buildBuilding(tiles, tile.getX(), tile.getY(), rotation);
@@ -278,12 +274,12 @@ public class Simulation extends Data {
 
 	public boolean getBuildingFarm()
 	{
-		return BuildingFarm;
+		return buildingFarm;
 	}
 
 	public boolean getBuildingWoodCutter()
 	{
-		return BuildingWoodCutter;
+		return buildingWoodCutter;
 	}
 
 	public boolean getBuildingWarehouse() {
@@ -294,6 +290,10 @@ public class Simulation extends Data {
 
 	public boolean getBuildingRoad() {
 		return buildingRoad;
+	}
+
+	public boolean getBuildingFase() {
+		return buildingRoad || buildingWareHouse || buildingFarm || buildingWoodCutter;
 	}
 
 	public int getRoadSize() {

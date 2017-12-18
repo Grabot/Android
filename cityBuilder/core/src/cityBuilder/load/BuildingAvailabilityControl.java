@@ -109,10 +109,19 @@ public class BuildingAvailabilityControl extends Data
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
             batch.draw(buildingRegion[building][buildingPosition][rotation], ((32 * rotationX) + buildingTile.getPosition().x), ((32 * rotationY) + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, -(90 * rotation), false);
 
-            if (generalAvailability(buildingTile, building, buildingPosition)) {
-                batch.draw(SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+            if (building == 3) {
+                if (generalAvailability(buildingTile, building, buildingPosition)) {
+                    batch.draw(SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                } else {
+                    batch.draw(SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                }
             } else {
-                batch.draw(SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                if (generalAvailability(buildingTile, building, buildingPosition)
+                        || !buildingTile.getRegionOwned()) {
+                    batch.draw(SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                } else {
+                    batch.draw(SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                }
             }
         }
     }
@@ -120,9 +129,18 @@ public class BuildingAvailabilityControl extends Data
     public void buttonAvailability(TextButton BuildBuildingButton, Tile buildingTile, int building, int buildingPosition) {
 
         // We don't need the texture here, but if the texture is null then this tile should not be checked
-        if (buildingRegion[building][buildingPosition][rotation] != null ) {
-            if (generalAvailability(buildingTile, building, buildingPosition)) {
-                BuildBuildingButton.setVisible(false);
+        if (building == 3) {
+            if (buildingRegion[building][buildingPosition][rotation] != null) {
+                if (generalAvailability(buildingTile, building, buildingPosition)) {
+                    BuildBuildingButton.setVisible(false);
+                }
+            }
+        } else {
+            if (buildingRegion[building][buildingPosition][rotation] != null) {
+                if (generalAvailability(buildingTile, building, buildingPosition)
+                        || !buildingTile.getRegionOwned()) {
+                    BuildBuildingButton.setVisible(false);
+                }
             }
         }
     }
@@ -181,7 +199,11 @@ public class BuildingAvailabilityControl extends Data
                 if (grid[x][y] ) {
                     if ((((x+(tileX-(radius*2))) >= 0) && ((y+(tileY-(radius*2))) >= 0)) && (((x+(tileX-(radius*2))) < gridSizeWidth) && ((y+(tileY-(radius*2))) < gridSizeHeight))) {
                         Tile tile = tiles.get(x + (tileX - (radius * 2))).get(y + (tileY - (radius * 2)));
-                        batch.draw(SquareOutlineAvailable, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                        // if it's a warehouse we want to see the range that we will gain (building == 1)
+                        // if it's a woodcutter we want the range to not include the regions that are not owned yet
+                        if ((building == 2 && tile.getRegionOwned()) || building == 1) {
+                            batch.draw(SquareOutlineAvailable, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                        }
                     }
                 }
             }

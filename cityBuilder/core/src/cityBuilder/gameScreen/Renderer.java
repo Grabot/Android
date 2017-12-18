@@ -118,11 +118,16 @@ public class Renderer extends Data
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
 
-		drawTiles.fillTiles( buildingAvailabilityControl, tiles, batch );
+		drawTiles.fillTiles( batch, tiles );
 
 		this.x = simulation.tileTouchX();
 		this.y = simulation.tileTouchY();
 		if( !inventoryOn ) {
+
+			if (simulation.getBuildingFase()) {
+				drawTiles.drawRegionOwned(batch, tiles);
+			}
+
 			if( simulation.getBuildingFarm() ) {
 				buildingRotationButton.setVisible( true );
 				inventoryButton.setVisible(false);
@@ -223,7 +228,7 @@ public class Renderer extends Data
 				touchedBox = simulation.touchedInfobox(tileinfo.getX(), tileinfo.getY(), tileinfo.getWidth(), tileinfo.getHeight());
 
 
-				if((x >= 0 && y >= 0) && (x < 50 && y < 50)) {
+				if(validTile()) {
 					if(!touchedBox) {
 						tileinfo.setText(x, y, tiles.get(x).get(y));
 						tileinfo.setPosition( (simulation.getTouchX() + 100), (720 - simulation.getTouchY()) );
