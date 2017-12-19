@@ -14,6 +14,7 @@ import cityBuilder.load.inventory.Inventory;
 import cityBuilder.load.inventory.InventoryActor;
 import cityBuilder.objects.Citizen;
 import cityBuilder.objects.Tile;
+import cityBuilder.objects.attributes.Wood;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -28,6 +29,7 @@ public class Simulation extends Data {
 	private ArrayList<WoodCutter> woodcutters = new ArrayList<WoodCutter>();
 	private ArrayList<Warehouse> warehouses = new ArrayList<Warehouse>();
 	private ArrayList<Road> roads = new ArrayList<Road>();
+	private ArrayList<Wood> woods = new ArrayList<Wood>();
 
 	private float width = 0;
 	private float height = 0;
@@ -52,7 +54,6 @@ public class Simulation extends Data {
 	private boolean up_pressed = false;
 	private boolean scrolling = false;
 
-	private boolean[] farmTiles = new boolean[626];
 	private boolean buildingFarm = false;
 	private boolean buildingWoodCutter = false;
 	private boolean buildingWareHouse = false;
@@ -83,9 +84,13 @@ public class Simulation extends Data {
 	}
 
 	public void populate() {
-		for( int i = 0; i < farmTiles.length; i++ )
-		{
-			farmTiles[i] = false;
+		for ( int x = 0; x < tiles.size(); x++ ) {
+			for (int y = 0; y < tiles.get(x).size(); y++ ) {
+				if (tiles.get(x).get(y).getOccupied() == 3 ) {
+					System.out.println("x: " + x +  " y: " + y );
+					woods.add(tiles.get(x).get(y).getWood());
+				}
+			}
 		}
 		Gdx.app.log(Simulation.LOG, "Game Screen populated");
 	}
@@ -127,6 +132,10 @@ public class Simulation extends Data {
 
 		for( int i = 0; i < warehouses.size(); i++ ) {
 			warehouses.get(i).update();
+		}
+
+		for( int i = 0; i < woods.size(); i++ ) {
+			woods.get(i).update();
 		}
 	}
 

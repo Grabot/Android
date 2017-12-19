@@ -188,8 +188,7 @@ public class Warehouse extends Data implements Building {
         return grid;
     }
 
-    private void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, int tileX, int tileY, int radius )
-    {
+    private void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, int tileX, int tileY, int radius ) {
         boolean[][] grid = new boolean[gridSizeWidth][gridSizeHeight];
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {
@@ -198,9 +197,9 @@ public class Warehouse extends Data implements Building {
         }
 
         defineCircle(grid, radius*2-1, radius*2-1, radius);
+        defineCircle(grid, radius*2+1, radius*2-1, radius);
         defineCircle(grid, radius*2-1, radius*2+1, radius);
         defineCircle(grid, radius*2+1, radius*2+1, radius);
-        defineCircle(grid, radius*2+1, radius*2-1, radius);
 
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {

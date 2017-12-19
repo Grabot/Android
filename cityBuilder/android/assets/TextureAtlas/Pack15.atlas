@@ -1,5 +1,5 @@
 
-Pack13.png
+Pack15.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -80,93 +80,128 @@ ironOreSmall
   orig: 64, 64
   offset: 0, 0
   index: -1
-pinetree
+pinetree0
   rotate: false
   xy: 320, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-roadDouble
+pinetree1
   rotate: false
   xy: 384, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-roadDoubleForward
+pinetree2
   rotate: false
   xy: 384, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-roadNo
+pinetree3
   rotate: false
   xy: 448, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-roadQuadruppel
+pinetree4
   rotate: false
   xy: 448, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-roadSingle
+pinetree5
   rotate: false
   xy: 512, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-roadTriple
+roadDouble
   rotate: false
   xy: 512, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-SquareBlueSmall
+roadDoubleForward
   rotate: false
   xy: 576, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-SquareGreenSmall
+roadNo
   rotate: false
   xy: 576, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-SquareGreySmal2l
+roadQuadruppel
   rotate: false
   xy: 640, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-SquareGreySmall
+roadSingle
   rotate: false
   xy: 640, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-SquareRedSmall
+roadTriple
   rotate: false
   xy: 704, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-water
+SquareBlueSmall
   rotate: false
   xy: 704, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+SquareGreenSmall
+  rotate: false
+  xy: 768, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+SquareGreySmal2l
+  rotate: false
+  xy: 768, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+SquareGreySmall
+  rotate: false
+  xy: 832, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+SquareRedSmall
+  rotate: false
+  xy: 832, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+water
+  rotate: false
+  xy: 896, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

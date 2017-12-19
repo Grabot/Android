@@ -171,8 +171,7 @@ public class BuildingAvailabilityControl extends Data
         return grid;
     }
 
-    public void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, Batch batch, int tileX, int tileY, int building, int radius )
-    {
+    public void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, Batch batch, int tileX, int tileY, int building, int radius ) {
         boolean[][] grid = new boolean[gridSizeWidth][gridSizeHeight];
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {
@@ -182,16 +181,16 @@ public class BuildingAvailabilityControl extends Data
 
         if (building == 1) {
             defineCircle(grid, radius*2-1, radius*2-1, radius);
+            defineCircle(grid, radius*2+1, radius*2-1, radius);
             defineCircle(grid, radius*2-1, radius*2+1, radius);
             defineCircle(grid, radius*2+1, radius*2+1, radius);
-            defineCircle(grid, radius*2+1, radius*2-1, radius);
         }
 
         if (building == 2) {
-            defineCircle(grid, radius+3, radius+3, radius);
-            defineCircle(grid, radius+4, radius+3, radius);
-            defineCircle(grid, radius+3, radius+4, radius);
-            defineCircle(grid, radius+4, radius+4, radius);
+            defineCircle(grid, radius*2, radius*2, radius);
+            defineCircle(grid, radius*2+1, radius*2, radius);
+            defineCircle(grid, radius*2, radius*2+1, radius);
+            defineCircle(grid, radius*2+1, radius*2+1, radius);
         }
 
         for (int x = 0; x < grid.length; x++ ) {

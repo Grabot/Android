@@ -98,6 +98,10 @@ public class Tile
 		}
 	}
 
+	public void drawWoods( Batch batch ) {
+		wood.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y );
+	}
+
 	public void drawFarm( Batch batch ) {
 		farm.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y );
 	}
@@ -112,11 +116,6 @@ public class Tile
 
 	public void drawRoads( Batch batch ) {
 		road.render( batch, 0, this.getPosition().x, this.getPosition().y );
-	}
-
-	public void drawWoods( Batch batch )
-	{
-		wood.draw( batch );
 	}
 
 	public TileType getType() {
@@ -194,6 +193,10 @@ public class Tile
 	public int getBuildingPosition()
 	{
 		return buildingPosition;
+	}
+
+	public Wood getWood() {
+		return wood;
 	}
 
 	public Warehouse getWarehouse() {

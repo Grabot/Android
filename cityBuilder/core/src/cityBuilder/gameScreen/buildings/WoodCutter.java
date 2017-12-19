@@ -22,6 +22,7 @@ public class WoodCutter extends Data implements Building {
 	public WoodCutter(int rotation, TextureAtlas atlas)
 	{
 		woodcutterTiles = new Tile[4];
+		regionTiles = new Tile[67];
 		this.rotation = rotation;
 		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("cubeDark");
 		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("cubeDark");
