@@ -14,7 +14,7 @@ import cityBuilder.load.inventory.Inventory;
 import cityBuilder.load.inventory.InventoryActor;
 import cityBuilder.objects.Citizen;
 import cityBuilder.objects.Tile;
-import cityBuilder.objects.attributes.Wood;
+import cityBuilder.gameScreen.buildings.Wood;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

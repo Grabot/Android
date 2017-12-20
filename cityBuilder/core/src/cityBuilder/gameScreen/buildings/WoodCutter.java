@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import cityBuilder.load.Building;
 import cityBuilder.load.Data;
@@ -13,21 +14,25 @@ import cityBuilder.objects.Tile;
 public class WoodCutter extends Data implements Building {
 
 	Tile[] woodcutterTiles;
+	Tile[] regionTiles;
 	private int rotation;
 	private TextureRegion SquareTileRegionWoodCutterBottomLeft;
 	private TextureRegion SquareTileRegionWoodCutterBottomRight;
 	private TextureRegion SquareTileRegionWoodCutterTopLeft;
 	private TextureRegion SquareTileRegionWoodCutterTopRight;
 
+	private Random random;
 	public WoodCutter(int rotation, TextureAtlas atlas)
 	{
 		woodcutterTiles = new Tile[4];
-		regionTiles = new Tile[67];
+		regionTiles = new Tile[48];
 		this.rotation = rotation;
 		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("cubeDark");
 		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("cubeDark");
 		SquareTileRegionWoodCutterTopRight = atlas.findRegion("cubeDark");
 		SquareTileRegionWoodCutterBottomRight = atlas.findRegion("cubeDark");
+
+		random = new Random();
 	}
 
 	@Override
@@ -48,6 +53,17 @@ public class WoodCutter extends Data implements Building {
 	}
 
 	public void update() {
+		for (Tile tile : regionTiles) {
+			if (tile != null) {
+				// Check if one of the region tiles is a wood tile.
+				if (tile.getOccupied() == 3) {
+					Wood wood = tile.getWood();
+					if (wood.getLife() == 1000) {
+						wood.setLife(random.nextInt(200));
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -61,6 +77,54 @@ public class WoodCutter extends Data implements Building {
 		woodcutterTiles[1] = tiles.get(x + 1).get(y);
 		woodcutterTiles[2] = tiles.get(x + 1).get(y + 1);
 		woodcutterTiles[3] = tiles.get(x).get(y + 1);
+
+		OutlineAvailability(tiles, x, y, 3);
+	}
+
+	private boolean[][] defineCircle(boolean[][] grid, int centerX, int centerY, int radius) {
+		for (int x = 0; x < grid.length; x++ ) {
+			for (int y = 0; y < grid[x].length; y++ ) {
+				int a = x - centerX;
+				int b = y - centerY;
+
+				if (a*a+b*b <= radius*radius+1) {
+					grid[x][y] = true;
+				}
+			}
+		}
+		return grid;
+	}
+
+	private void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, int tileX, int tileY, int radius ) {
+		boolean[][] grid = new boolean[gridSizeWidth][gridSizeHeight];
+		for (int x = 0; x < grid.length; x++ ) {
+			for (int y = 0; y < grid[x].length; y++) {
+				grid[x][y] = false;
+			}
+		}
+
+		defineCircle(grid, radius*2, radius*2, radius);
+		defineCircle(grid, radius*2+1, radius*2, radius);
+		defineCircle(grid, radius*2, radius*2+1, radius);
+		defineCircle(grid, radius*2+1, radius*2+1, radius);
+
+		int index = 0;
+		for (int x = 0; x < grid.length; x++ ) {
+			for (int y = 0; y < grid[x].length; y++) {
+				if (grid[x][y] ) {
+					if ((((x+(tileX-(radius*2))) >= 0) && ((y+(tileY-(radius*2))) >= 0)) && (((x+(tileX-(radius*2))) < gridSizeWidth) && ((y+(tileY-(radius*2))) < gridSizeHeight))) {
+						// We will set all available tiles for the Woodcutter, these are maximum 48.
+						Tile tile = tiles.get(x + (tileX - (radius * 2))).get(y + (tileY - (radius * 2)));
+						if (tile.getRegionOwned() && tile.getOccupied() != 2) {
+							// If we don't own the region yet we can't chop wood there.
+							regionTiles[index] = tile;
+							System.out.println("test " + index );
+							index ++;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public Tile[] getWoodCutterTiles() {

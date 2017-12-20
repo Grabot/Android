@@ -10,10 +10,8 @@ import cityBuilder.objects.attributes.Grass;
 import cityBuilder.objects.attributes.Iron;
 import cityBuilder.objects.attributes.Shore;
 import cityBuilder.objects.attributes.Stone;
-import cityBuilder.objects.attributes.Warehouse2Tex;
-import cityBuilder.objects.attributes.WarehouseTex;
 import cityBuilder.objects.attributes.Water;
-import cityBuilder.objects.attributes.Wood;
+import cityBuilder.gameScreen.buildings.Wood;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

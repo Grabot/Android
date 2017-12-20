@@ -1,4 +1,4 @@
-package cityBuilder.objects.attributes;
+package cityBuilder.gameScreen.buildings;
 
 import cityBuilder.load.Building;
 import cityBuilder.objects.Tile;
@@ -42,17 +42,17 @@ public class Wood implements Building {
 	@Override
 	public void render(Batch batch, int buildingPosition, float x, float y) {
 		// the more life the tree has, the bigger it is.
-		if ( life <= 25) {
+		if ( life <= 180) {
 			batch.draw(SquareTileRegionTree0, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if ( life > 25 && life <= 205) {
+		} else if ( life > 180 && life <= 360) {
 			batch.draw(SquareTileRegionTree1, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if ( life > 205 && life <= 385) {
+		} else if ( life > 360 && life <= 540) {
 			batch.draw(SquareTileRegionTree2, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if ( life > 385 && life <= 565 ) {
+		} else if ( life > 540 && life <= 720 ) {
 			batch.draw(SquareTileRegionTree3, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if ( life > 565 && life <= 745) {
+		} else if ( life > 720 && life <= 900) {
 			batch.draw(SquareTileRegionTree4, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if ( life > 745) {
+		} else if ( life > 900) {
 			batch.draw(SquareTileRegionTree5, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
 		}
 	}
@@ -69,5 +69,13 @@ public class Wood implements Building {
 	@Override
 	public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
 
+	}
+
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
 	}
 }
