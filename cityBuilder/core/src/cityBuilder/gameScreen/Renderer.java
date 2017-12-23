@@ -1,19 +1,5 @@
 package cityBuilder.gameScreen;
 
-import java.util.ArrayList;
-
-import cityBuilder.load.BuildingAvailabilityControl;
-import cityBuilder.load.Data;
-import cityBuilder.load.DrawTiles;
-import cityBuilder.load.TouchInput;
-import cityBuilder.load.build.buildActor;
-import cityBuilder.load.build.buildInventory;
-import cityBuilder.load.inventory.Inventory;
-import cityBuilder.load.inventory.InventoryActor;
-import cityBuilder.load.tileInfo.tileInfo;
-import cityBuilder.objects.Citizen;
-import cityBuilder.objects.Tile;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,6 +14,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
+import java.util.ArrayList;
+
+import cityBuilder.load.BuildingAvailabilityControl;
+import cityBuilder.load.Data;
+import cityBuilder.load.DrawTiles;
+import cityBuilder.load.TouchInput;
+import cityBuilder.load.build.buildActor;
+import cityBuilder.load.inventory.InventoryActor;
+import cityBuilder.load.tileInfo.tileInfo;
+import cityBuilder.objects.Citizen;
+import cityBuilder.objects.Tile;
 
 public class Renderer extends Data
 {
@@ -276,6 +274,8 @@ public class Renderer extends Data
 				inventoryActor.addAmountLabels();
 			}
 		}
+
+		drawTiles.drawBuildingInformation(batch, tiles);
 	}
 
 

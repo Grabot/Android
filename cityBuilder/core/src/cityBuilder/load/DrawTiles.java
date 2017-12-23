@@ -43,6 +43,17 @@ public class DrawTiles extends Data
 		}
 	}
 
+	public void drawBuildingInformation(Batch batch, ArrayList<ArrayList<Tile>> tiles) {
+		for (int x = 0; x < tiles.size(); x++ ) {
+			for (int y = 0; y < tiles.get(x).size(); y++) {
+
+				if (tiles.get(x).get(y).getOccupied() == 2) {
+					tiles.get(x).get(y).getWoodCutter().drawInformation(batch);
+				}
+			}
+		}
+	}
+
 	public void drawRegionOwned(Batch bitch, ArrayList<ArrayList<Tile>> tiles) {
 		for (int x = 0; x < tiles.size(); x++ ) {
 			for (int y = 0; y < tiles.get(x).size(); y++) {

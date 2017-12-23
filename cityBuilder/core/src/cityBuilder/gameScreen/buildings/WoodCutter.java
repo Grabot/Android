@@ -36,6 +36,9 @@ public class WoodCutter extends Data implements Building {
 	private int travelSpeed;
 	private int amountOfLogs;
 	private int doneProcessing;
+	private int restingPeriod;
+	private int standardProcessing;
+	private int standardWoodcutting;
 
 	BitmapFont font;
 
@@ -52,14 +55,17 @@ public class WoodCutter extends Data implements Building {
 
 		random = new Random();
 		woodcut = null;
-		woodcutTime = 2;
-		processTime = 2;
-		travelSpeed = 40;
+		standardProcessing = 2;
+		standardWoodcutting = 2;
+		woodcutTime = standardWoodcutting;
+		processTime = standardProcessing;
+		travelSpeed = 90;
 		amountOfLogs = 0;
 		doneProcessing = 0;
+		restingPeriod = 0;
 
 		font = new BitmapFont();
-		font.getData().setScale(5);
+		font.getData().setScale(2);
 	}
 
 	@Override
@@ -77,70 +83,77 @@ public class WoodCutter extends Data implements Building {
 			//bottom right
 			batch.draw( SquareTileRegionWoodCutterBottomRight, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
 		}
+	}
+
+	public void drawInformation( Batch batch ) {
 
 		if (doneProcessing != 0) {
-			font.draw(batch, "Hello World!", centerPosition.x, centerPosition.y);
+			font.draw(batch, "stock: " + amountOfLogs, centerPosition.x-32, centerPosition.y+120-(doneProcessing/5));
 			doneProcessing--;
 		}
 	}
 
 	public void update() {
-		if (!cutting) {
-			ArrayList<Tile> treeTiles = new ArrayList<Tile>();
-			for (Tile tile : regionTiles) {
-				if (tile != null) {
-					// Check if one of the region tiles is a wood tile.
-					if (tile.getOccupied() == 3) {
-						Wood wood = tile.getWood();
-						if (wood.getLife() == 1000) {
-							treeTiles.add(tile);
+		if (restingPeriod != 0) {
+			if (!cutting) {
+				ArrayList<Tile> treeTiles = new ArrayList<Tile>();
+				for (Tile tile : regionTiles) {
+					if (tile != null) {
+						// Check if one of the region tiles is a wood tile.
+						if (tile.getOccupied() == 3) {
+							Wood wood = tile.getWood();
+							if (wood.getLife() == 1000) {
+								treeTiles.add(tile);
+							}
 						}
 					}
 				}
-			}
 
-			if (treeTiles.size() != 0) {
-				// if there are fully grown trees we want to cut one down.
-				// just get the first one, not random but it will feel random for users.
-				woodcut = treeTiles.get(0);
-				cutting = true;
-				// We set a distance that the woodcutter has to travel.
-				distanceWoodCutterToTree = centerPosition.distance(woodcut.getPosition());
-				distanceTreeToWoodCutter =distanceWoodCutterToTree;
-			}
-		} else {
-			if (distanceWoodCutterToTree <= 0) {
-				distanceWoodCutterToTree = 0;
-				// The woodcutter has arrived at the tree and can start cutting it down!
-				if (woodcutTime == 0) {
-					// We introduce a bit of randomness for how old the tree is when it is newly planted.
-					woodcut.getWood().setLife(random.nextInt(300));
-					// indicates the woodcutting is done and the processing begins
-					woodcutTime = -1;
-				} else if (woodcutTime > 0) {
-					// it takes time to cut wood
-					woodcutTime -= 1;
-				} else {
-					if ( distanceTreeToWoodCutter <= 0) {
-						// Here the woodcutter is back home and he can process the log.
-						if (processTime == 0) {
-							// The tree is fully processed and it can be picked up!
-							amountOfLogs += 1;
-							doneProcessing = 600;
-							cutting = false;
-							processTime = 2;
-							woodcutTime = 2;
-						} else {
-							// it takes time to process the log.
-							processTime -= 1;
-						}
-					} else {
-						distanceTreeToWoodCutter -= travelSpeed;
-					}
+				if (treeTiles.size() != 0) {
+					// if there are fully grown trees we want to cut one down.
+					woodcut = treeTiles.get(random.nextInt(treeTiles.size()));
+					cutting = true;
+					// We set a distance that the woodcutter has to travel.
+					distanceWoodCutterToTree = centerPosition.distance(woodcut.getPosition());
+					distanceTreeToWoodCutter = distanceWoodCutterToTree;
 				}
 			} else {
-				distanceWoodCutterToTree -= travelSpeed;
+				if (distanceWoodCutterToTree <= 0) {
+					distanceWoodCutterToTree = 0;
+					// The woodcutter has arrived at the tree and can start cutting it down!
+					if (woodcutTime == 0) {
+						// We introduce a bit of randomness for how old the tree is when it is newly planted.
+						woodcut.getWood().setLife(random.nextInt(300));
+						// indicates the woodcutting is done and the processing begins
+						woodcutTime = -1;
+					} else if (woodcutTime > 0) {
+						// it takes time to cut wood
+						woodcutTime -= 1;
+					} else {
+						if (distanceTreeToWoodCutter <= 0) {
+							// Here the woodcutter is back home and he can process the log.
+							if (processTime == 0) {
+								// The tree is fully processed and it can be picked up!
+								amountOfLogs += 1;
+								doneProcessing = 600;
+								cutting = false;
+								processTime = standardProcessing;
+								woodcutTime = standardWoodcutting;
+								restingPeriod = 5;
+							} else {
+								// it takes time to process the log.
+								processTime -= 1;
+							}
+						} else {
+							distanceTreeToWoodCutter -= travelSpeed;
+						}
+					}
+				} else {
+					distanceWoodCutterToTree -= travelSpeed;
+				}
 			}
+		} else {
+			restingPeriod -= 1;
 		}
 	}
 
