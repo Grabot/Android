@@ -9,6 +9,7 @@ import java.util.Random;
 
 import cityBuilder.load.Building;
 import cityBuilder.load.Data;
+import cityBuilder.load.Vector;
 import cityBuilder.objects.Tile;
 
 public class WoodCutter extends Data implements Building {
@@ -20,8 +21,15 @@ public class WoodCutter extends Data implements Building {
 	private TextureRegion SquareTileRegionWoodCutterBottomRight;
 	private TextureRegion SquareTileRegionWoodCutterTopLeft;
 	private TextureRegion SquareTileRegionWoodCutterTopRight;
+	private TextureRegion SquareTileRegionAllowed;
 
 	private Random random;
+
+	private Tile woodcut;
+	private boolean cutting;
+	private Vector centerPosition;
+	private float distanceWoodCutterToTree;
+
 	public WoodCutter(int rotation, TextureAtlas atlas)
 	{
 		woodcutterTiles = new Tile[4];
@@ -31,8 +39,10 @@ public class WoodCutter extends Data implements Building {
 		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("cubeDark");
 		SquareTileRegionWoodCutterTopRight = atlas.findRegion("cubeDark");
 		SquareTileRegionWoodCutterBottomRight = atlas.findRegion("cubeDark");
+		SquareTileRegionAllowed = atlas.findRegion("SquareGreenSmall");
 
 		random = new Random();
+		woodcut = null;
 	}
 
 	@Override
@@ -50,18 +60,34 @@ public class WoodCutter extends Data implements Building {
 			//bottom right
 			batch.draw( SquareTileRegionWoodCutterBottomRight, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
 		}
+
+		if (woodcut != null && cutting) {
+			batch.draw( SquareTileRegionAllowed, -32 + woodcut.getPosition().x , -32 + woodcut.getPosition().y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
+		}
 	}
 
 	public void update() {
-		for (Tile tile : regionTiles) {
-			if (tile != null) {
-				// Check if one of the region tiles is a wood tile.
-				if (tile.getOccupied() == 3) {
-					Wood wood = tile.getWood();
-					if (wood.getLife() == 1000) {
-						wood.setLife(random.nextInt(200));
+		if (!cutting) {
+			ArrayList<Tile> treeTiles = new ArrayList<Tile>();
+			for (Tile tile : regionTiles) {
+				if (tile != null) {
+					// Check if one of the region tiles is a wood tile.
+					if (tile.getOccupied() == 3) {
+						Wood wood = tile.getWood();
+						if (wood.getLife() == 1000) {
+							treeTiles.add(tile);
+						}
 					}
 				}
+			}
+
+			if (treeTiles.size() != 0) {
+				// if there are fully grown trees we want to cut one down.
+				// just get the first one, not random but it will feel random for users.
+				woodcut = treeTiles.get(0);
+				cutting = true;
+				distanceWoodCutterToTree = centerPosition.distance(woodcut.getPosition());
+				System.out.println("distance: " + distanceWoodCutterToTree);
 			}
 		}
 	}
@@ -78,7 +104,10 @@ public class WoodCutter extends Data implements Building {
 		woodcutterTiles[2] = tiles.get(x + 1).get(y + 1);
 		woodcutterTiles[3] = tiles.get(x).get(y + 1);
 
+		centerPosition = new Vector(tiles.get(x).get(y).getPosition().x + 32, tiles.get(x).get(y).getPosition().y + 32);
+
 		OutlineAvailability(tiles, x, y, 3);
+		cutting = false;
 	}
 
 	private boolean[][] defineCircle(boolean[][] grid, int centerX, int centerY, int radius) {
@@ -118,7 +147,6 @@ public class WoodCutter extends Data implements Building {
 						if (tile.getRegionOwned() && tile.getOccupied() != 2) {
 							// If we don't own the region yet we can't chop wood there.
 							regionTiles[index] = tile;
-							System.out.println("test " + index );
 							index ++;
 						}
 					}
