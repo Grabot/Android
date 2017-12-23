@@ -1,6 +1,7 @@
 package cityBuilder.gameScreen.buildings;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -34,6 +35,9 @@ public class WoodCutter extends Data implements Building {
 	private float processTime;
 	private int travelSpeed;
 	private int amountOfLogs;
+	private int doneProcessing;
+
+	BitmapFont font;
 
 	public WoodCutter(int rotation, TextureAtlas atlas)
 	{
@@ -52,6 +56,10 @@ public class WoodCutter extends Data implements Building {
 		processTime = 2;
 		travelSpeed = 40;
 		amountOfLogs = 0;
+		doneProcessing = 0;
+
+		font = new BitmapFont();
+		font.getData().setScale(5);
 	}
 
 	@Override
@@ -68,6 +76,11 @@ public class WoodCutter extends Data implements Building {
 		} else if( position == 3 ) {
 			//bottom right
 			batch.draw( SquareTileRegionWoodCutterBottomRight, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
+		}
+
+		if (doneProcessing != 0) {
+			font.draw(batch, "Hello World!", centerPosition.x, centerPosition.y);
+			doneProcessing--;
 		}
 	}
 
@@ -113,6 +126,10 @@ public class WoodCutter extends Data implements Building {
 						if (processTime == 0) {
 							// The tree is fully processed and it can be picked up!
 							amountOfLogs += 1;
+							doneProcessing = 600;
+							cutting = false;
+							processTime = 2;
+							woodcutTime = 2;
 						} else {
 							// it takes time to process the log.
 							processTime -= 1;
