@@ -29,6 +29,11 @@ public class WoodCutter extends Data implements Building {
 	private boolean cutting;
 	private Vector centerPosition;
 	private float distanceWoodCutterToTree;
+	private float distanceTreeToWoodCutter;
+	private float woodcutTime;
+	private float processTime;
+	private int travelSpeed;
+	private int amountOfLogs;
 
 	public WoodCutter(int rotation, TextureAtlas atlas)
 	{
@@ -43,6 +48,10 @@ public class WoodCutter extends Data implements Building {
 
 		random = new Random();
 		woodcut = null;
+		woodcutTime = 2;
+		processTime = 2;
+		travelSpeed = 40;
+		amountOfLogs = 0;
 	}
 
 	@Override
@@ -59,10 +68,6 @@ public class WoodCutter extends Data implements Building {
 		} else if( position == 3 ) {
 			//bottom right
 			batch.draw( SquareTileRegionWoodCutterBottomRight, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		}
-
-		if (woodcut != null && cutting) {
-			batch.draw( SquareTileRegionAllowed, -32 + woodcut.getPosition().x , -32 + woodcut.getPosition().y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
 		}
 	}
 
@@ -86,8 +91,38 @@ public class WoodCutter extends Data implements Building {
 				// just get the first one, not random but it will feel random for users.
 				woodcut = treeTiles.get(0);
 				cutting = true;
+				// We set a distance that the woodcutter has to travel.
 				distanceWoodCutterToTree = centerPosition.distance(woodcut.getPosition());
-				System.out.println("distance: " + distanceWoodCutterToTree);
+				distanceTreeToWoodCutter =distanceWoodCutterToTree;
+			}
+		} else {
+			if (distanceWoodCutterToTree <= 0) {
+				distanceWoodCutterToTree = 0;
+				// The woodcutter has arrived at the tree and can start cutting it down!
+				if (woodcutTime == 0) {
+					// We introduce a bit of randomness for how old the tree is when it is newly planted.
+					woodcut.getWood().setLife(random.nextInt(300));
+					// indicates the woodcutting is done and the processing begins
+					woodcutTime = -1;
+				} else if (woodcutTime > 0) {
+					// it takes time to cut wood
+					woodcutTime -= 1;
+				} else {
+					if ( distanceTreeToWoodCutter <= 0) {
+						// Here the woodcutter is back home and he can process the log.
+						if (processTime == 0) {
+							// The tree is fully processed and it can be picked up!
+							amountOfLogs += 1;
+						} else {
+							// it takes time to process the log.
+							processTime -= 1;
+						}
+					} else {
+						distanceTreeToWoodCutter -= travelSpeed;
+					}
+				}
+			} else {
+				distanceWoodCutterToTree -= travelSpeed;
 			}
 		}
 	}
