@@ -61,7 +61,7 @@ public class WoodCutter extends Data implements Building {
 		woodcut = null;
 		standardProcessing = 3;
 		standardWoodcutting = 3;
-		standardRestingPeriod = 12;
+		standardRestingPeriod = 15;
 		woodcutTime = standardWoodcutting;
 		processTime = standardProcessing;
 		restingPeriod = standardRestingPeriod;
@@ -100,8 +100,12 @@ public class WoodCutter extends Data implements Building {
 		}
 
 		if (amountOfLogs == 10 && fullStock == 0) {
-			font.draw(batch, "stock is full", centerPosition.x-32, centerPosition.y+120-(fullProcessing/5));
-			fullProcessing -= 1;
+			if (fullProcessing != 0) {
+				font.draw(batch, "stock is full", centerPosition.x - 32, centerPosition.y + 120 - (fullProcessing / 5));
+				fullProcessing -= 1;
+			} else {
+				fullStock = 600;
+			}
 		} else if (amountOfLogs == 10) {
 			fullStock -= 1;
 			if (fullStock == 0) {
