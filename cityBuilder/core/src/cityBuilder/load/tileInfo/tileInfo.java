@@ -1,6 +1,7 @@
 package cityBuilder.load.tileInfo;
 
 import cityBuilder.gameScreen.Simulation;
+import cityBuilder.gameScreen.buildings.WoodCutter;
 import cityBuilder.objects.Tile;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -40,8 +41,10 @@ public class tileInfo extends Window {
 				//farm
 				label = new Label( "dit is een farm", skin );
 			} else if( building == 2 ) {
-				//woodcutter 
-				label = new Label( "dit is een woodcutter", skin );
+				//woodcutter
+				WoodCutter woodCutter = tile.getWoodCutter();
+				label = new Label( "woodcutter \nstock: " + woodCutter.getAmountOfLogs(), skin );
+				label.setSize(50, 20);
 			} else if( building == 3 ) {
 				//wood
 				label = new Label( "dit is een bos", skin );
