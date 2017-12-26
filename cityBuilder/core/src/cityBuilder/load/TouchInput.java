@@ -78,7 +78,7 @@ public class TouchInput
 		this.distance = simulation.getDistance();
 	}
 
-	public void MapScroll(boolean buildingRoad)
+	public void MapScroll(boolean buildingRoad, boolean buildingTree)
 	{
 
 		if( touchedDown && firstPress )
@@ -89,12 +89,12 @@ public class TouchInput
 		}
 		else if( touchedDown && !firstPress )
 		{
-			if (!buildingRoad) {
+			if (!buildingRoad && !buildingTree) {
 				offsetX = ((firstX - touchX) * currentZoom);
-				offsetX = MathUtils.clamp(offsetX, (((((width / 2) * currentZoom) - 32) - currentX) - (overShootX * currentZoom)), (((((640 * currentZoom) - 32) - currentX) + mapSizeWidth - (width * currentZoom))) + (overShootX * currentZoom));
+				//offsetX = MathUtils.clamp(offsetX, (((((width / 2) * currentZoom) - 32) - currentX) - (overShootX * currentZoom)), (((((640 * currentZoom) - 32) - currentX) + mapSizeWidth - (width * currentZoom))) + (overShootX * currentZoom));
 
 				offsetY = ((firstY - touchY) * currentZoom);
-				offsetY = MathUtils.clamp(offsetY, -((((mapSizeHeight - ((height / 2) * currentZoom)) - currentY) - 32) + (overShootY * currentZoom)), (-(((((height / 2) * currentZoom) - 32) - currentY)) + (overShootY * currentZoom)));
+				//offsetY = MathUtils.clamp(offsetY, -((((mapSizeHeight - ((height / 2) * currentZoom)) - currentY) - 32) + (overShootY * currentZoom)), (-(((((height / 2) * currentZoom) - 32) - currentY)) + (overShootY * currentZoom)));
 
 				if (Math.sqrt((offsetX * offsetX + offsetY * offsetY)) >= 20) {
 					scrolling = true;
@@ -111,27 +111,27 @@ public class TouchInput
 			offsetY = 0;
 			scrolling = false;
 
-			if( touchSideRight )
-			{
-				currentX = -280;
-				touchSideRight = false;
-			}
-			else if( touchSideLeft )
-			{
-				currentX = 280;
-				touchSideLeft = false;
-			}
-
-			if( touchUp )
-			{
-				currentY = -150;
-				touchUp = false;
-			}
-			else if( touchBottom )
-			{
-				currentY = 150;
-				touchBottom = false;
-			}
+//			if( touchSideRight )
+//			{
+//				currentX = -280;
+//				touchSideRight = false;
+//			}
+//			else if( touchSideLeft )
+//			{
+//				currentX = 280;
+//				touchSideLeft = false;
+//			}
+//
+//			if( touchUp )
+//			{
+//				currentY = -150;
+//				touchUp = false;
+//			}
+//			else if( touchBottom )
+//			{
+//				currentY = 150;
+//				touchBottom = false;
+//			}
 		}
 		simulation.isScrolling( scrolling );
 	}

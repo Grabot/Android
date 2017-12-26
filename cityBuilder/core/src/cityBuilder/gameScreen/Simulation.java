@@ -59,6 +59,7 @@ public class Simulation extends Data {
 	private boolean buildingWareHouse = false;
 	private boolean buildingWarehouse2 = false;
 	private boolean buildingRoad = false;
+	private boolean buildingTree = false;
 
 	float touch_distance_x = 999;
 	float touch_distance_y = 999;
@@ -87,7 +88,6 @@ public class Simulation extends Data {
 		for ( int x = 0; x < tiles.size(); x++ ) {
 			for (int y = 0; y < tiles.get(x).size(); y++ ) {
 				if (tiles.get(x).get(y).getOccupied() == 3 ) {
-					System.out.println("x: " + x +  " y: " + y );
 					woods.add(tiles.get(x).get(y).getWood());
 				}
 			}
@@ -160,6 +160,10 @@ public class Simulation extends Data {
 		buildingRoad = true;
 	}
 
+	public void buildTree() {
+		buildingTree = true;
+	}
+
 	public void BuildingConfirmation( int building, int rotation, int x, int y )
 	{
 		//set all tiles that occupy the farm
@@ -183,8 +187,25 @@ public class Simulation extends Data {
 			woodcutters.add(woodcutter);
 			buildingWoodCutter = false;
 		} else if( building == 3) {
+
+			Wood wood = new Wood(null, rotation, atlas);
+			wood.buildBuilding(tiles, x, y, rotation);
+
+			inventory.takeItem("treeSeed");
+			woods.add(wood);
 			// this is a tree.
+			buildingTree = false;
 		}
+	}
+
+	public void buildingConfirmationWood(int rotation, ArrayList<Tile> woodSelected) {
+		for (Tile tile : woodSelected) {
+			Wood wood = new Wood(null, rotation, atlas);
+			wood.buildBuilding(tiles, tile.getX(), tile.getY(), rotation);
+			woods.add(wood);
+			inventory.takeItem("treeSeed");
+		}
+		buildingTree = false;
 	}
 
 	public void BuildingConfirmationRoad( int rotation, ArrayList<Tile> roadSelected ) {
@@ -301,11 +322,19 @@ public class Simulation extends Data {
 		return buildingRoad;
 	}
 
+	public boolean getBuildingTree() {
+		return buildingTree;
+	}
+
 	public boolean getBuildingFase() {
-		return buildingRoad || buildingWareHouse || buildingFarm || buildingWoodCutter;
+		return buildingRoad || buildingWareHouse || buildingFarm || buildingWoodCutter || buildingTree;
 	}
 
 	public int getRoadSize() {
 		return inventory.checkInventory(Item.road);
+	}
+
+	public int getWoodSize() {
+		return inventory.checkInventory(Item.treeSeed);
 	}
 }

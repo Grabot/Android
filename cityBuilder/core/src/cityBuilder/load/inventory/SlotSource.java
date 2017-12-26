@@ -35,7 +35,7 @@ public class SlotSource extends Source {
         sourceSlot.take(sourceSlot.getAmount());
         payload.setObject(payloadSlot);
 
-        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output9.pack"));
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output10.atlas"));
         TextureRegion icon = icons.findRegion(payloadSlot.getItem().getTextureRegion());
 
         Actor dragActor = new Image(icon);

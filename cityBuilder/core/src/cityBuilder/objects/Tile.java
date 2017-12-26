@@ -17,6 +17,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.util.Random;
+
 public class Tile
 {
 	private TileType type;
@@ -44,10 +46,13 @@ public class Tile
 
 	private TextureRegion SquareGreySmal2l;
 
+	private Random random;
+
 	public Tile( Vector position, TextureAtlas atlas )
 	{
 		this.position.set( position );
 		this.atlas = atlas;
+		random = new Random();
 		regionOwned = false;
 
 		SquareGreySmal2l = atlas.findRegion("SquareGreySmal2l");
@@ -168,6 +173,13 @@ public class Tile
 		this.warehouse = warehouse;
 	}
 
+	public void setOccupiedWood(int buildingPosition, int rotataion, Wood wood) {
+		this.occupied = 3;
+		this.buildingPosition = buildingPosition;
+		this.wood = wood;
+		this.wood.setLife(random.nextInt(100));
+	}
+
 	public void setOccupied(int occupied, int buildingPosition, int rotation) {
 
 		this.occupied = occupied;
@@ -175,7 +187,7 @@ public class Tile
 
 		if( occupied == 3 ) {
 			// woods
-			wood = new Wood(this, buildingPosition, rotation, atlas);
+			wood = new Wood(this, rotation, atlas);
 		}
 
 	}

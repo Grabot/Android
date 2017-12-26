@@ -15,7 +15,8 @@ public enum Item {
 	wood("wood"),					// 10
 	woodBoard("woodBoard"),			// 11
 	woodClear("woodClear"),			// 12
-	woodCutter("woodCutter");		// 13
+	woodCutter("woodCutter"),		// 13
+	treeSeed("treeSeed");			// 14
 
 	private String textureRegion;
 

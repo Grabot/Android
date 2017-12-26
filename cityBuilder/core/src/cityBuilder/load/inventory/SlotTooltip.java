@@ -35,21 +35,21 @@ public class SlotTooltip extends Window implements SlotListener
         // title displays the amount
         clear();
         Label label;
-        if( slot.getItem().toString() == "farm" ) {
+        if( slot.getItem().toString().equals("farm")) {
             label = new Label("This is a motherfucking \n" + slot.getItem(), skin);
             add(label);
             row();
             TextButton buildFarm = new TextButton("Build", skin );
             buildFarm.addListener(buildFarmListener);
             add(buildFarm);
-        } else if( slot.getItem().toString() == "woodCutter" ) {
+        } else if( slot.getItem().toString().equals("woodCutter")) {
             label = new Label("This is a motherfucking \n" + slot.getItem(), skin);
             add(label);
             row();
             TextButton buildWoodCutter = new TextButton("Build", skin );
             buildWoodCutter.addListener(buildWoodCutterListener);
             add(buildWoodCutter);
-        } else if( slot.getItem().toString() == "fisherMan" ) {
+        } else if( slot.getItem().toString().equals("fisherMan")) {
             label = new Label("This is THE motherfucking \n" + slot.getItem(), skin);
             add(label);
             row();
@@ -69,6 +69,13 @@ public class SlotTooltip extends Window implements SlotListener
             row();
             TextButton buildRoad = new TextButton("Build", skin );
             buildRoad.addListener(buildRoadListener);
+            add(buildRoad);
+        } else if( slot.getItem().toString().equals("treeSeed")) {
+            label = new Label("Build a tree seed! \n" + slot.getItem(), skin);
+            add(label);
+            row();
+            TextButton buildRoad = new TextButton("Build", skin );
+            buildRoad.addListener(buildTreeListener);
             add(buildRoad);
         }
         pack();
@@ -113,6 +120,13 @@ public class SlotTooltip extends Window implements SlotListener
         @Override
         public void clicked (InputEvent event, float x, float y){
             game.buildRoad();
+        }
+    };
+
+    public ClickListener buildTreeListener = new ClickListener() {
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            game.buildTree();
         }
     };
 

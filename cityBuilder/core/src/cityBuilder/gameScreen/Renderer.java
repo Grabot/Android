@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import java.util.ArrayList;
 
+import cityBuilder.gameScreen.buildings.Wood;
 import cityBuilder.load.BuildingAvailabilityControl;
 import cityBuilder.load.Data;
 import cityBuilder.load.DrawTiles;
@@ -32,6 +33,7 @@ public class Renderer extends Data
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
 	private ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
 	private ArrayList<Tile> roadSelected = new ArrayList<Tile>();
+	private ArrayList<Tile> woodSelected = new ArrayList<Tile>();
 	public static final String LOG = Renderer.class.getSimpleName();
 
 	private boolean initialClose = false;
@@ -48,9 +50,12 @@ public class Renderer extends Data
 	private int y = -1;
 	private int previousRoadX = -1;
 	private int previousRoadY = -1;
+	private int previousWoodX = -1;
+	private int previousWoodY = -1;
 	private int previousWarehouseX = -1;
 	private int previousWarehouseY = -1;
 	private boolean trueRoadSelectionPress = false;
+	private boolean trueWoodSelectionPress = false;
 
 	private boolean inventoryOn = false;
 
@@ -219,6 +224,37 @@ public class Renderer extends Data
 					}
 				}
 
+			} else if( simulation.getBuildingTree()) {
+				boolean remove = false;
+				buildingRotationButton.setVisible( true );
+				inventoryButton.setVisible(false);
+				if (validTile()) {
+					// ugly way to ensure that the selected tile is selected by the user. It will
+					// give a single frame different tile selection. This will ignore that situation
+					if (trueWoodSelectionPress) {
+						if (previousWoodX != x || previousWoodY != y) {
+							previousWoodX = x;
+							previousWoodY = y;
+							for (Tile tile : woodSelected) {
+								if (tile == tiles.get(x).get(y)) {
+									remove = true;
+								}
+							}
+							if (remove) {
+								woodSelected.remove(tiles.get(x).get(y));
+							} else {
+								if (woodSelected.size() < simulation.getWoodSize()) {
+									woodSelected.add(tiles.get(x).get(y));
+								}
+							}
+						}
+					}
+					trueWoodSelectionPress = true;
+					buildBuildingButton.setVisible(true);
+					for (Tile tile : woodSelected) {
+						buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tile, 5, 0);
+					}
+				}
 			} else {
 				buildingRotationButton.setVisible( false );
 				inventoryButton.setVisible(true);
@@ -238,11 +274,12 @@ public class Renderer extends Data
 				}
 
 			}
-			inputHandler.MapScroll(simulation.getBuildingRoad());
+			inputHandler.MapScroll(simulation.getBuildingRoad(), simulation.getBuildingTree());
 			inputHandler.MapZoom();
 
 			if (!simulation.getTouchedDown()) {
 				trueRoadSelectionPress = false;
+				trueWoodSelectionPress = false;
 			}
 
 			if( initialClose ) {
@@ -263,6 +300,8 @@ public class Renderer extends Data
 			} else if( simulation.getBuildingWarehouse() ) {
 				inventoryOn = false;
 			} else if (simulation.getBuildingRoad()) {
+				inventoryOn = false;
+			} else if (simulation.getBuildingTree()) {
 				inventoryOn = false;
 			}
 
@@ -297,7 +336,7 @@ public class Renderer extends Data
 		buildingRotationButton.setBounds(1150, 500, 100, 100);
 		buildingRotationButton.setVisible( false );
 
-		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output9.pack"));
+		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output10.atlas"));
 		TextureRegion image;
 		image = icons.findRegion("empty");
 		ImageButtonStyle style = new ImageButtonStyle(skin.get(ButtonStyle.class));
@@ -335,6 +374,9 @@ public class Renderer extends Data
 			}else if( simulation.getBuildingRoad()) {
 				simulation.BuildingConfirmationRoad(rotation, roadSelected);
 				roadSelected.clear();
+			} else if (simulation.getBuildingTree()) {
+				simulation.buildingConfirmationWood(rotation, woodSelected);
+				woodSelected.clear();
 			}
 			inventoryActor.clearLabels();
 		}

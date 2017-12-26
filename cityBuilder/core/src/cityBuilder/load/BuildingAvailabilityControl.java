@@ -40,7 +40,7 @@ public class BuildingAvailabilityControl extends Data
         FileHandle buildingRestrictions = Gdx.files.internal("buildingData/buildingAvailability.csv");
         BufferedReader br = new BufferedReader(buildingRestrictions.reader());
 
-        buildingAvailability = new String[5][25][5][4];
+        buildingAvailability = new String[6][25][5][4];
         String line = "";
         int index = 0;
         try {
@@ -73,7 +73,7 @@ public class BuildingAvailabilityControl extends Data
         FileHandle buildingTextureRotate = Gdx.files.internal("buildingData/buildingTexture.csv");
         br = new BufferedReader(buildingTextureRotate.reader());
 
-        buildingRegion = new TextureRegion[5][10][4];
+        buildingRegion = new TextureRegion[6][10][4];
         // Re-use previous made variables
         line = "";
         index = 0;

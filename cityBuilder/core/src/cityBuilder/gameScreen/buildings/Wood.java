@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class Wood implements Building {
 	private Tile tile;
-	private int position;
 	private int rotation;
 	//private TextureRegion SquareTileRegionGrass;
 	private TextureRegion SquareTileRegionTree0;
@@ -23,10 +22,10 @@ public class Wood implements Building {
 
 	private int life;
 
-	public Wood( Tile tile, int position, int rotation, TextureAtlas atlas ) {
-		this.tile = tile;
-		this.position = position;
+	public Wood(Tile tile, int rotation, TextureAtlas atlas ) {
 		this.rotation = rotation;
+		// This can be null it will then later be filled when needed.
+		this.tile = tile;
 		//SquareTileRegionGrass = atlas.findRegion("Grass");
 		SquareTileRegionTree0 = atlas.findRegion("pinetree0");
 		SquareTileRegionTree1 = atlas.findRegion("pinetree1");
@@ -68,7 +67,8 @@ public class Wood implements Building {
 
 	@Override
 	public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
-
+		tile = tiles.get(x).get(y);
+		tile.setOccupiedWood(0, rotation, this);
 	}
 
 	public int getLife() {

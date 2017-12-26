@@ -4,6 +4,7 @@ import cityBuilder.load.Item;
 import cityBuilder.load.inventory.Inventory;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -50,7 +51,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 		// title displays the amount
 		// basic layout
 
-		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output9.pack"));
+		TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/Output10.atlas"));
 		final TextureRegion logImage = icons.findRegion("woodClear");
 		final TextureRegion stoneImage = icons.findRegion("stoneClear");
 		final Actor logIcon = new Actor(){
@@ -130,11 +131,11 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 
 			buildButton = new TextButton( "Create", skin );
 			buildButton.addListener(createListenerWoodcutter);
-		} else if( slot.getItem() == Item.values()[0]) {
-			//new warehouse test
+		} else if( slot.getItem() == Item.values()[14]) {
+			// tree seed
 			row().fill().expandX();
 			clear();
-			label = new Label("WareHouse \nResources required: \n", skin);
+			label = new Label("Tree \nResources required: \n", skin);
 
 			logIcon.setBounds(logIcon.getX(), logIcon.getY(), logImage.getRegionWidth(), logImage.getRegionHeight());
 			stoneIcon.setBounds(stoneIcon.getX(), stoneIcon.getY(), stoneImage.getRegionWidth(), stoneImage.getRegionHeight());
@@ -151,7 +152,7 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 			row();
 
 			buildButton = new TextButton( "Create", skin );
-			buildButton.addListener(createListenerWareHouse);
+			buildButton.addListener(createListenerTrees);
 		}  else if( slot.getItem() == Item.values()[6]) {
 			// road
 			row().fill().expandX();
@@ -245,6 +246,17 @@ public class buildSlotTooltip extends Window implements buildSlotListener
 				inventory.addItem(inventory.firstEmtpySlot(), 6);
 			} else {
 				inventory.addItem(inventory.findResourceSlot("road"), 6);
+			}
+		}
+	};
+
+	public ClickListener createListenerTrees = new ClickListener() {
+		@Override
+		public void clicked (InputEvent event, float x, float y) {
+			if (inventory.checkInventoryTest("treeSeed") == -1) {
+				inventory.addItem(inventory.firstEmtpySlot(), 14);
+			} else {
+				inventory.addItem(inventory.findResourceSlot("treeSeed"), 14);
 			}
 		}
 	};
