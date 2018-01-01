@@ -52,7 +52,7 @@ public class GameScreen implements Screen
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 
-		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/Pack16.atlas"));
+		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/IsoTest.atlas"));
 
 		this.citizens = citizens;
 		Gdx.app.log( LOG, "Creating opening screen" );

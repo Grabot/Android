@@ -14,11 +14,11 @@ public class Water
 	public Water( Tile tile, TextureAtlas atlas  )
 	{
 		this.tile = tile;
-		SquareTileRegionWater = atlas.findRegion("water");
+		SquareTileRegionWater = atlas.findRegion("waterIso");
 	}
 
 	public void draw( Batch batch )
 	{
-		batch.draw( SquareTileRegionWater, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+		batch.draw( SquareTileRegionWater, -45 + tile.getPosition().x , -24 + tile.getPosition().y, 32, 32, 90, 46, 1, 1, 0, false);
 	}
 }

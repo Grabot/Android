@@ -23,29 +23,29 @@ public class Shore {
 
 	public void draw( Batch batch ) {
 		if( tilePosition == 23 ) {
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 45, false);
 		} else if( tilePosition == 26 ) {
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 90, false);
+			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 135, false);
 		} else if( tilePosition == 25 ) {
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 180, false);
+			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 225, false);
 		} else if( tilePosition == 24 ) {
-			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 270, false);
+			batch.draw( SquareTileRegionShoreEdge, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 315, false);
 		} else if( tilePosition == 28 ) {
-			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 90, false);
+			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 135, false);
 		} else if( tilePosition == 27 ) {
-			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 180, false);
+			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 225, false);
 		} else if( tilePosition == 30 ) {
-			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 270, false);
+			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 315, false);
 		} else if( tilePosition == 29 ) {
-			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw( SquareTileRegionShoreEdgeSmall, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 45, false);
 		} else if( tilePosition == 34 ) {
-			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 90, false);
+			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 135, false);
 		} else if( tilePosition == 33 ) {
-			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 180, false);
+			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 225, false);
 		} else if( tilePosition == 32 ) {
-			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 270, false);
+			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 315, false);
 		} else if( tilePosition == 31 ) {
-			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw( SquareTileRegionShoreFull, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 45, false);
 		}
 	}
 }

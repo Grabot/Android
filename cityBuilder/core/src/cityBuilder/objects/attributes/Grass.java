@@ -14,11 +14,11 @@ public class Grass
 	public Grass( Tile tile, TextureAtlas atlas )
 	{
 		this.tile = tile;
-		SquareTileRegionGrass = atlas.findRegion("grass");
+		SquareTileRegionGrass = atlas.findRegion("grassIso");
 	}
 
 	public void draw( Batch batch )
 	{
-		batch.draw( SquareTileRegionGrass, -32 + tile.getPosition().x , -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+		batch.draw( SquareTileRegionGrass, -45 + tile.getPosition().x , -23 + tile.getPosition().y, 32, 32, 90, 46, 1, 1, 0, false);
 	}
 }

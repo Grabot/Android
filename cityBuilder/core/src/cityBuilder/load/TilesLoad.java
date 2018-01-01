@@ -16,7 +16,10 @@ public class TilesLoad extends Data {
 		for (int x = 0; x < gridSizeWidth; x++) {
 			ArrayList<Tile> mapLine = new ArrayList<Tile>();
 			for (int y = 0; y < gridSizeHeight; y++) {
-				tile[x][y] = new Tile(new Vector((tileHeight * x), (tileWidth * y)), atlas);
+				tile[x][y] = new Tile(new Vector(
+						(x*43)+(y*43), // x
+						(y*21)-(x*21)), // y
+						atlas);
 				mapLine.add(tile[x][y]);
 			}
 			tiles.add(mapLine);
@@ -31,6 +34,8 @@ public class TilesLoad extends Data {
 				tiles.get(x).get(y).setY(y);
 			}
 		}
+
+		// create the rotation possibility, we will do this by creating 4 double tile arrays.
 	}
 
 	public ArrayList<ArrayList<Tile>> getTiles() {

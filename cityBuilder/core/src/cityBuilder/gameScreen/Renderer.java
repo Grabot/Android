@@ -60,6 +60,7 @@ public class Renderer extends Data
 	private boolean inventoryOn = false;
 
 	private TextButton inventoryButton;
+	private TextButton rotateMapButton;
 	private TextButton buildBuildingButton;
 
 	private TextButton buildingRotationButton;
@@ -326,6 +327,11 @@ public class Renderer extends Data
 		inventoryButton.setBounds( 1150, 30, 100, 100);
 		inventoryButton.setVisible( true );
 
+		rotateMapButton = new TextButton( "Rotate map", skin);
+		rotateMapButton.setDisabled( false );
+		rotateMapButton.setBounds(20, 550, 100, 100);
+		rotateMapButton.setVisible(true);
+
 		buildBuildingButton = new TextButton( "Build Farm", skin );
 		buildBuildingButton.setDisabled( false );
 		buildBuildingButton.setBounds( 1000,  300, 200, 30 );
@@ -344,6 +350,7 @@ public class Renderer extends Data
 		style.imageDown = new TextureRegionDrawable(image);
 
 		stage.addActor( inventoryButton );
+		stage.addActor(rotateMapButton);
 		stage.addActor( inventoryActor );
 		stage.addActor(buildBuildingButton);
 		stage.addActor( buildingRotationButton );
@@ -351,6 +358,7 @@ public class Renderer extends Data
 		stage.addActor( tileinfo );
 
 		inventoryButton.addListener( InventoryListener );
+		rotateMapButton.addListener( rotateMapListener );
 		buildBuildingButton.addListener( buildBuildingListener );
 		buildingRotationButton.addListener( buildingRotationListener );
 	}
@@ -359,6 +367,13 @@ public class Renderer extends Data
 		@Override
 		public void clicked (InputEvent event, float x, float y) {
 			inventoryOn = !inventoryOn;
+		}
+	};
+
+	public ClickListener rotateMapListener = new ClickListener() {
+		@Override
+		public void clicked(InputEvent event, float x, float y) {
+			System.out.println("rotate map");
 		}
 	};
 

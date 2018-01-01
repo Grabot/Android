@@ -67,7 +67,7 @@ public class DrawTiles extends Data
 		TextureRegion SquareTileRegionSelected = atlas.findRegion("SquareGreySmall");
 
 		if( tiles.get(x).get(y).getOccupied() == 0 ) {
-			batch.draw( SquareTileRegionSelected, (-32 + tiles.get(x).get(y).getPosition().x), (-32 + tiles.get(x).get(y).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+			// batch.draw( SquareTileRegionSelected, (-32 + tiles.get(x).get(y).getPosition().x), (-32 + tiles.get(x).get(y).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 		} else if( tiles.get(x).get(y).getOccupied() == 1 ) {
 			drawselection.drawFarmSelected(tiles, batch, x, y);
 		} else if( tiles.get(x).get(y).getOccupied() == 2 ) {
