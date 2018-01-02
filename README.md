@@ -1,4 +1,5 @@
 CityBuilder Application for Android
+=====================================
 
 Overview
 --------
@@ -9,6 +10,13 @@ Dependencies
 the Libgdx framwork
 Gradle
 
+Installation instructions
+--------------------------
+
+...
+
 Author
 ------
 Sander Kools
+
+
