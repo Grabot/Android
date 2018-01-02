@@ -244,4 +244,8 @@ public class Tile
 	public void setRegionOwned(boolean regionOwned) {
 		this.regionOwned = regionOwned;
 	}
+
+	public Tile getTile() {
+		return this;
+	}
 }
