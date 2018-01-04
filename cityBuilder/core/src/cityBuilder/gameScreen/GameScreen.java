@@ -78,7 +78,7 @@ public class GameScreen implements Screen
 
 		//map layout
 		tileLoad = new TilesLoad(atlas);
-		tiles = tileLoad.getTiles2();
+		tiles = tileLoad.getTiles();
 
 		simulation = new Simulation( this, inventory, inventoryActor, buildInv, builder, citizens, tiles, atlas );
 		renderer = new Renderer( this, camera, stage, batch, atlas, inventoryActor, builder, tileinfo, citizens, tiles );
