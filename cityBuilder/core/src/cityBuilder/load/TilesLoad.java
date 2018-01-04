@@ -20,7 +20,7 @@ public class TilesLoad extends Data {
 			ArrayList<Tile> mapLine = new ArrayList<Tile>();
 			for (int y = 0; y < gridSizeHeight; y++) {
 				tile[x][y] = new Tile(new Vector(
-						(x*43)+(y*43), // x
+						(x*43)+(y*43),  // x
 						(y*21)-(x*21)), // y
 						atlas);
 				mapLine.add(tile[x][y]);
@@ -28,11 +28,11 @@ public class TilesLoad extends Data {
 			tiles1.add(mapLine);
 		}
 
-		for (int y = 0; y < gridSizeWidth; y++) {
+		for (int x = 0; x < gridSizeWidth; x++) {
 			ArrayList<Tile> mapLine2 = new ArrayList<Tile>();
-			for (int x = 0; x < gridSizeHeight; x++) {
+			for (int y = 0; y < gridSizeHeight; y++) {
 				tile[x][y] = new Tile(new Vector(
-						(x*43)+(y*43), // x
+						(x*43)+(y*43),  // x
 						(y*21)-(x*21)), // y
 						atlas);
 				mapLine2.add(tile[x][y]);
@@ -44,7 +44,7 @@ public class TilesLoad extends Data {
 			ArrayList<Tile> mapLine3 = new ArrayList<Tile>();
 			for (int y = gridSizeHeight-1; y >= 0; y--) {
 				tile[x][y] = new Tile(new Vector(
-						(x*43)+(y*43), // x
+						(x*43)+(y*43),  // x
 						(y*21)-(x*21)), // y
 						atlas);
 				mapLine3.add(tile[x][y]);

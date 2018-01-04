@@ -178,7 +178,7 @@ SquareGreenSmall
   orig: 64, 64
   offset: 0, 0
   index: -1
-SquareGreySmal2l
+SquareGreySmall2
   rotate: false
   xy: 768, 0
   size: 64, 64

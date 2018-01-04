@@ -44,18 +44,17 @@ public class Tile
 
 	private boolean regionOwned;
 
-	private TextureRegion SquareGreySmal2l;
+	private TextureRegion SquareGreySmall2;
 
 	private Random random;
 
-	public Tile( Vector position, TextureAtlas atlas )
-	{
+	public Tile( Vector position, TextureAtlas atlas ) {
 		this.position.set( position );
 		this.atlas = atlas;
 		random = new Random();
 		regionOwned = false;
 
-		SquareGreySmal2l = atlas.findRegion("SquareGreySmal2l");
+		SquareGreySmall2 = atlas.findRegion("SquareGreySmall2");
 	}
 
 	public void setAttributes( TileType type, int colour, int occupied, int resources, int tilePosition )
@@ -97,7 +96,7 @@ public class Tile
 
 	public void drawRegionOwned( Batch bitch ) {
 		if (!regionOwned) {
-			bitch.draw( SquareGreySmal2l, -32 + this.getPosition().x , -32 + this.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
+			bitch.draw(SquareGreySmall2, -32 + this.getPosition().x , -32 + this.getPosition().y, 32, 32, 64, 64, 1, 1, -90, false);
 		}
 	}
 
