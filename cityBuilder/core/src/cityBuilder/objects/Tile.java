@@ -195,6 +195,10 @@ public class Tile
 		return position;
 	}
 
+	public void setPosition(Vector position) {
+		this.position.set( position );
+	}
+
 	public void setBuildingPosition(int buildingPosition) {
 		this.buildingPosition = buildingPosition;
 	}
