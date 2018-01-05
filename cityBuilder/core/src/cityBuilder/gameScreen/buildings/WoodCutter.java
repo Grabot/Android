@@ -184,18 +184,18 @@ public class WoodCutter extends Data implements Building {
 	}
 
 	@Override
-	public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
-		tiles.get(x).get(y).setOccupiedWoodCutter(0, this);
-		tiles.get(x + 1).get(y).setOccupiedWoodCutter(1, this);
-		tiles.get(x + 1).get(y + 1).setOccupiedWoodCutter(2, this);
-		tiles.get(x).get(y + 1).setOccupiedWoodCutter(3, this);
+	public void buildBuilding(Tile[][] tiles, int x, int y, int rotation) {
+		tiles[x][y].setOccupiedWoodCutter(0, this);
+		tiles[x + 1][y].setOccupiedWoodCutter(1, this);
+		tiles[x + 1][y + 1].setOccupiedWoodCutter(2, this);
+		tiles[x][y + 1].setOccupiedWoodCutter(3, this);
 
-		woodcutterTiles[0] = tiles.get(x).get(y);
-		woodcutterTiles[1] = tiles.get(x + 1).get(y);
-		woodcutterTiles[2] = tiles.get(x + 1).get(y + 1);
-		woodcutterTiles[3] = tiles.get(x).get(y + 1);
+		woodcutterTiles[0] = tiles[x][y];
+		woodcutterTiles[1] = tiles[x + 1][y];
+		woodcutterTiles[2] = tiles[x + 1][y + 1];
+		woodcutterTiles[3] = tiles[x][y + 1];
 
-		centerPosition = new Vector(tiles.get(x).get(y).getPosition().x + 32, tiles.get(x).get(y).getPosition().y + 32);
+		centerPosition = new Vector(tiles[x][y].getPosition().x + 32, tiles[x][y].getPosition().y + 32);
 
 		OutlineAvailability(tiles, x, y, 3);
 		cutting = false;
@@ -215,7 +215,7 @@ public class WoodCutter extends Data implements Building {
 		return grid;
 	}
 
-	private void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, int tileX, int tileY, int radius ) {
+	private void OutlineAvailability(Tile[][] tiles, int tileX, int tileY, int radius ) {
 		boolean[][] grid = new boolean[gridSizeWidth][gridSizeHeight];
 		for (int x = 0; x < grid.length; x++ ) {
 			for (int y = 0; y < grid[x].length; y++) {
@@ -234,7 +234,7 @@ public class WoodCutter extends Data implements Building {
 				if (grid[x][y] ) {
 					if ((((x+(tileX-(radius*2))) >= 0) && ((y+(tileY-(radius*2))) >= 0)) && (((x+(tileX-(radius*2))) < gridSizeWidth) && ((y+(tileY-(radius*2))) < gridSizeHeight))) {
 						// We will set all available tiles for the Woodcutter, these are maximum 48.
-						Tile tile = tiles.get(x + (tileX - (radius * 2))).get(y + (tileY - (radius * 2)));
+						Tile tile = tiles[x + (tileX - (radius * 2))][y + (tileY - (radius * 2))];
 						if (tile.getRegionOwned() && tile.getOccupied() != 2) {
 							// If we don't own the region yet we can't chop wood there.
 							regionTiles[index] = tile;

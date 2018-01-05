@@ -78,13 +78,13 @@ public class Road implements Building {
     }
 
     @Override
-    public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
-        adjacentRoads[0] = tiles.get(x+1).get(y);
-        adjacentRoads[1] = tiles.get(x).get(y+1);
-        adjacentRoads[2] = tiles.get(x-1).get(y);
-        adjacentRoads[3] = tiles.get(x).get(y-1);
+    public void buildBuilding(Tile[][] tiles, int x, int y, int rotation) {
+        adjacentRoads[0] = tiles[x + 1][y];
+        adjacentRoads[1] = tiles[x][y + 1];
+        adjacentRoads[2] = tiles[x - 1][y];
+        adjacentRoads[3] = tiles[x][y - 1];
 
-        roadTile = tiles.get(x).get(y);
+        roadTile = tiles[x][y];
         roadTile.setOccupiedRoad(0, this);
     }
 

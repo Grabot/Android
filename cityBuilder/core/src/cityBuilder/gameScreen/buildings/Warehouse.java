@@ -111,64 +111,64 @@ public class Warehouse extends Data implements Building {
     }
 
     @Override
-    public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
+    public void buildBuilding(Tile[][] tiles, int x, int y, int rotation) {
         // Easy way to only set the correct tiles with the ratation
         if (rotation == 0) {
-            tiles.get(x).get(y).setOccupiedWarehouse(0, this);
-            tiles.get(x + 1).get(y).setOccupiedWarehouse(1, this);
-            tiles.get(x + 1).get(y + 1).setOccupiedWarehouse(2, this);
-            tiles.get(x).get(y + 1).setOccupiedWarehouse(3, this);
-            tiles.get(x - 1).get(y + 1).setOccupiedWarehouse(4, this);
-            tiles.get(x - 1).get(y).setOccupiedWarehouse(5, this);
+            tiles[x][y].setOccupiedWarehouse(0, this);
+            tiles[x + 1][y].setOccupiedWarehouse(1, this);
+            tiles[x + 1][y + 1].setOccupiedWarehouse(2, this);
+            tiles[x][y + 1].setOccupiedWarehouse(3, this);
+            tiles[x - 1][y + 1].setOccupiedWarehouse(4, this);
+            tiles[x - 1][y].setOccupiedWarehouse(5, this);
 
-            warehouseTiles[0] = tiles.get(x).get(y);
-            warehouseTiles[1] = tiles.get(x + 1).get(y);
-            warehouseTiles[2] = tiles.get(x + 1).get(y + 1);
-            warehouseTiles[3] = tiles.get(x).get(y + 1);
-            warehouseTiles[4] = tiles.get(x - 1).get(y + 1);
-            warehouseTiles[5] = tiles.get(x - 1).get(y);
+            warehouseTiles[0] = tiles[x][y];
+            warehouseTiles[1] = tiles[x + 1][y];
+            warehouseTiles[2] = tiles[x + 1][y + 1];
+            warehouseTiles[3] = tiles[x][y + 1];
+            warehouseTiles[4] = tiles[x - 1][y + 1];
+            warehouseTiles[5] = tiles[x - 1][y];
         } else if (rotation == 1) {
-            tiles.get(x).get(y).setOccupiedWarehouse(0, this);
-            tiles.get(x + 1).get(y).setOccupiedWarehouse(1, this);
-            tiles.get(x + 1).get(y + 1).setOccupiedWarehouse(2, this);
-            tiles.get(x).get(y + 1).setOccupiedWarehouse(3, this);
-            tiles.get(x).get(y - 1).setOccupiedWarehouse(7, this);
-            tiles.get(x + 1).get(y - 1).setOccupiedWarehouse(8, this);
+            tiles[x][y].setOccupiedWarehouse(0, this);
+            tiles[x + 1][y].setOccupiedWarehouse(1, this);
+            tiles[x + 1][y + 1].setOccupiedWarehouse(2, this);
+            tiles[x][y + 1].setOccupiedWarehouse(3, this);
+            tiles[x][y - 1].setOccupiedWarehouse(7, this);
+            tiles[x + 1][y - 1].setOccupiedWarehouse(8, this);
 
-            warehouseTiles[0] = tiles.get(x).get(y);
-            warehouseTiles[1] = tiles.get(x + 1).get(y);
-            warehouseTiles[2] = tiles.get(x + 1).get(y + 1);
-            warehouseTiles[3] = tiles.get(x).get(y + 1);
-            warehouseTiles[4] = tiles.get(x).get(y - 1);
-            warehouseTiles[5] = tiles.get(x + 1).get(y - 1);
+            warehouseTiles[0] = tiles[x][y];
+            warehouseTiles[1] = tiles[x + 1][y];
+            warehouseTiles[2] = tiles[x + 1][y + 1];
+            warehouseTiles[3] = tiles[x][y + 1];
+            warehouseTiles[4] = tiles[x][y - 1];
+            warehouseTiles[5] = tiles[x + 1][y - 1];
         } else if (rotation == 2) {
-            tiles.get(x).get(y).setOccupiedWarehouse(0, this);
-            tiles.get(x + 1).get(y).setOccupiedWarehouse(1, this);
-            tiles.get(x - 1).get(y).setOccupiedWarehouse(5, this);
-            tiles.get(x - 1).get(y - 1).setOccupiedWarehouse(6, this);
-            tiles.get(x).get(y - 1).setOccupiedWarehouse(7, this);
-            tiles.get(x + 1).get(y - 1).setOccupiedWarehouse(8, this);
+            tiles[x][y].setOccupiedWarehouse(0, this);
+            tiles[x + 1][y].setOccupiedWarehouse(1, this);
+            tiles[x - 1][y].setOccupiedWarehouse(5, this);
+            tiles[x - 1][y - 1].setOccupiedWarehouse(6, this);
+            tiles[x][y - 1].setOccupiedWarehouse(7, this);
+            tiles[x + 1][y - 1].setOccupiedWarehouse(8, this);
 
-            warehouseTiles[0] = tiles.get(x).get(y);
-            warehouseTiles[1] = tiles.get(x + 1).get(y);
-            warehouseTiles[2] = tiles.get(x - 1).get(y);
-            warehouseTiles[3] = tiles.get(x - 1).get(y -1);
-            warehouseTiles[4] = tiles.get(x).get(y - 1);
-            warehouseTiles[5] = tiles.get(x + 1).get(y - 1);
+            warehouseTiles[0] = tiles[x][y];
+            warehouseTiles[1] = tiles[x + 1][y];
+            warehouseTiles[2] = tiles[x - 1][y];
+            warehouseTiles[3] = tiles[x - 1][y -1];
+            warehouseTiles[4] = tiles[x][y - 1];
+            warehouseTiles[5] = tiles[x + 1][y - 1];
         } else if (rotation == 3) {
-            tiles.get(x).get(y).setOccupiedWarehouse(0, this);
-            tiles.get(x).get(y + 1).setOccupiedWarehouse(3, this);
-            tiles.get(x - 1).get(y + 1).setOccupiedWarehouse(4, this);
-            tiles.get(x - 1).get(y).setOccupiedWarehouse(5, this);
-            tiles.get(x - 1).get(y - 1).setOccupiedWarehouse(6, this);
-            tiles.get(x).get(y - 1).setOccupiedWarehouse(7, this);
+            tiles[x][y].setOccupiedWarehouse(0, this);
+            tiles[x][y + 1].setOccupiedWarehouse(3, this);
+            tiles[x - 1][y + 1].setOccupiedWarehouse(4, this);
+            tiles[x - 1][y].setOccupiedWarehouse(5, this);
+            tiles[x - 1][y - 1].setOccupiedWarehouse(6, this);
+            tiles[x][y - 1].setOccupiedWarehouse(7, this);
 
-            warehouseTiles[0] = tiles.get(x).get(y);
-            warehouseTiles[1] = tiles.get(x).get(y + 1);
-            warehouseTiles[2] = tiles.get(x - 1).get(y + 1);
-            warehouseTiles[3] = tiles.get(x - 1).get(y);
-            warehouseTiles[4] = tiles.get(x - 1).get(y - 1);
-            warehouseTiles[5] = tiles.get(x).get(y - 1);
+            warehouseTiles[0] = tiles[x][y];
+            warehouseTiles[1] = tiles[x][y + 1];
+            warehouseTiles[2] = tiles[x - 1][y + 1];
+            warehouseTiles[3] = tiles[x - 1][y];
+            warehouseTiles[4] = tiles[x - 1][y - 1];
+            warehouseTiles[5] = tiles[x][y - 1];
         }
 
         OutlineAvailability(tiles, x, y, 16);
@@ -188,7 +188,7 @@ public class Warehouse extends Data implements Building {
         return grid;
     }
 
-    private void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, int tileX, int tileY, int radius ) {
+    private void OutlineAvailability(Tile[][] tiles, int tileX, int tileY, int radius ) {
         boolean[][] grid = new boolean[gridSizeWidth][gridSizeHeight];
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {
@@ -205,7 +205,7 @@ public class Warehouse extends Data implements Building {
             for (int y = 0; y < grid[x].length; y++) {
                 if (grid[x][y] ) {
                     if ((((x+(tileX-(radius*2))) >= 0) && ((y+(tileY-(radius*2))) >= 0)) && (((x+(tileX-(radius*2))) < gridSizeWidth) && ((y+(tileY-(radius*2))) < gridSizeHeight))) {
-                        tiles.get(x + (tileX - (radius * 2))).get(y + (tileY - (radius * 2))).setRegionOwned(true);
+                        tiles[x + (tileX - (radius * 2))][y + (tileY - (radius * 2))].setRegionOwned(true);
                     }
                 }
             }

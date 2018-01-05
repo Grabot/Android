@@ -171,7 +171,7 @@ public class BuildingAvailabilityControl extends Data
         return grid;
     }
 
-    public void OutlineAvailability(ArrayList<ArrayList<Tile>> tiles, Batch batch, int tileX, int tileY, int building, int radius ) {
+    public void OutlineAvailability(Tile[][] tiles, Batch batch, int tileX, int tileY, int building, int radius ) {
         boolean[][] grid = new boolean[gridSizeWidth][gridSizeHeight];
         for (int x = 0; x < grid.length; x++ ) {
             for (int y = 0; y < grid[x].length; y++) {
@@ -197,7 +197,7 @@ public class BuildingAvailabilityControl extends Data
             for (int y = 0; y < grid[x].length; y++) {
                 if (grid[x][y] ) {
                     if ((((x+(tileX-(radius*2))) >= 0) && ((y+(tileY-(radius*2))) >= 0)) && (((x+(tileX-(radius*2))) < gridSizeWidth) && ((y+(tileY-(radius*2))) < gridSizeHeight))) {
-                        Tile tile = tiles.get(x + (tileX - (radius * 2))).get(y + (tileY - (radius * 2)));
+                        Tile tile = tiles[x + (tileX - (radius * 2))][y + (tileY - (radius * 2))];
                         // if it's a warehouse we want to see the range that we will gain (building == 1)
                         // if it's a woodcutter we want the range to not include the regions that are not owned yet
                         if ((building == 2 && tile.getRegionOwned()) || building == 1) {

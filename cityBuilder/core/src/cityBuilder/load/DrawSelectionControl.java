@@ -20,62 +20,62 @@ public class DrawSelectionControl extends Data {
 		SquareTileRegionSelected = atlas.findRegion("SquareGreySmall");
 	}
 
-	public void drawWarehouseSelected(BuildingAvailabilityControl buildingAvailabilityControl, ArrayList<ArrayList<Tile>> tiles, Batch batch, int x, int y) {
+	public void drawWarehouseSelected(BuildingAvailabilityControl buildingAvailabilityControl, Tile[][] tiles, Batch batch, int x, int y) {
 
-		if (tiles.get(x).get(y).getBuildingPosition() == 0) {
+		if (tiles[x][y].getBuildingPosition() == 0) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x, y, 1, 16);
-		} else if (tiles.get(x).get(y).getBuildingPosition() == 1) {
+		} else if (tiles[x][y].getBuildingPosition() == 1) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x-1, y, 1, 16);
-		} else if (tiles.get(x).get(y).getBuildingPosition() == 2) {
+		} else if (tiles[x][y].getBuildingPosition() == 2) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x-1, y-1, 1, 16);
-		} else if (tiles.get(x).get(y).getBuildingPosition() == 3) {
+		} else if (tiles[x][y].getBuildingPosition() == 3) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x, y-1, 1, 16);
-		} else if (tiles.get(x).get(y).getBuildingPosition() == 4) {
+		} else if (tiles[x][y].getBuildingPosition() == 4) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x+1, y-1, 1, 16);
-		} else if (tiles.get(x).get(y).getBuildingPosition() == 5) {
+		} else if (tiles[x][y].getBuildingPosition() == 5) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x+1, y, 1, 16);
-		} else if (tiles.get(x).get(y).getBuildingPosition() == 6) {
+		} else if (tiles[x][y].getBuildingPosition() == 6) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x+1, y+1, 1, 16);
-		} else if (tiles.get(x).get(y).getBuildingPosition() == 7) {
+		} else if (tiles[x][y].getBuildingPosition() == 7) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x, y+1, 1, 16);
-		} else if (tiles.get(x).get(y).getBuildingPosition() == 8) {
+		} else if (tiles[x][y].getBuildingPosition() == 8) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x-1, y+1, 1, 16);
 		}
 		// we know this tile has a warehouse object, we will use it to determine which tiles to draw selected.
-		Warehouse warehouse = tiles.get(x).get(y).getWarehouse();
+		Warehouse warehouse = tiles[x][y].getWarehouse();
 		for (Tile tile : warehouse.getWarehouseTiles()) {
 			drawSingleTile(batch, tile);
 		}
 	}
 
-	public void drawFarmSelected(ArrayList<ArrayList<Tile>> tiles, Batch batch, int x, int y) {
+	public void drawFarmSelected(Tile[][] tiles, Batch batch, int x, int y) {
 		// we know this tile has a farm object, we will use it to determine which tiles to draw selected.
-		Farm farm = tiles.get(x).get(y).getFarm();
+		Farm farm = tiles[x][y].getFarm();
 		for (Tile tile : farm.getFarmTiles()) {
 			drawSingleTile(batch, tile);
 		}
 	}
 
-	public void drawWoodCutterSelected(BuildingAvailabilityControl buildingAvailabilityControl, ArrayList<ArrayList<Tile>> tiles, Batch batch, int x, int y) {
+	public void drawWoodCutterSelected(BuildingAvailabilityControl buildingAvailabilityControl, Tile[][] tiles, Batch batch, int x, int y) {
 		//woodcutter, select all woodcutter tiles of the farm. The first tile is at the bottom otherwise the availability is drawn over it.
-		if( tiles.get(x).get(y).getBuildingPosition() == 0 ) {
+		if( tiles[x][y].getBuildingPosition() == 0 ) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x, y, 2, 3);
-		} else if( tiles.get(x).get(y).getBuildingPosition() == 1 ) {
+		} else if( tiles[x][y].getBuildingPosition() == 1 ) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x-1, y, 2, 3);
-		} else if( tiles.get(x).get(y).getBuildingPosition() == 2 ) {
+		} else if( tiles[x][y].getBuildingPosition() == 2 ) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x-1, y-1, 2, 3);
-		} else if( tiles.get(x).get(y).getBuildingPosition() == 3 ) {
+		} else if( tiles[x][y].getBuildingPosition() == 3 ) {
 			buildingAvailabilityControl.OutlineAvailability(tiles, batch, x, y-1, 2, 3);
 		}
 		// we know this tile has a farm object, we will use it to determine which tiles to draw selected.
-		WoodCutter woodCutter = tiles.get(x).get(y).getWoodCutter();
+		WoodCutter woodCutter = tiles[x][y].getWoodCutter();
 		for (Tile tile : woodCutter.getWoodCutterTiles()) {
 			drawSingleTile(batch, tile);
 		}
 	}
 
-	public void drawWoodSelected(ArrayList<ArrayList<Tile>> tiles, Batch batch, int x, int y) {
-		batch.draw( SquareTileRegionSelected, (-32 + tiles.get(x).get(y).getPosition().x), (-32 + tiles.get(x).get(y).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+	public void drawWoodSelected(Tile[][] tiles, Batch batch, int x, int y) {
+		batch.draw( SquareTileRegionSelected, (-32 + tiles[x][y].getPosition().x), (-32 + tiles[x][y].getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 	}
 
 	private void drawSingleTile(Batch bitch, Tile tile) {

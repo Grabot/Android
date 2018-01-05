@@ -24,7 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 public class GameScreen implements Screen
 {
 
-	public ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
+	public Tile[][] tiles;
 
 	public static final String LOG = Simulation.class.getSimpleName();
 
@@ -78,7 +78,7 @@ public class GameScreen implements Screen
 
 		//map layout
 		tileLoad = new TilesLoad(atlas);
-		tiles = tileLoad.getTiles();
+		tiles = tileLoad.getTileArray();
 
 		simulation = new Simulation( this, inventory, inventoryActor, buildInv, builder, citizens, tiles, atlas );
 		renderer = new Renderer( this, camera, stage, batch, atlas, inventoryActor, builder, tileinfo, citizens, tiles );

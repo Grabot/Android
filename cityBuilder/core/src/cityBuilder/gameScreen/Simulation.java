@@ -22,7 +22,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class Simulation extends Data {
 	private Citizen[] citizen = new Citizen[100];
 
-	public ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
+	public Tile[][] tiles;
 
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
 	private ArrayList<Farm> farms = new ArrayList<Farm>();
@@ -74,7 +74,9 @@ public class Simulation extends Data {
 	private InventoryActor inventoryActor;
 	private TextureAtlas atlas;
 
-	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor, buildInventory builder, buildActor actor, ArrayList<Citizen> citizens, ArrayList<ArrayList<Tile>> tiles, TextureAtlas atlas ) {
+	public Simulation(GameScreen game, Inventory inventory, InventoryActor inventoryActor,
+					  buildInventory builder, buildActor actor, ArrayList<Citizen> citizens,
+					  Tile[][] tiles, TextureAtlas atlas ) {
 		this.tiles = tiles;
 		this.game = game;
 		this.citizens = citizens;
@@ -85,10 +87,10 @@ public class Simulation extends Data {
 	}
 
 	public void populate() {
-		for ( int x = 0; x < tiles.size(); x++ ) {
-			for (int y = 0; y < tiles.get(x).size(); y++ ) {
-				if (tiles.get(x).get(y).getOccupied() == 3 ) {
-					woods.add(tiles.get(x).get(y).getWood());
+		for ( int x = 0; x < tiles.length; x++ ) {
+			for (int y = 0; y < tiles[x].length; y++ ) {
+				if (tiles[x][y].getOccupied() == 3 ) {
+					woods.add(tiles[x][y].getWood());
 				}
 			}
 		}

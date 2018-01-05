@@ -66,8 +66,8 @@ public class Wood implements Building {
 	}
 
 	@Override
-	public void buildBuilding(ArrayList<ArrayList<Tile>> tiles, int x, int y, int rotation) {
-		tile = tiles.get(x).get(y);
+	public void buildBuilding(Tile[][] tiles, int x, int y, int rotation) {
+		tile = tiles[x][y];
 		tile.setOccupiedWood(0, rotation, this);
 	}
 

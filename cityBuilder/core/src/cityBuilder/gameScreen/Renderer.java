@@ -31,7 +31,7 @@ import cityBuilder.objects.Tile;
 public class Renderer extends Data
 {
 	private ArrayList<Citizen> citizens = new ArrayList<Citizen>();
-	private ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
+	private Tile[][] tiles;
 	private ArrayList<Tile> roadSelected = new ArrayList<Tile>();
 	private ArrayList<Tile> woodSelected = new ArrayList<Tile>();
 	public static final String LOG = Renderer.class.getSimpleName();
@@ -86,7 +86,9 @@ public class Renderer extends Data
 
 	private BuildingAvailabilityControl buildingAvailabilityControl;
 
-	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch, TextureAtlas atlas, InventoryActor inventoryActor, buildActor builder, tileInfo tileinfo, ArrayList<Citizen> citizens, ArrayList<ArrayList<Tile>> tiles )
+	public Renderer( GameScreen game, OrthographicCamera camera, Stage stage, SpriteBatch batch,
+					 TextureAtlas atlas, InventoryActor inventoryActor, buildActor builder,
+					 tileInfo tileinfo, ArrayList<Citizen> citizens, Tile[][] tiles)
 	{
 		this.citizens = citizens;
 		this.game = game;
@@ -138,10 +140,10 @@ public class Renderer extends Data
 				if (validTile()) {
 					// drawing control for the farm
 					buildBuildingButton.setVisible(true);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x).get(y), 0, 0);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x + 1).get(y), 0, 1);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x + 1).get(y + 1), 0, 2);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x).get(y + 1), 0, 3);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x][y], 0, 0);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x + 1][y], 0, 1);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x + 1][y + 1], 0, 2);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x][y + 1], 0, 3);
 				}
 			} else if( simulation.getBuildingWoodCutter()) {
 				buildingRotationButton.setVisible( true );
@@ -150,10 +152,10 @@ public class Renderer extends Data
 
 					buildingAvailabilityControl.OutlineAvailability(tiles, batch, x, y, 2, 3);
 					buildBuildingButton.setVisible(true);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x).get(y), 2, 0);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x + 1).get(y), 2, 1);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x + 1).get(y + 1), 2, 2);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x).get(y + 1), 2, 3);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x][y], 2, 0);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x + 1][y], 2, 1);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x + 1][y + 1], 2, 2);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x][y + 1], 2, 3);
 				}
 			} else if( simulation.getBuildingWarehouse() ) {
 				buildingRotationButton.setVisible( true );
@@ -164,15 +166,15 @@ public class Renderer extends Data
 						previousWarehouseY = y;
 						// check all possible rotations, so 4 different possibilities.
 						for (int i = 0; i < 4; i++) {
-							boolean available = buildingAvailabilityControl.checkRotationPossibility(true, rotation, tiles.get(x).get(y), 0, 3);
-							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles.get(x + 1).get(y), 1, 3);
-							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles.get(x + 1).get(y + 1), 2, 3);
-							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles.get(x).get(y + 1), 3, 3);
-							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles.get(x - 1).get(y + 1), 4, 3);
-							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles.get(x - 1).get(y), 5, 3);
-							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles.get(x - 1).get(y - 1), 6, 3);
-							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles.get(x).get(y - 1), 7, 3);
-							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles.get(x + 1).get(y - 1), 8, 3);
+							boolean available = buildingAvailabilityControl.checkRotationPossibility(true, rotation, tiles[x][y], 0, 3);
+							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles[x + 1][y], 1, 3);
+							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles[x + 1][y + 1], 2, 3);
+							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles[x][y + 1], 3, 3);
+							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles[x - 1][y + 1], 4, 3);
+							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles[x - 1][y], 5, 3);
+							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles[x - 1][y - 1], 6, 3);
+							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles[x][y - 1], 7, 3);
+							available = buildingAvailabilityControl.checkRotationPossibility(available, rotation, tiles[x + 1][y - 1], 8, 3);
 
 							if (available) {
 								break;
@@ -183,15 +185,15 @@ public class Renderer extends Data
 
 					buildingAvailabilityControl.OutlineAvailability(tiles, batch, x, y, 1, 16);
 					buildBuildingButton.setVisible(true);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x).get(y), 3, 0);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x + 1).get(y), 3, 1);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x + 1).get(y + 1), 3, 2);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x).get(y + 1), 3, 3);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x - 1).get(y + 1), 3, 4);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x - 1).get(y), 3, 5);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x - 1).get(y - 1), 3, 6);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x).get(y - 1), 3, 7);
-					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles.get(x + 1).get(y - 1), 3, 8);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x][y], 3, 0);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x + 1][y], 3, 1);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x + 1][y + 1], 3, 2);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x][y + 1], 3, 3);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x - 1][y + 1], 3, 4);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x - 1][y], 3, 5);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x - 1][y - 1], 3, 6);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x][y - 1], 3, 7);
+					buildingAvailabilityControl.buildingControl(buildBuildingButton, batch, tiles[x + 1][y - 1], 3, 8);
 				}
 			} else if( simulation.getBuildingRoad()) {
 				boolean remove = false;
@@ -205,15 +207,15 @@ public class Renderer extends Data
 							previousRoadX = x;
 							previousRoadY = y;
 							for (Tile tile : roadSelected) {
-								if (tile == tiles.get(x).get(y)) {
+								if (tile == tiles[x][y]) {
 									remove = true;
 								}
 							}
 							if (remove) {
-								roadSelected.remove(tiles.get(x).get(y));
+								roadSelected.remove(tiles[x][y]);
 							} else {
 								if (roadSelected.size() < simulation.getRoadSize()) {
-									roadSelected.add(tiles.get(x).get(y));
+									roadSelected.add(tiles[x][y]);
 								}
 							}
 						}
@@ -237,15 +239,15 @@ public class Renderer extends Data
 							previousWoodX = x;
 							previousWoodY = y;
 							for (Tile tile : woodSelected) {
-								if (tile == tiles.get(x).get(y)) {
+								if (tile == tiles[x][y]) {
 									remove = true;
 								}
 							}
 							if (remove) {
-								woodSelected.remove(tiles.get(x).get(y));
+								woodSelected.remove(tiles[x][y]);
 							} else {
 								if (woodSelected.size() < simulation.getWoodSize()) {
-									woodSelected.add(tiles.get(x).get(y));
+									woodSelected.add(tiles[x][y]);
 								}
 							}
 						}
@@ -265,7 +267,7 @@ public class Renderer extends Data
 
 				if(validTile()) {
 					if(!touchedBox) {
-						tileinfo.setText(x, y, tiles.get(x).get(y));
+						tileinfo.setText(x, y, tiles[x][y]);
 						tileinfo.setPosition( (simulation.getTouchX() + 100), (720 - simulation.getTouchY()) );
 						tileinfo.setVisible( true );
 						drawTiles.drawSelected( buildingAvailabilityControl, tiles, batch, atlas, x, y );
