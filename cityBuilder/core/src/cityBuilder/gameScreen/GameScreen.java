@@ -52,7 +52,7 @@ public class GameScreen implements Screen
 	public GameScreen( Application app, OrthographicCamera camera, Stage stage, SpriteBatch batch, ArrayList<Citizen> citizens )
 	{
 
-		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/IsoTest.atlas"));
+		atlas = new TextureAtlas(Gdx.files.internal("TextureAtlas/IsoAnno2.atlas"));
 
 		this.citizens = citizens;
 		Gdx.app.log( LOG, "Creating opening screen" );
@@ -109,10 +109,6 @@ public class GameScreen implements Screen
 
 	public void BuildWarehouse() {
 		simulation.BuildWarehouse();
-	}
-
-	public void buildWarehouse2() {
-		simulation.buildWarehouse2();
 	}
 
 	public void buildRoad() {

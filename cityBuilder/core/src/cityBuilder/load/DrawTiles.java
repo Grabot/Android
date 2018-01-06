@@ -12,10 +12,11 @@ import java.util.ArrayList;
 public class DrawTiles extends Data
 {
 	private DrawSelectionControl drawselection;
-
+	private TextureRegion SquareTileRegionSelected;
 	public DrawTiles(TextureAtlas atlas)
 	{
 		drawselection = new DrawSelectionControl(atlas);
+		SquareTileRegionSelected = atlas.findRegion("selectedIso");
 	}
 
 	public void fillTiles( Batch batch, Tile[][] tiles)
@@ -64,10 +65,8 @@ public class DrawTiles extends Data
 
 	public void drawSelected( BuildingAvailabilityControl buildingAvailabilityControl, Tile[][] tiles, Batch batch, TextureAtlas atlas, int x, int y )
 	{
-		TextureRegion SquareTileRegionSelected = atlas.findRegion("SquareGreySmall");
-
 		if( tiles[x][y].getOccupied() == 0 ) {
-			// batch.draw( SquareTileRegionSelected, (-32 + tiles.get(x).get(y).getPosition().x), (-32 + tiles.get(x).get(y).getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+			batch.draw( SquareTileRegionSelected, (-45 + tiles[x][y].getPosition().x), (-23 + tiles[x][y].getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
 		} else if( tiles[x][y].getOccupied() == 1 ) {
 			drawselection.drawFarmSelected(tiles, batch, x, y);
 		} else if( tiles[x][y].getOccupied() == 2 ) {

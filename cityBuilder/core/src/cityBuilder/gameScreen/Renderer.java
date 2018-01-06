@@ -81,8 +81,6 @@ public class Renderer extends Data
 	private TextureAtlas atlas;
 	private buildActor builder;
 
-	private boolean touchedBox = false;
-
 	private int rotation = 0;
 
 	private BuildingAvailabilityControl buildingAvailabilityControl;
@@ -98,9 +96,6 @@ public class Renderer extends Data
 		this.tileinfo = tileinfo;
 		this.tiles = tiles;
 
-		float width = Gdx.graphics.getWidth();
-		float height = Gdx.graphics.getHeight();
-
 		this.atlas = atlas;
 
 		progressBar = new Texture( Gdx.files.internal( "data/progressBar.png" ));
@@ -109,7 +104,7 @@ public class Renderer extends Data
 		progressRegion = new TextureRegion( progressBar, 0, 0, progressBar.getWidth(), progressBar.getHeight() );
 		progressFillRegion = new TextureRegion( progressBarFill, 0, 0, progressBarFill.getWidth(), progressBarFill.getHeight() );
 
-		inputHandler = new TouchInput( camera, width, height );
+		inputHandler = new TouchInput( camera );
 		drawTiles = new DrawTiles(atlas);
 
 		buildingAvailabilityControl = new BuildingAvailabilityControl(atlas);
@@ -263,16 +258,13 @@ public class Renderer extends Data
 				buildingRotationButton.setVisible( false );
 				inventoryButton.setVisible(true);
 				buildBuildingButton.setVisible( false );
-				touchedBox = simulation.touchedInfobox(tileinfo.getX(), tileinfo.getY(), tileinfo.getWidth(), tileinfo.getHeight());
 
 
 				if(validTile()) {
-					if(!touchedBox) {
-						tileinfo.setText(x, y, tiles[x][y]);
-						tileinfo.setPosition( (simulation.getTouchX() + 100), (720 - simulation.getTouchY()) );
-						tileinfo.setVisible( true );
-						drawTiles.drawSelected( buildingAvailabilityControl, tiles, batch, atlas, x, y );
-					}
+					tileinfo.setText(x, y, tiles[x][y]);
+					tileinfo.setPosition( (simulation.getTouchX() + 100), (720 - simulation.getTouchY()) );
+					tileinfo.setVisible( true );
+					drawTiles.drawSelected( buildingAvailabilityControl, tiles, batch, atlas, x, y );
 				} else {
 					tileinfo.setVisible( false );
 				}
@@ -391,10 +383,13 @@ public class Renderer extends Data
 			}
 			for( int i = 0; i < tiles.length; i++ ) {
 				for (int j = 0; j < tiles.length; j++) {
-					tiles[i][j].setPosition(locations[tiles.length - j - 1][i]);
+					tiles[i][j].setPosition(locations[j][tiles.length - i - 1]);
 				}
 			}
-			System.out.println("rotate map left");
+			// easy hack for opposite rotation.
+			rotate();
+			rotate();
+			rotate();
 		}
 	};
 
@@ -409,10 +404,10 @@ public class Renderer extends Data
 			}
 			for( int i = 0; i < tiles.length; i++ ) {
 				for (int j = 0; j < tiles.length; j++) {
-					tiles[i][j].setPosition(locations[j][tiles.length - i - 1]);
+					tiles[i][j].setPosition(locations[tiles.length - j - 1][i]);
 				}
 			}
-			System.out.println("rotate map left");
+			rotate();
 		}
 	};
 
@@ -452,6 +447,7 @@ public class Renderer extends Data
 
 		buildingAvailabilityControl.rotationControl(rotation);
 	}
+
 	public void dispose()
 	{
 		stage.clear();

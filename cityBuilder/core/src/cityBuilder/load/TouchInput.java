@@ -43,21 +43,8 @@ public class TouchInput
 	private OrthographicCamera camera;
 	private Simulation simulation;
 
-	private float width = 0;
-	private float height = 0;
-
-	private int mapSizeWidth = (25*64);
-	private int mapSizeHeight = (25*64);
-
-	private int overShootX = 2000;
-	private int overShootY = 500;
-
-	private boolean roadTouched = false;
-
-	public TouchInput( OrthographicCamera camera, float width, float height )
+	public TouchInput( OrthographicCamera camera )
 	{
-		this.width = width;
-		this.height = height;
 
 		currentX = camera.position.x;
 		currentY = camera.position.y;
@@ -91,10 +78,8 @@ public class TouchInput
 		{
 			if (!buildingRoad && !buildingTree) {
 				offsetX = ((firstX - touchX) * currentZoom);
-				//offsetX = MathUtils.clamp(offsetX, (((((width / 2) * currentZoom) - 32) - currentX) - (overShootX * currentZoom)), (((((640 * currentZoom) - 32) - currentX) + mapSizeWidth - (width * currentZoom))) + (overShootX * currentZoom));
 
 				offsetY = ((firstY - touchY) * currentZoom);
-				//offsetY = MathUtils.clamp(offsetY, -((((mapSizeHeight - ((height / 2) * currentZoom)) - currentY) - 32) + (overShootY * currentZoom)), (-(((((height / 2) * currentZoom) - 32) - currentY)) + (overShootY * currentZoom)));
 
 				if (Math.sqrt((offsetX * offsetX + offsetY * offsetY)) >= 20) {
 					scrolling = true;
@@ -110,28 +95,6 @@ public class TouchInput
 			offsetX = 0;
 			offsetY = 0;
 			scrolling = false;
-
-//			if( touchSideRight )
-//			{
-//				currentX = -280;
-//				touchSideRight = false;
-//			}
-//			else if( touchSideLeft )
-//			{
-//				currentX = 280;
-//				touchSideLeft = false;
-//			}
-//
-//			if( touchUp )
-//			{
-//				currentY = -150;
-//				touchUp = false;
-//			}
-//			else if( touchBottom )
-//			{
-//				currentY = 150;
-//				touchBottom = false;
-//			}
 		}
 		simulation.isScrolling( scrolling );
 	}

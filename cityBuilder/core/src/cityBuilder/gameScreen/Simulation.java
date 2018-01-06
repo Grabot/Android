@@ -44,7 +44,6 @@ public class Simulation extends Data {
 	private float distance = 0;
 
 	private int pressed = 0;
-	private int miningProgress = 0;
 
 	private boolean infoboxTouch = false;
 	private boolean touched_down = false;
@@ -57,14 +56,12 @@ public class Simulation extends Data {
 	private boolean buildingFarm = false;
 	private boolean buildingWoodCutter = false;
 	private boolean buildingWareHouse = false;
-	private boolean buildingWarehouse2 = false;
 	private boolean buildingRoad = false;
 	private boolean buildingTree = false;
 
 	float touch_distance_x = 999;
 	float touch_distance_y = 999;
 	float sec = 0.0f;
-	private boolean MiningSequence = false;
 
 	public static final String LOG = Simulation.class.getSimpleName();
 
@@ -152,10 +149,6 @@ public class Simulation extends Data {
 
 	public void BuildWarehouse() {
 		buildingWareHouse = true;
-	}
-
-	public void buildWarehouse2() {
-		buildingWarehouse2 = true;
 	}
 
 	public void buildRoad() {
@@ -260,10 +253,6 @@ public class Simulation extends Data {
 		}
 	}
 
-	public boolean touchedInfobox( float tileX, float tileY, float tileWidth, float tileHeight ) {
-		return ((touchX >= tileX) && (touchX <= (tileX + tileWidth))) && (((720 - touchY) > tileY) && ((720 - touchY) <= (tileY + tileHeight)));
-	}
-
 	public int tileTouchX() {
 		return Math.round((touch_distance_x)/64);
 	}
@@ -296,14 +285,6 @@ public class Simulation extends Data {
 		return distance;
 	}
 
-	public boolean getMining() {
-		return MiningSequence;
-	}
-
-	public int getMiningProgress() {
-		return miningProgress;
-	}
-
 	public boolean getBuildingFarm()
 	{
 		return buildingFarm;
@@ -317,8 +298,6 @@ public class Simulation extends Data {
 	public boolean getBuildingWarehouse() {
 		return buildingWareHouse;
 	}
-
-	public boolean getBuildingWarehouse2() { return buildingWarehouse2; }
 
 	public boolean getBuildingRoad() {
 		return buildingRoad;

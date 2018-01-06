@@ -56,13 +56,6 @@ public class SlotTooltip extends Window implements SlotListener
             TextButton buildWarehouse = new TextButton("Build", skin );
             buildWarehouse.addListener(buildWarehouseListener);
             add(buildWarehouse);
-        } else if( slot.getItem().toString().equals("brick")) {
-            label = new Label("This is another motherfucking \n" + slot.getItem(), skin);
-            add(label);
-            row();
-            TextButton buildWarehouse2 = new TextButton("Build", skin );
-            buildWarehouse2.addListener(buildWarehouse2Listener);
-            add(buildWarehouse2);
         } else if( slot.getItem().toString().equals("road")) {
             label = new Label("This is ROOAADD! \n" + slot.getItem(), skin);
             add(label);
@@ -106,13 +99,6 @@ public class SlotTooltip extends Window implements SlotListener
         public void clicked (InputEvent event, float x, float y)
         {
             game.BuildWarehouse();
-        }
-    };
-
-    public ClickListener buildWarehouse2Listener = new ClickListener() {
-        @Override
-        public void clicked (InputEvent event, float x, float y) {
-            game.buildWarehouse2();
         }
     };
 
