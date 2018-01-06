@@ -17,11 +17,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import java.util.ArrayList;
 
-import cityBuilder.gameScreen.buildings.Wood;
 import cityBuilder.load.BuildingAvailabilityControl;
 import cityBuilder.load.Data;
 import cityBuilder.load.DrawTiles;
 import cityBuilder.load.TouchInput;
+import cityBuilder.load.Vector;
 import cityBuilder.load.build.buildActor;
 import cityBuilder.load.inventory.InventoryActor;
 import cityBuilder.load.tileInfo.tileInfo;
@@ -60,7 +60,8 @@ public class Renderer extends Data
 	private boolean inventoryOn = false;
 
 	private TextButton inventoryButton;
-	private TextButton rotateMapButton;
+	private TextButton rotateMapLeftButton;
+	private TextButton rotateMapRightButton;
 	private TextButton buildBuildingButton;
 
 	private TextButton buildingRotationButton;
@@ -329,10 +330,15 @@ public class Renderer extends Data
 		inventoryButton.setBounds( 1150, 30, 100, 100);
 		inventoryButton.setVisible( true );
 
-		rotateMapButton = new TextButton( "Rotate map", skin);
-		rotateMapButton.setDisabled( false );
-		rotateMapButton.setBounds(20, 550, 100, 100);
-		rotateMapButton.setVisible(true);
+		rotateMapLeftButton = new TextButton( "Rotate map left", skin);
+		rotateMapLeftButton.setDisabled( false );
+		rotateMapLeftButton.setBounds(20, 550, 100, 100);
+		rotateMapLeftButton.setVisible(true);
+
+		rotateMapRightButton = new TextButton( "Rotate map right", skin);
+		rotateMapRightButton.setDisabled( false );
+		rotateMapRightButton.setBounds(130, 550, 100, 100);
+		rotateMapRightButton.setVisible(true);
 
 		buildBuildingButton = new TextButton( "Build Farm", skin );
 		buildBuildingButton.setDisabled( false );
@@ -352,7 +358,8 @@ public class Renderer extends Data
 		style.imageDown = new TextureRegionDrawable(image);
 
 		stage.addActor( inventoryButton );
-		stage.addActor(rotateMapButton);
+		stage.addActor(rotateMapLeftButton);
+		stage.addActor(rotateMapRightButton);
 		stage.addActor( inventoryActor );
 		stage.addActor(buildBuildingButton);
 		stage.addActor( buildingRotationButton );
@@ -360,7 +367,8 @@ public class Renderer extends Data
 		stage.addActor( tileinfo );
 
 		inventoryButton.addListener( InventoryListener );
-		rotateMapButton.addListener( rotateMapListener );
+		rotateMapLeftButton.addListener(rotateMapLeftListener);
+		rotateMapRightButton.addListener(rotateMapRightListener);
 		buildBuildingButton.addListener( buildBuildingListener );
 		buildingRotationButton.addListener( buildingRotationListener );
 	}
@@ -372,10 +380,39 @@ public class Renderer extends Data
 		}
 	};
 
-	public ClickListener rotateMapListener = new ClickListener() {
+	public ClickListener rotateMapLeftListener = new ClickListener() {
 		@Override
 		public void clicked(InputEvent event, float x, float y) {
-			System.out.println("rotate map");
+			Vector[][] locations = new Vector[tiles.length][tiles.length];
+			for( int i = 0; i < tiles.length; i++ ) {
+				for( int j = 0; j < tiles.length; j++ ) {
+					locations[i][j] = new Vector(tiles[i][j].getPosition());
+				}
+			}
+			for( int i = 0; i < tiles.length; i++ ) {
+				for (int j = 0; j < tiles.length; j++) {
+					tiles[i][j].setPosition(locations[tiles.length - j - 1][i]);
+				}
+			}
+			System.out.println("rotate map left");
+		}
+	};
+
+	public ClickListener rotateMapRightListener = new ClickListener() {
+		@Override
+		public void clicked(InputEvent event, float x, float y) {
+			Vector[][] locations = new Vector[tiles.length][tiles.length];
+			for( int i = 0; i < tiles.length; i++ ) {
+				for( int j = 0; j < tiles.length; j++ ) {
+					locations[i][j] = new Vector(tiles[i][j].getPosition());
+				}
+			}
+			for( int i = 0; i < tiles.length; i++ ) {
+				for (int j = 0; j < tiles.length; j++) {
+					tiles[i][j].setPosition(locations[j][tiles.length - i - 1]);
+				}
+			}
+			System.out.println("rotate map left");
 		}
 	};
 
