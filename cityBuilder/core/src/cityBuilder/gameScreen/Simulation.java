@@ -8,6 +8,7 @@ import cityBuilder.gameScreen.buildings.Warehouse;
 import cityBuilder.gameScreen.buildings.WoodCutter;
 import cityBuilder.load.Data;
 import cityBuilder.load.Item;
+import cityBuilder.load.Vector;
 import cityBuilder.load.build.buildActor;
 import cityBuilder.load.build.buildInventory;
 import cityBuilder.load.inventory.Inventory;
@@ -245,20 +246,20 @@ public class Simulation extends Data {
 
 	private void checkTouch()
 	{
-		//no touch detection in the panel sections
-		if( !(touchX > 950 ))
-		{
-			touch_distance_x = ((touchX - (ScreenWidth / 2)) * cameraZ + cameraX);
-			touch_distance_y = (((touchY - (ScreenHeight / 2)) * cameraZ - cameraY) * -1);
-		}
+		touch_distance_x = ((touchX - (ScreenWidth / 2)) * cameraZ + cameraX);
+		touch_distance_y = (((touchY - (ScreenHeight / 2)) * cameraZ - cameraY) * -1);
 	}
 
 	public int tileTouchX() {
-		return Math.round((touch_distance_x)/64);
+		int x = Math.round((touch_distance_x)/43);
+		int y = Math.round((touch_distance_y)/21);
+		return ((x-y)/2);
 	}
 
 	public int tileTouchY() {
-		return Math.round((touch_distance_y)/64);
+		int x = Math.round((touch_distance_x)/43);
+		int y = Math.round((touch_distance_y)/21);
+		return y+((x-y)/2);
 	}
 
 	public boolean getTouchedDown() {

@@ -43,17 +43,14 @@ public class TouchInput
 	private OrthographicCamera camera;
 	private Simulation simulation;
 
-	public TouchInput( OrthographicCamera camera )
-	{
-
+	public TouchInput( OrthographicCamera camera ) {
 		currentX = camera.position.x;
 		currentY = camera.position.y;
 		camera.zoom = 2.0f;
 		currentZoom = camera.zoom;
 	}
 
-	public void variables( OrthographicCamera camera, Simulation simulation )
-	{
+	public void variables( OrthographicCamera camera, Simulation simulation ) {
 		this.camera = camera;
 		this.simulation = simulation;
 
@@ -65,17 +62,13 @@ public class TouchInput
 		this.distance = simulation.getDistance();
 	}
 
-	public void MapScroll(boolean buildingRoad, boolean buildingTree)
-	{
+	public void MapScroll(boolean buildingRoad, boolean buildingTree) {
 
-		if( touchedDown && firstPress )
-		{
+		if( touchedDown && firstPress ) {
 			firstPress = false;
 			firstX = touchX;
 			firstY = touchY;
-		}
-		else if( touchedDown && !firstPress )
-		{
+		} else if( touchedDown && !firstPress ) {
 			if (!buildingRoad && !buildingTree) {
 				offsetX = ((firstX - touchX) * currentZoom);
 
@@ -87,8 +80,7 @@ public class TouchInput
 			}
 		}
 
-		if( !touchedDown )
-		{
+		if( !touchedDown ) {
 			firstPress = true;
 			currentX = (currentX + offsetX);
 			currentY = (currentY - offsetY);
@@ -99,59 +91,42 @@ public class TouchInput
 		simulation.isScrolling( scrolling );
 	}
 
-	public void MapZoom()
-	{
-		if( distance != 0 )
-		{
-			if( touchedDown && firstPinch )
-			{
+	public void MapZoom() {
+		if( distance != 0 ) {
+			if( touchedDown && firstPinch ) {
 				firstPinch = false;
 
 				firstDistance = distance;
 			}
-		}
-		else
-		{
+		} else {
 			firstPinch = true;
 		}
 
 
-		if( touchedDown && !firstPinch )
-		{
+		if( touchedDown && !firstPinch ) {
 
 			zoomSpeed = firstDistance - distance;
 
-			Gdx.app.log( "Zoomtest", "zoomSpeed: " + zoomSpeed );
-
-			if( camera.zoom <= 0.1 && zoomSpeed <= 0 )
-			{
+			if( camera.zoom <= 0.1 && zoomSpeed <= 0 ) {
 				currentZoom = 0.1f;
 				zoomSpeed = 0;
-			}
-			else if( camera.zoom >= 4 && zoomSpeed > 0)
-			{
+			} else if( camera.zoom >= 4 && zoomSpeed > 0) {
 				currentZoom = 4f;
 				zoomSpeed = 0;
-			}
-			else
-			{
+			} else {
 				camera.zoom = (currentZoom + (zoomSpeed/1000));
 			}
 		}
 
-		if( !touchedDown )
-		{
+		if( !touchedDown ) {
 			currentZoom = (currentZoom + (zoomSpeed/1000));
 			zoomSpeed = 0;
 			firstPinch = true;
 		}
 
-		if( down_pressed )
-		{
+		if( down_pressed ) {
 			currentZoom += 0.1;
-		}
-		else if( up_pressed )
-		{
+		} else if( up_pressed ) {
 			currentZoom -= 0.1;
 		}
 

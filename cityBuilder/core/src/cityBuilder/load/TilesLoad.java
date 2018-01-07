@@ -15,18 +15,13 @@ public class TilesLoad extends Data {
 						(x*43)+(y*43),  // x
 						(y*21)-(x*21)), // y
 						atlas);
+				tileArray[x][y].setX(x);
+				tileArray[x][y].setY(y);
 			}
 		}
 
 		setAttributes setAttributes = new setAttributes();
 		setAttributes.setAttributesTileArray(tileArray);
-
-		for (int x = 0; x < gridSizeWidth; x++ ) {
-			for (int y = 0; y < gridSizeHeight-1; y++ ) {
-				tileArray[x][y].setX(x);
-				tileArray[x][y].setY(y);
-			}
-		}
 	}
 
 	public Tile[][] getTileArray() {
