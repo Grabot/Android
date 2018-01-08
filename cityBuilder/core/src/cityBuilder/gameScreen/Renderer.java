@@ -390,6 +390,9 @@ public class Renderer extends Data
 			rotate();
 			rotate();
 			rotate();
+			simulation.globalRotate();
+			simulation.globalRotate();
+			simulation.globalRotate();
 		}
 	};
 
@@ -408,6 +411,7 @@ public class Renderer extends Data
 				}
 			}
 			rotate();
+			simulation.globalRotate();
 		}
 	};
 
