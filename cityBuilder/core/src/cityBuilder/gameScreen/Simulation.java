@@ -255,24 +255,36 @@ public class Simulation extends Data {
 	public int tileTouchX() {
 		int x = Math.round((touch_distance_x)/43);
 		int y = Math.round((touch_distance_y)/21);
+		int tileX = ((x - y) / 2);
+		int tileY = y+((x-y)/2);
 		if (globalRotation == 0) {
-			return ((x - y) / 2);
-		} else if ( globalRotation == 1 ) {
-			return 0;
+			return tileX;
+		} else if (globalRotation == 1) {
+			return tileY;
+		}  else if (globalRotation == 2) {
+			return tiles.length - tileX - 1;
+		} else if (globalRotation == 3) {
+			return (tiles.length - tileY - 1);
 		} else {
-			return ((y - x) / 2);
+			return 0;
 		}
 	}
 
 	public int tileTouchY() {
 		int x = Math.round((touch_distance_x)/43);
 		int y = Math.round((touch_distance_y)/21);
+		int tileX = ((x - y) / 2);
+		int tileY = y+((x-y)/2);
 		if (globalRotation == 0) {
-			return y+((x-y)/2);
+			return tileY;
 		} else if (globalRotation == 1) {
-			return 0;
+			return (tiles.length - tileX - 1);
+		} else if (globalRotation == 2) {
+			return tiles.length - tileY - 1;
+		} else if (globalRotation == 3) {
+			return tileX;
 		} else {
-			return y+((x-y)/2);
+			return 0;
 		}
 	}
 
