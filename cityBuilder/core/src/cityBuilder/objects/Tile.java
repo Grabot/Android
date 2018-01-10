@@ -52,9 +52,9 @@ public class Tile
 		this.position.set( position );
 		this.atlas = atlas;
 		random = new Random();
-		regionOwned = false;
+		regionOwned = true;
 
-		SquareGreySmall2 = atlas.findRegion("SquareGreySmall2");
+		SquareGreySmall2 = atlas.findRegion("selectedIso");
 	}
 
 	public void setAttributes( TileType type, int colour, int occupied, int resources, int tilePosition )
