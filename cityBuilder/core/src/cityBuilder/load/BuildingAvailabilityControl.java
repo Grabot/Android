@@ -32,9 +32,9 @@ public class BuildingAvailabilityControl extends Data
     private TextureRegion[][][] buildingRegion;
 
     public BuildingAvailabilityControl(TextureAtlas atlas) {
-        SquareTileRegionFault = atlas.findRegion("SquareRedSmall");
-        SquareTileRegionAllowed = atlas.findRegion("SquareGreenSmall");
-        SquareOutlineAvailable = atlas.findRegion("SquareBlueSmall");
+        SquareTileRegionFault = atlas.findRegion("notAllowedIso");
+        SquareTileRegionAllowed = atlas.findRegion("allowedIso");
+        SquareOutlineAvailable = atlas.findRegion("allowedFullIso");
 
         // Read the availability of the buildings from a file and store all the data in a multi dimensional array
         FileHandle buildingRestrictions = Gdx.files.internal("buildingData/buildingAvailability.csv");
@@ -107,20 +107,22 @@ public class BuildingAvailabilityControl extends Data
 
     public void buildingAvailability(Batch batch, Tile buildingTile, int building, int buildingPosition) {
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
-            batch.draw(buildingRegion[building][buildingPosition][rotation], ((32 * rotationX) + buildingTile.getPosition().x), ((32 * rotationY) + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, -(90 * rotation), false);
+            // First draw the texture of the building itself.
+            batch.draw(buildingRegion[building][buildingPosition][rotation], ((32 * rotationX) + buildingTile.getPosition().x), ((32 * rotationY) + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
 
+            // Then draw if it is allowed to place it or not with red or green overlay.
             if (building == 3) {
                 if (generalAvailability(buildingTile, building, buildingPosition)) {
-                    batch.draw(SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                    batch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                 } else {
-                    batch.draw(SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                    batch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                 }
             } else {
                 if (generalAvailability(buildingTile, building, buildingPosition)
                         || !buildingTile.getRegionOwned()) {
-                    batch.draw(SquareTileRegionFault, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                    batch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                 } else {
-                    batch.draw(SquareTileRegionAllowed, (-32 + buildingTile.getPosition().x), (-32 + buildingTile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                    batch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                 }
             }
         }
@@ -136,6 +138,7 @@ public class BuildingAvailabilityControl extends Data
                 }
             }
         } else {
+            System.out.println("test " + buildingRegion[building][buildingPosition][rotation]);
             if (buildingRegion[building][buildingPosition][rotation] != null) {
                 if (generalAvailability(buildingTile, building, buildingPosition)
                         || !buildingTile.getRegionOwned()) {
@@ -201,7 +204,7 @@ public class BuildingAvailabilityControl extends Data
                         // if it's a warehouse we want to see the range that we will gain (building == 1)
                         // if it's a woodcutter we want the range to not include the regions that are not owned yet
                         if ((building == 2 && tile.getRegionOwned()) || building == 1) {
-                            batch.draw(SquareOutlineAvailable, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+                            batch.draw(SquareOutlineAvailable, (-45 + tile.getPosition().x), (-23 + tile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                         }
                     }
                 }

@@ -1,0 +1,82 @@
+
+isoAnno4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+treeTest
+  rotate: false
+  xy: 0, 92
+  size: 152, 158
+  orig: 152, 158
+  offset: 0, 0
+  index: -1
+treeTest2
+  rotate: false
+  xy: 152, 92
+  size: 152, 158
+  orig: 152, 158
+  offset: 0, 0
+  index: -1
+treeTest3
+  rotate: false
+  xy: 304, 92
+  size: 152, 158
+  orig: 152, 158
+  offset: 0, 0
+  index: -1
+treeTest4
+  rotate: false
+  xy: 456, 92
+  size: 152, 158
+  orig: 152, 158
+  offset: 0, 0
+  index: -1
+allowedFullIso
+  rotate: false
+  xy: 0, 46
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+allowedIso
+  rotate: false
+  xy: 608, 204
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+grassIso
+  rotate: false
+  xy: 0, 0
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+notAllowedFullIso
+  rotate: false
+  xy: 90, 46
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+notAllowedIso
+  rotate: false
+  xy: 608, 158
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+selectedIso
+  rotate: false
+  xy: 698, 204
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+waterIso
+  rotate: false
+  xy: 90, 0
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1

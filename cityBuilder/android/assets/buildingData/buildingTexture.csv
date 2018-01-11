@@ -1,9 +1,9 @@
-cubeLight; cubeLight; cubeLight; cubeDark,cubeLight; cubeLight; cubeLight; cubeLight,cubeLight; cubeLight; cubeDark; cubeDark,cubeDark; cubeDark; cubeDark; cubeDark,cubeDark; cubeDark; cubeDark; cubeDark,cubeDark; cubeDark; cubeDark; cubeDark
-cubeLight; cubeLight; cubeDark; cubeLight,cubeLight; cubeLight; cubeLight; cubeDark,cubeDark; cubeLight; cubeLight; cubeDark,cubeDark; cubeDark; cubeDark; ,,
-cubeLight; cubeDark; cubeLight; cubeLight,cubeLight; cubeLight; cubeDark; cubeDark,cubeDark; cubeDark; cubeLight; cubeLight,cubeLight; cubeDark; ; ,,
-cubeDark; cubeLight; cubeLight; cubeLight,cubeLight; cubeLight; cubeDark; cubeLight,cubeLight; cubeDark; cubeDark; cubeLight,cubeDark; cubeDark; ; cubeDark,,
-,cubeLight; cubeDark; cubeDark; cubeLight,,cubeDark; ; ; cubeLight,,
-,cubeLight; cubeDark; cubeLight; cubeLight,,cubeDark; ; cubeDark; cubeDark,,
-,cubeDark; cubeDark; cubeLight; cubeLight,,; ; cubeLight; cubeDark,,
-,cubeDark; cubeLight; cubeLight; cubeLight,,; cubeDark; cubeDark; cubeDark,,
-,cubeDark; cubeLight; cubeLight; cubeDark,,; cubeLight; cubeDark; ,,
+allowedIso; allowedIso; allowedIso; allowedFullIso,allowedIso; allowedIso; allowedIso; allowedIso,allowedIso; allowedIso; allowedFullIso; allowedFullIso,allowedFullIso; allowedFullIso; allowedFullIso; allowedFullIso,allowedFullIso; allowedFullIso; allowedFullIso; allowedFullIso,treeTest; treeTest; treeTest; treeTest
+allowedIso; allowedIso; allowedFullIso; allowedIso,allowedIso; allowedIso; allowedIso; allowedFullIso,allowedFullIso; allowedIso; allowedIso; allowedFullIso,allowedFullIso; allowedFullIso; allowedFullIso; ,,
+allowedIso; allowedFullIso; allowedIso; allowedIso,allowedIso; allowedIso; allowedFullIso; allowedFullIso,allowedFullIso; allowedFullIso; allowedIso; allowedIso,allowedIso; allowedFullIso; ; ,,
+allowedFullIso; allowedIso; allowedIso; allowedIso,allowedIso; allowedIso; allowedFullIso; allowedIso,allowedIso; allowedFullIso; allowedFullIso; allowedIso,allowedFullIso; allowedFullIso; ; allowedFullIso,,
+,allowedIso; allowedFullIso; allowedFullIso; allowedIso,,allowedFullIso; ; ; allowedIso,,
+,allowedIso; allowedFullIso; allowedIso; allowedIso,,allowedFullIso; ; allowedFullIso; allowedFullIso,,
+,allowedFullIso; allowedFullIso; allowedIso; allowedIso,,; ; allowedIso; allowedFullIso,,
+,allowedFullIso; allowedIso; allowedIso; allowedIso,,; allowedFullIso; allowedFullIso; allowedFullIso,,
+,allowedFullIso; allowedIso; allowedIso; allowedFullIso,,; allowedIso; allowedFullIso; ,,
