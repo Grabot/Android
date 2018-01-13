@@ -17,7 +17,7 @@ public class DrawSelectionControl extends Data {
 	private TextureRegion SquareTileRegionSelected;
 
 	public DrawSelectionControl(TextureAtlas atlas) {
-		SquareTileRegionSelected = atlas.findRegion("SquareGreySmall");
+		SquareTileRegionSelected = atlas.findRegion("selectedIso");
 	}
 
 	public void drawWarehouseSelected(BuildingAvailabilityControl buildingAvailabilityControl, Tile[][] tiles, Batch batch, int x, int y) {
@@ -75,7 +75,7 @@ public class DrawSelectionControl extends Data {
 	}
 
 	public void drawWoodSelected(Tile[][] tiles, Batch batch, int x, int y) {
-		batch.draw( SquareTileRegionSelected, (-32 + tiles[x][y].getPosition().x), (-32 + tiles[x][y].getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		batch.draw( SquareTileRegionSelected, (-45 + tiles[x][y].getPosition().x), (-23 + tiles[x][y].getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
 	}
 
 	private void drawSingleTile(Batch bitch, Tile tile) {
