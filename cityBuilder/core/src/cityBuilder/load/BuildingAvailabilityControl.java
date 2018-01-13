@@ -108,7 +108,7 @@ public class BuildingAvailabilityControl extends Data
     public void buildingAvailability(Batch batch, Tile buildingTile, int building, int buildingPosition) {
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
             // First draw the texture of the building itself.
-            batch.draw(buildingRegion[building][buildingPosition][rotation], ((40 * rotationX) + buildingTile.getPosition().x), ((40 * rotationY) + buildingTile.getPosition().y), 0, 0, 40, 40, 1, 1, 0, false);
+            batch.draw(buildingRegion[building][buildingPosition][rotation], ((40 * rotationX) + buildingTile.getPosition().x), ((10 * rotationY) + buildingTile.getPosition().y), 0, 0, 60, 60, 1, 1, 0, false);
 
             // Then draw if it is allowed to place it or not with red or green overlay.
             if (building == 3) {
