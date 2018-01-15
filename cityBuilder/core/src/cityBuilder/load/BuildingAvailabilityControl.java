@@ -105,24 +105,24 @@ public class BuildingAvailabilityControl extends Data
         }
     }
 
-    public void buildingAvailability(Batch batch, Tile buildingTile, int building, int buildingPosition) {
+    public void buildingAvailability(Batch bitch, Tile buildingTile, int building, int buildingPosition) {
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
             // First draw the texture of the building itself.
-            batch.draw(buildingRegion[building][buildingPosition][rotation], ((40 * rotationX) + buildingTile.getPosition().x), ((10 * rotationY) + buildingTile.getPosition().y), 0, 0, 60, 60, 1, 1, 0, false);
+            bitch.draw(buildingRegion[building][buildingPosition][rotation], (-40 + buildingTile.getPosition().x), (-10 + buildingTile.getPosition().y), 0, 0, 60, 60, 1, 1, 0, false);
 
             // Then draw if it is allowed to place it or not with red or green overlay.
             if (building == 3) {
                 if (generalAvailability(buildingTile, building, buildingPosition)) {
-                    batch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
+                    bitch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                 } else {
-                    batch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
+                    bitch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                 }
             } else {
                 if (generalAvailability(buildingTile, building, buildingPosition)
                         || !buildingTile.getRegionOwned()) {
-                    batch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
+                    bitch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                 } else {
-                    batch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
+                    bitch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
                 }
             }
         }
