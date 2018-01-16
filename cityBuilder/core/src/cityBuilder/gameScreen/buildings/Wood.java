@@ -38,17 +38,17 @@ public class Wood implements Building {
 	public void render(Batch batch, int buildingPosition, float x, float y) {
 		// the more life the tree has, the bigger it is.
 		if ( life <= 180) {
-			batch.draw(SquareTileRegionTree0, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw(SquareTileRegionTree0, -30 + tile.getPosition().x, 35 + tile.getPosition().y, 0, 0, 60, 60, 1, 1, -90, false);
 		} else if ( life > 180 && life <= 360) {
-			batch.draw(SquareTileRegionTree1, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw(SquareTileRegionTree1, -40 + tile.getPosition().x, 45 + tile.getPosition().y, 0, 0, 60, 60, 1, 1, -90, false);
 		} else if ( life > 360 && life <= 540) {
-			batch.draw(SquareTileRegionTree2, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw(SquareTileRegionTree2, -40 + tile.getPosition().x, 45 + tile.getPosition().y, 0, 0, 60, 60, 1, 1, -90, false);
 		} else if ( life > 540 && life <= 720 ) {
-			batch.draw(SquareTileRegionTree3, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw(SquareTileRegionTree3, -40 + tile.getPosition().x, 45 + tile.getPosition().y, 0, 0, 60, 60, 1, 1, -90, false);
 		} else if ( life > 720 && life <= 900) {
-			batch.draw(SquareTileRegionTree3, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw(SquareTileRegionTree3, -40 + tile.getPosition().x, 45 + tile.getPosition().y, 0, 0, 60, 60, 1, 1, -90, false);
 		} else if ( life > 900) {
-			batch.draw(SquareTileRegionTree3, -32 + tile.getPosition().x, -32 + tile.getPosition().y, 32, 32, 64, 64, 1, 1, 0, false);
+			batch.draw(SquareTileRegionTree3, -40 + tile.getPosition().x, 45 + tile.getPosition().y, 0, 0, 60, 60, 1, 1, -90, false);
 		}
 	}
 
