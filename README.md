@@ -3,7 +3,7 @@ CityBuilder Application for Android
 
 Overview
 --------
-The github repository for a new Android game project
+The github repository for a new Android game project.
 
 Dependencies
 --------
