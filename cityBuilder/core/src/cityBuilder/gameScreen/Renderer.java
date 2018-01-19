@@ -122,8 +122,10 @@ public class Renderer extends Data
 
 		drawTiles.fillTiles( batch, tiles );
 
-		this.x = simulation.tileTouchX();
-		this.y = simulation.tileTouchY();
+		if (simulation.touchAllowed()) {
+			this.x = simulation.tileTouchX();
+			this.y = simulation.tileTouchY();
+		}
 		if( !inventoryOn ) {
 
 			if (simulation.getBuildingFase()) {

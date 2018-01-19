@@ -252,6 +252,11 @@ public class Simulation extends Data {
 		touch_distance_y = (((touchY - (ScreenHeight / 2)) * cameraZ - cameraY) * -1);
 	}
 
+	public boolean touchAllowed() {
+		// Simple way to make sure that you can press the "build" button
+		return !(touchX > 1000);
+	}
+
 	public int tileTouchX() {
 		int x = Math.round((touch_distance_x)/43);
 		int y = Math.round((touch_distance_y)/21);

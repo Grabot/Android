@@ -23,26 +23,17 @@ public class Farm extends Data implements Building {
 	{
 		farmTiles = new Tile[4];
 		this.rotation = rotation;
-		SquareTileRegionFarmBottomLeft = atlas.findRegion("cubeLight");
-		SquareTileRegionFarmTopLeft = atlas.findRegion("cubeLight");
-		SquareTileRegionFarmTopRight = atlas.findRegion("cubeLight");
-		SquareTileRegionFarmBottomRight = atlas.findRegion("cubeLight");
+		SquareTileRegionFarmBottomLeft = atlas.findRegion("farm");
+		SquareTileRegionFarmTopLeft = atlas.findRegion("farm");
+		SquareTileRegionFarmTopRight = atlas.findRegion("farm");
+		SquareTileRegionFarmBottomRight = atlas.findRegion("farm");
 	}
 
 	@Override
 	public void render(Batch batch, int position, float x, float y) {
 		if( position == 0 ) {
 			//bottom left
-			batch.draw( SquareTileRegionFarmBottomLeft, -32 + x, -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if( position == 1 ) {
-			//top left
-			batch.draw( SquareTileRegionFarmTopLeft, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if( position == 2 ) {
-			//top right
-			batch.draw( SquareTileRegionFarmTopRight, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if( position == 3 ) {
-			//bottom right
-			batch.draw( SquareTileRegionFarmBottomRight, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
+			batch.draw( SquareTileRegionFarmBottomLeft, x, y, 0, 0, 96, 180, 1, 1, -90, false);
 		}
 	}
 

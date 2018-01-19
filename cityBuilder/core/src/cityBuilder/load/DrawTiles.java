@@ -24,7 +24,11 @@ public class DrawTiles extends Data
 		for (int x = 0; x < tiles.length; x++ ) {
 			for (int y = 0; y < tiles[x].length; y++ ) {
 				tiles[x][y].drawTile( batch );
+			}
+		}
 
+		for ( int x = 0; x < tiles.length; x++ ) {
+			for (int y = 0; y < tiles[x].length; y++ ) {
 				if (tiles[x][y].getOccupied() != 0) {
 					if (tiles[x][y].getOccupied() == 1) {
 						tiles[x][y].drawFarm(batch);
