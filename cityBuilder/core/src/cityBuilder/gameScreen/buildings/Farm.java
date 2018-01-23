@@ -14,26 +14,20 @@ public class Farm extends Data implements Building {
 
 	private Tile[] farmTiles;
 	private int rotation;
-	private TextureRegion SquareTileRegionFarmBottomLeft;
-	private TextureRegion SquareTileRegionFarmBottomRight;
-	private TextureRegion SquareTileRegionFarmTopLeft;
-	private TextureRegion SquareTileRegionFarmTopRight;
+	private TextureRegion farmTexture;
 
 	public Farm(int rotation, TextureAtlas atlas)
 	{
 		farmTiles = new Tile[4];
 		this.rotation = rotation;
-		SquareTileRegionFarmBottomLeft = atlas.findRegion("farm");
-		SquareTileRegionFarmTopLeft = atlas.findRegion("farm");
-		SquareTileRegionFarmTopRight = atlas.findRegion("farm");
-		SquareTileRegionFarmBottomRight = atlas.findRegion("farm");
+		farmTexture = atlas.findRegion("farm");
 	}
 
 	@Override
 	public void render(Batch batch, int position, float x, float y) {
 		if( position == 0 ) {
-			//bottom left
-			batch.draw( SquareTileRegionFarmBottomLeft, x, y, 0, 0, 96, 180, 1, 1, -90, false);
+			// 1 texture is used to draw the whole farm. Make sure you don't draw it 4 times.
+			batch.draw( farmTexture, x-50, y+55, 0, 0, 96, 180, 1, 1, -90, false);
 		}
 	}
 
