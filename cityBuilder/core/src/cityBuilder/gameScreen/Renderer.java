@@ -245,7 +245,6 @@ public class Renderer extends Data
 								woodSelected.remove(tiles[x][y]);
 							} else {
 								if (woodSelected.size() < simulation.getWoodSize()) {
-									System.out.println("test add");
 									woodSelected.add(tiles[x][y]);
 								}
 							}
