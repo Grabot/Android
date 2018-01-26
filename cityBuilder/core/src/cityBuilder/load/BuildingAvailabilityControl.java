@@ -110,6 +110,8 @@ public class BuildingAvailabilityControl extends Data
             // First draw the texture of the building itself.
             if (building == 0 && buildingPosition == 0) {
                 bitch.draw(buildingRegion[building][buildingPosition][rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
+            } else if (building == 2 ) {
+
             } else if (building == 5){
                 bitch.draw(buildingRegion[building][buildingPosition][rotation], (-40 + buildingTile.getPosition().x), (45 + buildingTile.getPosition().y), 0, 0, 60, 60, 1, 1, -90, false);
             }
