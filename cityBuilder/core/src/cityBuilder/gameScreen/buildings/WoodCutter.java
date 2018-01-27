@@ -18,7 +18,7 @@ public class WoodCutter extends Data implements Building {
 	Tile[] woodcutterTiles;
 	Tile[] regionTiles;
 	private int rotation;
-	private TextureRegion woodCutterTexture;
+	private TextureRegion[] woodCutterTexture;
 	private TextureRegion SquareTileRegionAllowed;
 
 	private Random random;
@@ -48,7 +48,11 @@ public class WoodCutter extends Data implements Building {
 		woodcutterTiles = new Tile[4];
 		regionTiles = new Tile[48];
 		this.rotation = rotation;
-		woodCutterTexture = atlas.findRegion("farm");
+		woodCutterTexture = new TextureRegion[4];
+		woodCutterTexture[0] = atlas.findRegion("woodCutter1");
+		woodCutterTexture[1] = atlas.findRegion("woodCutter2");
+		woodCutterTexture[2] = atlas.findRegion("woodCutter3");
+		woodCutterTexture[3] = atlas.findRegion("woodCutter4");
 		SquareTileRegionAllowed = atlas.findRegion("SquareGreenSmall");
 
 		random = new Random();
@@ -72,7 +76,7 @@ public class WoodCutter extends Data implements Building {
 	@Override
 	public void render(Batch batch, int position, float x, float y) {
 		if( position == 0 ) {
-			batch.draw( woodCutterTexture, x - 50, y + 55, 0, 0, 96, 180, 1, 1, -90, false);
+			batch.draw( woodCutterTexture[rotation], x - 50, y + 55, 0, 0, 96, 180, 1, 1, -90, false);
 		}
 	}
 
