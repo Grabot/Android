@@ -42,11 +42,11 @@ public class setAttributes extends Data
 		while( line != null ) {
 			String[] items = line.split(",");
 			for (int width = 0; width < items.length; width++) {
-				if( Integer.parseInt(items[width]) == 2 ) {
+				if (Integer.parseInt(items[width]) == 2) {
 					tiles[height][width].setAttributes( TileType.grass, available, 0, 2000, 0 );
-				} else if( Integer.parseInt(items[width]) == 8 ) {
+				} else if (Integer.parseInt(items[width]) == 8) {
 					tiles[height][width].setAttributes( TileType.water, available, 0, 2000, 0 );
-				} else if(Integer.parseInt(items[width]) == 5) {
+				} else if (Integer.parseInt(items[width]) == 5) {
 					tiles[height][width].setAttributes( TileType.grass, available, 0, 2000, 0 );
 					Wood wood = new Wood(null, 0, atlas);
 					wood.buildBuilding(tiles, tiles[height][width].getX(), tiles[height][width].getY(), 0);

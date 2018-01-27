@@ -27,8 +27,9 @@ public class BuildingAvailabilityControl extends Data
     private TextureRegion SquareTileRegionFault;
     private TextureRegion SquareTileRegionAllowed;
     private TextureRegion SquareOutlineAvailable;
-    private TextureRegion farmTexture;
+    private TextureRegion[] farmTexture;
     private TextureRegion treeTexture;
+
 
     private String[][][][] buildingAvailability;
     private TextureRegion[][][] buildingRegion;
@@ -37,7 +38,11 @@ public class BuildingAvailabilityControl extends Data
         SquareTileRegionFault = atlas.findRegion("notAllowedIso");
         SquareTileRegionAllowed = atlas.findRegion("allowedIso");
         SquareOutlineAvailable = atlas.findRegion("regionIso");
-        farmTexture = atlas.findRegion("farm");
+        farmTexture = new TextureRegion[4];
+        farmTexture[0] = atlas.findRegion("farm1");
+        farmTexture[1] = atlas.findRegion("farm2");
+        farmTexture[2] = atlas.findRegion("farm3");
+        farmTexture[3] = atlas.findRegion("farm4");
         treeTexture = atlas.findRegion("treeTest");
 
         // Read the availability of the buildings from a file and store all the data in a multi dimensional array
@@ -110,30 +115,28 @@ public class BuildingAvailabilityControl extends Data
     }
 
     public void buildingAvailability(Batch bitch, Tile buildingTile, int building, int buildingPosition) {
-        if (buildingRegion[building][buildingPosition][rotation] != null ) {
-            // First draw the texture of the building itself.
-            if (building == 0 && buildingPosition == 0) {
-                bitch.draw(farmTexture,(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
-            } else if (building == 2 && buildingPosition == 0) {
-                bitch.draw(farmTexture,(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
-            } else if (building == 5){
-                bitch.draw(treeTexture, (buildingTile.getPosition().x - 40), (buildingTile.getPosition().y + 45), 0, 0, 60, 60, 1, 1, -90, false);
-            }
+        // First draw the texture of the building itself.
+        if (building == 0 && buildingPosition == 0) {
+            bitch.draw(farmTexture[rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
+        } else if (building == 2 && buildingPosition == 0) {
+            bitch.draw(farmTexture[rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
+        } else if (building == 5) {
+            bitch.draw(treeTexture, (buildingTile.getPosition().x - 40), (buildingTile.getPosition().y + 45), 0, 0, 60, 60, 1, 1, -90, false);
+        }
 
-            // Then draw if it is allowed to place it or not with red or green overlay.
-            if (building == 3) {
-                if (generalAvailability(buildingTile, building, buildingPosition)) {
-                    bitch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
-                } else {
-                    bitch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
-                }
+        // Then draw if it is allowed to place it or not with red or green overlay.
+        if (building == 3) {
+            if (generalAvailability(buildingTile, building, buildingPosition)) {
+                bitch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
             } else {
-                if (generalAvailability(buildingTile, building, buildingPosition)
-                        || !buildingTile.getRegionOwned()) {
-                    bitch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
-                } else {
-                    bitch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
-                }
+                bitch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
+            }
+        } else {
+            if (generalAvailability(buildingTile, building, buildingPosition)
+                    || !buildingTile.getRegionOwned()) {
+                bitch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
+            } else {
+                bitch.draw(SquareTileRegionAllowed, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
             }
         }
     }
