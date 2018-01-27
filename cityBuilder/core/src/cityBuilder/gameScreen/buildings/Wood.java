@@ -34,7 +34,7 @@ public class Wood implements Building {
 	}
 
 	@Override
-	public void render(Batch batch, int buildingPosition, float x, float y) {
+	public void render(Batch batch, int buildingPosition, float x, float y, int globalRotation) {
 		// the more life the tree has, the bigger it is.
 		if ( life <= 180) {
 			batch.draw(SquareTileRegionTree0, -26 + tile.getPosition().x, 31 + tile.getPosition().y, 0, 0, 60, 60, 1, 1, -90, false);

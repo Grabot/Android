@@ -29,7 +29,7 @@ public class Warehouse extends Data implements Building {
     }
 
     @Override
-    public void render(Batch bitch, int buildingPosition, float x, float y) {
+    public void render(Batch bitch, int buildingPosition, float x, float y, int globalRotation) {
         // Very ugly and easy way to solve this issue.
         if (buildingPosition == 0 && rotation == 0) {
             bitch.draw(buildingRegionDark, -32 + x, -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);

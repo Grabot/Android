@@ -19,7 +19,7 @@ public class DrawTiles extends Data
 		SquareTileRegionSelected = atlas.findRegion("selectedIso");
 	}
 
-	public void fillTiles( Batch batch, Tile[][] tiles)
+	public void fillTiles( Batch batch, Tile[][] tiles, int globalRotation)
 	{
 		for (int x = 0; x < tiles.length; x++ ) {
 			for (int y = 0; y < tiles[x].length; y++ ) {
@@ -31,15 +31,15 @@ public class DrawTiles extends Data
 			for (int y = 0; y < tiles[x].length; y++ ) {
 				if (tiles[x][y].getOccupied() != 0) {
 					if (tiles[x][y].getOccupied() == 1) {
-						tiles[x][y].drawFarm(batch);
+						tiles[x][y].drawFarm(batch, globalRotation);
 					} else if (tiles[x][y].getOccupied() == 2) {
-						tiles[x][y].drawWoodCutter(batch);
+						tiles[x][y].drawWoodCutter(batch, globalRotation);
 					} else if (tiles[x][y].getOccupied() == 3) {
-						tiles[x][y].drawWoods(batch);
+						tiles[x][y].drawWoods(batch, globalRotation);
 					} else if (tiles[x][y].getOccupied() == 4) {
-						tiles[x][y].drawWarehouse(batch);
+						tiles[x][y].drawWarehouse(batch, globalRotation);
 					} else if (tiles[x][y].getOccupied() == 5) {
-						tiles[x][y].drawRoads(batch);
+						tiles[x][y].drawRoads(batch, globalRotation);
 					} else if (tiles[x][y].getOccupied() == 6) {
 						// nothing yet
 					}

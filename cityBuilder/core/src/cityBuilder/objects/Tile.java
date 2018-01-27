@@ -100,24 +100,24 @@ public class Tile
 		}
 	}
 
-	public void drawWoods( Batch batch ) {
-		wood.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y );
+	public void drawWoods( Batch batch, int globalRotation ) {
+		wood.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y, globalRotation );
 	}
 
-	public void drawFarm( Batch batch ) {
-		farm.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y );
+	public void drawFarm( Batch batch, int globalRotation ) {
+		farm.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y, globalRotation );
 	}
 
-	public void drawWoodCutter( Batch batch ) {
-		woodCutter.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y );
+	public void drawWoodCutter( Batch batch, int globalRotation ) {
+		woodCutter.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y, globalRotation );
 	}
 
-	public void drawWarehouse( Batch batch ) {
-		warehouse.render( batch, 0, this.getPosition().x, this.getPosition().y );
+	public void drawWarehouse( Batch batch, int globalRotation ) {
+		warehouse.render( batch, 0, this.getPosition().x, this.getPosition().y, globalRotation );
 	}
 
-	public void drawRoads( Batch batch ) {
-		road.render( batch, 0, this.getPosition().x, this.getPosition().y );
+	public void drawRoads( Batch batch, int globalRotation ) {
+		road.render( batch, 0, this.getPosition().x, this.getPosition().y, globalRotation );
 	}
 
 	public TileType getType() {

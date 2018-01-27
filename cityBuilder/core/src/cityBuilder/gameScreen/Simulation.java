@@ -357,4 +357,8 @@ public class Simulation extends Data {
 			globalRotation = 0;
 		}
 	}
+
+	public int getGlobalRotation() {
+		return globalRotation;
+	}
 }

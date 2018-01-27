@@ -74,9 +74,10 @@ public class WoodCutter extends Data implements Building {
 	}
 
 	@Override
-	public void render(Batch batch, int position, float x, float y) {
+	public void render(Batch batch, int position, float x, float y, int globalRotation) {
 		if( position == 0 ) {
-			batch.draw( woodCutterTexture[rotation], x - 50, y + 55, 0, 0, 96, 180, 1, 1, -90, false);
+			int trueRotation = (rotation - globalRotation + 4) % 4;
+			batch.draw( woodCutterTexture[trueRotation], x - 50, y + 55, 0, 0, 96, 180, 1, 1, -90, false);
 		}
 	}
 

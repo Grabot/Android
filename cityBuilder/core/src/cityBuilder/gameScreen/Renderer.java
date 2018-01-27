@@ -120,7 +120,7 @@ public class Renderer extends Data
 		this.simulation = simulation;
 		inputHandler.variables( camera, simulation );
 
-		drawTiles.fillTiles( batch, tiles );
+		drawTiles.fillTiles( batch, tiles, simulation.getGlobalRotation() );
 
 		if (simulation.touchAllowed()) {
 			this.x = simulation.tileTouchX();
