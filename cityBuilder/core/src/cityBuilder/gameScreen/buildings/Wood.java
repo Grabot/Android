@@ -30,7 +30,6 @@ public class Wood implements Building {
 		SquareTileRegionTree2 = atlas.findRegion("treeTest2");
 		SquareTileRegionTree3 = atlas.findRegion("treeTest");
 
-		// the life of the wood. 745 is fully adult.
 		life = 1000;
 	}
 

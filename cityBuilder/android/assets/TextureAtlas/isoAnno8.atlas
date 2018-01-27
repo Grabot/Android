@@ -1,0 +1,285 @@
+
+isoAnno8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+warehouse1
+  rotate: false
+  xy: 0, 1788
+  size: 362, 250
+  orig: 362, 250
+  offset: 0, 0
+  index: -1
+warehouse2
+  rotate: false
+  xy: 0, 1538
+  size: 362, 250
+  orig: 362, 250
+  offset: 0, 0
+  index: -1
+warehouse3
+  rotate: false
+  xy: 362, 1788
+  size: 362, 250
+  orig: 362, 250
+  offset: 0, 0
+  index: -1
+warehouse4
+  rotate: false
+  xy: 0, 1288
+  size: 362, 250
+  orig: 362, 250
+  offset: 0, 0
+  index: -1
+farm1
+  rotate: false
+  xy: 362, 1558
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+farm2
+  rotate: false
+  xy: 724, 1808
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+farm3
+  rotate: false
+  xy: 0, 1058
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+farm4
+  rotate: false
+  xy: 362, 1328
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+house1
+  rotate: false
+  xy: 0, 828
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+house2
+  rotate: false
+  xy: 0, 598
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+house3
+  rotate: false
+  xy: 0, 368
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+house4
+  rotate: false
+  xy: 0, 138
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+farm
+  rotate: false
+  xy: 362, 1156
+  size: 289, 172
+  orig: 289, 172
+  offset: 0, 0
+  index: -1
+sheepFarm1
+  rotate: false
+  xy: 289, 926
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+sheepFarm2
+  rotate: false
+  xy: 289, 696
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+sheepFarm3
+  rotate: false
+  xy: 289, 466
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+sheepFarm4
+  rotate: false
+  xy: 289, 236
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+tailor1
+  rotate: false
+  xy: 289, 6
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+tailor2
+  rotate: false
+  xy: 724, 1578
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+tailor3
+  rotate: false
+  xy: 651, 1348
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+tailor4
+  rotate: false
+  xy: 651, 1118
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+woodCutter1
+  rotate: false
+  xy: 578, 888
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+woodCutter2
+  rotate: false
+  xy: 578, 658
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+woodCutter3
+  rotate: false
+  xy: 578, 428
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+woodCutter4
+  rotate: false
+  xy: 578, 198
+  size: 289, 230
+  orig: 289, 230
+  offset: 0, 0
+  index: -1
+treeTest
+  rotate: false
+  xy: 578, 40
+  size: 152, 158
+  orig: 152, 158
+  offset: 0, 0
+  index: -1
+treeTest2
+  rotate: false
+  xy: 730, 40
+  size: 152, 158
+  orig: 152, 158
+  offset: 0, 0
+  index: -1
+treeTest3
+  rotate: false
+  xy: 867, 960
+  size: 152, 158
+  orig: 152, 158
+  offset: 0, 0
+  index: -1
+treeTest4
+  rotate: false
+  xy: 867, 802
+  size: 152, 158
+  orig: 152, 158
+  offset: 0, 0
+  index: -1
+allowedFullIso
+  rotate: false
+  xy: 0, 92
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+allowedIso
+  rotate: false
+  xy: 867, 756
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+grassIso
+  rotate: false
+  xy: 0, 46
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+notAllowedFullIso
+  rotate: false
+  xy: 90, 92
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+notAllowedIso
+  rotate: false
+  xy: 867, 710
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+regionFullIso
+  rotate: false
+  xy: 0, 0
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+regionIso
+  rotate: false
+  xy: 90, 46
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+selectedIso
+  rotate: false
+  xy: 180, 92
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+waterIso
+  rotate: false
+  xy: 867, 664
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+yellowIso
+  rotate: false
+  xy: 90, 0
+  size: 90, 46
+  orig: 90, 46
+  offset: 0, 0
+  index: -1
+water
+  rotate: false
+  xy: 289, 1224
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

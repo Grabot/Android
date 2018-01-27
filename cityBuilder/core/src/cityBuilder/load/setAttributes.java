@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cityBuilder.enums.TileType;
+import cityBuilder.gameScreen.buildings.Wood;
 import cityBuilder.objects.Tile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class setAttributes extends Data
 {
@@ -19,14 +21,14 @@ public class setAttributes extends Data
 	public setAttributes() {
 	}
 
-	public void setAttributesTileArray(Tile[][] tiles) {
+	public void setAttributesTileArray(Tile[][] tiles, TextureAtlas atlas) {
 		for( int x = 0; x < gridSizeWidth; x++ ) {
 			for( int y = 0; y < gridSizeHeight; y++ ) {
 				tiles[x][y].setAttributes( TileType.grass, available, 0, 2000, 0 );
 			}
 		}
 
-		layout = Gdx.files.internal("mapLayout/IsoAnno.csv");
+		layout = Gdx.files.internal("mapLayout/IsoAnno2.csv");
 		br = new BufferedReader(layout.reader());
 
 		String line = null;
@@ -40,10 +42,15 @@ public class setAttributes extends Data
 		while( line != null ) {
 			String[] items = line.split(",");
 			for (int width = 0; width < items.length; width++) {
-				if( Integer.parseInt(items[width]) == 0 ) {
+				if( Integer.parseInt(items[width]) == 2 ) {
 					tiles[height][width].setAttributes( TileType.grass, available, 0, 2000, 0 );
-				} else if( Integer.parseInt(items[width]) == 1 ) {
+				} else if( Integer.parseInt(items[width]) == 8 ) {
 					tiles[height][width].setAttributes( TileType.water, available, 0, 2000, 0 );
+				} else if(Integer.parseInt(items[width]) == 5) {
+					tiles[height][width].setAttributes( TileType.grass, available, 0, 2000, 0 );
+					Wood wood = new Wood(null, 0, atlas);
+					wood.buildBuilding(tiles, tiles[height][width].getX(), tiles[height][width].getY(), 0);
+					tiles[height][width].getWood().setLife(1000);
 				}
 			}
 

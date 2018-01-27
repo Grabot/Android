@@ -21,7 +21,7 @@ public class TilesLoad extends Data {
 		}
 
 		setAttributes setAttributes = new setAttributes();
-		setAttributes.setAttributesTileArray(tileArray);
+		setAttributes.setAttributesTileArray(tileArray, atlas);
 	}
 
 	public Tile[][] getTileArray() {

@@ -172,7 +172,7 @@ public class Tile
 		this.warehouse = warehouse;
 	}
 
-	public void setOccupiedWood(int buildingPosition, int rotataion, Wood wood) {
+	public void setOccupiedWood(int buildingPosition, int rotation, Wood wood) {
 		this.occupied = 3;
 		this.buildingPosition = buildingPosition;
 		this.wood = wood;
