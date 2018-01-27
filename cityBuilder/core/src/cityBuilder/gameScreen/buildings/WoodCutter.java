@@ -18,10 +18,7 @@ public class WoodCutter extends Data implements Building {
 	Tile[] woodcutterTiles;
 	Tile[] regionTiles;
 	private int rotation;
-	private TextureRegion SquareTileRegionWoodCutterBottomLeft;
-	private TextureRegion SquareTileRegionWoodCutterBottomRight;
-	private TextureRegion SquareTileRegionWoodCutterTopLeft;
-	private TextureRegion SquareTileRegionWoodCutterTopRight;
+	private TextureRegion woodCutterTexture;
 	private TextureRegion SquareTileRegionAllowed;
 
 	private Random random;
@@ -51,10 +48,7 @@ public class WoodCutter extends Data implements Building {
 		woodcutterTiles = new Tile[4];
 		regionTiles = new Tile[48];
 		this.rotation = rotation;
-		SquareTileRegionWoodCutterBottomLeft = atlas.findRegion("cubeDark");
-		SquareTileRegionWoodCutterTopLeft = atlas.findRegion("cubeDark");
-		SquareTileRegionWoodCutterTopRight = atlas.findRegion("cubeDark");
-		SquareTileRegionWoodCutterBottomRight = atlas.findRegion("cubeDark");
+		woodCutterTexture = atlas.findRegion("farm");
 		SquareTileRegionAllowed = atlas.findRegion("SquareGreenSmall");
 
 		random = new Random();
@@ -78,17 +72,7 @@ public class WoodCutter extends Data implements Building {
 	@Override
 	public void render(Batch batch, int position, float x, float y) {
 		if( position == 0 ) {
-			//bottom left
-			batch.draw( SquareTileRegionWoodCutterBottomLeft, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if( position == 1 ) {
-			//top left
-			batch.draw( SquareTileRegionWoodCutterTopLeft, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if( position == 2 ) {
-			//top right
-			batch.draw( SquareTileRegionWoodCutterTopRight, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
-		} else if( position == 3 ) {
-			//bottom right
-			batch.draw( SquareTileRegionWoodCutterBottomRight, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, -(90 * rotation), false);
+			batch.draw( woodCutterTexture, x - 50, y + 55, 0, 0, 96, 180, 1, 1, -90, false);
 		}
 	}
 

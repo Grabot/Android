@@ -27,6 +27,8 @@ public class BuildingAvailabilityControl extends Data
     private TextureRegion SquareTileRegionFault;
     private TextureRegion SquareTileRegionAllowed;
     private TextureRegion SquareOutlineAvailable;
+    private TextureRegion farmTexture;
+    private TextureRegion treeTexture;
 
     private String[][][][] buildingAvailability;
     private TextureRegion[][][] buildingRegion;
@@ -34,7 +36,9 @@ public class BuildingAvailabilityControl extends Data
     public BuildingAvailabilityControl(TextureAtlas atlas) {
         SquareTileRegionFault = atlas.findRegion("notAllowedIso");
         SquareTileRegionAllowed = atlas.findRegion("allowedIso");
-        SquareOutlineAvailable = atlas.findRegion("allowedFullIso");
+        SquareOutlineAvailable = atlas.findRegion("regionIso");
+        farmTexture = atlas.findRegion("farm");
+        treeTexture = atlas.findRegion("treeTest");
 
         // Read the availability of the buildings from a file and store all the data in a multi dimensional array
         FileHandle buildingRestrictions = Gdx.files.internal("buildingData/buildingAvailability.csv");
@@ -109,11 +113,11 @@ public class BuildingAvailabilityControl extends Data
         if (buildingRegion[building][buildingPosition][rotation] != null ) {
             // First draw the texture of the building itself.
             if (building == 0 && buildingPosition == 0) {
-                bitch.draw(buildingRegion[building][buildingPosition][rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
-            } else if (building == 2 ) {
-
+                bitch.draw(farmTexture,(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
+            } else if (building == 2 && buildingPosition == 0) {
+                bitch.draw(farmTexture,(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
             } else if (building == 5){
-                bitch.draw(buildingRegion[building][buildingPosition][rotation], (-40 + buildingTile.getPosition().x), (45 + buildingTile.getPosition().y), 0, 0, 60, 60, 1, 1, -90, false);
+                bitch.draw(treeTexture, (buildingTile.getPosition().x - 40), (buildingTile.getPosition().y + 45), 0, 0, 60, 60, 1, 1, -90, false);
             }
 
             // Then draw if it is allowed to place it or not with red or green overlay.
