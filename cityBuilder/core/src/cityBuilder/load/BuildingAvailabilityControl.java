@@ -29,6 +29,7 @@ public class BuildingAvailabilityControl extends Data
     private TextureRegion SquareOutlineAvailable;
     private TextureRegion[] farmTexture;
     private TextureRegion[] woodCutterTexture;
+    private TextureRegion[] wareHouseTexture;
     private TextureRegion treeTexture;
 
 
@@ -49,6 +50,11 @@ public class BuildingAvailabilityControl extends Data
         woodCutterTexture[1] = atlas.findRegion("woodCutter2");
         woodCutterTexture[2] = atlas.findRegion("woodCutter3");
         woodCutterTexture[3] = atlas.findRegion("woodCutter4");
+        wareHouseTexture = new TextureRegion[4];
+        wareHouseTexture[0] = atlas.findRegion("warehouse1");
+        wareHouseTexture[1] = atlas.findRegion("warehouse2");
+        wareHouseTexture[2] = atlas.findRegion("warehouse3");
+        wareHouseTexture[3] = atlas.findRegion("warehouse4");
         treeTexture = atlas.findRegion("treeTest");
 
         // Read the availability of the buildings from a file and store all the data in a multi dimensional array
@@ -126,7 +132,9 @@ public class BuildingAvailabilityControl extends Data
             bitch.draw(farmTexture[rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
         } else if (building == 2 && buildingPosition == 0) {
             bitch.draw(woodCutterTexture[rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
-        } else if (building == 5) {
+        } else if (building == 3 && buildingPosition == 0) {
+            bitch.draw(wareHouseTexture[rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
+        }  else if (building == 5) {
             bitch.draw(treeTexture, (buildingTile.getPosition().x - 40), (buildingTile.getPosition().y + 45), 0, 0, 60, 60, 1, 1, -90, false);
         }
 
