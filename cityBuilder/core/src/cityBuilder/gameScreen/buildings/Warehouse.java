@@ -21,10 +21,10 @@ public class Warehouse extends Data implements Building {
         this.rotation = rotation;
 
         wareHouseTexture = new TextureRegion[4];
-        wareHouseTexture[0] = atlas.findRegion("warehouse1");
-        wareHouseTexture[1] = atlas.findRegion("warehouse2");
-        wareHouseTexture[2] = atlas.findRegion("warehouse3");
-        wareHouseTexture[3] = atlas.findRegion("warehouse4");
+        wareHouseTexture[0] = atlas.findRegion("warehouse2");
+        wareHouseTexture[1] = atlas.findRegion("warehouse3");
+        wareHouseTexture[2] = atlas.findRegion("warehouse4");
+        wareHouseTexture[3] = atlas.findRegion("warehouse1");
     }
 
     @Override

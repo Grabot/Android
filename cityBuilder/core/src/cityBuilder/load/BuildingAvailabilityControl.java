@@ -32,7 +32,6 @@ public class BuildingAvailabilityControl extends Data
     private TextureRegion[] wareHouseTexture;
     private TextureRegion treeTexture;
 
-
     private String[][][][] buildingAvailability;
     private TextureRegion[][][] buildingRegion;
 
@@ -51,10 +50,10 @@ public class BuildingAvailabilityControl extends Data
         woodCutterTexture[2] = atlas.findRegion("woodCutter3");
         woodCutterTexture[3] = atlas.findRegion("woodCutter4");
         wareHouseTexture = new TextureRegion[4];
-        wareHouseTexture[0] = atlas.findRegion("warehouse1");
-        wareHouseTexture[1] = atlas.findRegion("warehouse2");
-        wareHouseTexture[2] = atlas.findRegion("warehouse3");
-        wareHouseTexture[3] = atlas.findRegion("warehouse4");
+        wareHouseTexture[0] = atlas.findRegion("warehouse2");
+        wareHouseTexture[1] = atlas.findRegion("warehouse3");
+        wareHouseTexture[2] = atlas.findRegion("warehouse4");
+        wareHouseTexture[3] = atlas.findRegion("warehouse1");
         treeTexture = atlas.findRegion("treeTest");
 
         // Read the availability of the buildings from a file and store all the data in a multi dimensional array
@@ -140,6 +139,30 @@ public class BuildingAvailabilityControl extends Data
 
         // Then draw if it is allowed to place it or not with red or green overlay.
         if (building == 3) {
+            if (rotation == 0 && buildingPosition == 0
+                    || rotation == 0 && buildingPosition == 1
+                    || rotation == 0 && buildingPosition == 2
+                    || rotation == 0 && buildingPosition == 3
+                    || rotation == 0 && buildingPosition == 4
+                    || rotation == 0 && buildingPosition == 5
+                    || rotation == 1 && buildingPosition == 0
+                    || rotation == 1 && buildingPosition == 1
+                    || rotation == 1 && buildingPosition == 2
+                    || rotation == 1 && buildingPosition == 3
+                    || rotation == 1 && buildingPosition == 7
+                    || rotation == 1 && buildingPosition == 8
+                    || rotation == 2 && buildingPosition == 0
+                    || rotation == 2 && buildingPosition == 1
+                    || rotation == 2 && buildingPosition == 5
+                    || rotation == 2 && buildingPosition == 6
+                    || rotation == 2 && buildingPosition == 7
+                    || rotation == 2 && buildingPosition == 8
+                    || rotation == 3 && buildingPosition == 0
+                    || rotation == 3 && buildingPosition == 3
+                    || rotation == 3 && buildingPosition == 4
+                    || rotation == 3 && buildingPosition == 5
+                    || rotation == 3 && buildingPosition == 6
+                    || rotation == 3 && buildingPosition == 7)
             if (generalAvailability(buildingTile, building, buildingPosition)) {
                 bitch.draw(SquareTileRegionFault, (-45 + buildingTile.getPosition().x), (-23 + buildingTile.getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
             } else {
