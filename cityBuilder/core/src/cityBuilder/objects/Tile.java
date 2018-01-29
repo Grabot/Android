@@ -113,7 +113,7 @@ public class Tile
 	}
 
 	public void drawWarehouse( Batch batch, int globalRotation ) {
-		warehouse.render( batch, 0, this.getPosition().x, this.getPosition().y, globalRotation );
+		warehouse.render( batch, buildingPosition, this.getPosition().x, this.getPosition().y, globalRotation );
 	}
 
 	public void drawRoads( Batch batch, int globalRotation ) {
