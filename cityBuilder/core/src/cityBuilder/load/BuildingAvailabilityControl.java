@@ -132,7 +132,7 @@ public class BuildingAvailabilityControl extends Data
         } else if (building == 2 && buildingPosition == 0) {
             bitch.draw(woodCutterTexture[rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
         } else if (building == 3 && buildingPosition == 0) {
-            bitch.draw(wareHouseTexture[rotation],(buildingTile.getPosition().x - 50), (buildingTile.getPosition().y + 55), 0, 0, 96, 180, 1, 1, -90, false);
+            bitch.draw(wareHouseTexture[rotation],(buildingTile.getPosition().x - 100), (buildingTile.getPosition().y + 105), 0, 0, 144, 270, 1, 1, -90, false);
         }  else if (building == 5) {
             bitch.draw(treeTexture, (buildingTile.getPosition().x - 40), (buildingTile.getPosition().y + 45), 0, 0, 60, 60, 1, 1, -90, false);
         }

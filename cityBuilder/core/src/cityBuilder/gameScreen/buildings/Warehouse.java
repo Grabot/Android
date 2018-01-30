@@ -31,7 +31,7 @@ public class Warehouse extends Data implements Building {
     public void render(Batch bitch, int buildingPosition, float x, float y, int globalRotation) {
         // Very ugly and easy way to solve this issue.
         if (buildingPosition == 0) {
-            bitch.draw(wareHouseTexture[rotation],(x - 50), (y + 55), 0, 0, 96, 180, 1, 1, -90, false);
+            bitch.draw(wareHouseTexture[rotation],(x - 100), (y + 105), 0, 0, 144, 270, 1, 1, -90, false);
         }
     }
 
