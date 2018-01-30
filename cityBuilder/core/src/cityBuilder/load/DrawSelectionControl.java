@@ -44,7 +44,9 @@ public class DrawSelectionControl extends Data {
 		// we know this tile has a warehouse object, we will use it to determine which tiles to draw selected.
 		Warehouse warehouse = tiles[x][y].getWarehouse();
 		for (Tile tile : warehouse.getWarehouseTiles()) {
-			drawSingleTile(batch, tile);
+			if (tile != null) {
+				drawSingleTile(batch, tile);
+			}
 		}
 	}
 
@@ -75,10 +77,10 @@ public class DrawSelectionControl extends Data {
 	}
 
 	public void drawWoodSelected(Tile[][] tiles, Batch batch, int x, int y) {
-		batch.draw( SquareTileRegionSelected, (-45 + tiles[x][y].getPosition().x), (-23 + tiles[x][y].getPosition().y), 0, 0, 90, 46, 1, 1, 0, false);
+		drawSingleTile(batch, tiles[x][y]);
 	}
 
 	private void drawSingleTile(Batch bitch, Tile tile) {
-		// bitch.draw( SquareTileRegionSelected, (-32 + tile.getPosition().x), (-32 + tile.getPosition().y), 0, 0, 64, 64, 1, 1, 0, false);
+		bitch.draw( SquareTileRegionSelected, (tile.getPosition().x - 45), (tile.getPosition().y - 23), 0, 0, 90, 46, 1, 1, 0, false);
 	}
 }
