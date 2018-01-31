@@ -60,13 +60,13 @@ public class Road implements Building {
         } else if (adjacent[0] && !adjacent[1] && adjacent[2] && !adjacent[3]) {
             batch.draw( roadDoubleForward, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, 90, false);
         } else if (adjacent[0] && !adjacent[1] && !adjacent[2] && !adjacent[3]) {
-            batch.draw( roadSingle, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, 90, false);
-        } else if (!adjacent[0] && adjacent[1] && !adjacent[2] && !adjacent[3]) {
-            batch.draw( roadSingle, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, 180, false);
-        } else if (!adjacent[0] && !adjacent[1] && adjacent[2] && !adjacent[3]) {
-            batch.draw( roadSingle, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, 270, false);
-        } else if (!adjacent[0] && !adjacent[1] && !adjacent[2] && adjacent[3]) {
             batch.draw( roadSingle, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, 0, false);
+        } else if (!adjacent[0] && adjacent[1] && !adjacent[2] && !adjacent[3]) {
+            batch.draw( roadSingle, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, 90, false);
+        } else if (!adjacent[0] && !adjacent[1] && adjacent[2] && !adjacent[3]) {
+            batch.draw( roadSingle, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, 180, false);
+        } else if (!adjacent[0] && !adjacent[1] && !adjacent[2] && adjacent[3]) {
+            batch.draw( roadSingle, -32 + x , -32 + y, 32, 32, 64, 64, 1, 1, 270, false);
         } else if (!adjacent[0] && !adjacent[1] && !adjacent[2] && !adjacent[3]) {
             batch.draw(roadNo, -32 + x, -32 + y, 32, 32, 64, 64, 1, 1, 0, false);
         }
