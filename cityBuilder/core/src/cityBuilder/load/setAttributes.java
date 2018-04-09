@@ -28,7 +28,7 @@ public class setAttributes extends Data
 			}
 		}
 
-		layout = Gdx.files.internal("mapLayout/IsoAnno3.csv");
+		layout = Gdx.files.internal("mapLayout/IsoAnno4.csv");
 		br = new BufferedReader(layout.reader());
 
 		String line = null;
