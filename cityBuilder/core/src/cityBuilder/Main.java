@@ -82,7 +82,7 @@ public class Main implements ApplicationListener, InputProcessor
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, width, height);
-		camera.position.set( camera.viewportWidth/2f, ((camera.viewportHeight / 2f)+(5*64)), 0.5f );
+		camera.position.set( 2000, 0, 0.5f );
 
 		batch = new SpriteBatch();
 
@@ -239,6 +239,7 @@ public class Main implements ApplicationListener, InputProcessor
 
 		if( keycode == Keys.ENTER )
 		{
+			System.out.println("camera x:" + camera.position.x + " y:" + camera.position.y);
 			enter_pressed = true;
 		}
 
