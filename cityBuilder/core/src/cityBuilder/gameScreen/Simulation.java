@@ -230,6 +230,13 @@ public class Simulation extends Data {
 				}
 			}
 		}
+		updateRoadIndex();
+	}
+
+	private void updateRoadIndex() {
+		for (Road road : roads) {
+			road.setRoadIndex(globalRotation);
+		}
 	}
 
 	public void updateScroll(float cameraX, float cameraY, float cameraZ) {
@@ -356,6 +363,7 @@ public class Simulation extends Data {
 		if (globalRotation == 4) {
 			globalRotation = 0;
 		}
+		updateRoadIndex();
 	}
 
 	public int getGlobalRotation() {

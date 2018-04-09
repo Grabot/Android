@@ -16,22 +16,11 @@ public class Road implements Building {
     private boolean[] adjacent;
     private Tile roadTile;
     private TextureRegion[] roads;
-    private TextureRegion roadNo;
-    private TextureRegion roadSingle;
-    private TextureRegion roadDouble;
-    private TextureRegion roadTriple;
-    private TextureRegion roadDoubleForward;
-    private TextureRegion roadQuadruppel;
     private int rotation;
+    private int roadIndex;
 
     public Road(int rotation, TextureAtlas atlas) {
         this.rotation = rotation;
-        roadNo = atlas.findRegion("roadNo");
-        roadSingle = atlas.findRegion("roadSingle");
-        roadDouble = atlas.findRegion("roadDouble");
-        roadTriple = atlas.findRegion("roadTriple");
-        roadDoubleForward = atlas.findRegion("roadDoubleForward");
-        roadQuadruppel = atlas.findRegion("roadQuadruppel");
         roads = new TextureRegion[16];
         roads[0] = atlas.findRegion("roadNo");
         roads[1] = atlas.findRegion("roadSingle1");
@@ -51,44 +40,12 @@ public class Road implements Building {
         roads[15] = atlas.findRegion("roadQuadruppel");
         adjacentRoads = new Tile[4];
         adjacent = new boolean[4];
+        roadIndex = 0;
     }
 
     @Override
     public void render(Batch batch, int buildingPosition, float x, float y, int globalRotation) {
-        if (!adjacent[0] && !adjacent[1] && !adjacent[2] && !adjacent[3]) {
-            batch.draw(roads[0], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (adjacent[0] && !adjacent[1] && !adjacent[2] && !adjacent[3]) {
-            // if there is only 1 road tile to the right below of this one.
-            batch.draw(roads[1], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (!adjacent[0] && adjacent[1] && !adjacent[2] && !adjacent[3]) {
-            batch.draw(roads[2], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (!adjacent[0] && !adjacent[1] && adjacent[2] && !adjacent[3]) {
-            batch.draw(roads[3], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (!adjacent[0] && !adjacent[1] && !adjacent[2] && adjacent[3]) {
-            batch.draw(roads[4], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (adjacent[0] && adjacent[1] && !adjacent[2] && !adjacent[3]) {
-            batch.draw(roads[5], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (!adjacent[0] && adjacent[1] && adjacent[2] && !adjacent[3]) {
-            batch.draw(roads[6], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (!adjacent[0] && !adjacent[1] && adjacent[2] && adjacent[3]) {
-            batch.draw(roads[7], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (adjacent[0] && !adjacent[1] && !adjacent[2] && adjacent[3]) {
-            batch.draw(roads[8], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (adjacent[0] && !adjacent[1] && adjacent[2] && !adjacent[3]) {
-            batch.draw(roads[9], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (!adjacent[0] && adjacent[1] && !adjacent[2] && adjacent[3]) {
-            batch.draw(roads[10], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (adjacent[0] && adjacent[1] && adjacent[2] && !adjacent[3]) {
-            batch.draw(roads[11], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (!adjacent[0] && adjacent[1] && adjacent[2] && adjacent[3]) {
-            batch.draw(roads[12], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (adjacent[0] && !adjacent[1] && adjacent[2] && adjacent[3]) {
-            batch.draw(roads[13], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (adjacent[0] && adjacent[1] && !adjacent[2] && adjacent[3]) {
-            batch.draw(roads[14], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        } else if (adjacent[0] && adjacent[1] && adjacent[2] && adjacent[3]) {
-            batch.draw(roads[15], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
-        }
+        batch.draw(roads[roadIndex], x - 45, y - 23, 32, 32, 90, 48, 1, 1, 0, false);
     }
 
     @Override
@@ -117,5 +74,145 @@ public class Road implements Building {
 
     public void setAdjacent(int index, boolean occupied) {
         adjacent[index] = occupied;
+    }
+
+    public void setRoadIndex(int globalRotation) {
+        if (!adjacent[0] && !adjacent[1] && !adjacent[2] && !adjacent[3]) {
+            roadIndex = 0;
+        } else if (adjacent[0] && !adjacent[1] && !adjacent[2] && !adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 1;
+            } else if (globalRotation == 1) {
+                roadIndex = 2;
+            } else if (globalRotation == 2) {
+                roadIndex = 3;
+            } else {
+                roadIndex = 4;
+            }
+        } else if (!adjacent[0] && adjacent[1] && !adjacent[2] && !adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 2;
+            } else if (globalRotation == 1) {
+                roadIndex = 3;
+            } else if (globalRotation == 2) {
+                roadIndex = 4;
+            } else {
+                roadIndex = 1;
+            }
+        } else if (!adjacent[0] && !adjacent[1] && adjacent[2] && !adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 3;
+            } else if (globalRotation == 1) {
+                roadIndex = 4;
+            } else if (globalRotation == 2) {
+                roadIndex = 1;
+            } else {
+                roadIndex = 2;
+            }
+        } else if (!adjacent[0] && !adjacent[1] && !adjacent[2] && adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 4;
+            } else if (globalRotation == 1) {
+                roadIndex = 1;
+            } else if (globalRotation == 2) {
+                roadIndex = 2;
+            } else {
+                roadIndex = 3;
+            }
+        } else if (adjacent[0] && adjacent[1] && !adjacent[2] && !adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 5;
+            } else if (globalRotation == 1) {
+                roadIndex = 6;
+            } else if (globalRotation == 2) {
+                roadIndex = 7;
+            } else {
+                roadIndex = 8;
+            }
+        } else if (!adjacent[0] && adjacent[1] && adjacent[2] && !adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 6;
+            } else if (globalRotation == 1) {
+                roadIndex = 7;
+            } else if (globalRotation == 2) {
+                roadIndex = 8;
+            } else {
+                roadIndex = 5;
+            }
+        } else if (!adjacent[0] && !adjacent[1] && adjacent[2] && adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 7;
+            } else if (globalRotation == 1) {
+                roadIndex = 8;
+            } else if (globalRotation == 2) {
+                roadIndex = 5;
+            } else {
+                roadIndex = 6;
+            }
+        } else if (adjacent[0] && !adjacent[1] && !adjacent[2] && adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 8;
+            } else if (globalRotation == 1) {
+                roadIndex = 5;
+            } else if (globalRotation == 2) {
+                roadIndex = 6;
+            } else {
+                roadIndex = 7;
+            }
+        } else if (adjacent[0] && !adjacent[1] && adjacent[2] && !adjacent[3]) {
+            if (globalRotation == 0 || globalRotation == 2) {
+                roadIndex = 9;
+            } else {
+                roadIndex = 10;
+            }
+        } else if (!adjacent[0] && adjacent[1] && !adjacent[2] && adjacent[3]) {
+            if (globalRotation == 0 || globalRotation == 2) {
+                roadIndex = 10;
+            } else {
+                roadIndex = 9;
+            }
+        } else if (adjacent[0] && adjacent[1] && adjacent[2] && !adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 11;
+            } else if (globalRotation == 1) {
+                roadIndex = 12;
+            } else if (globalRotation == 2) {
+                roadIndex = 13;
+            } else {
+                roadIndex = 14;
+            }
+        } else if (!adjacent[0] && adjacent[1] && adjacent[2] && adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 12;
+            } else if (globalRotation == 1) {
+                roadIndex = 13;
+            } else if (globalRotation == 2) {
+                roadIndex = 14;
+            } else {
+                roadIndex = 11;
+            }
+        } else if (adjacent[0] && !adjacent[1] && adjacent[2] && adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 13;
+            } else if (globalRotation == 1) {
+                roadIndex = 14;
+            } else if (globalRotation == 2) {
+                roadIndex = 11;
+            } else {
+                roadIndex = 12;
+            }
+        } else if (adjacent[0] && adjacent[1] && !adjacent[2] && adjacent[3]) {
+            if (globalRotation == 0) {
+                roadIndex = 14;
+            } else if (globalRotation == 1) {
+                roadIndex = 11;
+            } else if (globalRotation == 2) {
+                roadIndex = 12;
+            } else {
+                roadIndex = 13;
+            }
+        } else if (adjacent[0] && adjacent[1] && adjacent[2] && adjacent[3]) {
+            roadIndex = 15;
+        }
     }
 }
